@@ -11,7 +11,8 @@
     "start": "react-scripts-with-sass start",
     "build": "react-scripts-with-sass build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "yarn run build && surge -p build -d react-pnpd.surge.sh"
   },
   "devDependencies": {
     "create-react-app-sass": "^1.1.0"

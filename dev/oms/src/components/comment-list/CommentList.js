@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './commentlist.css';
 //import { createStore } from 'redux';
 import { store } from '../../stateManager';
+import Comment from '../comment/Comment'
 
 class CommentList extends Component {
     constructor(){
@@ -9,20 +10,32 @@ class CommentList extends Component {
 
         store.dispatch({ type: 'GET_COMMENTS' });
 
-        this.comments = store.getState();
+        this.updateComments();
+
+        //store.subscribe(this.updateComments);
 
         console.log(this.comments);
     }
 
+    updateComments(){
+        this.comments = store.getState();
+    }
+
     render() {
         return (
-            <ul>
-                {this.comments.map(comment => <li key={comment.key}>
-                    <h2>{comment.name}</h2>
-                    <div>{comment.comment}</div>
-                    </li>)}
-            </ul>
-        )
+            <div>
+                {this.comments.map((comment) => {
+                return (
+                         <Comment
+                             name={comment.name}
+                             comment={comment.comment}
+                             id={comment.key}
+                             key={comment.key}
+                         />
+                     )
+                 })}
+            </div>
+        );
     }
 }
 

@@ -1,0 +1,129 @@
+{
+  "customers": [
+    {
+      "id": "CUS123456789",
+      "first_name": "Dave",
+      "last_name": "Ordersworth",
+      "title": "Sir",
+      "email": "sirdave@ordersworth.com",
+      "client_id": "GD",
+      "opt_in": false,
+      "create_date": "2017-10-13T10:03:22.105Z",
+      "last_modified": "2017-10-13T10:03:22.105Z",
+      "customer-summary": [
+        {
+          "reference": "CUS123456789",
+          "title": "Sir",
+          "first_name": "Dave",
+          "last_name": "Ordersworth",
+          "email": "sirdave@ordersworth.com",
+          "client_id": "GD",
+          "external": 183732,
+          "delivery_address": {
+            "id": "12345",
+            "address_lines": "221B Baker Street",
+            "locality": "London",
+            "region": "London",
+            "postal_code": "N17 1AB",
+            "country": "GB",
+            "address_to": "Sir Dave Ordersworth Customer"
+          },
+          "phones": [
+            {
+              "phone": "01234 567890"
+            }
+          ]
+        }
+      ],
+      "oder-summary": [
+        {
+          "count": 15,
+          "limit": 5,
+          "offset": 0,
+          "results": [
+            {
+              "external_id": "ORDR21895275",
+              "client_id": "gd",
+              "reference": "ORD123456789",
+              "created": "2017-10-13T10:44:06.728Z",
+              "currency": "GBP",
+              "price": "151.00",
+              "channel": "WEB",
+              "country": "UK",
+              "status": "Complete",
+              "shipment": [
+                {
+                  "mbf_reference": "SR5000000216",
+                  "carrier": "UPS",
+                  "carrier_reference": "1Z6W193E6842860299",
+                  "job": [
+                    {
+                      "id": "JOB12345",
+                      "status": "In Lab",
+                      "price": "60.00",
+                      "quantity": 1,
+                      "product_image_url": "https://cdn/photo1.jpg",
+                      "product_brand": "Maui Jim",
+                      "product_colour": "Gunmetal",
+                      "product_name": "Wassup"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "prescription-summary": [
+        {
+          "count": 15,
+          "limit": 5,
+          "offset": 0,
+          "results": [
+            {
+              "prescription_id": 123456,
+              "reference": "My glasses",
+              "date_created": "2017-10-13T10:45:45.990Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "first_name": "Asd",
+      "last_name": "Ordersworth",
+      "title": "Sir",
+      "email": "sirdave@ordersworth.com",
+      "client_id": "GD",
+      "opt_in": false,
+      "create_date": "2017-10-13T10:03:22.105Z",
+      "last_modified": "2017-10-13T10:03:22.105Z",
+      "customer-summary": [
+        {
+          "reference": "CUS123456789",
+          "title": "Sir",
+          "first_name": "Dave",
+          "last_name": "Ordersworth",
+          "email": "sirdave@ordersworth.com",
+          "client_id": "GD",
+          "external": 183732,
+          "delivery_address": {
+            "id": "12345",
+            "address_lines": "221B Baker Street",
+            "locality": "London",
+            "region": "London",
+            "postal_code": "N17 1AB",
+            "country": "GB",
+            "address_to": "Sir Dave Ordersworth Customer"
+          },
+          "phones": [
+            {
+              "phone": "01234 567890"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

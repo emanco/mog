@@ -1,0 +1,331 @@
+@import "./1_vars.scss";
+@import "./2_mixins.scss";
+@import "./4_global.scss";
+
+.form-control, .selectric-wrapper .label{
+  transition:all .3s;
+  -webkit-appearance: none;
+  border-radius:0;
+  box-shadow:none;
+  border:1px solid colour('line');
+  line-height: 1.42857;
+  padding: 6px 12px;
+  font-size: 14px;
+  height: 34px;
+  font-weight:font-weight('light');
+  color:$colour-text;
+  width:100%;
+  @include scale-pixels('font-size', 16px, 18px);
+
+  &::-webkit-input-placeholder,
+  &:-moz-placeholder,
+  &::-moz-placeholder,
+  &:-ms-input-placeholder{
+    @include scale-pixels('font-size', 16px, 18px);
+    font-weight:font-weight('light');
+    color:$colour-placeholder;
+  }
+
+  html.browser-ie &{
+    transition: none;
+  }
+
+  &.valid{
+    border:1px solid #ccc;
+    background-image:none;
+  }
+
+  @include sm{
+    height: 43px;
+    padding: 11px 16px;
+    line-height:1.333333;
+
+  }
+
+  @include lg{
+    height: 50px;
+    padding: 13px 16px;
+    line-height: 1.5;
+  }
+
+  @include xlg{
+    height: 60px;
+    padding: 17px 16px;
+  }
+
+  &.-nav{
+    background-color: transparent;
+    text-indent: 26px;
+    letter-spacing: -0.01em;
+    color:#fff;
+
+    height:56px;
+    line-height:56px;
+    padding: 26px 16px;
+
+    @include md{
+      height:67px;
+      text-indent: 46px;
+      line-height:67px;
+      padding: 32px 16px;
+    }
+
+    @include xlg{
+      height:77px;
+      line-height:77px;
+      text-indent: 66px;
+      padding: 24px 16px;
+    }
+  }
+}
+
+textarea.form-control{
+  height:130px;
+}
+
+.selectric{
+  border:1px solid #ccc;
+
+  .label{
+    border:none;
+
+    .selectric-placeholder &{
+      color:$colour-placeholder;
+    }
+  }
+}
+
+.selectric-wrapper .label{
+  padding-right:30px;
+}
+.btn-round{
+  $btn-transition: 0.9s $cubic-bezier1;
+  border-radius:2em;
+  border:1px solid rgba(255,255,255,.5);
+  display: inline-block;
+  height:3em;
+  width:3em;
+  text-align: center;
+  position: relative;
+  transition:all $btn-transition;
+
+  i,span{
+    @include vertical-align;
+    position: absolute;
+  }
+
+  i{
+    color:#fff;
+    @extend .f36;
+    left:0.6em;
+    transition:left $btn-transition;
+  }
+
+  span{
+    opacity:0;
+    visibility: hidden;
+    left:0;
+    color:#fff;
+    transition:all $btn-transition;
+  }
+
+  &:hover{
+    width:8em;
+    background-color: $colour-secondary;
+    border-color: $colour-secondary;
+
+    span{
+      opacity:1;
+      visibility: visible;
+      left:2em;
+    }
+
+    i{
+      left:3em;
+    }
+  }
+}
+
+//Buttons
+.btn {
+  font-family: $font-body;
+  padding: 10px 15px;
+  border: 1px solid #e5e9eb;
+  background-color:#e5e6e9;
+  //color: #fff;
+  position: relative;
+  border-radius: 0;
+  transition: all .4s;
+  @extend .f18;
+  font-weight: font-weight('normal');
+  color:#737880;
+
+  &:hover, &:focus, &:active{
+    background-color: darken(#e5e6e9,5%);
+    color:$colour-primary;
+    border-color:$colour-primary;
+  }
+
+  @include sm {
+    padding: 5px 10px;
+  }
+
+  @include md {
+    padding: 5px 15px;
+  }
+
+  @include lg {
+    padding: 11px 25px;
+  }
+
+  &.-dark {
+    @include custom-button($colour-primary);
+    color:#fff;
+
+    &:hover{
+      background-color: lighten($colour-primary, 10%);
+    }
+  }
+
+  &.-edit, &.-add {
+    background-color: transparent;
+    position: absolute;
+    top:10%;
+    right:0;
+
+    &:after {
+      content: "\f2bf";
+      font-family: "Ionicons";
+      display: inline-block;
+      padding-left:10px;
+      color:$colour-text-secondary;
+      transition: all .4s;
+    }
+
+    &:hover{
+      &:after{
+        color:$colour-primary;
+      }
+    }
+
+  }
+
+  &.-add {
+    top:0;
+
+    &:after {
+      content: "\f359";
+    }
+  }
+
+  /*
+      For placing an icon on the right hand side of the button.
+
+      Example Usage:
+      <a class="btn -icon" href="#">
+          Go <i class="ion-ios-arrow-thin-right"></i>
+      </a>
+  */
+  &.-icon {
+    i {
+      @include responsive-font(20px, 27px);
+      @include vertical-align;
+      position: absolute;
+      margin-top: 1px;
+      right: 20px;
+    }
+
+    &.-left {
+      i {
+        right: auto;
+        left: 20px;
+
+        @include sm{
+          left:35px;
+        }
+      }
+    }
+
+    &:not(.-left):after {
+      content: "";
+      display: inline-block;
+      width: 29px;
+
+      @include lg {
+        width: 40px;
+      }
+    }
+
+    &.-left:before {
+      content: "";
+      display: inline-block;
+      width: 25px;
+    }
+
+    &.-arrow-right{
+      padding-right:55px;
+
+      @include md{
+        padding-right:77px;
+      }
+
+      &:after{
+        content:"\f3d6";
+        font-family:"Ionicons";
+        @include responsive-font(20px, 37px);
+        @include vertical-align;
+        position: absolute;
+        right: 18%;
+      }
+    }
+  }
+}
+
+
+.checkbox-container {
+  line-height: 1.7em;
+
+  @include lg {
+    line-height: 1.8em;
+  }
+}
+//Custom Checkboxes
+input[type=checkbox], input[type=radio] {
+  display: none; //Hide the checkbox
+
+  .checkbox-container & {
+
+    & + label {
+      position: relative;
+      cursor: pointer;
+      font-weight:font-weight('normal');
+      @include scale-pixels('padding-left',25px,32px);
+      color: $colour-text-secondary;
+      @extend .f20;
+
+      &:before {
+        font-family: "Ionicons";
+        display: inline-block;
+        content: "\f401"; //Unchecked
+        letter-spacing: 10px; //The space between checkbox and label
+        color: $colour-text-secondary;
+        position: absolute;
+        top: 0;
+        left: 0;
+        @extend .f26;
+        padding-left:2px;
+        transition: color .3s;
+
+        @include lg {
+          top: 0;
+        }
+      }
+    }
+
+    &:checked + label:before {
+      content: "\f3fe"; //Checked with a tick
+      color: $colour-primary;
+    }
+  }
+}
+

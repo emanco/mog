@@ -1,0 +1,514 @@
+/*
+  Usage:
+  @include placeholder {
+    font-style: italic;
+    color: black;
+  }
+*/
+/*
+  Returns a media queries which scales the units relative to the xs and lg values
+  Remember, dont be lazy when using this. If you've got other things that need be
+  in media queries for the same element, dont use this.
+
+  Usage: @include scale-pixels('margin-top', 25px, 125px);
+
+  Returns:
+
+  padding:25px
+
+  @media (min-width:768px){
+    padding:50px;
+  }
+
+  @media (min-width:992px){
+    padding:80px;
+  }
+
+  @media (min-width:1200px){
+    padding:115px;
+  }
+
+  @media (min-width:1500px){
+    padding:125px;
+  }
+*/
+/*
+  Pass in a colour and it gives you a button, BOOM.
+*/
+/*
+  Pass in 2 colours and it gives you a button width a gradient, BOOM.
+*/
+/*
+  Bootstrap size mixins
+*/
+/*
+ Viewport sized typography with minimum and maximum values
+
+ @param {Number}   $min         - Minimum font size (px)
+ @param {Number}   $max         - Maximum font size (px)
+
+  Example scss - 2.79vw font size (with 53px fallback),
+  @include responsive-font(20px, 53px);
+*/
+/*
+  Icon Container sizing
+*/
+/*
+  Usage:
+  @include placeholder {
+    font-style: italic;
+    color: black;
+  }
+*/
+/*
+  Returns a media queries which scales the units relative to the xs and lg values
+  Remember, dont be lazy when using this. If you've got other things that need be
+  in media queries for the same element, dont use this.
+
+  Usage: @include scale-pixels('margin-top', 25px, 125px);
+
+  Returns:
+
+  padding:25px
+
+  @media (min-width:768px){
+    padding:50px;
+  }
+
+  @media (min-width:992px){
+    padding:80px;
+  }
+
+  @media (min-width:1200px){
+    padding:115px;
+  }
+
+  @media (min-width:1500px){
+    padding:125px;
+  }
+*/
+/*
+  Pass in a colour and it gives you a button, BOOM.
+*/
+/*
+  Pass in 2 colours and it gives you a button width a gradient, BOOM.
+*/
+/*
+  Bootstrap size mixins
+*/
+/*
+ Viewport sized typography with minimum and maximum values
+
+ @param {Number}   $min         - Minimum font size (px)
+ @param {Number}   $max         - Maximum font size (px)
+
+  Example scss - 2.79vw font size (with 53px fallback),
+  @include responsive-font(20px, 53px);
+*/
+/*
+  Icon Container sizing
+*/
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 400; }
+
+.f14 {
+  font-size: 14px;
+  font-size: 0.72917vw; }
+  @media (max-width: 1508.57143px) {
+    .f14 {
+      font-size: 11px; } }
+  @media (min-width: 1920px) {
+    .f14 {
+      font-size: 14px; } }
+
+.f16 {
+  font-size: 15.56px;
+  font-size: 0.81042vw; }
+  @media (max-width: 1604.11311px) {
+    .f16 {
+      font-size: 13px; } }
+  @media (min-width: 1920px) {
+    .f16 {
+      font-size: 15.56px; } }
+
+.f17, .component-prescription .extra {
+  font-size: 16.89px;
+  font-size: 0.87969vw; }
+  @media (max-width: 1591.47425px) {
+    .f17, .component-prescription .extra {
+      font-size: 14px; } }
+  @media (min-width: 1920px) {
+    .f17, .component-prescription .extra {
+      font-size: 16.89px; } }
+
+.f18, .component-customer-info .view-more a, .component-card-order-info .shipment, .component-shipment .shipment-details p, .component-prescription .prescription-table {
+  font-size: 18px;
+  font-size: 0.9375vw; }
+  @media (max-width: 1493.33333px) {
+    .f18, .component-customer-info .view-more a, .component-card-order-info .shipment, .component-shipment .shipment-details p, .component-prescription .prescription-table {
+      font-size: 14px; } }
+  @media (min-width: 1920px) {
+    .f18, .component-customer-info .view-more a, .component-card-order-info .shipment, .component-shipment .shipment-details p, .component-prescription .prescription-table {
+      font-size: 18px; } }
+
+.f20, .component-comments .comments li, .component-shipment .shipment-details p.heading {
+  font-size: 20px;
+  font-size: 1.04167vw; }
+  @media (max-width: 1536px) {
+    .f20, .component-comments .comments li, .component-shipment .shipment-details p.heading {
+      font-size: 16px; } }
+  @media (min-width: 1920px) {
+    .f20, .component-comments .comments li, .component-shipment .shipment-details p.heading {
+      font-size: 20px; } }
+
+.f21 {
+  font-size: 21.3px;
+  font-size: 1.10938vw; }
+  @media (max-width: 1442.25352px) {
+    .f21 {
+      font-size: 16px; } }
+  @media (min-width: 1920px) {
+    .f21 {
+      font-size: 21.3px; } }
+
+.f22 {
+  font-size: 22.22px;
+  font-size: 1.15729vw; }
+  @media (max-width: 1382.53825px) {
+    .f22 {
+      font-size: 16px; } }
+  @media (min-width: 1920px) {
+    .f22 {
+      font-size: 22.22px; } }
+
+.f26, .heading2 {
+  font-size: 26.67px;
+  font-size: 1.38906vw; }
+  @media (max-width: 1583.80202px) {
+    .f26, .heading2 {
+      font-size: 22px; } }
+  @media (min-width: 1920px) {
+    .f26, .heading2 {
+      font-size: 26.67px; } }
+
+.f24, .component .actions, .component-card-job .job-name {
+  font-size: 24.44px;
+  font-size: 1.27292vw; }
+  @media (max-width: 1414.07529px) {
+    .f24, .component .actions, .component-card-job .job-name {
+      font-size: 18px; } }
+  @media (min-width: 1920px) {
+    .f24, .component .actions, .component-card-job .job-name {
+      font-size: 24.44px; } }
+
+.f31, .component-customer-prescriptions .actions {
+  font-size: 31px;
+  font-size: 1.61458vw; }
+  @media (max-width: 1610.32258px) {
+    .f31, .component-customer-prescriptions .actions {
+      font-size: 26px; } }
+  @media (min-width: 1920px) {
+    .f31, .component-customer-prescriptions .actions {
+      font-size: 31px; } }
+
+.f36 {
+  font-size: 35.56px;
+  font-size: 1.85208vw; }
+  @media (max-width: 1349.83127px) {
+    .f36 {
+      font-size: 25px; } }
+  @media (min-width: 1920px) {
+    .f36 {
+      font-size: 35.56px; } }
+
+.f40, .heading1 {
+  font-size: 40px;
+  font-size: 2.08333vw; }
+  @media (max-width: 1296px) {
+    .f40, .heading1 {
+      font-size: 27px; } }
+  @media (min-width: 1920px) {
+    .f40, .heading1 {
+      font-size: 40px; } }
+
+.f60 {
+  font-size: 59.95px;
+  font-size: 3.1224vw; }
+  @media (max-width: 960.80067px) {
+    .f60 {
+      font-size: 30px; } }
+  @media (min-width: 1920px) {
+    .f60 {
+      font-size: 59.95px; } }
+
+.heading1 {
+  font-family: "nimbus-sans";
+  color: #222222; }
+
+.heading2 {
+  font-weight: 400; }
+
+* {
+  outline: 0 !important; }
+
+html {
+  height: auto; }
+
+body {
+  height: 100%;
+  color: #222222;
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  font-family: "nimbus-sans";
+  font-size: 20px;
+  font-size: 1.04167vw;
+  font-weight: 300;
+  letter-spacing: -0.02em; }
+  @media (max-width: 1344px) {
+    body {
+      font-size: 14px; } }
+  @media (min-width: 1920px) {
+    body {
+      font-size: 20px; } }
+
+a, a:hover, a:visited, a:focus {
+  text-decoration: none; }
+
+ul {
+  margin: 0; }
+
+p {
+  line-height: 1em; }
+
+.component {
+  position: relative;
+  padding: 5% 0;
+  display: inline-block;
+  width: 100%; }
+  .component .actions {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #222; }
+  .component p:last-child {
+    margin-bottom: 0; }
+  .component.card {
+    display: table;
+    width: 100%;
+    margin-bottom: 2%;
+    padding: 0;
+    background-color: #f8f8f8;
+    transition: all .5s; }
+    .component.card.-in {
+      box-shadow: 0 0 3px 3px rgba(200, 200, 200, 0.3);
+      background-color: #fff; }
+    .component.card > [class*='col-'] {
+      display: table-cell;
+      padding: 4%;
+      float: none;
+      vertical-align: middle; }
+      .component.card > [class*='col-'] p:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0; }
+    .component.card .price {
+      display: inline-block;
+      width: 100px; }
+
+.component-customer-info p, .component-customer-info a {
+  color: #979797; }
+
+.component-customer-info .heading {
+  padding-bottom: 2%;
+  color: #222222; }
+
+.component-customer-info .btn.-edit {
+  margin-top: -30px; }
+
+.component-customer-info .view-more {
+  padding-top: 5%; }
+  .component-customer-info .view-more a {
+    color: #1d71d5; }
+
+.component-customer-orders,
+.component-customer-prescriptions,
+.component-customer-notes {
+  border-top: 1px solid #e8e9e9;
+  cursor: pointer; }
+  .component-customer-orders .heading,
+  .component-customer-prescriptions .heading,
+  .component-customer-notes .heading {
+    position: relative; }
+  .component-customer-orders .sub-text,
+  .component-customer-prescriptions .sub-text,
+  .component-customer-notes .sub-text {
+    padding: 2% 0; }
+
+.component-card-order.-in {
+  margin-bottom: 0; }
+
+.component-card-order-info {
+  padding: 0;
+  max-height: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .5s;
+  overflow: hidden;
+  margin-bottom: 0 !important;
+  display: block; }
+  .component-card-order-info.-in {
+    max-height: 1000px;
+    visibility: visible;
+    opacity: 1;
+    margin-bottom: 2% !important;
+    box-shadow: 0 0 3px 3px rgba(200, 200, 200, 0.3); }
+  .component-card-order-info .shipment {
+    background-color: #63676a;
+    color: #fff;
+    padding: 2% 4%;
+    font-weight: 400; }
+
+.component-card-job {
+  margin-bottom: 0 !important;
+  background-color: #fff !important;
+  display: table;
+  width: 100%;
+  cursor: pointer; }
+  .component-card-job:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 5%;
+    border-bottom: 1px solid #e8e9e9;
+    display: inline-block;
+    height: 1px; }
+  .component-card-job > [class*='col-'] {
+    display: table-cell;
+    float: none; }
+  .component-card-job .text-container {
+    padding-left: 0 !important; }
+  .component-card-job .img {
+    width: 100%; }
+    @media (min-width: 768px) {
+      .component-card-job .img {
+        width: 100px; } }
+
+.component-customer-prescriptions .actions {
+  color: #979797; }
+
+.component-comments {
+  box-shadow: 0 0 3px 3px rgba(200, 200, 200, 0.3);
+  padding-top: 0; }
+  .component-comments .comments {
+    list-style-type: none;
+    margin: 0;
+    padding: 0; }
+    .component-comments .comments li {
+      position: relative;
+      padding: 4%; }
+      .component-comments .comments li:after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 5%;
+        border-bottom: 1px solid #e8e9e9;
+        display: inline-block;
+        height: 1px; }
+      .component-comments .comments li:last-child:after {
+        display: none; }
+      .component-comments .comments li .user-initials {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        position: absolute;
+        left: 5%; }
+      .component-comments .comments li .comment {
+        padding-left: 13%; }
+        .component-comments .comments li .comment .date {
+          margin-bottom: 0; }
+  .component-comments .add-comment {
+    padding: 5%;
+    border-top: 1px solid #e0e0e0; }
+    .component-comments .add-comment .comment-container {
+      position: relative; }
+    .component-comments .add-comment .more-comments {
+      position: absolute;
+      top: 2%;
+      right: 2%; }
+    .component-comments .add-comment .new-comment {
+      margin-bottom: 3%; }
+    .component-comments .add-comment .btn {
+      float: right; }
+
+.component-order-summary {
+  background-color: #fff;
+  padding: 5%;
+  box-shadow: 0 0 9px 0 rgba(40, 40, 40, 0.3);
+  margin-top: 5%; }
+  .component-order-summary .heading, .component-order-summary .sub-text {
+    margin-bottom: 3%; }
+
+.component-shipment {
+  padding: 0;
+  margin-top: 10%; }
+  .component-shipment .shipment-details {
+    background-color: #63676a;
+    padding: 5%;
+    color: #fff;
+    box-shadow: 0 0 9px 0 rgba(40, 40, 40, 0.3); }
+    .component-shipment .shipment-details p {
+      font-weight: 300; }
+      .component-shipment .shipment-details p.heading {
+        font-weight: 400;
+        padding-bottom: 2%; }
+
+.component-shipment-job {
+  background-color: #fff;
+  padding: 0;
+  display: block;
+  margin-top: 5%; }
+  .component-shipment-job:first-of-type {
+    margin-top: 0; }
+  .component-shipment-job .image-container {
+    padding-right: 5%; }
+    .component-shipment-job .image-container .img {
+      width: 100%; }
+  .component-shipment-job .actions {
+    top: 0;
+    right: 0; }
+  .component-shipment-job .summary {
+    padding: 9% 5% 7%; }
+
+.component-prescription {
+  padding-bottom: 4%; }
+  .component-prescription .heading {
+    padding-bottom: 2%; }
+  .component-prescription .extra {
+    padding: 2% 0; }
+    .component-prescription .extra strong {
+      line-height: 3em; }
+  .component-prescription .prescription-table {
+    margin: 2% 0; }
+    .component-prescription .prescription-table th, .component-prescription .prescription-table td {
+      text-align: center; }
+      .component-prescription .prescription-table th:first-child, .component-prescription .prescription-table td:first-child {
+        border-right: 1px solid #e8e9e9; }
+    .component-prescription .prescription-table thead tr th {
+      border-bottom: 1px solid #e8e9e9;
+      font-weight: 400;
+      color: #979797; }
+    .component-prescription .prescription-table tbody tr.left-eye {
+      background-color: #ddf8ef; }
+    .component-prescription .prescription-table tbody tr.right-eye {
+      background-color: #fdd3cf;
+      border-bottom: 4px solid #fff; }
+
+.component-job-notes .controls-container {
+  position: absolute;
+  right: 50px;
+  top: -30px; }
+
+.component-job-notes .component-comments {
+  padding-top: 0;
+  margin-top: 5%; }

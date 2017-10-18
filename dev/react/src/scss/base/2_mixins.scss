@@ -1,0 +1,346 @@
+@import "./1_vars.scss";
+
+@function layer($layer) {
+  @if map_has_key($layers, $layer) {
+    @return map-get($layers, $layer);
+  } @else {
+    @warn "#{$layer} does not exist";
+    @return null;
+  }
+}
+
+@function nav-height($size) {
+  @if map_has_key($nav-heights, $size) {
+    @return map-get($nav-heights, $size);
+  } @else {
+    @warn "#{$nav-type} does not exist";
+    @return null;
+  }
+}
+
+@function font-weight($weight) {
+  @if map_has_key($font-weights, $weight) {
+    @return map-get($font-weights, $weight);
+  } @else {
+    @warn "#{$weight} does not exist";
+    @return null;
+  }
+}
+
+@function nav-width($width) {
+  @if map_has_key($nav-widths, $width) {
+    @return map-get($nav-widths, $width);
+  } @else {
+    @warn "#{$width} does not exist";
+    @return null;
+  }
+}
+
+@function breakpoint($breakpoint) {
+  @if map_has_key($breakpoints, $breakpoint) {
+    @return map-get($breakpoints, $breakpoint);
+  } @else {
+    @warn "#{$breakpoint} does not exist";
+    @return null;
+  }
+}
+
+/// Fetch nested keys
+/// @param {Map} $map - Map
+/// @param {Arglist} $keys - Keys to fetch
+/// @return {*}
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+
+  @return $map;
+}
+
+// Generate classes based on map
+@mixin render-colour-classes($map, $parent-colour: '') {
+  @each $key, $value in $map {
+    @if type-of($value) == "map" {
+      @include render-colour-classes($value, $key)
+    } @else {
+
+      $class: $key;
+
+      @if $parent-colour != '' {
+        @if $key == 'base' {
+          $class: #{$parent-colour};
+        } @else {
+          $class: #{$class}-#{$parent-colour};
+        }
+      }
+
+      // This line is for debugging
+      // @warn ".colour-#{$class} => #{$value}";
+
+      .colour-#{$class} {
+        color: #{$value};
+      }
+      .bg-colour-#{$class} {
+        background-color: #{$value};
+      }
+      //.border-colour-#{$class} {
+      //  border-color: #{$value};
+      //}
+    }
+  }
+}
+
+@function colour($colour, $tone: 'base') {
+  @if type-of(map-get($colours, $colour)) == "map" {
+    @return map-deep-get($colours, $colour, $tone);
+  } @else {
+    @if map_has_key($colours, $colour) {
+      @return map-get($colours, $colour);
+    } @else {
+      @warn "#{$colour} does not exist";
+      @return null;
+    }
+  }
+}
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin middle-align {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*
+  Usage:
+  @include placeholder {
+    font-style: italic;
+    color: black;
+  }
+*/
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}
+}
+
+/*
+  Returns a media queries which scales the units relative to the xs and lg values
+  Remember, dont be lazy when using this. If you've got other things that need be
+  in media queries for the same element, dont use this.
+
+  Usage: @include scale-pixels('margin-top', 25px, 125px);
+
+  Returns:
+
+  padding:25px
+
+  @media (min-width:768px){
+    padding:50px;
+  }
+
+  @media (min-width:992px){
+    padding:80px;
+  }
+
+  @media (min-width:1200px){
+    padding:115px;
+  }
+
+  @media (min-width:1500px){
+    padding:125px;
+  }
+*/
+@mixin scale-pixels($property, $xs, $xlg){
+  $multiplier: round(($xlg - $xs) / 5);
+
+  #{$property}:$xs;
+
+  @include sm {
+    #{$property}: $xs + $multiplier;
+  }
+
+  @include md {
+    #{$property}: $xs + ($multiplier * 2);
+  }
+
+  @include lg {
+    #{$property}: $xs + ($multiplier * 3);
+  }
+
+  @include xlg {
+    #{$property}:$xlg;
+  }
+}
+
+/*
+  Pass in a colour and it gives you a button, BOOM.
+*/
+@mixin custom-button($this-color) {
+  background-color:$this-color;
+  color:#FFF;
+  border-color:$this-color;
+  //
+  //html.no-touch &:hover{
+  //  background-color: darken($this-color, 10%);
+  //  border-color: darken($this-color, 10%);
+  //  background-image:none;
+  //}
+
+  &.-outline{
+    border-color:$this-color;
+    color:$this-color;
+    background-color:transparent;
+
+    html.no-touch &:hover{
+      background-color: $this-color;
+      color: #FFF;
+    }
+  }
+}
+
+/*
+  Pass in 2 colours and it gives you a button width a gradient, BOOM.
+*/
+@mixin custom-button-gradient($colour1, $colour2) {
+  background-color: $colour1;
+  background-image: linear-gradient(to bottom, $colour1 0%, $colour2 100%);
+  border-color:$colour1;
+  color:#FFF;
+  background-size: 100% 200%;
+
+  html.no-touch &:hover{
+    background-color: $colour2;
+    background-position: 0 -102%;
+  }
+}
+
+/*
+  Bootstrap size mixins
+*/
+@mixin xlg {
+  @media (min-width: breakpoint('xlg')) { @content; }
+}
+
+@mixin lg {
+  @media (min-width: breakpoint('lg')) { @content; }
+}
+
+@mixin md {
+  @media (min-width: breakpoint('md')) { @content; }
+}
+
+@mixin sm {
+  @media (min-width: breakpoint('sm')) { @content; }
+}
+
+@mixin above-ipad-portrait {
+  @media (min-width: 769px) { @content; }
+}
+
+@mixin below-ipad-portrait {
+  @media (max-width: 769px) { @content; }
+}
+
+//Try not to use this, everything should be mobile first
+@mixin xs {
+  @media (max-width: breakpoint('xs')) { @content; }
+}
+
+//Returns vw for the given pixels, defaulting to viewport width 1920
+@function pixels-to-vw($target, $viewport-width:1920) {
+  $vw-context: ($viewport-width * 0.01) * 1px;
+  @return ($target / $vw-context) * 1vw;
+}
+
+/*
+ Viewport sized typography with minimum and maximum values
+
+ @param {Number}   $min         - Minimum font size (px)
+ @param {Number}   $max         - Maximum font size (px)
+
+  Example scss - 2.79vw font size (with 53px fallback),
+  @include responsive-font(20px, 53px);
+*/
+@mixin responsive-font($min, $max) {
+  $responsive: pixels-to-vw($max);
+  $responsive-unitless: $responsive / ($responsive - $responsive + 1);
+  $dimension: if(unit($responsive) == 'vh', 'height', 'width');
+  $min-breakpoint: $min / $responsive-unitless * 100;
+
+  @media (max-#{$dimension}: #{$min-breakpoint}) {
+    font-size: $min;
+  }
+
+  $max-breakpoint: $max / $responsive-unitless * 100;
+
+  @media (min-#{$dimension}: #{$max-breakpoint}) {
+    font-size: $max;
+  }
+
+  font-size: $max;
+  font-size: $responsive;
+}
+
+
+/*
+  Icon Container sizing
+*/
+@mixin icon-container($xs, $xlg){
+  $multiplier: round(($xlg - $xs) / 5);
+
+  font-size: $xs;
+  width: $xs;
+  height: $xs;
+  line-height: $xs;
+
+  @include sm {
+    font-size: $xs + $multiplier;
+    width: $xs + $multiplier;
+    height: $xs + $multiplier;
+    line-height: $xs + $multiplier;
+  }
+
+  @include md {
+    font-size: $xs + ($multiplier * 2);
+    width: $xs + ($multiplier * 2);
+    height: $xs + ($multiplier * 2);
+    line-height: $xs + ($multiplier * 2);
+  }
+
+  @include lg {
+    font-size: $xs + ($multiplier * 3);
+    width: $xs + ($multiplier * 3);
+    height: $xs + ($multiplier * 3);
+    line-height: $xs + ($multiplier * 3);
+  }
+
+  @include xlg {
+    font-size: $xlg;
+    width: $xlg;
+    height: $xlg;
+    line-height: $xlg;
+  }
+
+}
+
+//Returns a font
+@mixin font($name, $path, $filename, $weight, $style:normal){
+  @font-face {
+    font-family: '#{$name}';
+    src: url('#{$path}/#{$filename}.eot');
+    src: url('#{$path}/#{$filename}.eot?#iefix') format('embedded-opentype'),
+    url('#{$path}/#{$filename}.woff2') format('woff2'),
+    url('#{$path}/#{$filename}.woff') format('woff'),
+    url('#{$path}/#{$filename}.ttf') format('truetype'),
+    url('#{$path}/#{$filename}.svg') format('svg');
+    font-weight: $weight;
+    font-style: $style;
+  }
+}

@@ -1,0 +1,317 @@
+@import "./2_mixins.scss";
+
+.no-padding {
+	padding: 0 !important;
+}
+
+.text-center-sm{
+	@include sm{
+		text-align:center;
+	}
+}
+
+@include xlg{
+	.hidden-xlg{
+		display: none;
+	}
+}
+
+//A circular container for icons 
+.icon-container{
+	border-radius: 50%;
+	display: inline-block;
+	text-align: center;
+	line-height:1.0em;
+	@include scale-pixels('padding', 5px, 9px);
+
+	&.-rounded{
+		border-radius:8px;
+	}
+
+	i{
+		display: inline-block;
+		@include icon-container(24px, 36px);
+	}
+
+	&.-size-1{
+		@include scale-pixels('padding', 10px, 20px);
+	}
+
+	&.-size-2{
+		@include scale-pixels('padding', 10px, 15px);
+	}
+
+	&.-lowericon{
+		i{
+			@include sm {
+				position: relative;
+				top: 2px;
+			}
+		}
+	}
+}
+
+.overlay{
+	transition:background-color 0.5s;
+	background-color:rgba(0,0,0,0.4);
+
+	&.-absolute{
+		position: absolute;
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+	}
+}
+
+.display-table{
+	display: block;
+
+	> * {
+		display: block;
+
+		> * {
+			display: block;
+		}
+	}
+
+	@include sm{
+		display: table;
+
+		&:not(.container){
+			width:100%;
+		}
+
+		> *{
+			display: table-row;
+			height:100%;
+
+			> *:not(.visible-xs){
+				height:100%;
+				display: table-cell ;
+				float:none;
+				vertical-align:middle;
+			}
+		}
+	}
+
+	&.-fixed{
+		table-layout: fixed;
+	}
+}
+
+.display-table-sm{
+	display: block;
+
+	> * {
+		display: block;
+
+		> * {
+			display: block;
+		}
+	}
+
+	@include sm{
+		display: table;
+
+		&:not(.container){
+			width:100%;
+		}
+
+		> *{
+			display: table-row;
+			height:100%;
+
+			> *:not(.visible-xs){
+				height:100%;
+				display: table-cell ;
+				float:none;
+				vertical-align:middle;
+			}
+		}
+
+		&.-addresses{
+			border-spacing: 10px;
+			border-collapse: separate;
+			width:calc(100% + 20px);
+			left:-10px;
+			position: relative;
+
+			> * {
+				> * {
+					vertical-align: top;
+				}
+			}
+		}
+	}
+}
+
+.full-size{
+	height:100vh;
+	width:100%;
+}
+
+//Simple helper for background images
+.pnp-bg{
+	background-size:cover;
+	background-position:center center;
+	background-repeat:no-repeat;
+	position: relative;
+}
+
+.full-height{
+	min-height:480px - nav-height('xs');
+	height:100vh;
+	height:calc(100vh - #{nav-height('xs')});
+
+	@include sm{
+		height:calc(100vh - #{nav-height('sm')});
+	}
+
+	@include md{
+		height:calc(100vh - #{nav-height('md')});
+	}
+
+	@include lg{
+		height:calc(100vh - #{nav-height('lg')});
+	}
+
+	@include xlg{
+		height:calc(100vh - #{nav-height('xlg')});
+	}
+}
+
+.full-height-ignore-nav{
+	min-height:500px;
+	height:100vh;
+}
+
+.full-height-sm{
+	@include sm {
+		height: 100vh;
+		height: calc(100vh - #{nav-height('xs')});
+
+		@include sm {
+			height: calc(100vh - #{nav-height('sm')});
+		}
+
+		@include md {
+			height: calc(100vh - #{nav-height('md')});
+		}
+
+		@include lg {
+			height: calc(100vh - #{nav-height('lg')});
+		}
+
+		@include xlg {
+			height: calc(100vh - #{nav-height('xlg')});
+		}
+	}
+}
+
+.nav-height{
+	height:nav-height('xs');
+
+	@include sm{
+		height:nav-height('sm');
+	}
+
+	@include md{
+		height:nav-height('md');
+	}
+
+	@include lg{
+		height:nav-height('lg');
+	}
+
+	@include xlg{
+		height:nav-height('xlg');
+	}
+}
+
+.nav-size{
+	width:nav-height('xs');
+	height:nav-height('xs');
+
+	@include sm{
+		width:nav-height('sm');
+		height:nav-height('sm');
+	}
+
+	@include md{
+		width:nav-height('md');
+		height:nav-height('md');
+	}
+
+	@include lg{
+		width:nav-height('lg');
+		height:nav-height('lg');
+	}
+
+	@include xlg{
+		width:nav-height('xlg');
+		height:nav-height('xlg');
+	}
+}
+
+.nav-line-height{
+	height:nav-height('xs');
+	line-height:nav-height('xs');
+
+	@include sm{
+		height:nav-height('sm');
+		line-height:nav-height('sm');
+	}
+
+	@include md{
+		height:nav-height('md');
+		line-height:nav-height('md');
+	}
+
+	@include lg{
+		height:nav-height('lg');
+		line-height:nav-height('lg');
+	}
+
+	@include xlg{
+		height:nav-height('xlg');
+		line-height:nav-height('xlg');
+	}
+}
+
+@include render-colour-classes($colours);
+
+.veil{
+	background: rgba(0, 0, 0, 0);
+	bottom: 0;
+	position: fixed;
+	top: 0;
+	z-index: layer('veil');
+	right:-100%;
+	visibility: hidden;
+	transition: all .5s;
+	cursor: pointer;
+
+	&.-in{
+		right: 0;
+		left: 0;
+		visibility: visible;
+		background: rgba(0, 0, 0, 0.4);
+	}
+}
+
+.cust-scroll {
+	&::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+		background-color: #eee;
+	}
+
+	&::-webkit-scrollbar{
+		width: 4px;
+		background-color: #eee;
+	}
+
+	&::-webkit-scrollbar-thumb{
+		background-color: #111;
+	}
+}

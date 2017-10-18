@@ -1,0 +1,30 @@
+@import "./1_vars.scss";
+
+//Add to bootstrap rows to remove gutter
+
+.container-fluid{
+  padding:0;
+}
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.row > [class*='col-'] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.list-inline{
+  margin:0;
+}
+
+// Remove outlines from all links and fields
+input, select, textarea, a {
+  &:active, &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: initial !important;
+  }
+}

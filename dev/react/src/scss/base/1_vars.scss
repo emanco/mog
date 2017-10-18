@@ -1,0 +1,89 @@
+// Bootstrap breakpoints
+$breakpoints: (
+        'xs': 767px,
+        'sm': 768px,
+        'md': 992px,
+        'lg': 1200px,
+        'xlg': 1500px
+);
+
+// Navigation heights
+$nav-heights: (
+        'xs': 57px,
+        'sm': 65px,
+        'md': 78px,
+        'lg': 89px,
+        'xlg': 100px
+);
+
+//Panel padding
+$panel-padding-sm-left:100px;
+$panel-padding-sm-top:86px;
+$panel-padding-md-left:100px;
+$panel-padding-md-top:109px;
+$panel-padding-lg-left:130px;
+$panel-padding-lg-top:112px;
+$panel-padding-xlg-left:160px;
+$panel-padding-xlg-top:130px;
+
+//Standard font size on mobile
+$font-size-xs:14px;
+
+//Padding left and right on mobile
+$padding-xs:20px;
+
+//Body copy line height
+$line-height: 1.0em;
+
+$box-shadow: 0 0 3px 3px rgba(200,200,200,.3);
+
+$box-shadow-on-dark: 0 0 9px 0 rgba(40,40,40,.3);
+
+//Typography
+$font-body:'nimbus-sans';
+$font-heading: $font-body;
+
+$font-weights: (
+        'extralight': 200,
+        'light': 300,
+        'standard': 400,
+        'normal': 400,
+        'medium': 500,
+        'book': 600,
+        'bold': 700
+);
+
+$layers: (
+        'breadcrumb': 10,
+        'veil' : 20,
+);
+
+$colours: (
+        'grey': (
+                'lighter': #a4a4a4,
+                'light': #bfbfbd,
+                'base': #63676a,
+                'panel': #a0a2a9,
+                'dark':#222222
+        ),
+        'blue': (
+                'base': #212937,
+                'muted-primary': #444a5a,
+                'link': #1d71d5
+        ),
+        'prescription' : (
+                'red':#fdd3cf,
+                'green':#ddf8ef
+        ),
+        'line': #e8e9e9
+
+);
+
+$cubic-bezier1: cubic-bezier(0.23, 1, 0.32, 1);
+
+//Colors assigned to variables
+$colour-text: #222222;
+$colour-text-secondary: #979797;
+$colour-placeholder: lighten(#222222, 40%);
+$colour-primary: #212937;
+$colour-secondary: #f4b400;

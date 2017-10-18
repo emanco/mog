@@ -1,0 +1,34 @@
+@import "./2_mixins.scss";
+
+h1,h2,h3,h4,h5,h6{
+  margin:0;
+  font-weight: font-weight('normal');
+}
+
+.f14{ @include responsive-font(11px, 14px); }
+.f16{ @include responsive-font(13px, 15.56px); }
+.f17{ @include responsive-font(14px, 16.89px); }
+.f18{ @include responsive-font(14px, 18px); }
+.f20{ @include responsive-font(16px, 20px); }
+.f21{ @include responsive-font(16px, 21.3px); }
+.f22{ @include responsive-font(16px, 22.22px); }
+.f26{ @include responsive-font(22px, 26.67px); }
+.f24{ @include responsive-font(18px, 24.44px); }
+.f31{ @include responsive-font(26px, 31px); }
+.f36{ @include responsive-font(25px, 35.56px); }
+.f40{ @include responsive-font(27px, 40px); }
+.f60{ @include responsive-font(30px, 59.95px); }
+
+.heading1{
+  @extend .f40;
+  font-family:$font-heading;
+  color:$colour-text;
+}
+
+.heading2{
+  @extend .f26;
+  font-weight:font-weight('normal');
+}
+
+.heading3{
+}

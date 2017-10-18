@@ -1,0 +1,227 @@
+/*
+  Usage:
+  @include placeholder {
+    font-style: italic;
+    color: black;
+  }
+*/
+/*
+  Returns a media queries which scales the units relative to the xs and lg values
+  Remember, dont be lazy when using this. If you've got other things that need be
+  in media queries for the same element, dont use this.
+
+  Usage: @include scale-pixels('margin-top', 25px, 125px);
+
+  Returns:
+
+  padding:25px
+
+  @media (min-width:768px){
+    padding:50px;
+  }
+
+  @media (min-width:992px){
+    padding:80px;
+  }
+
+  @media (min-width:1200px){
+    padding:115px;
+  }
+
+  @media (min-width:1500px){
+    padding:125px;
+  }
+*/
+/*
+  Pass in a colour and it gives you a button, BOOM.
+*/
+/*
+  Pass in 2 colours and it gives you a button width a gradient, BOOM.
+*/
+/*
+  Bootstrap size mixins
+*/
+/*
+ Viewport sized typography with minimum and maximum values
+
+ @param {Number}   $min         - Minimum font size (px)
+ @param {Number}   $max         - Maximum font size (px)
+
+  Example scss - 2.79vw font size (with 53px fallback),
+  @include responsive-font(20px, 53px);
+*/
+/*
+  Icon Container sizing
+*/
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 400; }
+
+.f14 {
+  font-size: 14px;
+  font-size: 0.72917vw; }
+  @media (max-width: 1508.57143px) {
+    .f14 {
+      font-size: 11px; } }
+  @media (min-width: 1920px) {
+    .f14 {
+      font-size: 14px; } }
+
+.f16 {
+  font-size: 15.56px;
+  font-size: 0.81042vw; }
+  @media (max-width: 1604.11311px) {
+    .f16 {
+      font-size: 13px; } }
+  @media (min-width: 1920px) {
+    .f16 {
+      font-size: 15.56px; } }
+
+.f17 {
+  font-size: 16.89px;
+  font-size: 0.87969vw; }
+  @media (max-width: 1591.47425px) {
+    .f17 {
+      font-size: 14px; } }
+  @media (min-width: 1920px) {
+    .f17 {
+      font-size: 16.89px; } }
+
+.f18 {
+  font-size: 18px;
+  font-size: 0.9375vw; }
+  @media (max-width: 1493.33333px) {
+    .f18 {
+      font-size: 14px; } }
+  @media (min-width: 1920px) {
+    .f18 {
+      font-size: 18px; } }
+
+.f20 {
+  font-size: 20px;
+  font-size: 1.04167vw; }
+  @media (max-width: 1536px) {
+    .f20 {
+      font-size: 16px; } }
+  @media (min-width: 1920px) {
+    .f20 {
+      font-size: 20px; } }
+
+.f21 {
+  font-size: 21.3px;
+  font-size: 1.10938vw; }
+  @media (max-width: 1442.25352px) {
+    .f21 {
+      font-size: 16px; } }
+  @media (min-width: 1920px) {
+    .f21 {
+      font-size: 21.3px; } }
+
+.f22 {
+  font-size: 22.22px;
+  font-size: 1.15729vw; }
+  @media (max-width: 1382.53825px) {
+    .f22 {
+      font-size: 16px; } }
+  @media (min-width: 1920px) {
+    .f22 {
+      font-size: 22.22px; } }
+
+.f26, .heading2 {
+  font-size: 26.67px;
+  font-size: 1.38906vw; }
+  @media (max-width: 1583.80202px) {
+    .f26, .heading2 {
+      font-size: 22px; } }
+  @media (min-width: 1920px) {
+    .f26, .heading2 {
+      font-size: 26.67px; } }
+
+.f24 {
+  font-size: 24.44px;
+  font-size: 1.27292vw; }
+  @media (max-width: 1414.07529px) {
+    .f24 {
+      font-size: 18px; } }
+  @media (min-width: 1920px) {
+    .f24 {
+      font-size: 24.44px; } }
+
+.f31 {
+  font-size: 31px;
+  font-size: 1.61458vw; }
+  @media (max-width: 1610.32258px) {
+    .f31 {
+      font-size: 26px; } }
+  @media (min-width: 1920px) {
+    .f31 {
+      font-size: 31px; } }
+
+.f36 {
+  font-size: 35.56px;
+  font-size: 1.85208vw; }
+  @media (max-width: 1349.83127px) {
+    .f36 {
+      font-size: 25px; } }
+  @media (min-width: 1920px) {
+    .f36 {
+      font-size: 35.56px; } }
+
+.f40, .heading1 {
+  font-size: 40px;
+  font-size: 2.08333vw; }
+  @media (max-width: 1296px) {
+    .f40, .heading1 {
+      font-size: 27px; } }
+  @media (min-width: 1920px) {
+    .f40, .heading1 {
+      font-size: 40px; } }
+
+.f60 {
+  font-size: 59.95px;
+  font-size: 3.1224vw; }
+  @media (max-width: 960.80067px) {
+    .f60 {
+      font-size: 30px; } }
+  @media (min-width: 1920px) {
+    .f60 {
+      font-size: 59.95px; } }
+
+.heading1 {
+  font-family: "nimbus-sans";
+  color: #222222; }
+
+.heading2 {
+  font-weight: 400; }
+
+* {
+  outline: 0 !important; }
+
+html {
+  height: auto; }
+
+body {
+  height: 100%;
+  color: #222222;
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  font-family: "nimbus-sans";
+  font-size: 20px;
+  font-size: 1.04167vw;
+  font-weight: 300;
+  letter-spacing: -0.02em; }
+  @media (max-width: 1344px) {
+    body {
+      font-size: 14px; } }
+  @media (min-width: 1920px) {
+    body {
+      font-size: 20px; } }
+
+a, a:hover, a:visited, a:focus {
+  text-decoration: none; }
+
+ul {
+  margin: 0; }
+
+p {
+  line-height: 1em; }

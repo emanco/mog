@@ -1,0 +1,370 @@
+@import "./1_vars.scss";
+@import "./2_mixins.scss";
+@import "./4_global.scss";
+
+.component{
+  position: relative;
+  padding:5% 0;
+  display: inline-block;
+  width:100%;
+
+  .actions{
+    position: absolute;
+    top:10px;
+    right:20px;
+    color: #222;
+    @extend .f24;
+  }
+
+  p:last-child{
+    margin-bottom:0;
+  }
+
+  &.card{
+    display: table;
+    width:100%;
+    margin-bottom:2%;
+    padding: 0;
+    background-color: #f8f8f8;
+    transition: all .5s;
+
+    &.-in{
+      box-shadow:$box-shadow;
+      background-color: #fff;
+    }
+
+    > [class*='col-'] {
+      display: table-cell;
+      padding:4%;
+      float:none;
+      vertical-align: middle;
+
+      p:last-child{
+        margin-bottom:0;
+        padding-bottom:0;
+      }
+    }
+
+    .price{
+      display: inline-block;
+      width:100px;
+    }
+  }
+}
+
+.component-customer-info{
+  p,a{
+    color:$colour-text-secondary;
+  }
+
+  .heading{
+    padding-bottom:2%;
+    color:$colour-text;
+  }
+
+  .btn.-edit{
+    margin-top:-30px;
+  }
+
+  .view-more{
+    padding-top:5%;
+    a {
+      color: colour('blue', 'link');
+      @extend .f18;
+    }
+  }
+}
+
+.component-customer-orders,
+.component-customer-prescriptions,
+.component-customer-notes{
+  border-top: 1px solid colour('line');
+  cursor: pointer;
+
+  .heading{
+    position: relative;
+  }
+
+  .sub-text{
+    padding:2% 0;
+  }
+}
+
+.component-card-order{
+  &.-in{
+    margin-bottom:0;
+  }
+}
+
+.component-card-order-info{
+  padding:0;
+  max-height:0;
+  visibility: hidden;
+  opacity:0;
+  transition: all .5s;
+  overflow: hidden;
+  margin-bottom:0 !important;
+  display: block;
+
+  &.-in{
+    max-height:1000px;
+    visibility: visible;
+    opacity:1;
+    margin-bottom:2% !important;
+    box-shadow:$box-shadow;
+  }
+
+  .shipment{
+    background-color: colour('grey', 'base');
+    color:#fff;
+    padding:2% 4%;
+    @extend .f18;
+    font-weight:font-weight('normal')
+  }
+
+}
+
+.component-card-job{
+  margin-bottom:0 !important;
+  background-color: #fff !important;
+  display: table;
+  width:100%;
+  cursor: pointer;
+
+  &:after{
+    content:"";
+    position: absolute;
+    right:0;
+    left:5%;
+    border-bottom:1px solid colour('line');
+    display: inline-block;
+    height:1px;
+  }
+
+  > [class*='col-'] {
+    display: table-cell;
+    float:none;
+  }
+
+  .text-container{
+    padding-left:0 !important;
+  }
+
+  .job-name{
+    @extend .f24;
+  }
+
+  .img{
+    width:100%;
+
+    @include sm {
+      width: 100px;
+    }
+  }
+}
+
+.component-customer-prescriptions{
+  .actions{
+    @extend .f31;
+    color:$colour-text-secondary;
+  }
+}
+
+.component-comments{
+  box-shadow: $box-shadow;
+  padding-top:0;
+
+  .comments {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      @extend .f20;
+      position: relative;
+      padding: 4%;
+
+      &:after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 5%;
+        border-bottom: 1px solid colour('line');
+        display: inline-block;
+        height: 1px;
+      }
+
+      &:last-child{
+        &:after{
+          display:none;
+        }
+      }
+
+      .user-initials {
+        @include vertical-align;
+        position: absolute;
+        left: 5%;
+      }
+
+      .comment {
+        padding-left: 13%;
+
+        .date {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .add-comment{
+    padding:5%;
+    border-top:1px solid #e0e0e0;
+
+    .comment-container{
+        position: relative;
+    }
+
+    .more-comments{
+      position: absolute;
+      top:2%;
+      right:2%;
+    }
+
+    .new-comment{
+      margin-bottom:3%;
+    }
+
+    .btn{
+      float:right;
+    }
+  }
+}
+
+.component-order-summary{
+  background-color: #fff;
+  padding:5%;
+  box-shadow: $box-shadow-on-dark;
+  margin-top:5%;
+
+  .heading, .sub-text{
+    margin-bottom:3%;
+  }
+}
+
+.component-shipment{
+  padding:0;
+  margin-top:10%;
+
+  .shipment-details{
+    background-color: colour('grey', 'base');
+    padding:5%;
+    color:#fff;
+    box-shadow: $box-shadow-on-dark;
+
+    p {
+      @extend .f18;
+      font-weight:font-weight('light');
+
+      &.heading{
+        @extend .f20;
+        font-weight:font-weight('normal');
+        padding-bottom:2%;
+      }
+    }
+  }
+}
+
+.component-shipment-job{
+  background-color: #fff;
+  padding:0;
+  display: block;
+  margin-top:5%;
+
+  &:first-of-type{
+    margin-top:0;
+  }
+
+  .image-container{
+    padding-right: 5%;
+
+    .img{
+      width:100%;
+    }
+  }
+
+  .actions{
+    top:0;
+    right:0;
+  }
+
+  .summary {
+    padding: 9% 5% 7%;
+  }
+}
+
+.component-prescription{
+  padding-bottom:4%;
+
+  .heading{
+    padding-bottom:2%;
+  }
+
+  .extra{
+    @extend .f17;
+    padding:2% 0;
+
+    strong{
+      line-height:3em;
+    }
+  }
+
+  .prescription-table{
+    @extend .f18;
+    margin:2% 0;
+
+    th,td{
+      text-align: center;
+
+      &:first-child{
+        border-right:1px solid colour('line');
+      }
+    }
+
+    thead{
+      tr{
+        th {
+          border-bottom: 1px solid colour('line');
+          font-weight:font-weight('normal');
+          color:$colour-text-secondary;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        &.left-eye {
+          background-color: colour('prescription', 'green');
+        }
+
+        &.right-eye {
+          background-color: colour('prescription', 'red');
+          border-bottom: 4px solid #fff;
+        }
+      }
+    }
+  }
+}
+
+.component-job-notes{
+  .controls-container{
+    position: absolute;
+    right:50px;
+    top:-30px;
+  }
+
+  .component-comments{
+    padding-top:0;
+    margin-top:5%;
+  }
+}

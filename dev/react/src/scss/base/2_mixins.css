@@ -1,0 +1,55 @@
+/*
+  Usage:
+  @include placeholder {
+    font-style: italic;
+    color: black;
+  }
+*/
+/*
+  Returns a media queries which scales the units relative to the xs and lg values
+  Remember, dont be lazy when using this. If you've got other things that need be
+  in media queries for the same element, dont use this.
+
+  Usage: @include scale-pixels('margin-top', 25px, 125px);
+
+  Returns:
+
+  padding:25px
+
+  @media (min-width:768px){
+    padding:50px;
+  }
+
+  @media (min-width:992px){
+    padding:80px;
+  }
+
+  @media (min-width:1200px){
+    padding:115px;
+  }
+
+  @media (min-width:1500px){
+    padding:125px;
+  }
+*/
+/*
+  Pass in a colour and it gives you a button, BOOM.
+*/
+/*
+  Pass in 2 colours and it gives you a button width a gradient, BOOM.
+*/
+/*
+  Bootstrap size mixins
+*/
+/*
+ Viewport sized typography with minimum and maximum values
+
+ @param {Number}   $min         - Minimum font size (px)
+ @param {Number}   $max         - Maximum font size (px)
+
+  Example scss - 2.79vw font size (with 53px fallback),
+  @include responsive-font(20px, 53px);
+*/
+/*
+  Icon Container sizing
+*/

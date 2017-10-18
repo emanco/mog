@@ -1,0 +1,32 @@
+@import "./3_typography.scss";
+
+*{
+  outline: 0 !important;
+}
+
+html{
+  height:auto;
+}
+
+body{
+  height: 100%;
+  color:$colour-text;
+  font-smooth:always;
+  -webkit-font-smoothing: antialiased;
+  font-family: $font-body;
+  @include responsive-font($font-size-xs, 20px);
+  font-weight:font-weight('light');
+  letter-spacing: -0.02em;
+}
+
+a,a:hover,a:visited,a:focus{
+  text-decoration: none;
+}
+
+ul{
+  margin:0;
+}
+
+p{
+  line-height: $line-height;
+}

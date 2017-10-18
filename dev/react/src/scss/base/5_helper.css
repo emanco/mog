@@ -1,0 +1,404 @@
+/*
+  Usage:
+  @include placeholder {
+    font-style: italic;
+    color: black;
+  }
+*/
+/*
+  Returns a media queries which scales the units relative to the xs and lg values
+  Remember, dont be lazy when using this. If you've got other things that need be
+  in media queries for the same element, dont use this.
+
+  Usage: @include scale-pixels('margin-top', 25px, 125px);
+
+  Returns:
+
+  padding:25px
+
+  @media (min-width:768px){
+    padding:50px;
+  }
+
+  @media (min-width:992px){
+    padding:80px;
+  }
+
+  @media (min-width:1200px){
+    padding:115px;
+  }
+
+  @media (min-width:1500px){
+    padding:125px;
+  }
+*/
+/*
+  Pass in a colour and it gives you a button, BOOM.
+*/
+/*
+  Pass in 2 colours and it gives you a button width a gradient, BOOM.
+*/
+/*
+  Bootstrap size mixins
+*/
+/*
+ Viewport sized typography with minimum and maximum values
+
+ @param {Number}   $min         - Minimum font size (px)
+ @param {Number}   $max         - Maximum font size (px)
+
+  Example scss - 2.79vw font size (with 53px fallback),
+  @include responsive-font(20px, 53px);
+*/
+/*
+  Icon Container sizing
+*/
+.no-padding {
+  padding: 0 !important; }
+
+@media (min-width: 768px) {
+  .text-center-sm {
+    text-align: center; } }
+
+@media (min-width: 1500px) {
+  .hidden-xlg {
+    display: none; } }
+
+.icon-container {
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.0em;
+  padding: 5px; }
+  @media (min-width: 768px) {
+    .icon-container {
+      padding: 6px; } }
+  @media (min-width: 992px) {
+    .icon-container {
+      padding: 7px; } }
+  @media (min-width: 1200px) {
+    .icon-container {
+      padding: 8px; } }
+  @media (min-width: 1500px) {
+    .icon-container {
+      padding: 9px; } }
+  .icon-container.-rounded {
+    border-radius: 8px; }
+  .icon-container i {
+    display: inline-block;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px; }
+    @media (min-width: 768px) {
+      .icon-container i {
+        font-size: 26px;
+        width: 26px;
+        height: 26px;
+        line-height: 26px; } }
+    @media (min-width: 992px) {
+      .icon-container i {
+        font-size: 28px;
+        width: 28px;
+        height: 28px;
+        line-height: 28px; } }
+    @media (min-width: 1200px) {
+      .icon-container i {
+        font-size: 30px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px; } }
+    @media (min-width: 1500px) {
+      .icon-container i {
+        font-size: 36px;
+        width: 36px;
+        height: 36px;
+        line-height: 36px; } }
+  .icon-container.-size-1 {
+    padding: 10px; }
+    @media (min-width: 768px) {
+      .icon-container.-size-1 {
+        padding: 12px; } }
+    @media (min-width: 992px) {
+      .icon-container.-size-1 {
+        padding: 14px; } }
+    @media (min-width: 1200px) {
+      .icon-container.-size-1 {
+        padding: 16px; } }
+    @media (min-width: 1500px) {
+      .icon-container.-size-1 {
+        padding: 20px; } }
+  .icon-container.-size-2 {
+    padding: 10px; }
+    @media (min-width: 768px) {
+      .icon-container.-size-2 {
+        padding: 11px; } }
+    @media (min-width: 992px) {
+      .icon-container.-size-2 {
+        padding: 12px; } }
+    @media (min-width: 1200px) {
+      .icon-container.-size-2 {
+        padding: 13px; } }
+    @media (min-width: 1500px) {
+      .icon-container.-size-2 {
+        padding: 15px; } }
+  @media (min-width: 768px) {
+    .icon-container.-lowericon i {
+      position: relative;
+      top: 2px; } }
+
+.overlay {
+  transition: background-color 0.5s;
+  background-color: rgba(0, 0, 0, 0.4); }
+  .overlay.-absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; }
+
+.display-table {
+  display: block; }
+  .display-table > * {
+    display: block; }
+    .display-table > * > * {
+      display: block; }
+  @media (min-width: 768px) {
+    .display-table {
+      display: table; }
+      .display-table:not(.container) {
+        width: 100%; }
+      .display-table > * {
+        display: table-row;
+        height: 100%; }
+        .display-table > * > *:not(.visible-xs) {
+          height: 100%;
+          display: table-cell;
+          float: none;
+          vertical-align: middle; } }
+  .display-table.-fixed {
+    table-layout: fixed; }
+
+.display-table-sm {
+  display: block; }
+  .display-table-sm > * {
+    display: block; }
+    .display-table-sm > * > * {
+      display: block; }
+  @media (min-width: 768px) {
+    .display-table-sm {
+      display: table; }
+      .display-table-sm:not(.container) {
+        width: 100%; }
+      .display-table-sm > * {
+        display: table-row;
+        height: 100%; }
+        .display-table-sm > * > *:not(.visible-xs) {
+          height: 100%;
+          display: table-cell;
+          float: none;
+          vertical-align: middle; }
+      .display-table-sm.-addresses {
+        border-spacing: 10px;
+        border-collapse: separate;
+        width: calc(100% + 20px);
+        left: -10px;
+        position: relative; }
+        .display-table-sm.-addresses > * > * {
+          vertical-align: top; } }
+
+.full-size {
+  height: 100vh;
+  width: 100%; }
+
+.pnp-bg {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative; }
+
+.full-height {
+  min-height: 423px;
+  height: 100vh;
+  height: calc(100vh - 57px); }
+  @media (min-width: 768px) {
+    .full-height {
+      height: calc(100vh - 65px); } }
+  @media (min-width: 992px) {
+    .full-height {
+      height: calc(100vh - 78px); } }
+  @media (min-width: 1200px) {
+    .full-height {
+      height: calc(100vh - 89px); } }
+  @media (min-width: 1500px) {
+    .full-height {
+      height: calc(100vh - 100px); } }
+
+.full-height-ignore-nav {
+  min-height: 500px;
+  height: 100vh; }
+
+@media (min-width: 768px) {
+  .full-height-sm {
+    height: 100vh;
+    height: calc(100vh - 57px); } }
+  @media (min-width: 768px) and (min-width: 768px) {
+    .full-height-sm {
+      height: calc(100vh - 65px); } }
+  @media (min-width: 768px) and (min-width: 992px) {
+    .full-height-sm {
+      height: calc(100vh - 78px); } }
+  @media (min-width: 768px) and (min-width: 1200px) {
+    .full-height-sm {
+      height: calc(100vh - 89px); } }
+  @media (min-width: 768px) and (min-width: 1500px) {
+    .full-height-sm {
+      height: calc(100vh - 100px); } }
+
+.nav-height {
+  height: 57px; }
+  @media (min-width: 768px) {
+    .nav-height {
+      height: 65px; } }
+  @media (min-width: 992px) {
+    .nav-height {
+      height: 78px; } }
+  @media (min-width: 1200px) {
+    .nav-height {
+      height: 89px; } }
+  @media (min-width: 1500px) {
+    .nav-height {
+      height: 100px; } }
+
+.nav-size {
+  width: 57px;
+  height: 57px; }
+  @media (min-width: 768px) {
+    .nav-size {
+      width: 65px;
+      height: 65px; } }
+  @media (min-width: 992px) {
+    .nav-size {
+      width: 78px;
+      height: 78px; } }
+  @media (min-width: 1200px) {
+    .nav-size {
+      width: 89px;
+      height: 89px; } }
+  @media (min-width: 1500px) {
+    .nav-size {
+      width: 100px;
+      height: 100px; } }
+
+.nav-line-height {
+  height: 57px;
+  line-height: 57px; }
+  @media (min-width: 768px) {
+    .nav-line-height {
+      height: 65px;
+      line-height: 65px; } }
+  @media (min-width: 992px) {
+    .nav-line-height {
+      height: 78px;
+      line-height: 78px; } }
+  @media (min-width: 1200px) {
+    .nav-line-height {
+      height: 89px;
+      line-height: 89px; } }
+  @media (min-width: 1500px) {
+    .nav-line-height {
+      height: 100px;
+      line-height: 100px; } }
+
+.colour-lighter-grey {
+  color: #a4a4a4; }
+
+.bg-colour-lighter-grey {
+  background-color: #a4a4a4; }
+
+.colour-light-grey {
+  color: #bfbfbd; }
+
+.bg-colour-light-grey {
+  background-color: #bfbfbd; }
+
+.colour-grey {
+  color: #63676a; }
+
+.bg-colour-grey {
+  background-color: #63676a; }
+
+.colour-panel-grey {
+  color: #a0a2a9; }
+
+.bg-colour-panel-grey {
+  background-color: #a0a2a9; }
+
+.colour-dark-grey {
+  color: #222222; }
+
+.bg-colour-dark-grey {
+  background-color: #222222; }
+
+.colour-blue {
+  color: #212937; }
+
+.bg-colour-blue {
+  background-color: #212937; }
+
+.colour-muted-primary-blue {
+  color: #444a5a; }
+
+.bg-colour-muted-primary-blue {
+  background-color: #444a5a; }
+
+.colour-link-blue {
+  color: #1d71d5; }
+
+.bg-colour-link-blue {
+  background-color: #1d71d5; }
+
+.colour-red-prescription {
+  color: #fdd3cf; }
+
+.bg-colour-red-prescription {
+  background-color: #fdd3cf; }
+
+.colour-green-prescription {
+  color: #ddf8ef; }
+
+.bg-colour-green-prescription {
+  background-color: #ddf8ef; }
+
+.colour-line {
+  color: #e8e9e9; }
+
+.bg-colour-line {
+  background-color: #e8e9e9; }
+
+.veil {
+  background: transparent;
+  bottom: 0;
+  position: fixed;
+  top: 0;
+  z-index: 20;
+  right: -100%;
+  visibility: hidden;
+  transition: all .5s;
+  cursor: pointer; }
+  .veil.-in {
+    right: 0;
+    left: 0;
+    visibility: visible;
+    background: rgba(0, 0, 0, 0.4); }
+
+.cust-scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #eee; }
+
+.cust-scroll::-webkit-scrollbar {
+  width: 4px;
+  background-color: #eee; }
+
+.cust-scroll::-webkit-scrollbar-thumb {
+  background-color: #111; }

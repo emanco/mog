@@ -1,0 +1,137 @@
+/*
+  Usage:
+  @include placeholder {
+    font-style: italic;
+    color: black;
+  }
+*/
+/*
+  Returns a media queries which scales the units relative to the xs and lg values
+  Remember, dont be lazy when using this. If you've got other things that need be
+  in media queries for the same element, dont use this.
+
+  Usage: @include scale-pixels('margin-top', 25px, 125px);
+
+  Returns:
+
+  padding:25px
+
+  @media (min-width:768px){
+    padding:50px;
+  }
+
+  @media (min-width:992px){
+    padding:80px;
+  }
+
+  @media (min-width:1200px){
+    padding:115px;
+  }
+
+  @media (min-width:1500px){
+    padding:125px;
+  }
+*/
+/*
+  Pass in a colour and it gives you a button, BOOM.
+*/
+/*
+  Pass in 2 colours and it gives you a button width a gradient, BOOM.
+*/
+/*
+  Bootstrap size mixins
+*/
+/*
+ Viewport sized typography with minimum and maximum values
+
+ @param {Number}   $min         - Minimum font size (px)
+ @param {Number}   $max         - Maximum font size (px)
+
+  Example scss - 2.79vw font size (with 53px fallback),
+  @include responsive-font(20px, 53px);
+*/
+/*
+  Icon Container sizing
+*/
+.nav-container {
+  padding: 20px 30px;
+  position: relative; }
+  .nav-container .search {
+    display: inline-block;
+    width: 70%;
+    margin-left: 30px;
+    border: none; }
+  .nav-container .burger-container {
+    position: fixed;
+    right: 30px;
+    top: 18px; }
+    @media (min-width: 768px) {
+      .nav-container .burger-container {
+        top: 25px; } }
+    @media (min-width: 992px) {
+      .nav-container .burger-container {
+        top: 31px; } }
+    @media (min-width: 1200px) {
+      .nav-container .burger-container {
+        top: 38px; } }
+    @media (min-width: 1500px) {
+      .nav-container .burger-container {
+        top: 41px; } }
+
+.burger {
+  cursor: pointer;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none; }
+  .burger i {
+    position: relative;
+    display: inline-block;
+    width: 17px;
+    height: 2px;
+    top: -3px;
+    color: #212937;
+    font: bold 14px/.4 Helvetica;
+    text-transform: uppercase;
+    text-indent: -55px;
+    background: #212937;
+    transition: all .2s ease-out; }
+    @media (min-width: 768px) {
+      .burger i {
+        top: -5px;
+        background: #222222; } }
+    @media (min-width: 992px) {
+      .burger i {
+        width: 21px; } }
+    .burger i:before, .burger i:after {
+      content: '';
+      height: 2px;
+      background: #212937;
+      position: absolute;
+      left: 0;
+      transition: all .2s ease-out;
+      width: 17px; }
+      @media (min-width: 768px) {
+        .burger i:before, .burger i:after {
+          background: #222222; } }
+      @media (min-width: 992px) {
+        .burger i:before, .burger i:after {
+          width: 21px; } }
+    .burger i:before {
+      top: -6px; }
+    .burger i:after {
+      bottom: -6px; }
+    @media (min-width: 992px) {
+      .burger i:before {
+        top: -7px; }
+      .burger i:after {
+        bottom: -7px; } }
+  .burger.-in i {
+    background: transparent; }
+    .burger.-in i:before {
+      top: 0;
+      transform: rotateZ(45deg); }
+    .burger.-in i:after {
+      bottom: 0;
+      transform: rotateZ(-45deg); }

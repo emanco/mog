@@ -14,9 +14,7 @@ import { applyMiddleware, createStore, combineReducers } from 'redux';
 import Summarypage from "./pages/summary/page";
 
 
-//Components
-//import NavigationComponent from './components/navigation/component';
-
+//components
 import HeaderComponent from './components/header/view';
 import BreadcrumbsComponent from './components/breadcrumbs/view';
 
@@ -43,10 +41,6 @@ import "./scss/base/bootstrap_overrides.css";
 import "./scss/base/components.css";
 import "./scss/base/forms.css";
 import "./scss/base/general.css";
-//import "./scss/base/nav.css";
-
-//console.log('jquery'+$);
-
 
 
 let store = createStore(combineReducers({ summaryReducer }), applyMiddleware(promiseMiddleware(), thunk, logger));

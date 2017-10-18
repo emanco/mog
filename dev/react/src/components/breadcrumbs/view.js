@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 // Ionicons
 //import Ionicon from 'react-ionicons';
 
+import Sticky from 'react-sticky-el';
+
 class BreadcrumbsView extends Component {
 
     componentDidMount() {
@@ -13,7 +15,7 @@ class BreadcrumbsView extends Component {
     render() {
 
         return (
-            <div>
+            <Sticky stickyClassName="sticky-breadcrumb">
                 <div id="mog-breadcrumb" className="row mog-breadcrumb nav-height">
                     <ul className="list-inline">
                         <li><a href="/customers/CUS123456789">Dave Ordersworth</a></li>
@@ -21,7 +23,7 @@ class BreadcrumbsView extends Component {
                         <li className="active"><a href="">London Retro Reggie</a></li>
                     </ul>
                 </div>
-            </div>
+            </Sticky>
         );
     }
 }

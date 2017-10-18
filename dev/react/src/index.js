@@ -50,7 +50,9 @@ ReactDOM.render(
     <Provider store={store}>
         <Router>
             <div>
+
                 <HeaderComponent />
+
                 <BreadcrumbsComponent />
 
                 <Switch>

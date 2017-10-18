@@ -2,6 +2,11 @@
 @import "./2_mixins.scss";
 @import "./4_global.scss";
 
+
+.sticky-breadcrumb {
+  z-index: 1;
+}
+
 .mog-breadcrumb{
   background-color: $colour-primary;
   color: #fff;
@@ -80,6 +85,7 @@
 .left-panel,
 .right-panel{
   padding: 30px;
+  z-index: -1;
 
   @include md {
     width: 50%;

@@ -1,0 +1,492 @@
+/*
+  Usage:
+  @include placeholder {
+    font-style: italic;
+    color: black;
+  }
+*/
+/*
+  Returns a media queries which scales the units relative to the xs and lg values
+  Remember, dont be lazy when using this. If you've got other things that need be
+  in media queries for the same element, dont use this.
+
+  Usage: @include scale-pixels('margin-top', 25px, 125px);
+
+  Returns:
+
+  padding:25px
+
+  @media (min-width:768px){
+    padding:50px;
+  }
+
+  @media (min-width:992px){
+    padding:80px;
+  }
+
+  @media (min-width:1200px){
+    padding:115px;
+  }
+
+  @media (min-width:1500px){
+    padding:125px;
+  }
+*/
+/*
+  Pass in a colour and it gives you a button, BOOM.
+*/
+/*
+  Pass in 2 colours and it gives you a button width a gradient, BOOM.
+*/
+/*
+  Bootstrap size mixins
+*/
+/*
+ Viewport sized typography with minimum and maximum values
+
+ @param {Number}   $min         - Minimum font size (px)
+ @param {Number}   $max         - Maximum font size (px)
+
+  Example scss - 2.79vw font size (with 53px fallback),
+  @include responsive-font(20px, 53px);
+*/
+/*
+  Icon Container sizing
+*/
+/*
+  Usage:
+  @include placeholder {
+    font-style: italic;
+    color: black;
+  }
+*/
+/*
+  Returns a media queries which scales the units relative to the xs and lg values
+  Remember, dont be lazy when using this. If you've got other things that need be
+  in media queries for the same element, dont use this.
+
+  Usage: @include scale-pixels('margin-top', 25px, 125px);
+
+  Returns:
+
+  padding:25px
+
+  @media (min-width:768px){
+    padding:50px;
+  }
+
+  @media (min-width:992px){
+    padding:80px;
+  }
+
+  @media (min-width:1200px){
+    padding:115px;
+  }
+
+  @media (min-width:1500px){
+    padding:125px;
+  }
+*/
+/*
+  Pass in a colour and it gives you a button, BOOM.
+*/
+/*
+  Pass in 2 colours and it gives you a button width a gradient, BOOM.
+*/
+/*
+  Bootstrap size mixins
+*/
+/*
+ Viewport sized typography with minimum and maximum values
+
+ @param {Number}   $min         - Minimum font size (px)
+ @param {Number}   $max         - Maximum font size (px)
+
+  Example scss - 2.79vw font size (with 53px fallback),
+  @include responsive-font(20px, 53px);
+*/
+/*
+  Icon Container sizing
+*/
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 400; }
+
+.f14 {
+  font-size: 14px;
+  font-size: 0.72917vw; }
+  @media (max-width: 1508.57143px) {
+    .f14 {
+      font-size: 11px; } }
+  @media (min-width: 1920px) {
+    .f14 {
+      font-size: 14px; } }
+
+.f16 {
+  font-size: 15.56px;
+  font-size: 0.81042vw; }
+  @media (max-width: 1604.11311px) {
+    .f16 {
+      font-size: 13px; } }
+  @media (min-width: 1920px) {
+    .f16 {
+      font-size: 15.56px; } }
+
+.f17 {
+  font-size: 16.89px;
+  font-size: 0.87969vw; }
+  @media (max-width: 1591.47425px) {
+    .f17 {
+      font-size: 14px; } }
+  @media (min-width: 1920px) {
+    .f17 {
+      font-size: 16.89px; } }
+
+.f18, .sub-text, .address-container {
+  font-size: 18px;
+  font-size: 0.9375vw; }
+  @media (max-width: 1493.33333px) {
+    .f18, .sub-text, .address-container {
+      font-size: 14px; } }
+  @media (min-width: 1920px) {
+    .f18, .sub-text, .address-container {
+      font-size: 18px; } }
+
+.f20, .address-container .heading {
+  font-size: 20px;
+  font-size: 1.04167vw; }
+  @media (max-width: 1536px) {
+    .f20, .address-container .heading {
+      font-size: 16px; } }
+  @media (min-width: 1920px) {
+    .f20, .address-container .heading {
+      font-size: 20px; } }
+
+.f21, .user-initials.-small {
+  font-size: 21.3px;
+  font-size: 1.10938vw; }
+  @media (max-width: 1442.25352px) {
+    .f21, .user-initials.-small {
+      font-size: 16px; } }
+  @media (min-width: 1920px) {
+    .f21, .user-initials.-small {
+      font-size: 21.3px; } }
+
+.f22, .accordion .heading.trigger {
+  font-size: 22.22px;
+  font-size: 1.15729vw; }
+  @media (max-width: 1382.53825px) {
+    .f22, .accordion .heading.trigger {
+      font-size: 16px; } }
+  @media (min-width: 1920px) {
+    .f22, .accordion .heading.trigger {
+      font-size: 22.22px; } }
+
+.f26, .heading2 {
+  font-size: 26.67px;
+  font-size: 1.38906vw; }
+  @media (max-width: 1583.80202px) {
+    .f26, .heading2 {
+      font-size: 22px; } }
+  @media (min-width: 1920px) {
+    .f26, .heading2 {
+      font-size: 26.67px; } }
+
+.f24 {
+  font-size: 24.44px;
+  font-size: 1.27292vw; }
+  @media (max-width: 1414.07529px) {
+    .f24 {
+      font-size: 18px; } }
+  @media (min-width: 1920px) {
+    .f24 {
+      font-size: 24.44px; } }
+
+.f31 {
+  font-size: 31px;
+  font-size: 1.61458vw; }
+  @media (max-width: 1610.32258px) {
+    .f31 {
+      font-size: 26px; } }
+  @media (min-width: 1920px) {
+    .f31 {
+      font-size: 31px; } }
+
+.f36 {
+  font-size: 35.56px;
+  font-size: 1.85208vw; }
+  @media (max-width: 1349.83127px) {
+    .f36 {
+      font-size: 25px; } }
+  @media (min-width: 1920px) {
+    .f36 {
+      font-size: 35.56px; } }
+
+.f40, .heading1 {
+  font-size: 40px;
+  font-size: 2.08333vw; }
+  @media (max-width: 1296px) {
+    .f40, .heading1 {
+      font-size: 27px; } }
+  @media (min-width: 1920px) {
+    .f40, .heading1 {
+      font-size: 40px; } }
+
+.f60, .user-initials {
+  font-size: 59.95px;
+  font-size: 3.1224vw; }
+  @media (max-width: 960.80067px) {
+    .f60, .user-initials {
+      font-size: 30px; } }
+  @media (min-width: 1920px) {
+    .f60, .user-initials {
+      font-size: 59.95px; } }
+
+.heading1 {
+  font-family: "nimbus-sans";
+  color: #222222; }
+
+.heading2 {
+  font-weight: 400; }
+
+* {
+  outline: 0 !important; }
+
+html {
+  height: auto; }
+
+body {
+  height: 100%;
+  color: #222222;
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  font-family: "nimbus-sans";
+  font-size: 20px;
+  font-size: 1.04167vw;
+  font-weight: 300;
+  letter-spacing: -0.02em; }
+  @media (max-width: 1344px) {
+    body {
+      font-size: 14px; } }
+  @media (min-width: 1920px) {
+    body {
+      font-size: 20px; } }
+
+a, a:hover, a:visited, a:focus {
+  text-decoration: none; }
+
+ul {
+  margin: 0; }
+
+p {
+  line-height: 1em; }
+
+.mog-breadcrumb {
+  background-color: #212937;
+  color: #fff;
+  padding: 20px 30px;
+  position: relative;
+  z-index: 10; }
+  .mog-breadcrumb a {
+    color: #777b85; }
+  .mog-breadcrumb li.active a {
+    color: #fff; }
+  .mog-breadcrumb ul {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    left: 30px; }
+    .mog-breadcrumb ul li:before {
+      content: "\f3d3";
+      font-family: "Ionicons";
+      padding-right: 15px;
+      color: #777b85; }
+    .mog-breadcrumb ul li:first-child:before {
+      display: none; }
+
+.sub-text {
+  color: #979797;
+  font-weight: 300; }
+
+.user-initials {
+  display: inline-block;
+  border-radius: 50%;
+  border: 1px solid #e8e9e9;
+  text-align: center;
+  height: 80px;
+  line-height: 80px;
+  width: 80px;
+  color: #979797; }
+  @media (min-width: 768px) {
+    .user-initials {
+      height: 92px; } }
+  @media (min-width: 992px) {
+    .user-initials {
+      height: 104px; } }
+  @media (min-width: 1200px) {
+    .user-initials {
+      height: 116px; } }
+  @media (min-width: 1500px) {
+    .user-initials {
+      height: 140px; } }
+  @media (min-width: 768px) {
+    .user-initials {
+      line-height: 92px; } }
+  @media (min-width: 992px) {
+    .user-initials {
+      line-height: 104px; } }
+  @media (min-width: 1200px) {
+    .user-initials {
+      line-height: 116px; } }
+  @media (min-width: 1500px) {
+    .user-initials {
+      line-height: 140px; } }
+  @media (min-width: 768px) {
+    .user-initials {
+      width: 92px; } }
+  @media (min-width: 992px) {
+    .user-initials {
+      width: 104px; } }
+  @media (min-width: 1200px) {
+    .user-initials {
+      width: 116px; } }
+  @media (min-width: 1500px) {
+    .user-initials {
+      width: 140px; } }
+  .user-initials.-small {
+    font-weight: 300;
+    height: 30px;
+    line-height: 30px;
+    width: 30px; }
+    @media (min-width: 768px) {
+      .user-initials.-small {
+        height: 33px; } }
+    @media (min-width: 992px) {
+      .user-initials.-small {
+        height: 36px; } }
+    @media (min-width: 1200px) {
+      .user-initials.-small {
+        height: 39px; } }
+    @media (min-width: 1500px) {
+      .user-initials.-small {
+        height: 45px; } }
+    @media (min-width: 768px) {
+      .user-initials.-small {
+        line-height: 33px; } }
+    @media (min-width: 992px) {
+      .user-initials.-small {
+        line-height: 36px; } }
+    @media (min-width: 1200px) {
+      .user-initials.-small {
+        line-height: 39px; } }
+    @media (min-width: 1500px) {
+      .user-initials.-small {
+        line-height: 45px; } }
+    @media (min-width: 768px) {
+      .user-initials.-small {
+        width: 33px; } }
+    @media (min-width: 992px) {
+      .user-initials.-small {
+        width: 36px; } }
+    @media (min-width: 1200px) {
+      .user-initials.-small {
+        width: 39px; } }
+    @media (min-width: 1500px) {
+      .user-initials.-small {
+        width: 45px; } }
+  .user-initials.-user {
+    background-color: #dadbdf;
+    color: #fff;
+    border: none; }
+  .user-initials.-system {
+    background-color: #444a5a;
+    color: #fff;
+    border: none; }
+
+.left-panel,
+.right-panel {
+  padding: 30px; }
+  @media (min-width: 992px) {
+    .left-panel,
+    .right-panel {
+      width: 50%;
+      display: inline-block;
+      float: left; } }
+  .left-panel.-dark-inset,
+  .right-panel.-dark-inset {
+    background-color: #a0a2a9;
+    padding: 3%;
+    box-shadow: inset 1px 1px 1px rgab(20, 20, 20, 0.3);
+    position: fixed;
+    right: 0;
+    height: calc(100vh - 57px);
+    overflow: auto;
+    top: 57px; }
+    @media (min-width: 768px) {
+      .left-panel.-dark-inset,
+      .right-panel.-dark-inset {
+        top: 65px;
+        padding-top: 65px;
+        height: calc(100vh - 65px); } }
+    @media (min-width: 992px) {
+      .left-panel.-dark-inset,
+      .right-panel.-dark-inset {
+        top: 78px;
+        padding-top: 78px;
+        height: calc(100vh - 78px); } }
+    @media (min-width: 1200px) {
+      .left-panel.-dark-inset,
+      .right-panel.-dark-inset {
+        top: 89px;
+        padding-top: 89px;
+        height: calc(100vh - 89px); } }
+    @media (min-width: 1500px) {
+      .left-panel.-dark-inset,
+      .right-panel.-dark-inset {
+        top: 100px;
+        padding-top: 100px;
+        height: calc(100vh - 100px); } }
+
+.right-panel {
+  display: none; }
+  @media (min-width: 992px) {
+    .right-panel {
+      display: inline-block !important; }
+      .right-panel .btn.-back {
+        display: none; } }
+
+.address-container {
+  border: 1px solid #e8e9e9;
+  width: 50%;
+  padding: 3%; }
+  .address-container .heading {
+    font-weight: 700; }
+  .address-container .address {
+    line-height: 1.4em; }
+
+.accordion {
+  border-top: 1px solid #e8e9e9;
+  padding: 5%; }
+  .accordion .reveal * {
+    transition: none; }
+  .accordion .trigger:hover {
+    cursor: pointer; }
+  .accordion .reveal {
+    display: none;
+    position: relative; }
+  .accordion .heading {
+    line-height: 1.5em;
+    position: relative; }
+    .accordion .heading.trigger.active:after {
+      transform: translateY(-50%) rotate(180deg); }
+    .accordion .heading.trigger:after {
+      font-family: Ionicons;
+      content: '\f3d0';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5em;
+      color: #979797;
+      transition: transform .5s; }

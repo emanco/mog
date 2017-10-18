@@ -1,0 +1,18 @@
+.container-fluid {
+  padding: 0; }
+
+.row {
+  margin-right: 0;
+  margin-left: 0; }
+
+.row > [class*='col-'] {
+  padding-right: 0;
+  padding-left: 0; }
+
+.list-inline {
+  margin: 0; }
+
+input:active, input:focus, select:active, select:focus, textarea:active, textarea:focus, a:active, a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: initial !important; }

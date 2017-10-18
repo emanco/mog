@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 
 // Include dumb component
-import CustomerView from "./view";
+import CustomerinfoView from "./view";
 
 
-class CustomerComponent extends Component {
+class CustomerinfoComponent extends Component {
     componentWillMount() {
     }
 
@@ -15,10 +15,10 @@ class CustomerComponent extends Component {
         // otherwise just render one customer by id
         return (
             <div>
-                <CustomerView customerid={this.props.customerid} data={this.props.data} />
+                <CustomerinfoView customerid={this.props.customerid} data={this.props.data} />
             </div>
         )
     }
 }
 
-export default CustomerComponent;
+export default CustomerinfoComponent;

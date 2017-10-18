@@ -8,8 +8,6 @@ class OrderView extends Component {
 
     render() {
 
-
-
         let $currency = this.props.data.currency,
             $class = this.props.id === 0 ? '-in':'';
 

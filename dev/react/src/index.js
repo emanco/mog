@@ -11,7 +11,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 
 //pages
-import Summarypage from "./pages/summary/page";
+import Summarypage from "./pages/customers/page";
 
 
 //components
@@ -22,7 +22,7 @@ import FooterComponent from './components/footer/view';
 
 
 //reducers
-import summaryReducer from './pages/summary/reducers';
+import customersReducer from './pages/customers/reducers';
 
 
 // Bootstrap & jQuery
@@ -43,7 +43,7 @@ import "./scss/base/forms.css";
 import "./scss/base/general.css";
 
 
-let store = createStore(combineReducers({ summaryReducer }), applyMiddleware(promiseMiddleware(), thunk, logger));
+let store = createStore(combineReducers({ customersReducer }), applyMiddleware(promiseMiddleware(), thunk, logger));
 
 
 ReactDOM.render(

@@ -1,4 +1,4 @@
-export default function summaryReducer(state = {}, action = '') {
+export default function customersReducer(state = {}, action = '') {
     switch (action.type)
     {
          case 'FETCH_DATA_PENDING' :

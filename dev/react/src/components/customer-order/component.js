@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 
 // Include dumb component
-import CardorderView from "./view";
+import CustomerOrderView from "./view";
 
 
-class CardorderComponent extends Component {
+class CustomerOrderComponent extends Component {
 
     componentWillMount() {
         //console.log('orders for id: '+this.props.customerid);
@@ -15,9 +15,9 @@ class CardorderComponent extends Component {
         let $this = this;
 
         return (
-            <CardorderView id={this.props.id} customerid={$this.props.customerid}  data={$this.props.data} />
+            <CustomerOrderView id={this.props.id} customerid={$this.props.customerid}  data={$this.props.data} />
         );
     }
 }
 
-export default CardorderComponent;
+export default CustomerOrderComponent;

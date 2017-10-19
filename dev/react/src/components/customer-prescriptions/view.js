@@ -3,7 +3,7 @@ import Moment from 'react-moment';
 
 import '../../scss/components/orders.css';
 
-class PrescriptionView extends Component {
+class CustomerPrescriptionView extends Component {
 
 
 
@@ -49,4 +49,4 @@ class PrescriptionView extends Component {
     }
 }
 
-export default PrescriptionView;
+export default CustomerPrescriptionView;

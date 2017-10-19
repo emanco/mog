@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import CustomerinfoComponent from '../../components/customer-info/component';
-import CardorderComponent from '../../components/card-order/component';
-import PrescriptionComponent from '../../components/prescriptions/component';
+import CustomerInfoComponent from '../../components/customer-info/component';
+import CustomerOrderComponent from '../../components/customer-order/component';
+import CustomerPrescriptionComponent from '../../components/customer-prescriptions/component';
 
 import { connect } from 'react-redux';
 
@@ -58,7 +58,7 @@ class Summarypage extends Component {
               <div className="left-panel">
 
 
-                  <CustomerinfoComponent customerid={$id} data={this.props.payload[0].data}/>
+                  <CustomerInfoComponent customerid={$id} data={this.props.payload[0].data}/>
 
 
                   <section className="component component-customer-orders row">
@@ -69,13 +69,13 @@ class Summarypage extends Component {
                       <p className="sub-text">Showing {this.props.payload[1].data[0].limit} of {this.props.payload[1].data[0].count} </p>
 
                       {this.props.payload[1].data[0].results.map(function(order, i) {
-                          return <CardorderComponent key={i} id={i} customerid={$id} data={order} />
+                          return <CustomerOrderComponent key={i} id={i} customerid={$id} data={order} />
                       })}
 
                   <button className="btn">View More</button>
                   </section>
 
-                 <PrescriptionComponent customerid={$id} data={this.props.payload[2].data} name={this.props.payload[0].data.first_name+' '+this.props.payload[0].data.last_name} />
+                 <CustomerPrescriptionComponent customerid={$id} data={this.props.payload[2].data} name={this.props.payload[0].data.first_name+' '+this.props.payload[0].data.last_name} />
               </div>
 
 

@@ -3,7 +3,7 @@ import Moment from 'react-moment';
 
 import '../../scss/components/orders.css';
 
-class OrderView extends Component {
+class CustomerOrderView extends Component {
 
 
     render() {
@@ -82,4 +82,4 @@ class OrderView extends Component {
     }
 }
 
-export default OrderView;
+export default CustomerOrderView;

@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import {getData} from "./actions";
 
 import $ from 'jquery';
+import BreadcrumbsComponent from "../../components/breadcrumbs/view";
 
 
 
@@ -54,6 +55,7 @@ class Summarypage extends Component {
 
       return (
           <div>
+              <BreadcrumbsComponent path={this.props.location.pathname}/>
 
               <div className="left-panel">
 

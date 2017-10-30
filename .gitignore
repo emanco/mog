@@ -28,3 +28,5 @@ dev/myoptique-oms/node_modules/
 dev/myoptique-oms/src/components/
 docs/
 /login.rtf
+!/dev/public_html/
+/design/

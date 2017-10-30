@@ -11,19 +11,20 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 
 //pages
-import Summarypage from "./pages/summary/page";
+import Summarypage from "./pages/customers/page";
+import Searchpage from "./pages/search/page";
 
 
 //components
-import HeaderComponent from './components/header/view';
-import BreadcrumbsComponent from './components/breadcrumbs/view';
+import HeaderComponent from './components/header/component';
+//import BreadcrumbsComponent from './components/breadcrumbs/view';
 
 import FooterComponent from './components/footer/view';
 
 
 //reducers
-import summaryReducer from './pages/summary/reducers';
-
+import summaryReducer from './pages/customers/reducers';
+import searchReducer from './pages/search/reducers';
 
 // Bootstrap & jQuery
 //import $ from 'jquery';
@@ -43,20 +44,30 @@ import "./scss/base/forms.css";
 import "./scss/base/general.css";
 
 
-let store = createStore(combineReducers({ summaryReducer }), applyMiddleware(promiseMiddleware(), thunk, logger));
+let store = createStore(combineReducers({ summaryReducer, searchReducer }), applyMiddleware(promiseMiddleware(), thunk, logger));
 
 
 ReactDOM.render(
     <Provider store={store}>
         <Router>
             <div>
+
                 <HeaderComponent />
-                <BreadcrumbsComponent />
+
+                {/*<BreadcrumbsComponent />*/}
 
                 <Switch>
+
                     <Route exact path="/" component={Summarypage} />
+
+                    {/*Customers*/}
                     <Route exact path="/customers" component={Summarypage} />
                     <Route exact path="/customers/:customerid" component={Summarypage} />
+
+                    {/*Search*/}
+                    <Route exact path="/search" component={Searchpage} />
+                    <Route exact path="/search/:searchid" component={Searchpage} />
+
                 </Switch>
 
                 <FooterComponent />

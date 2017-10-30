@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
+import "./../../scss/components/breadcrumbs.css";
+
 //import './../../scss/components/header.css';
 
 // Ionicons
 //import Ionicon from 'react-ionicons';
 
-class BreadcrumbsView extends Component {
+
+
+import Sticky from 'react-sticky-el';
+
+class BreadcrumbsComponent extends Component {
+
+    componentWillMount() {
+
+    }
 
     componentDidMount() {
 
@@ -12,18 +22,32 @@ class BreadcrumbsView extends Component {
 
     render() {
 
-        return (
-            <div>
-                <div id="mog-breadcrumb" className="row mog-breadcrumb nav-height">
-                    <ul className="list-inline">
-                        <li><a href="/customers/CUS123456789">Dave Ordersworth</a></li>
-                        <li><a href="/customers/CUS123456789/orders">ORDR21892503</a></li>
-                        <li className="active"><a href="">London Retro Reggie</a></li>
-                    </ul>
-                </div>
-            </div>
-        );
+
+        let $path = this.props.path;
+
+        if ($path.includes('search')) {
+            console.log('contains search!');
+            return (
+                <Sticky stickyClassName="sticky-breadcrumb">
+                    <div id="mog-breadcrumb" className="row mog-breadcrumb nav-height">
+                        <span className="search-results">{this.props.number} Search Results for {this.props.query}</span>
+                    </div>
+                </Sticky>
+            )
+        } else {
+            return (
+                <Sticky stickyClassName="sticky-breadcrumb">
+                    <div id="mog-breadcrumb" className="row mog-breadcrumb nav-height">
+                        <ul className="list-inline">
+                            <li><a href="/customers/CUS123456789">Dave Ordersworth</a></li>
+                            <li><a href="/customers/CUS123456789/orders">ORDR21892503</a></li>
+                            <li className="active"><a href="">London Retro Reggie</a></li>
+                        </ul>
+                    </div>
+                </Sticky>
+            )
+        }
     }
 }
 
-export default BreadcrumbsView;
+export default BreadcrumbsComponent;

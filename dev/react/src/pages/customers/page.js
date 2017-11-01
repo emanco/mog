@@ -44,7 +44,9 @@ class Summarypage extends Component {
       if (this.props.success === false) {
           return (
               <div>
-                  <p><strong>Error:</strong> {this.props.payload.message}</p>
+                  <div className="left-panel">
+                      <p><strong>Error:</strong> {this.props.payload.message}</p>
+                  </div>
               </div>
           );
       }

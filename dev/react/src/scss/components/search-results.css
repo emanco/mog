@@ -4,3 +4,6 @@
   right: 30px;
   color: #222;
   opacity: 0.5; }
+
+.component-results a, .component-results a:hover {
+  color: #222222; }

@@ -41,12 +41,15 @@ class SearchResultView extends Component {
 
                             <div className="row component card" key={i} >
                                     <div className="col-sm-12" >
-                                        <p className="heading2">
-                                            {result.fields.customer_first_name} {result.fields.customer_last_name}
-                                        </p>
-                                        <p className="sub-text">
-                                            {result.fields.customer_id} | {result.fields.customer_billing_postcode}
-                                        </p>
+                                        <a href={"../customers/"+result.fields.customer_id}>
+                                            <p className="heading2">
+                                                {result.fields.customer_first_name} {result.fields.customer_last_name}
+                                            </p>
+                                            <p className="sub-text">
+                                                {result.fields.customer_id} | {result.fields.customer_billing_postcode}
+                                            </p>
+                                        </a>
+
                                         <p className="col-sm2 text-right" onClick={$this.onHover} >
                                             <i className="ion-more actions" id={i}/>
                                         </p>

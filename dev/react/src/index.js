@@ -24,7 +24,8 @@ import FooterComponent from './components/footer/view';
 
 //reducers
 import summaryReducer from './pages/customers/reducers';
-import searchReducer from './pages/search/reducers';
+import searchReducer from './components/search-results/reducers';
+import userReducer from './components/search-user/reducers';
 
 // Bootstrap & jQuery
 //import $ from 'jquery';
@@ -44,7 +45,7 @@ import "./scss/base/forms.css";
 import "./scss/base/general.css";
 
 
-let store = createStore(combineReducers({ summaryReducer, searchReducer }), applyMiddleware(promiseMiddleware(), thunk, logger));
+let store = createStore(combineReducers({ summaryReducer, searchReducer, userReducer }), applyMiddleware(promiseMiddleware(), thunk, logger));
 
 
 ReactDOM.render(

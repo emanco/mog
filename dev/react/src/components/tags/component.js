@@ -3,7 +3,7 @@ import TagsInput from 'react-tagsinput';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import {submit, getData} from "./../../pages/search/actions";
+import {onSubmit, getSearch} from "../search-results/actions";
 
 //import 'react-tagsinput/react-tagsinput.css' // If using WebPack and style-loader.
 
@@ -54,10 +54,10 @@ class TagsComponent extends Component {
 
         console.log('query '+query);
 
-        this.props.dispatch(submit(query));
+        this.props.dispatch(onSubmit(query));
 
         this.props.history.push('/search/'+query);
-        this.props.dispatch(getData(query));
+        this.props.dispatch(getSearch(query));
     }
 
 

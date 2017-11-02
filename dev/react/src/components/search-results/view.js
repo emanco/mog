@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {getUser} from "../../pages/search/actions";
-
 class SearchResultView extends Component {
 
     constructor() {
         super();
         this.state = {};
 
-        this.onHover = this.handleHover.bind(this);
+        this.handleHover = this.handleHover.bind(this);
+    }
+
+    componentDidMount() {
+        console.log('component did mount: '+this.props.data[0].hits.hit[0].fields.customer_id);
+        this.props.change(this.props.data[0].hits.hit[0].fields.customer_id);  //emit the first userid to outside
     }
 
     handleHover = (event) => {
         console.log('hovering'+ event.target.id);
-        let $targetid = parseInt(event.target.id)+1;
+        let $targetid = parseInt(event.target.id,10)+1;
 
         console.log('targetid '+$targetid);
 
-        this.props.dispatch(getUser(this.props.searchid, $targetid));
+        this.props.change(event.target.id);  //emit the first userid to outside
 
+
+        //this.props.dispatch(getUser(this.props.searchid, $targetid));
     };
 
     render() {
@@ -40,7 +45,7 @@ class SearchResultView extends Component {
                         return (
 
                             <div className="row component card" key={i} >
-                                    <div className="col-sm-12" >
+                                    <div className="col-sm-12" id={i}>
                                         <a href={"../customers/"+result.fields.customer_id}>
                                             <p className="heading2">
                                                 {result.fields.customer_first_name} {result.fields.customer_last_name}
@@ -50,8 +55,8 @@ class SearchResultView extends Component {
                                             </p>
                                         </a>
 
-                                        <p className="col-sm2 text-right" onClick={$this.onHover} >
-                                            <i className="ion-more actions" id={i}/>
+                                        <p className="col-sm2 text-right" onMouseOver={$this.handleHover} >
+                                            <i className="ion-more actions" id={result.fields.customer_id}/>
                                         </p>
                                     </div>
                                 </div>

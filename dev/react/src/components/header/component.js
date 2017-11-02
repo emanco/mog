@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import {submit, getData} from "./../../pages/search/actions";
+import {onSubmit, getSearch} from "../search-results/actions";
 
 import './../../scss/components/header.css';
 
@@ -25,10 +25,10 @@ class HeaderComponent extends Component {
         let query = this.refs["search"].value;
         console.log(query);
 
-        this.props.dispatch(submit(query));
+        this.props.dispatch(onSubmit(query));
 
         this.props.history.push('/search/'+query);
-        this.props.dispatch(getData(query));
+        this.props.dispatch(getSearch(query));
 
     };
 

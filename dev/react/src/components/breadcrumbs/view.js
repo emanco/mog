@@ -16,10 +16,6 @@ class BreadcrumbsComponent extends Component {
 
     }
 
-    componentDidMount() {
-
-    }
-
     render() {
 
 
@@ -28,13 +24,12 @@ class BreadcrumbsComponent extends Component {
         if ($path.includes('search')) {
             console.log('contains search :'+this.props.query);
 
-            let $number = this.props.query !== undefined ? this.props.number : 'No',
-                $for = this.props.query !== undefined ? 'for' : null;
+            let $for = this.props.query !== undefined ? 'for' : null;
 
             return (
                 <Sticky stickyClassName="sticky-breadcrumb">
                     <div id="mog-breadcrumb" className="row mog-breadcrumb nav-height">
-                        <span className="search-results">{$number} Search Results {$for} {this.props.query}</span>
+                        <span className="search-results">Search Results {$for} {this.props.query}</span>
                     </div>
                 </Sticky>
             )

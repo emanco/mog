@@ -4,8 +4,6 @@ import BreadcrumbsComponent from "../../components/breadcrumbs/view";
 import SearchResultComponent from "../../components/search-results/component";
 import SearchUserComponent from "../../components/search-user/component";
 
-
-
 class Searchpage extends Component {
 
     constructor () {
@@ -51,12 +49,8 @@ class Searchpage extends Component {
               </div>
 
               <div className="right-panel">
-                  <SearchUserComponent onRef={ref => (this.user = ref)} id={$id}/>
+                      <SearchUserComponent onRef={ref => (this.user = ref)} id={$id}/>
               </div>
-
-
-
-
 
 
               {/*<div className="right-panel">*/}

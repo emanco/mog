@@ -4,12 +4,23 @@ import CustomerInfoComponent from "../customer-info/component";
 import CustomerOrderComponent from "../customer-order/component";
 import CustomerPrescriptionComponent from "../customer-prescriptions/component";
 
-
 import { connect } from 'react-redux';
 import { getUserData } from "./actions";
 
+// for animation, hopefully!
+//import TransitionGroup from 'react-transition-group/TransitionGroup';
+import TweenMax from 'gsap';
+//TODO: read https://greensock.com/forums/topic/15749-gsap-with-create-react-app/ and figure out how to implement GSAP
+
+
 
 class SearchUserComponent extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.onChange = this.onChange.bind(this);
+    }
 
     componentWillMount() {
         //this.props.dispatch(getUserData(1));
@@ -17,6 +28,8 @@ class SearchUserComponent extends Component {
 
     componentDidMount() {
         this.props.onRef(this);
+
+        TweenMax.from('.customer-info',0.5,{autoAlpha:0} );
     }
     componentWillUnmount() {
         this.props.onRef(undefined);
@@ -51,24 +64,26 @@ class SearchUserComponent extends Component {
 
         // otherwise just render one customer by id
         return (
-            <div>
-                <CustomerInfoComponent customerid={this.props.id} data={this.props.payload[0].data}/>
+            <div className='customer-info'>
 
-                <section className="component component-customer-orders row">
-                    <h2 className="heading2 heading">
-                        Orders
-                        <button className="btn -add">Place Order</button>
-                    </h2>
-                    <p className="sub-text">Showing {this.props.payload[1].data[0].limit} of {this.props.payload[1].data[0].count} </p>
+                    <CustomerInfoComponent customerid={this.props.id} data={this.props.payload[0].data}/>
 
-                    {this.props.payload[1].data[0].results.map(function(order, i) {
-                        return <CustomerOrderComponent key={i} id={i} customerid={$this.props.id} data={order} />
-                    })}
+                    <section className="component component-customer-orders row">
+                        <h2 className="heading2 heading">
+                            Orders
+                            <button className="btn -add">Place Order</button>
+                        </h2>
+                        <p className="sub-text">Showing {this.props.payload[1].data[0].limit} of {this.props.payload[1].data[0].count} </p>
 
-                    <button className="btn">View More</button>
-                </section>
+                        {this.props.payload[1].data[0].results.map(function(order, i) {
+                            return <CustomerOrderComponent key={i} id={i} customerid={$this.props.id} data={order} />
+                        })}
 
-                {/*<CustomerPrescriptionComponent customerid={this.props.id} data={this.props.payload[2].data} name={this.props.payload[0].data.first_name+' '+this.props.payload[0].data.last_name} />*/}
+                        <button className="btn">View More</button>
+                    </section>
+
+                    <CustomerPrescriptionComponent customerid={this.props.id} data={this.props.payload[2].data} name={this.props.payload[0].data.first_name+' '+this.props.payload[0].data.last_name} />
+
 
             </div>
         )

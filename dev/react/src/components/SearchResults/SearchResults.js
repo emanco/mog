@@ -2,13 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getSearch } from "./actions";
 
+import * as SearchActions from './actions'
 // CSS
 import './../../scss/components/search-results.css';
 
-class SearchResults extends Component {
+@connect(
+  state =>
+    ({
+      searchVisible: state.search.open,
+    }),
+    {...SearchActions}
+)
+export default class SearchResults extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {};
         this.props.dispatch(getSearch(this.props.searchid));
 
@@ -86,9 +94,3 @@ class SearchResults extends Component {
         }
     }
 }
-
-//export default SearchResultView;
-
-export default connect((state) => {
-    return state.searchReducer;
-})(SearchResults);

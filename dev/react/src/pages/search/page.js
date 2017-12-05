@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import BreadcrumbsComponent from "../../components/Breadcrumbs/Breadcrumbs";
-import SearchResultComponent from "../../components/SearchResults/component";
+import SearchResultComponent from "../../components/SearchResults/SearchResults";
 import SearchUserComponent from "../../components/SearchUser/SearchUser";
 
 class Searchpage extends Component {

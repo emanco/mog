@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getSearch } from "./actions";
 
-class SearchResultView extends Component {
+// CSS
+import './../../scss/components/search-results.css';
+
+class SearchResults extends Component {
 
     constructor() {
         super();
         this.state = {};
+        this.props.dispatch(getSearch(this.props.searchid));
 
         this.handleHover = this.handleHover.bind(this);
     }
 
     componentDidMount() {
-        console.log('component did mount: '+this.props.data[0].hits.hit[0].fields.customer_id);
-        this.props.change(this.props.data[0].hits.hit[0].fields.customer_id);  //emit the first userid to outside
+        console.log('component did mount: '+this.props.payload.data[0].hits.hit[0].fields.customer_id);
+        this.props.change(this.props.payload.data[0].hits.hit[0].fields.customer_id);  //emit the first userid to outside
     }
 
     handleHover = (event) => {
@@ -29,6 +34,18 @@ class SearchResultView extends Component {
 
     render() {
 
+        if (this.props.loading === true || typeof this.props.payload === 'undefined') {
+            return (
+                <p>Loading...</p>
+            );
+        }
+
+        if (this.props.success === false) {
+            return (
+                <p><strong>Error:</strong> {this.props.payload.message}</p>
+            );
+        }
+
         if (this.props.searchid === undefined) {
             return (
                 <div>
@@ -40,8 +57,9 @@ class SearchResultView extends Component {
             let $this = this;
 
             return (
+              <section className="component component-results">
                 <div>
-                    {this.props.data[0].hits.hit.map(function(result, i) {
+                    {this.props.payload.data[0].hits.hit.map(function(result, i) {
                         return (
 
                             <div className="row component card" key={i} >
@@ -63,6 +81,7 @@ class SearchResultView extends Component {
                         )
                     })}
                 </div>
+              </section>
             )
         }
     }
@@ -72,4 +91,4 @@ class SearchResultView extends Component {
 
 export default connect((state) => {
     return state.searchReducer;
-})(SearchResultView);
+})(SearchResults);

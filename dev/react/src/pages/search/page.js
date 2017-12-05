@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import BreadcrumbsComponent from "../../components/breadcrumbs/view";
-import SearchResultComponent from "../../components/search-results/component";
-import SearchUserComponent from "../../components/search-user/component";
+import BreadcrumbsComponent from "../../components/Breadcrumbs/Breadcrumbs";
+import SearchResultComponent from "../../components/SearchResults/component";
+import SearchUserComponent from "../../components/SearchUser/SearchUser";
 
 class Searchpage extends Component {
 
@@ -55,7 +55,7 @@ class Searchpage extends Component {
 
               {/*<div className="right-panel">*/}
 
-                  {/*<CustomerInfoComponent customerid={$id} data={this.props.payload[0].data}/>*/}
+                  {/*<CustomerInfo customerid={$id} data={this.props.payload[0].data}/>*/}
 
                   {/*<section className="component component-customer-orders row">*/}
                       {/*<h2 className="heading2 heading">*/}

@@ -3,11 +3,11 @@ import TagsInput from 'react-tagsinput';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import {onSubmit, getSearch} from "../search-results/actions";
+import {onSubmit, getSearch} from "../SearchResults/actions";
 
 //import 'react-tagsinput/react-tagsinput.css' // If using WebPack and style-loader.
 
-class TagsComponent extends Component {
+class Tags extends Component {
     constructor() {
         super();
         this.state = {tags: [], tag: ''}
@@ -97,4 +97,4 @@ class TagsComponent extends Component {
 
 export default connect((state) => {
     return state.searchReducer;
-})(withRouter(TagsComponent));
+})(withRouter(Tags));

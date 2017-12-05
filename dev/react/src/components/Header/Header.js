@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import {onSubmit, getSearch} from "../search-results/actions";
+import {onSubmit, getSearch} from "../SearchResults/actions";
 
 import './../../scss/components/header.css';
 
-import TagsComponent from './../tags/component';
+import TagsComponent from './../Tags/Tags';
 
-class HeaderComponent extends Component {
+class Header extends Component {
 
     constructor() {
         super();
@@ -68,4 +68,4 @@ class HeaderComponent extends Component {
 
 export default connect((state) => {
     return state.searchReducer;
-})(withRouter(HeaderComponent));
+})(withRouter(Header));

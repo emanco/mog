@@ -1,14 +1,17 @@
+// Common libraries
 import React, { Component } from 'react';
 import Moment from 'react-moment';
 
 import '../../scss/components/orders.css';
 
-class CustomerPrescriptionView extends Component {
 
+class CustomerPrescription extends Component {
 
+    componentWillMount() {
+        //console.log('orders for id: '+this.props.customerid);
+    }
 
     render() {
-
         let $this = this;
 
         return (
@@ -42,11 +45,10 @@ class CustomerPrescriptionView extends Component {
 
                         <button className="btn">View More</button>
                     </section>
-                    
+
                 </div>
             );
-
     }
 }
 
-export default CustomerPrescriptionView;
+export default CustomerPrescription;

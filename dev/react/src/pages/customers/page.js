@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import CustomerInfoComponent from '../../components/customer-info/component';
-import CustomerOrderComponent from '../../components/customer-order/component';
-import CustomerPrescriptionComponent from '../../components/customer-prescriptions/component';
+import CustomerInfo from '../../components/CustomerInfo/CustomerInfo';
+import CustomerOrderComponent from '../../components/CustomerOrder/CustomerOrder';
+import CustomerPrescriptionComponent from '../../components/CustomerPrescriptions/CustomerPrescriptions';
 
 import { connect } from 'react-redux';
 
 import {getData} from "./actions";
 
 import $ from 'jquery';
-import BreadcrumbsComponent from "../../components/breadcrumbs/view";
+import BreadcrumbsComponent from "../../components/Breadcrumbs/Breadcrumbs";
 
 
 
@@ -62,7 +62,7 @@ class Summarypage extends Component {
               <div className="left-panel">
 
 
-                  <CustomerInfoComponent customerid={$id} data={this.props.payload[0].data}/>
+                  <CustomerInfo customerid={$id} data={this.props.payload[0].data}/>
 
 
                   <section className="component component-customer-orders row">

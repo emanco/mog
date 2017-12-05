@@ -16,16 +16,16 @@ import Searchpage from "./pages/search/page";
 
 
 //components
-import HeaderComponent from './components/header/component';
-//import BreadcrumbsComponent from './components/breadcrumbs/view';
+import HeaderComponent from './components/Header/Header';
+//import BreadcrumbsComponent from './components/Breadcrumbs/Breadcrumbs';
 
-import FooterComponent from './components/footer/view';
+import FooterComponent from './components/Footer/Footer';
 
 
 //reducers
 import summaryReducer from './pages/customers/reducers';
-import searchReducer from './components/search-results/reducers';
-import userReducer from './components/search-user/reducers';
+import searchReducer from './components/SearchResults/reducers';
+import userReducer from './components/SearchUser/reducers';
 
 // Bootstrap & jQuery
 //import $ from 'jquery';

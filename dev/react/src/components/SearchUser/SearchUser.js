@@ -1,8 +1,8 @@
 // Common libraries
 import React, { Component } from 'react';
-import CustomerInfoComponent from "../customer-info/component";
-import CustomerOrderComponent from "../customer-order/component";
-import CustomerPrescriptionComponent from "../customer-prescriptions/component";
+import CustomerInfo from "../CustomerInfo/CustomerInfo";
+import CustomerOrderComponent from "../CustomerOrder/CustomerOrder";
+import CustomerPrescriptionComponent from "../CustomerPrescriptions/CustomerPrescriptions";
 
 import { connect } from 'react-redux';
 import { getUserData } from "./actions";
@@ -14,7 +14,7 @@ import TweenMax from 'gsap';
 
 
 
-class SearchUserComponent extends Component {
+class SearchUser extends Component {
 
     constructor(props) {
         super(props);
@@ -66,7 +66,7 @@ class SearchUserComponent extends Component {
         return (
             <div className='customer-info'>
 
-                    <CustomerInfoComponent customerid={this.props.id} data={this.props.payload[0].data}/>
+                    <CustomerInfo customerid={this.props.id} data={this.props.payload[0].data}/>
 
                     <section className="component component-customer-orders row">
                         <h2 className="heading2 heading">
@@ -94,4 +94,4 @@ class SearchUserComponent extends Component {
 
 export default connect((state) => {
     return state.userReducer;
-})(SearchUserComponent);
+})(SearchUser);

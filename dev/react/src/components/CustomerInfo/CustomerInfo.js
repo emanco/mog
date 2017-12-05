@@ -1,8 +1,16 @@
+// Common libraries
 import React, { Component } from 'react';
 
-class CustomerView extends Component {
+class CustomerInfo extends Component {
+    componentWillMount() {
+    }
+    // @TODO - DO SOMETHING ABOUT THIS
+    //customerid = this.props.customerid
+    //data = this.props.data
+
     render() {
 
+        // otherwise just render one customer by id
         if (this.props.customerid === undefined) {
             return (
                 <div>
@@ -48,4 +56,4 @@ class CustomerView extends Component {
     }
 }
 
-export default CustomerView;
+export default CustomerInfo;

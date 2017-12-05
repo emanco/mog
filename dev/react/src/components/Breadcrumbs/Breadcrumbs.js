@@ -10,7 +10,7 @@ import "./../../scss/components/breadcrumbs.css";
 
 import Sticky from 'react-sticky-el';
 
-class BreadcrumbsComponent extends Component {
+class Breadcrumbs extends Component {
 
     componentWillMount() {
 
@@ -49,4 +49,4 @@ class BreadcrumbsComponent extends Component {
     }
 }
 
-export default BreadcrumbsComponent;
+export default Breadcrumbs;

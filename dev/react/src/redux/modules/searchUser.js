@@ -13,21 +13,21 @@ export default function userReducer(state = {}, action = '') {
     switch (action.type)
     {
 
-        case USER_RESULTS_PENDING :
+        case 'USER_RESULTS_PENDING' :
             console.log('SEARCH USER LOADING');
             return {
                 ...state,
                 loading: true,
                 success: false
             };
-        case USER_RESULTS_FULFILLED :
+        case 'USER_RESULTS_FULFILLED' :
             return {
                 ...state,
                 loading: false,
                 success: true,
                 payload: action.payload
             };
-        case USER_RESULTS_REJECTED :
+        case 'USER_RESULTS_REJECTED' :
             return {
                 ...state,
                 loading: false,

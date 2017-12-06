@@ -25,9 +25,9 @@ class Searchpage extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         console.log('id is '+this.props.match.params.searchid);
-        //getSearch(this.props.match.params.searchid);
+        getSearch(this.props.match.params.searchid);
         //this.props.dispatch(getData(this.props.match.params.searchid));
 
         //TODO: refactor actions into getData for right side page and getSearch for left side!

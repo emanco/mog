@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { getUserData } from "./searchUser";
+
 // Actions
 const LOADING = 'myOp/search/LOADING';
 const LOADED = 'myOp/search/LOADED';
@@ -14,26 +16,24 @@ const initialState = {
 export default function searchReducer(state = initialState, action = '') {
     switch (action.type)
     {
-        case 'LOADING' :
+        case LOADING :
           console.log('LOADING')
-            state = {
+            return {
                 ...state,
                 loading: true,
                 success: false
             };
-        break;
-        case 'LOADED' :
+        case LOADED :
             console.log('LOADED');
             console.log(action.payload);
-            state = {
+            return {
                 ...state,
                 loading: false,
                 success: true,
-                results: action.payload.data // Not sure why it's so deep like this but this gives the actual results
+                payload: action.payload // Not sure why it's so deep like this but this gives the actual results
             };
-        break;
-        case 'FAILED' :
-            state = {
+        case FAILED :
+            return {
                 ...state,
                 loading: false,
                 success: false,
@@ -41,37 +41,38 @@ export default function searchReducer(state = initialState, action = '') {
                     message: action.payload.message
                 }
             };
-        break;
         case 'SEARCH_SUBMIT' :
-            state = {
+            return {
                 ...state,
                 query: action.payload
             };
-        break;
         case 'SEARCH_CHANGE' :
-            state = {
+            return {
                 ...state,
                 query: action.payload
             };
-        break;
         default:
-            state = initialState;
+            return state;
     }
-    return state;
 }
 
 // get Search results with this action, separated by the combined above
 export function getSearch (id) {
     //return axios.get('https://mog-api.herokuapp.com/search/');
     console.log('getSearch Action Called')
-    return {
-        types: ['LOADING', 'LOADED', 'FAILED'],
+    return (dispatch, getState) => {
+      dispatch({
+        types: [LOADING, LOADED, FAILED],
         payload: {
           request: {
             url: 'https://mog-api.herokuapp.com/search/'
           }
         }
-      }
+      }).then(() => {
+        dispatch(getUserData('CUS123456789')) // @TODO - REMIVE HARD CODED VALUE
+        // The above promise has resolved. We now need to go fetch the customer with the ID provided
+      })
+    }
 };
 
 export function onSubmit (value) {

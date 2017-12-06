@@ -57,6 +57,7 @@ class Tags extends Component {
         this.props.dispatch(onSubmit(query));
 
         this.props.history.push('/search/'+query);
+        console.log('HANDLE TAG SUBMIT');
         this.props.dispatch(getSearch(query));
     }
 

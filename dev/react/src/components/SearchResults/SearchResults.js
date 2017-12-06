@@ -10,11 +10,9 @@ export default class SearchResults extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-        getSearch(this.props.searchid);
+        // getSearch(this.props.searchid);
 
         this.handleHover = this.handleHover.bind(this);
-        console.log('HERE')
-        console.log(props)
     }
 
     componentDidMount() {

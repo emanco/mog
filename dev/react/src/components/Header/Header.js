@@ -28,7 +28,7 @@ class Header extends Component {
         this.props.dispatch(onSubmit(query));
 
         this.props.history.push('/search/'+query);
-        this.props.dispatch(getSearch(query));
+        getSearch(query);
 
     };
 

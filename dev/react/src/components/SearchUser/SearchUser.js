@@ -5,7 +5,7 @@ import CustomerOrderComponent from "../CustomerOrder/CustomerOrder";
 import CustomerPrescriptionComponent from "../CustomerPrescriptions/CustomerPrescriptions";
 
 import { connect } from 'react-redux';
-import { getUserData } from "./actions";
+import { getUserData } from "../../redux/modules/searchUser";
 
 // for animation, hopefully!
 //import TransitionGroup from 'react-transition-group/TransitionGroup';
@@ -38,17 +38,13 @@ class SearchUser extends Component {
 
     // this function is being called by the parent component and triggered by another child component!
     onChange(id) {
-        console.log('triggered child function with new id: '+id);
-
         //console.log('data is: '+this.props.payload_user)
 
-        this.props.dispatch(getUserData(id));
+        getUserData(id);
     }
 
 
     render() {
-        console.log('SEARCH USER PAYLOAD ============')
-        console.log(this.props)
         if (this.props.loading === true || typeof this.props.payload === 'undefined') {
             return (
                 <p>Loading...</p>

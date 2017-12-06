@@ -11,7 +11,8 @@ import { getSearch } from '../../redux/modules/search'
 
 @connect(
   (state, ownProps) => (console.log(state),{
-    searchResultsData: state.searchReducer.results
+    searchResultsData: state.searchReducer.payload.data,
+    userData: state.userReducer.payload
   }),
   {...SearchActions, ...SearchUserActions}
 )
@@ -26,7 +27,7 @@ class Searchpage extends Component {
 
     componentDidMount() {
         console.log('id is '+this.props.match.params.searchid);
-        getSearch(this.props.match.params.searchid);
+        //getSearch(this.props.match.params.searchid);
         //this.props.dispatch(getData(this.props.match.params.searchid));
 
         //TODO: refactor actions into getData for right side page and getSearch for left side!
@@ -51,6 +52,7 @@ class Searchpage extends Component {
       let $id = this.props.match.params.searchid;
           //$searchData = this.props.payload.data[0];
       console.log('HERE ------------------')
+      console.log(this.props.userData);
       return (
 
 
@@ -65,7 +67,7 @@ class Searchpage extends Component {
 
               <div className="right-panel">
                 Right Panel
-                {/*<SearchUser onRef={ref => (this.user = ref)} id={$id}/> */}
+                <SearchUser onRef={ref => (this.user = ref)} id={$id} data={this.props.userData}/>
               </div>
 
 

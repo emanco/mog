@@ -27,7 +27,7 @@ import FooterComponent from './components/Footer/Footer';
 //reducers
 import summaryReducer from './containers/customers/reducers';
 import searchReducer from './redux/modules/search';
-import userReducer from './components/SearchUser/reducers';
+import userReducer from './redux/modules/searchUser';
 
 // Bootstrap & jQuery
 //import $ from 'jquery';

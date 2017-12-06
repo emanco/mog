@@ -6,6 +6,8 @@ import { getUserData } from "./searchUser";
 const LOADING = 'myOp/search/LOADING';
 const LOADED = 'myOp/search/LOADED';
 const FAILED = 'myOp/search/FAILED';
+const SEARCH_SUBMIT = 'myOp/search/SEARCH_SUBMIT';
+const SEARCH_CHANGE = 'myOp/search/SEARCH_CHANGE';
 
 const initialState = {
     loading: true,
@@ -69,7 +71,7 @@ export function getSearch (id) {
           }
         }
       }).then(() => {
-        dispatch(getUserData('CUS123456789')) // @TODO - REMIVE HARD CODED VALUE
+        dispatch(getUserData('CUS123456789')) // @TODO - REMOVE HARD CODED VALUE
         // The above promise has resolved. We now need to go fetch the customer with the ID provided
       })
     }
@@ -77,14 +79,14 @@ export function getSearch (id) {
 
 export function onSubmit (value) {
     return {
-        type: 'SEARCH_SUBMIT',
+        type: SEARCH_SUBMIT,
         query: value
     };
 };
 
 export function onChange (value) {
     return {
-        type: 'SEARCH_CHANGE',
+        type: SEARCH_CHANGE,
         query: value
     };
 };

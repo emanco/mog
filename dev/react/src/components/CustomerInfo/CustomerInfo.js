@@ -18,7 +18,7 @@ class CustomerInfo extends Component {
                 </div>
             );
         } else {
-
+            console.log(this.props.data)
             return (
                 <div>
 

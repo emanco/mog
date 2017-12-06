@@ -9,14 +9,19 @@ import {getData} from "./actions";
 
 import $ from 'jquery';
 import BreadcrumbsComponent from "../../components/Breadcrumbs/Breadcrumbs";
+import * as SummaryActions from '../../redux/modules/customers'
 
-
-
-class Summarypage extends Component {
+@connect(
+  (state, ownProps) => ({
+    payload: state.summaryReducer.payload
+  }),
+  {...SummaryActions}
+)
+export default class Summarypage extends Component {
 
     componentWillMount() {
         console.log('id is '+this.props.match.params.customerid);
-        this.props.dispatch(getData(this.props.match.params.customerid));
+        this.props.getData(this.props.match.params.customerid);
     }
 
     componentDidMount() {
@@ -54,14 +59,13 @@ class Summarypage extends Component {
 
 
       let $id = this.props.match.params.customerid;
-
+    if (this.props.payload[1]) {
       return (
           <div>
               <BreadcrumbsComponent path={this.props.location.pathname}/>
 
               <div className="left-panel">
-
-
+        <p className="sub-text">Showing {this.props.payload[1].data[0].limit} of {this.props.payload[1].count} </p>
                   <CustomerInfo customerid={$id} data={this.props.payload[0].data}/>
 
 
@@ -80,6 +84,7 @@ class Summarypage extends Component {
                   </section>
 
                  <CustomerPrescriptionComponent customerid={$id} data={this.props.payload[2].data} name={this.props.payload[0].data.first_name+' '+this.props.payload[0].data.last_name} />
+
               </div>
 
 
@@ -533,12 +538,8 @@ class Summarypage extends Component {
           </div>
 
       );
+    } else {
+      return (<div>Loading...</div>)
+    }
   }
 }
-
-//export default Summarypage;
-
-
-export default connect((state) => {
-    return state.summaryReducer;
-})(Summarypage);

@@ -43,7 +43,7 @@ export default function userReducer(state = {}, action = '') {
 
 
 // declare all API calls for left hand side
-const getCustomer = (id=1) => {
+const getCustomer = (id = 1) => {
     return axios.get('https://mog-api.herokuapp.com/customer-summary/'+id)
 }
 

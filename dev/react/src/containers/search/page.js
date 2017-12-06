@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 
 import * as SearchActions from '../../redux/modules/search'
 import * as SearchUserActions from '../../redux/modules/searchUser'
-import { getSearch } from '../../redux/modules/search'
 
 @connect(
   (state, ownProps) => (console.log(state),{
@@ -27,8 +26,7 @@ class Searchpage extends Component {
 
     componentWillMount() {
         console.log('id is '+this.props.match.params.searchid);
-        getSearch(this.props.match.params.searchid);
-        //this.props.dispatch(getData(this.props.match.params.searchid));
+        this.props.getSearch(this.props.match.params.searchid);
 
         //TODO: refactor actions into getData for right side page and getSearch for left side!
         //this.props.dispatch(getUser(this.props.match.params.searchid));
@@ -61,12 +59,10 @@ class Searchpage extends Component {
               <Breadcrumbs number={this.props.getNumber} path={this.props.location.pathname} query={$id} onRef={ref => (this.bread = ref)}/>
 
               <div className="left-panel">
-                Left Panel
                 <SearchResults searchid={$id} change={this.handleChange} data={this.props.searchResultsData} />
               </div>
 
               <div className="right-panel">
-                Right Panel
                 <SearchUser onRef={ref => (this.user = ref)} id={$id} data={this.props.userData}/>
               </div>
 

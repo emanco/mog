@@ -13,7 +13,6 @@ class CustomerOrder extends Component {
     }
 
     render() {
-        let $this = this;
         let $currency = this.props.data.currency;
         let $class = this.props.id === 0 ? '-in':'';
 

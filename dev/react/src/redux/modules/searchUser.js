@@ -1,15 +1,10 @@
 import axios from 'axios';
 
-// Actions
-const USER_RESULTS_PENDING = 'myOp/searchUser/LOADING';
-const USER_RESULTS_FULFILLED = 'myOp/searchUser/LOADED';
-const USER_RESULTS_REJECTED = 'myOp/searchUser/FAILED';
-
 const initialState = {
 
 }
 
-export default function userReducer(state = {}, action = '') {
+export default function userReducer(state = initialState, action = '') {
     switch (action.type)
     {
 

@@ -25,7 +25,7 @@ import FooterComponent from './components/Footer/Footer';
 
 
 //reducers
-import summaryReducer from './containers/customers/reducers';
+import summaryReducer from './redux/modules/customers';
 import searchReducer from './redux/modules/search';
 import userReducer from './redux/modules/searchUser';
 

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getSearch } from "../../redux/modules/search";
 
 // CSS
 import './../../scss/components/search-results.css';
@@ -10,7 +8,6 @@ export default class SearchResults extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-        // getSearch(this.props.searchid);
 
         this.handleHover = this.handleHover.bind(this);
     }

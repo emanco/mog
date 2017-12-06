@@ -9,8 +9,7 @@ export default function summaryReducer(state = {}, action = '') {
                 loading: true,
                 success: false,
                 payload: {}
-            };
-            break;
+            }
         case 'FETCH_DATA_FULFILLED' :
             //console.log(action.payload);
             return {
@@ -18,8 +17,7 @@ export default function summaryReducer(state = {}, action = '') {
                 loading: false,
                 success: true,
                 payload: action.payload
-            };
-            break;
+            }
         case 'FETCH_DATA_REJECTED' :
             return {
                 ...state,
@@ -28,12 +26,10 @@ export default function summaryReducer(state = {}, action = '') {
                 payload: {
                     message: action.payload.message
                 }
-            };
+            }
         default:
             return state;
     }
-
-    return state;
 }
 
 const loader = axios.create({

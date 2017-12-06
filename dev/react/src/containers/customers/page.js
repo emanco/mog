@@ -5,8 +5,6 @@ import CustomerPrescriptionComponent from '../../components/CustomerPrescription
 
 import { connect } from 'react-redux';
 
-import {getData} from "./actions";
-
 import $ from 'jquery';
 import BreadcrumbsComponent from "../../components/Breadcrumbs/Breadcrumbs";
 import * as SummaryActions from '../../redux/modules/customers'

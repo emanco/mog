@@ -9,7 +9,7 @@ import * as SearchActions from '../../redux/modules/search'
 import * as SearchUserActions from '../../redux/modules/searchUser'
 
 @connect(
-  (state, ownProps) => (console.log(state),{
+  (state, ownProps) => ({
     searchResultsData: state.searchReducer.payload.data,
     userData: state.userReducer.payload
   }),

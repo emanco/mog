@@ -47,7 +47,8 @@ class SearchUser extends Component {
 
 
     render() {
-
+        console.log('SEARCH USER PAYLOAD ============')
+        console.log(this.props)
         if (this.props.loading === true || typeof this.props.payload === 'undefined') {
             return (
                 <p>Loading...</p>

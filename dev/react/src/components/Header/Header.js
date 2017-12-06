@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import {onSubmit, getSearch} from "../SearchResults/actions";
+import {onSubmit, getSearch} from "../../redux/modules/search";
 
 import './../../scss/components/header.css';
 

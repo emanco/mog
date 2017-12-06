@@ -1,19 +1,32 @@
 import React, { Component } from 'react';
 
-import BreadcrumbsComponent from "../../components/Breadcrumbs/Breadcrumbs";
-import SearchResultComponent from "../../components/SearchResults/SearchResults";
-import SearchUserComponent from "../../components/SearchUser/SearchUser";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import SearchResults from "../../components/SearchResults/SearchResults";
+import SearchUser from "../../components/SearchUser/SearchUser";
+import { connect } from 'react-redux';
+
+import * as SearchActions from '../../redux/modules/search'
+import * as SearchUserActions from '../../redux/modules/searchUser'
+import { getSearch } from '../../redux/modules/search'
+
+@connect(
+  (state, ownProps) => (console.log(state),{
+    searchResultsData: state.searchReducer.results
+  }),
+  {...SearchActions, ...SearchUserActions}
+)
 
 class Searchpage extends Component {
 
-    constructor () {
-        super();
-
+    constructor (props) {
+        super(props);
+        console.log(props)
         this.handleChange = this.handleChange.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         console.log('id is '+this.props.match.params.searchid);
+        getSearch(this.props.match.params.searchid);
         //this.props.dispatch(getData(this.props.match.params.searchid));
 
         //TODO: refactor actions into getData for right side page and getSearch for left side!
@@ -21,35 +34,38 @@ class Searchpage extends Component {
 
         //let $searchid= this.props.match.params.searchid;
         //this.props.dispatch(getSearch($searchid));
+
+      // Don't care about pre-loading data,
     }
 
     handleChange(id) {
         console.log('new id to load is: '+id);
 
         //calling child function
-        this.user.onChange(id);
+        this.props.onChange(id);
     }
 
 
   render() {
 
-
       let $id = this.props.match.params.searchid;
           //$searchData = this.props.payload.data[0];
-
+      console.log('HERE ------------------')
       return (
 
 
           <div>
               {/*<BreadcrumbsComponent number={$searchData.hits.hit.length} path={this.props.location.pathname} query={$id}/>*/}
-              <BreadcrumbsComponent number={this.props.getNumber} path={this.props.location.pathname} query={$id} onRef={ref => (this.bread = ref)}/>
+              <Breadcrumbs number={this.props.getNumber} path={this.props.location.pathname} query={$id} onRef={ref => (this.bread = ref)}/>
 
               <div className="left-panel">
-                  <SearchResultComponent searchid={$id} change={this.handleChange} />
+                Left Panel
+                <SearchResults searchid={$id} change={this.handleChange} data={this.props.searchResultsData} />
               </div>
 
               <div className="right-panel">
-                      <SearchUserComponent onRef={ref => (this.user = ref)} id={$id}/>
+                Right Panel
+                {/*<SearchUser onRef={ref => (this.user = ref)} id={$id}/> */}
               </div>
 
 

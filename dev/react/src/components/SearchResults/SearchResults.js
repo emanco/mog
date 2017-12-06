@@ -1,31 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getSearch } from "./actions";
+import { getSearch } from "../../redux/modules/search";
 
-import * as SearchActions from './actions'
 // CSS
 import './../../scss/components/search-results.css';
 
-@connect(
-  state =>
-    ({
-      searchVisible: state.search.open,
-    }),
-    {...SearchActions}
-)
 export default class SearchResults extends Component {
 
     constructor(props) {
         super(props);
         this.state = {};
-        this.props.dispatch(getSearch(this.props.searchid));
+        getSearch(this.props.searchid);
 
         this.handleHover = this.handleHover.bind(this);
+        console.log('HERE')
+        console.log(props)
     }
 
     componentDidMount() {
-        console.log('component did mount: '+this.props.payload.data[0].hits.hit[0].fields.customer_id);
-        this.props.change(this.props.payload.data[0].hits.hit[0].fields.customer_id);  //emit the first userid to outside
+       // console.log('component did mount: '+this.props.data[0].hits.hit[0].fields.customer_id);
+      // this.props.change(this.props.data[0].hits.hit[0].fields.customer_id);  //emit the first userid to outside
     }
 
     handleHover = (event) => {
@@ -41,8 +35,7 @@ export default class SearchResults extends Component {
     };
 
     render() {
-
-        if (this.props.loading === true || typeof this.props.payload === 'undefined') {
+        if (this.props.loading === true || typeof this.props.data === 'undefined') {
             return (
                 <p>Loading...</p>
             );
@@ -63,13 +56,12 @@ export default class SearchResults extends Component {
         } else {
 
             let $this = this;
-
+            console.log(this.props.data);
             return (
               <section className="component component-results">
                 <div>
-                    {this.props.payload.data[0].hits.hit.map(function(result, i) {
+                {this.props.data[0].hits.hit.map(function(result, i) {
                         return (
-
                             <div className="row component card" key={i} >
                                     <div className="col-sm-12" id={i}>
                                         <a href={"../customers/"+result.fields.customer_id}>

@@ -49,6 +49,7 @@
     "react-sticky-el": "^1.0.13",
     "react-tagsinput": "^3.19.0",
     "redux": "^3.7.2",
+    "redux-axios-middleware": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^4.4.1",
     "redux-thunk": "^2.2.0",

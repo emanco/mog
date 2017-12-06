@@ -3,7 +3,7 @@ import TagsInput from 'react-tagsinput';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import {onSubmit, getSearch} from "../SearchResults/actions";
+import {onSubmit, getSearch} from "../../redux/modules/search";
 
 //import 'react-tagsinput/react-tagsinput.css' // If using WebPack and style-loader.
 

@@ -17,20 +17,17 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
     switch (action.type)
     {
         case LOADING_LIST :
-          console.log('LOADING')
             return {
                 ...state,
                 loading: true,
                 success: false
             };
         case LOADED_LIST :
-            console.log('LOADED');
-            console.log(action.payload);
             return {
                 ...state,
                 loading: false,
                 success: true,
-                payload: action.payload // Not sure why it's so deep like this but this gives the actual results
+                payload: action.payload.data // Not sure why it's so deep like this but this gives the actual results
             };
         case FAILED_LIST :
             return {
@@ -47,25 +44,25 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
 }
 
 // get Search results with this action, separated by the combined above
-export function getFraudCheckList (id) {
-  console.log('getSearch Action Called')
+export function getFraudCheckList () {
   return (dispatch, getState) => {
     dispatch({
-      types: [LOADING, LOADED, FAILED],
+      types: [LOADING_LIST, LOADED_LIST, FAILED_LIST],
       payload: {
         request: {
-          url: 'https://mog-api.herokuapp.com/search/'
+          url: 'https://virtserver.swaggerhub.com/MyOptiqueGroup/mbf-order-api/1.0.3/fraud-check-orders/',
+          headers: {'Authorization': 'omsfire'}
         }
       }
     })
-};
+  };
+}
 
 // Get details on the list currently being hovered over
-export function getFraudCheckListOrder (id) {
-  console.log('getSearch Action Called')
+export function getFraudCheckListOrder () {
   return (dispatch, getState) => {
     dispatch({
-      types: [LOADING, LOADED, FAILED],
+      types: [LOADING_ORDER, LOADED_ORDER, FAILED_ORDER],
       payload: {
         request: {
           url: 'https://mog-api.herokuapp.com/search/'

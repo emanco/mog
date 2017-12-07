@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import CustomerInfo from '../../components/CustomerInfo/CustomerInfo';
-import CustomerOrderComponent from '../../components/CustomerOrder/CustomerOrder';
-import CustomerPrescriptionComponent from '../../components/CustomerPrescriptions/CustomerPrescriptions';
 
 import { connect } from 'react-redux';
 
 import * as fraudCheckOverviewActions from '../../redux/modules/fraudCheckOverview'
+import FraudCheckList from '../../components/FraudCheckList/FraudCheckList'
+
+import './../../scss/components/fraudCheckOverview.css';
 
 @connect(
   (state, ownProps) => ({
-    payload: state.summaryReducer.payload
+    data: state.fraudCheckOverviewReducer.payload
   }),
   {...fraudCheckOverviewActions}
 )
@@ -20,9 +20,25 @@ export default class fraudCheckOverview extends Component {
     }
 
     componentDidMount() {
+      this.props.getFraudCheckList();
     }
 
   render() {
-    <div>Fraud Check Overview Container</div>
+
+    if (!this.props.data[0]) {
+      return (<div>LOADING...</div>)
+    } else {
+      return(
+        <div className="fraudCheckOverview">
+        <div className="left-panel">
+          <div>{this.props.data[0].count} Items</div>
+          <FraudCheckList data={this.props.data[0]} />
+        </div>
+        <div className="right-panel cust-scroll">
+          Right Panel
+        </div>
+        </div>
+      )
+    }
   }
 }

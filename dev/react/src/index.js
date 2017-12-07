@@ -15,6 +15,7 @@ import { applyMiddleware, createStore, combineReducers } from 'redux';
 //pages
 import Summarypage from "./containers/customers/page";
 import Searchpage from "./containers/search/page";
+import fraudCheckOverview from './containers/fraudCheck/fraudCheckOverview'
 
 
 //components
@@ -28,7 +29,7 @@ import FooterComponent from './components/Footer/Footer';
 import summaryReducer from './redux/modules/customers';
 import searchReducer from './redux/modules/search';
 import userReducer from './redux/modules/searchUser';
-
+import fraudCheckOverviewReducer from './redux/modules/fraudCheckOverview';
 // Bootstrap & jQuery
 //import $ from 'jquery';
 //import { Carousel, Modal,Button, Panel,Image,Row,Col } from 'react-bootstrap';
@@ -52,7 +53,7 @@ const client = axios.create({ //all axios can be used, shown in axios documentat
 });
 
 
-let store = createStore(combineReducers({ summaryReducer, searchReducer, userReducer }), applyMiddleware(promiseMiddleware(), thunk, logger, axiosMiddleware(client)));
+let store = createStore(combineReducers({ summaryReducer, searchReducer, userReducer, fraudCheckOverviewReducer }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(promiseMiddleware(), thunk, logger, axiosMiddleware(client)));
 
 
 ReactDOM.render(
@@ -75,6 +76,8 @@ ReactDOM.render(
                     {/*Search*/}
                     <Route exact path="/search" component={Searchpage} />
                     <Route exact path="/search/:searchid" component={Searchpage} />
+
+                    <Route exact path='/fraud-check' component={fraudCheckOverview} />
 
                 </Switch>
 

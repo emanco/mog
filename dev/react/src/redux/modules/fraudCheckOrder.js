@@ -43,7 +43,7 @@ export default function fraudCheckOrderReducer(state = initialState, action = ''
 }
 
 // get Search results with this action, separated by the combined above
-export function getFraudCheckOrder (id) {
+export function getSearch (id) {
     //return axios.get('https://mog-api.herokuapp.com/search/');
     console.log('getSearch Action Called')
     return (dispatch, getState) => {

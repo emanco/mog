@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import axiosMiddleware from 'redux-axios-middleware';
+import axios from 'axios';
 import promiseMiddleware from 'redux-promise-middleware';
 import logger from 'redux-logger';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -11,21 +13,21 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 
 //pages
-import Summarypage from "./pages/customers/page";
-import Searchpage from "./pages/search/page";
+import Summarypage from "./containers/customers/page";
+import Searchpage from "./containers/search/page";
 
 
 //components
-import HeaderComponent from './components/header/component';
-//import BreadcrumbsComponent from './components/breadcrumbs/view';
+import HeaderComponent from './components/Header/Header';
+//import BreadcrumbsComponent from './components/Breadcrumbs/Breadcrumbs';
 
-import FooterComponent from './components/footer/view';
+import FooterComponent from './components/Footer/Footer';
 
 
 //reducers
-import summaryReducer from './pages/customers/reducers';
-import searchReducer from './components/search-results/reducers';
-import userReducer from './components/search-user/reducers';
+import summaryReducer from './redux/modules/customers';
+import searchReducer from './redux/modules/search';
+import userReducer from './redux/modules/searchUser';
 
 // Bootstrap & jQuery
 //import $ from 'jquery';
@@ -44,8 +46,13 @@ import "./scss/base/components.css";
 import "./scss/base/forms.css";
 import "./scss/base/general.css";
 
+// Axios Client setup. This could be moved elsewhere, but will work for now
+const client = axios.create({ //all axios can be used, shown in axios documentation
+  responseType: 'json'
+});
 
-let store = createStore(combineReducers({ summaryReducer, searchReducer, userReducer }), applyMiddleware(promiseMiddleware(), thunk, logger));
+
+let store = createStore(combineReducers({ summaryReducer, searchReducer, userReducer }), applyMiddleware(promiseMiddleware(), thunk, logger, axiosMiddleware(client)));
 
 
 ReactDOM.render(

@@ -64,7 +64,7 @@ class CustomerOrder extends Component {
                                           </div>
 
                                           <div className="col-sm-5 text-right">
-                                              <OrderStatus status={job.status} />
+                                              {/*<OrderStatus status={job.status} /> */}
                                               <span className="price">{$currency}{job.price}</span>
                                           </div>
 

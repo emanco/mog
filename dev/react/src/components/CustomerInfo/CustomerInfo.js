@@ -47,7 +47,7 @@ class CustomerInfo extends Component {
                             <p className="view-more"><a href="">View More</a></p>
                         </div>
 
-                        <div className="btn -edit">Edit Profile</div>
+                    {this.props.editable && <div className="btn -edit">Edit Profile</div>}
 
                     </section>
                 </div>

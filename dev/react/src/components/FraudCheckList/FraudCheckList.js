@@ -18,7 +18,6 @@ export default class FraudCheckList extends Component {
   render() {
     return(
       <div>
-        <div>Fraud Check Overview List</div>
         {
           this.props.data.results.map((result, i) => {
             return (<FraudCheckListItem data={result} key={i} />)

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 // Include dumb component
 import Moment from 'react-moment';
+import { currency } from  '../../helpers/mappings';
 
 import '../../scss/components/orders.css';
 
@@ -13,7 +14,8 @@ class CustomerOrder extends Component {
     }
 
     render() {
-        let $currency = this.props.data.currency;
+        console.log(this.props.data.currency)
+        let $currency = currency(this.props.data.currency);
         let $class = this.props.id === 0 ? '-in':'';
 
         return (
@@ -30,7 +32,7 @@ class CustomerOrder extends Component {
 
                   <div className="col-sm-5 text-right">
                       <span className="status sub-text">{this.props.data.status}</span>
-                      <span className="price">{$currency} {this.props.data.price}</span>
+                      <span className="price">{$currency}{this.props.data.price}</span>
                   </div>
               </div>
 
@@ -63,7 +65,7 @@ class CustomerOrder extends Component {
 
                                           <div className="col-sm-5 text-right">
                                               <span className="status sub-text">{job.status}</span>
-                                              <span className="price">{$currency} {job.price}</span>
+                                              <span className="price">{$currency}{job.price}</span>
                                           </div>
 
                                       </div>

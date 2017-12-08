@@ -20,3 +20,12 @@ export function fraudCheckStatus(statusVal) {
     return 'failed'
   }
 }
+
+export function currency(currencyCode) {
+  switch(currencyCode) {
+    case 'GBP' :
+      return '£';
+    default:
+      return '£';
+  }
+}

@@ -1,3 +1,7 @@
+import axios from 'axios';
+
+import buildQueryUrl from '../../helpers/buildQueryUrl'
+import { getCustomer, getOrders } from './customers'
 // Actions
 const LOADING_LIST = 'myOp/fraudCheckOverviewList/LOADING';
 const LOADED_LIST = 'myOp/fraudCheckOverviewList/LOADED';
@@ -38,36 +42,77 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
                     message: action.payload.message
                 }
             };
+        case 'FRAUD_ORDER_PENDING' :
+          return {
+            ...state,
+            orderLoading: true,
+            orderSuccess: false
+          }
+        case 'FRAUD_ORDER_FAILED' :
+          return {
+            ...state,
+            orderLoading: false,
+            orderSuccess: false,
+            orderPayload: {
+              message: action.payload.message
+            }
+          }
+        case 'FRAUD_ORDER_FULFILLED' :
+          return {
+            ...state,
+            loading: false,
+            success: true,
+            orderPayload: action.payload
+          }
         default:
             return state;
     }
 }
 
 // get Search results with this action, separated by the combined above
-export function getFraudCheckList () {
+export function getFraudCheckList (queryParams = {}) {
+
+  /* @NOTE - getFraudCheckList API
+   * Method: Get
+   * Swagger: https://app.swaggerhub.com/apis/MyOptiqueGroup/mbf-order-api/1.0.3#/Orders/get_fraud_check_orders
+   * Pass queryParams object when calling this method to get the correct results
+   */
+
+  const queryUrl = buildQueryUrl('https://virtserver.swaggerhub.com/MyOptiqueGroup/mbf-order-api/1.0.3/fraud-check-orders/', queryParams)
+
   return (dispatch, getState) => {
     dispatch({
       types: [LOADING_LIST, LOADED_LIST, FAILED_LIST],
       payload: {
         request: {
-          url: 'https://virtserver.swaggerhub.com/MyOptiqueGroup/mbf-order-api/1.0.3/fraud-check-orders/',
+          url: queryUrl,
           headers: {'Authorization': 'omsfire'}
         }
       }
+    }).then((result) => {
+      // @TODO - Check if offset is zero. If so we need to load the first customer and order details
+      console.log(result)
+      // dispatch(getFraudCheckListOrders(result.payload.data[0].results[0].customer_reference))
+      dispatch(getFraudCheckListOrder(result.payload.data[0].results[0].customer_reference))
+      // Also get customer data
     })
   };
 }
 
-// Get details on the list currently being hovered over
-export function getFraudCheckListOrder () {
-  return (dispatch, getState) => {
+// Get details on the list item currently being hovered over
+export function getFraudCheckListOrder (id) {
+
+  /* @NOTE - Fetch User and Order Details
+   * Call getCustomer & getOrders from the customers reducer which just returns the data then
+   * put it into this reducer
+   */
+  let testid = 'CUS123456789' /* @TODO - MAKE THIS DYNAMIC */
+  console.log('CHECKLIST ORDER')
+  return (dispatch) => {
     dispatch({
-      types: [LOADING_ORDER, LOADED_ORDER, FAILED_ORDER],
-      payload: {
-        request: {
-          url: 'https://mog-api.herokuapp.com/search/'
-        }
-      }
+      type: 'FRAUD_ORDER',
+      payload: axios.all([getCustomer(testid), getOrders(testid)])
     })
   }
+
 }

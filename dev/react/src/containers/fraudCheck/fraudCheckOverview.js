@@ -4,12 +4,15 @@ import { connect } from 'react-redux';
 
 import * as fraudCheckOverviewActions from '../../redux/modules/fraudCheckOverview'
 import FraudCheckList from '../../components/FraudCheckList/FraudCheckList'
+import CustomerInfo from '../../components/CustomerInfo/CustomerInfo';
+import CustomerOrderList from '../../components/CustomerOrderList/CustomerOrderList';
 
 import './../../scss/components/fraudCheckOverview.css';
 
 @connect(
   (state, ownProps) => ({
-    data: state.fraudCheckOverviewReducer.payload
+    data: state.fraudCheckOverviewReducer.payload,
+    orderData: state.fraudCheckOverviewReducer.orderPayload
   }),
   {...fraudCheckOverviewActions}
 )
@@ -25,9 +28,10 @@ export default class fraudCheckOverview extends Component {
 
   render() {
 
-    if (!this.props.data[0]) {
+    if (!this.props.data[0] || !this.props.orderData) {
       return (<div>LOADING...</div>)
     } else {
+      console.log(this.props.orderData)
       return(
         <div className="fraudCheckOverview">
         <div className="left-panel">
@@ -35,7 +39,8 @@ export default class fraudCheckOverview extends Component {
           <FraudCheckList data={this.props.data[0]} />
         </div>
         <div className="right-panel cust-scroll">
-          Right Panel
+          <CustomerInfo customerid={this.props.data[0].results[0].customer_reference} data={this.props.orderData[0].data}/>
+          <CustomerOrderList data={this.props.orderData[1].data[0]} customerid={this.props.data[0].results[0].customer_reference} />
         </div>
         </div>
       )

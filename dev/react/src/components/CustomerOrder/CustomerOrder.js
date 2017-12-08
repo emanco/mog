@@ -23,7 +23,7 @@ class CustomerOrder extends Component {
                   <div className="col-sm-7">
                       <p className="order-id heading2">{this.props.data.external_id}</p>
                       <p className="sub-text">
-                          <Moment date={this.props.data.created} format="DD MMM YYYY" /> | {this.props.data.reference}
+                          <Moment date={this.props.data.created} format="ddd DD MMM YYYY" /> | {this.props.data.reference}
                       </p>
                   </div>
 

@@ -22,8 +22,8 @@ export default class fraudCheckList extends Component {
     const statusClass = fraudCheckStatus(this.props.data.latest_fraud_status);
     return(
       <div className="row component">
-        <div className={'fraudCheck-'+statusClass + ' col-sm-12 fraudCheckListItem'}>
-          {this.props.data.order_reference}
+        <div className={'fraudCheck-'+ statusClass + ' col-sm-12 fraudCheckListItem'}>
+          <p className="heading2">{this.props.data.order_reference}</p>
           {clientNameMapping(this.props.data.client_id)}
         </div>
       </div>

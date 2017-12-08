@@ -38,7 +38,7 @@ export default class fraudCheckOverview extends Component {
           <div>{this.props.data[0].count} Items</div>
           <FraudCheckList data={this.props.data[0]} />
         </div>
-        <div className="right-panel cust-scroll">
+        <div className="right-panel -light-inset cust-scroll">
           <CustomerInfo customerid={this.props.data[0].results[0].customer_reference} data={this.props.orderData[0].data}/>
           <CustomerOrderList data={this.props.orderData[1].data[0]} customerid={this.props.data[0].results[0].customer_reference} />
         </div>

@@ -1,3 +1,13 @@
+@import '../customBase/variables.scss';
+
 .fraudCheckOverview .left-panel {
   border-right: 1px solid #e8e9e9;
+}
+
+.fraudCheckOverview {
+  .component-customer-orders .component.card {
+    background: white;
+    border: 1px solid $color-grey-border;
+  }
+
 }

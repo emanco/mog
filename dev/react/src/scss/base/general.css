@@ -419,7 +419,10 @@ p {
       float: left; } }
   .left-panel.-dark-inset,
   .right-panel.-dark-inset {
-    background-color: #a0a2a9;
+    background-color: #a0a2a9; }
+  .left-panel.-dark-inset, .left-panel.-light-inset,
+  .right-panel.-dark-inset,
+  .right-panel.-light-inset {
     padding: 3%;
     box-shadow: inset 1px 1px 1px rgab(20, 20, 20, 0.3);
     position: fixed;
@@ -428,26 +431,30 @@ p {
     overflow: auto;
     top: 57px; }
     @media (min-width: 768px) {
-      .left-panel.-dark-inset,
-      .right-panel.-dark-inset {
+      .left-panel.-dark-inset, .left-panel.-light-inset,
+      .right-panel.-dark-inset,
+      .right-panel.-light-inset {
         top: 65px;
         padding-top: 65px;
         height: calc(100vh - 65px); } }
     @media (min-width: 992px) {
-      .left-panel.-dark-inset,
-      .right-panel.-dark-inset {
+      .left-panel.-dark-inset, .left-panel.-light-inset,
+      .right-panel.-dark-inset,
+      .right-panel.-light-inset {
         top: 78px;
         padding-top: 78px;
         height: calc(100vh - 78px); } }
     @media (min-width: 1200px) {
-      .left-panel.-dark-inset,
-      .right-panel.-dark-inset {
+      .left-panel.-dark-inset, .left-panel.-light-inset,
+      .right-panel.-dark-inset,
+      .right-panel.-light-inset {
         top: 89px;
         padding-top: 89px;
         height: calc(100vh - 89px); } }
     @media (min-width: 1500px) {
-      .left-panel.-dark-inset,
-      .right-panel.-dark-inset {
+      .left-panel.-dark-inset, .left-panel.-light-inset,
+      .right-panel.-dark-inset,
+      .right-panel.-light-inset {
         top: 100px;
         padding-top: 100px;
         height: calc(100vh - 100px); } }

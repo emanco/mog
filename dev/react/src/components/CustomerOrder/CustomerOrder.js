@@ -5,6 +5,8 @@ import React, { Component } from 'react';
 import Moment from 'react-moment';
 import { currency } from  '../../helpers/mappings';
 
+import OrderStatus from '../OrderStatus/OrderStatus';
+
 import '../../scss/components/orders.css';
 
 class CustomerOrder extends Component {
@@ -17,7 +19,6 @@ class CustomerOrder extends Component {
         console.log(this.props.data.currency)
         let $currency = currency(this.props.data.currency);
         let $class = this.props.id === 0 ? '-in':'';
-
         return (
           <div>
 
@@ -31,7 +32,7 @@ class CustomerOrder extends Component {
                   </div>
 
                   <div className="col-sm-5 text-right">
-                      <span className="status sub-text">{this.props.data.status}</span>
+                      <OrderStatus status={this.props.data.status} />
                       <span className="price">{$currency}{this.props.data.price}</span>
                   </div>
               </div>
@@ -51,7 +52,6 @@ class CustomerOrder extends Component {
                               <div className="col-xs-12">
 
                                   {shipment.job.map(function(job, i) {
-
                                   return(
                                       <div key={i} className="row component card component-card-job">
                                           <div className="col-xs-4 col-sm-2">
@@ -64,7 +64,7 @@ class CustomerOrder extends Component {
                                           </div>
 
                                           <div className="col-sm-5 text-right">
-                                              <span className="status sub-text">{job.status}</span>
+                                              <OrderStatus status={job.status} />
                                               <span className="price">{$currency}{job.price}</span>
                                           </div>
 

@@ -93,9 +93,11 @@
     //border:1px solid red;
     float: left;
   }
-
-  &.-dark-inset{
+  &.-dark-inset {
     background-color: colour('grey', 'panel');
+  }
+  &.-dark-inset,
+  &.-light-inset {
     padding:3%;
     box-shadow:inset 1px 1px 1px rgab(20,20,20,.3);
     position: fixed;

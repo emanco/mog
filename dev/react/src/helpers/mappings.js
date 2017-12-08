@@ -29,3 +29,21 @@ export function currency(currencyCode) {
       return '£';
   }
 }
+
+export function getStatusClass(statusVal) {
+  console.log(statusVal)
+  const testVal = statusVal.toUpperCase();
+  switch(testVal)
+    {
+      case 'COMPLETE' :
+        return 'status-complete';
+      case 'PAYMENT RECEIVED' :
+        return 'status-paid';
+      case 'DISPATCHED' :
+        return 'status-dispatched';
+      case 'IN LAB' :
+        return 'status-lab';
+      default :
+        return ''
+    }
+}

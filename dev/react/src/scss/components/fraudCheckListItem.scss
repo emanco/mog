@@ -1,3 +1,5 @@
+@import '../customBase/variables.scss';
+
 .fraudCheckListItem {
   border: 1px solid #e8e9e9;
   padding: 4%;
@@ -6,13 +8,13 @@
   box-sizing: border-box;
 
   &.fraudCheck-passed {
-    border-left: 2px solid #34d9ba;
+    border-left: 2px solid $color-green;
   }
   &.fraudCheck-maybe {
-    border-left: 2px solid #fcd259;
+    border-left: 2px solid $color-yellow;
   }
   &.fraudCheck-failed {
-    border-left: 2px solid #f86e61;
+    border-left: 2px solid $color-red;
   }
 }
 

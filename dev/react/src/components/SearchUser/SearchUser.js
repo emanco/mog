@@ -22,10 +22,6 @@ class SearchUser extends Component {
         this.onChange = this.onChange.bind(this);
     }
 
-    componentWillMount() {
-        //this.props.dispatch(getUserData(1));
-    }
-
     componentDidMount() {
         this.props.onRef(this);
 

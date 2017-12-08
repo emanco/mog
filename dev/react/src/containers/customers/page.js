@@ -17,7 +17,8 @@ import * as SummaryActions from '../../redux/modules/customers'
 )
 export default class Summarypage extends Component {
 
-    componentWillMount() {
+    constructor(props) {
+        super(props)
         console.log('id is '+this.props.match.params.customerid);
         this.props.getData(this.props.match.params.customerid);
     }

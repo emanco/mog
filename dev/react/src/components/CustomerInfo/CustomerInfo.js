@@ -2,11 +2,6 @@
 import React, { Component } from 'react';
 
 class CustomerInfo extends Component {
-    componentWillMount() {
-    }
-    // @TODO - DO SOMETHING ABOUT THIS
-    //customerid = this.props.customerid
-    //data = this.props.data
 
     render() {
 

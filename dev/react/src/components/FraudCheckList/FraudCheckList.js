@@ -12,9 +12,6 @@ export default class FraudCheckList extends Component {
       super(props)
     }
 
-    componentDidMount() {
-    }
-
   render() {
     return(
       <div>

@@ -11,10 +11,6 @@ import '../../scss/components/orders.css';
 
 class CustomerOrder extends Component {
 
-    componentWillMount() {
-        //console.log('orders for id: '+this.props.customerid);
-    }
-
     render() {
         console.log(this.props.data.currency)
         let $currency = currency(this.props.data.currency);

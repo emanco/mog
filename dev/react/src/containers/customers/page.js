@@ -6,7 +6,7 @@ import CustomerPrescriptionComponent from '../../components/CustomerPrescription
 import { connect } from 'react-redux';
 
 import $ from 'jquery';
-import BreadcrumbsComponent from "../../components/Breadcrumbs/Breadcrumbs";
+import StickyBar from "../../components/StickyBar/StickyBar";
 import * as SummaryActions from '../../redux/modules/customers'
 
 @connect(
@@ -51,14 +51,13 @@ export default class Summarypage extends Component {
     if (this.props.payload[1]) {
       return (
           <div>
-              <BreadcrumbsComponent path={this.props.location.pathname}/>
+              <StickyBar path={this.props.location.pathname}/>
 
               <div className="left-panel">
                   <p className="sub-text">Showing {this.props.payload[1].data[0].limit} of {this.props.payload[1].count} </p>
                   <CustomerInfo customerid={$id} data={this.props.payload[0].data} editable={true}/>
                   <CustomerOrderList data={this.props.payload[1].data[0]} customerid={$id} editable={true}/>
                   <CustomerPrescriptionComponent customerid={$id} data={this.props.payload[2].data} name={this.props.payload[0].data.first_name+' '+this.props.payload[0].data.last_name} />
-
               </div>
 
 

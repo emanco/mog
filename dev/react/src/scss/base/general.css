@@ -281,32 +281,8 @@ ul {
 p {
   line-height: 1em; }
 
-.sticky-breadcrumb {
+.sticky-bar {
   z-index: 1; }
-
-.mog-breadcrumb {
-  background-color: #212937;
-  color: #fff;
-  padding: 20px 30px;
-  position: relative;
-  z-index: 10; }
-  .mog-breadcrumb a {
-    color: #777b85; }
-  .mog-breadcrumb li.active a {
-    color: #fff; }
-  .mog-breadcrumb ul {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    position: absolute;
-    left: 30px; }
-    .mog-breadcrumb ul li:before {
-      content: "\f3d3";
-      font-family: "Ionicons";
-      padding-right: 15px;
-      color: #777b85; }
-    .mog-breadcrumb ul li:first-child:before {
-      display: none; }
 
 .sub-text {
   color: #979797;

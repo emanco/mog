@@ -1,4 +1,4 @@
-export {Breadcrumbs} from './Breadcrumbs/Breadcrumbs'
+export {StickyBar} from './StickyBar/StickyBar'
 export {CustomerInfo} from './CustomerInfo/CustomerInfo'
 export {CustomerOrder} from './CustomerOrder/CustomerOrder'
 export {CustomerPrescriptions} from './CustomerPrescriptions/CustomerPrescriptions'

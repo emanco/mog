@@ -20,7 +20,7 @@ import fraudCheckOverview from './containers/fraudCheck/fraudCheckOverview'
 
 //components
 import HeaderComponent from './components/Header/Header';
-//import BreadcrumbsComponent from './components/Breadcrumbs/Breadcrumbs';
+//import StickyBarComponent from './components/StickyBar/StickyBar';
 
 import FooterComponent from './components/Footer/Footer';
 
@@ -63,7 +63,7 @@ ReactDOM.render(
 
                 <HeaderComponent />
 
-                {/*<BreadcrumbsComponent />*/}
+                {/*<StickyBarComponent />*/}
 
                 <Switch>
 

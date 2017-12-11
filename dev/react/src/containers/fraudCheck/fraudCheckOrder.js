@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import BreadcrumbsComponent from "../../components/Breadcrumbs/Breadcrumbs";
+import StickyBarComponent from "../../components/StickyBar/StickyBar";
 import * as fraudCheckOverviewActions from '../../redux/modules/fraudCheckOverview'
 
 @connect(

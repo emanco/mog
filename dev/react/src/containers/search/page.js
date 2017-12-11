@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import StickyBar from "../../components/StickyBar/StickyBar";
 import SearchResults from "../../components/SearchResults/SearchResults";
 import SearchUser from "../../components/SearchUser/SearchUser";
 import { connect } from 'react-redux';
@@ -55,8 +55,8 @@ class Searchpage extends Component {
 
 
           <div>
-              {/*<BreadcrumbsComponent number={$searchData.hits.hit.length} path={this.props.location.pathname} query={$id}/>*/}
-              <Breadcrumbs number={this.props.getNumber} path={this.props.location.pathname} query={$id} onRef={ref => (this.bread = ref)}/>
+              {/*<StickyBarComponent number={$searchData.hits.hit.length} path={this.props.location.pathname} query={$id}/>*/}
+              <StickyBar number={this.props.getNumber} path={this.props.location.pathname} query={$id} onRef={ref => (this.bread = ref)}/>
 
               <div className="left-panel">
                 <SearchResults searchid={$id} change={this.handleChange} data={this.props.searchResultsData} />

@@ -1,0 +1,17 @@
+@import "../base/1_vars.scss";
+@import "../base/2_mixins.scss";
+@import "../base/4_global.scss";
+
+.search-results {
+  font-size: 2em;
+  line-height: 1.7em;
+  letter-spacing: -0.5pt;
+}
+
+.sticky-bar {
+  background-color: $colour-primary;
+  color: #fff;
+  padding:20px 30px;
+  position: relative;
+  z-index: layer('breadcrumb');
+}

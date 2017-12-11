@@ -1,6 +1,8 @@
+#root .fraudCheckOverview .fraudCheckListItem {
+  padding: 4%; }
+
 .fraudCheckListItem {
   border: 1px solid #e8e9e9;
-  padding: 4%;
   display: table-cell;
   vertical-align: middle;
   box-sizing: border-box; }

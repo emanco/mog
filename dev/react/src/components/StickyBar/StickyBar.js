@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "./../../scss/components/stickybar.css";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import StickyDropdown from "../StickyDropdown/StickyDropdown"
 //import './../../scss/components/header.css';
 
 // Ionicons
@@ -27,7 +28,7 @@ class StickyBar extends Component {
             let $for = this.props.query !== undefined ? 'for' : null;
 
             return (
-                <Sticky stickyClassName="sticky-bar">
+                <Sticky className="sticky-bar">
                     <div id="mog-breadcrumb" className="row mog-breadcrumb nav-height">
                         <span className="search-results">Search Results {$for} {this.props.query}</span>
                     </div>
@@ -36,12 +37,12 @@ class StickyBar extends Component {
         } else if ($path.includes('fraud-check')) {
           return (
                 <Sticky className="sticky-bar">
-                    Fraud Check
+                    <StickyDropdown />
                 </Sticky>
             )
         } else {
             return (
-                <Sticky stickyClassName="sticky-bar">
+                <Sticky className="sticky-bar">
                     <Breadcrumbs />
                 </Sticky>
             )

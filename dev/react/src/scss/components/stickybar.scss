@@ -13,18 +13,6 @@
   color: #fff;
   padding:20px 30px;
   position: relative;
-  z-index: layer('breadcrumb');
-}
-
-.sticky-dropdown-current {
-
-  display:inline;
-
-  &:after {
-    content: '&#8744'
-  }
-
-  &.heading1 {
-    color: white;
-  }
+  z-index: layer('breadcrumb') !important;
+  transform: none !important;
 }

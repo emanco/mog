@@ -7,6 +7,7 @@ import FraudCheckList from '../../components/FraudCheckList/FraudCheckList'
 import CustomerInfo from '../../components/CustomerInfo/CustomerInfo';
 import CustomerOrderList from '../../components/CustomerOrderList/CustomerOrderList';
 import StickyBar from '../../components/StickyBar/StickyBar';
+import StickyActions from '../../components/StickyActions/StickyActions';
 
 import './../../scss/components/fraudCheckOverview.css';
 
@@ -14,7 +15,8 @@ import './../../scss/components/fraudCheckOverview.css';
   (state, ownProps) => ({
     data: state.fraudCheckOverviewReducer.payload,
     orderData: state.fraudCheckOverviewReducer.orderPayload,
-    custOrdersLoading: state.fraudCheckOverviewReducer.orderLoading
+    orderLoading: state.fraudCheckOverviewReducer.orderLoading,
+    currentlyViewedOrder: state.fraudCheckOverviewReducer.currentorder
   }),
   {...fraudCheckOverviewActions}
 )
@@ -30,9 +32,18 @@ export default class fraudCheckOverview extends Component {
       this.props.getFraudCheckList();
     }
 
-  handleFraudCheckListHover = () => {
+  handleFraudCheckListHover = (orderRef) => {
 
-    this.props.getFraudCheckListOrder('CUS123456789');
+    // Check we're not already displaying the order
+    if (orderRef !== this.props.data[0].results[0].order_reference) {
+      this.props.getFraudCheckListOrder('CUS123456789');
+    }
+  }
+
+  handleFraudFilterting = (value) => {
+    this.props.getFraudCheckList({
+      status: value
+    })
   }
 
   render() {
@@ -43,17 +54,22 @@ export default class fraudCheckOverview extends Component {
           <div>LOADING...</div>
         </div>)
     } else {
+      const loadingClass = this.props.orderLoading ? '-loading' : '';
+      console.log(this.props.orderLoading)
       return(
         <div>
-          <StickyBar path={this.props.location.pathname}/>
+          <StickyBar path={this.props.location.pathname} filterListCallback={() => this.handleFraudFiltering }/>
           <div className="fraudCheckOverview">
             <div className="left-panel">
               <div>{this.props.data[0].count} Items</div>
               <FraudCheckList data={this.props.data[0]} hoverCallback={this.handleFraudCheckListHover}/>
             </div>
-            <div className="right-panel -light-inset cust-scroll">
+            <div className={"right-panel -light-inset cust-scroll fraudCheckOverview-order " + loadingClass}>
+              <div className="fraudCheckOverview-right-inner">
               <CustomerInfo customerid={this.props.data[0].results[0].customer_reference} data={this.props.orderData[0].data}/>
-              <CustomerOrderList isLoading={this.props.custOrdersLoading} data={this.props.orderData[1].data[0]} customerid={this.props.data[0].results[0].customer_reference} />
+              <CustomerOrderList data={this.props.orderData[1].data[0]} customerid={this.props.data[0].results[0].customer_reference} />
+              </div>
+              <StickyActions orderRef/>
             </div>
           </div>
         </div>

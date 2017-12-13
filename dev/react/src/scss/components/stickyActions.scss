@@ -1,0 +1,44 @@
+@import "../customBase/variables.scss";
+@import '../base/1_vars.scss';
+
+.sticky-actions {
+  padding: 2em;
+  background: white;
+  width: 100%;
+  overflow:hidden;
+  border-top: 1px solid colour("grey","base");
+
+  & .sticky-bottom {
+    bottom: 0;
+    width: 100%;
+  }
+
+  .button {
+    width: 170px;
+    height: 48px;
+    margin-left: 1em;
+  }
+
+  .stickyActions-cta {
+    float: right;
+  }
+
+  .btn-approve {
+    color: white;
+  }
+}
+
+
+// @TODO - Move to Button component
+
+.button {
+  box-sizing: border-box;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.btn-approve {
+  background-color: $color-btn-green;
+  border-color: $color-btn-green;
+}
+

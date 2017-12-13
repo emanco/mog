@@ -61,11 +61,13 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
             }
           }
         case 'FRAUD_ORDER_FULFILLED' :
+          console.log(action.payload)
           return {
             ...state,
             orderLoading: false,
             orderSuccess: true,
-            orderPayload: action.payload
+            orderPayload: action.payload,
+            currentOrder: action.payload
           }
         default:
             return state;
@@ -83,7 +85,7 @@ export function getFraudCheckList (queryParams = {}) {
 
   const queryUrl = buildQueryUrl('https://virtserver.swaggerhub.com/MyOptiqueGroup/mbf-order-api/1.0.3/fraud-check-orders/', queryParams)
 
-  /*
+  /* @todo - PUT BACK WHEN THE API IS WORKING CORRECTLY
   return (dispatch, getState) => {
     dispatch({
       types: [LOADING_LIST, LOADED_LIST, FAILED_LIST],
@@ -102,8 +104,6 @@ export function getFraudCheckList (queryParams = {}) {
     })
 };
     */
-  console.log(fraudCheckOrderData)
-
     return (dispatch) => {
       dispatch({
         type: LOADED_LIST,

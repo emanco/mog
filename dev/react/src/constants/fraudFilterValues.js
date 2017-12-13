@@ -1,15 +1,18 @@
 const fraudFilterValues = [
   {
     'label': 'Pending fraud check',
-    'value': 'pending'
+    'value': 'FRAUD CHECK NOT CHECKED',
+    class: 'pending'
   },
   {
     'label': 'Customer contacted',
-    'value': 'contacted'
+    'value': 'FRAUD CHECK CUSTOMER CONTACTED',
+    'class': 'contacted'
   },
   {
     'label': 'Rejected',
-    'value': 'rejected'
+    'value': 'FRAUD CHECK FAILED',
+    'class': 'rejected'
   }
 ];
 

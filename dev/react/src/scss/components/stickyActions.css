@@ -1,0 +1,26 @@
+.sticky-actions {
+  padding: 2em;
+  background: white;
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid colour("grey", "base"); }
+  .sticky-actions .sticky-bottom {
+    bottom: 0;
+    width: 100%; }
+  .sticky-actions .button {
+    width: 170px;
+    height: 48px;
+    margin-left: 1em; }
+  .sticky-actions .stickyActions-cta {
+    float: right; }
+  .sticky-actions .btn-approve {
+    color: white; }
+
+.button {
+  box-sizing: border-box;
+  border-radius: 3px;
+  text-align: center; }
+
+.btn-approve {
+  background-color: #5de1c8;
+  border-color: #5de1c8; }

@@ -13,12 +13,17 @@ import Sticky from 'react-sticky-el';
 
 class StickyBar extends Component {
 
-    componentWillMount() {
-
+    constructor(props) {
+      super(props);
+      this.filterListCallback = this.filterListCallback.bind(this)
     }
 
-    render() {
+    filterListCallback = (value) => {
+      this.props.filterListCallback(value)
+    }
 
+
+    render() {
 
         let $path = this.props.path;
 
@@ -37,7 +42,7 @@ class StickyBar extends Component {
         } else if ($path.includes('fraud-check')) {
           return (
                 <Sticky className="sticky-bar">
-                    <StickyDropdown />
+                    <StickyDropdown filterListCallback={this.filterListCallback }/>
                 </Sticky>
             )
         } else {

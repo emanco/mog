@@ -13,8 +13,8 @@ export default class FraudCheckList extends Component {
       this.handleHoverCallback = this.handleHoverCallback.bind(this)
     }
 
-  handleHoverCallback = () => {
-    this.props.hoverCallback()
+  handleHoverCallback = (orderRef) => {
+    this.props.hoverCallback(orderRef)
   }
 
   render() {

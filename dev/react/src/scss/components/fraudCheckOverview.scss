@@ -11,3 +11,18 @@
   }
 
 }
+
+.fraudCheckOverview-order.right-panel.cust-scroll {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+
+  .fraudCheckOverview-right-inner {
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+  .sticky-actions {
+    position: sticky;
+    bottom: 0;
+  }
+}

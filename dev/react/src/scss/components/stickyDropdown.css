@@ -1,8 +1,17 @@
 .sticky-dropdown {
-  position: relative; }
+  position: relative;
+  display: inline-block;
+  cursor: pointer; }
+
+.sticky-dropdown-current {
+  display: inline; }
+  .sticky-dropdown-current:after {
+    content: '>'; }
+  .sticky-dropdown-current.heading1 {
+    color: white; }
 
 .sticky-dropdown-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -13,11 +22,33 @@
 
 .sticky-dropdown-list {
   position: absolute;
+  right: -50%;
   background: white;
   color: black;
-  padding: 2em; }
+  padding: 2em;
+  min-width: 230px;
+  z-index: 10; }
   .sticky-dropdown-list ul {
     list-style: none;
     margin: 0;
     padding: 0;
     font-size: 18px; }
+  .sticky-dropdown-list .sticky-dropdown-list-item {
+    position: relative; }
+    .sticky-dropdown-list .sticky-dropdown-list-item:before {
+      content: '';
+      height: 6px;
+      width: 6px;
+      display: inline-block;
+      border-radius: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -12px;
+      margin: auto; }
+    .sticky-dropdown-list .sticky-dropdown-list-item.sticky-item-pending:before {
+      background-color: #e8e9e9; }
+    .sticky-dropdown-list .sticky-dropdown-list-item.sticky-item-contacted:before {
+      background-color: #fcd259; }
+    .sticky-dropdown-list .sticky-dropdown-list-item.sticky-item-rejected:before {
+      background-color: #f86e61; }

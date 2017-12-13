@@ -10,14 +10,19 @@ export default class FraudCheckList extends Component {
 
     constructor(props) {
       super(props)
+      this.handleHoverCallback = this.handleHoverCallback.bind(this)
     }
+
+  handleHoverCallback = () => {
+    this.props.hoverCallback()
+  }
 
   render() {
     return(
       <div>
         {
           this.props.data.results.map((result, i) => {
-            return (<FraudCheckListItem data={result} key={i} />)
+            return (<FraudCheckListItem data={result} key={i} hoverCallback={this.handleHoverCallback}/>)
           })
         }
       </div>

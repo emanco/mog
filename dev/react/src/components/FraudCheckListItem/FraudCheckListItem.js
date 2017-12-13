@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 
 import * as fraudCheckOverviewActions from '../../redux/modules/fraudCheckOverview'
 
+import Icon from '../Icon/Icon'
+
 import {clientNameMapping, fraudCheckStatus} from '../../helpers/mappings'
 
 import './../../scss/components/fraudCheckListItem.css';
@@ -13,17 +15,28 @@ export default class fraudCheckList extends Component {
   constructor(props) {
     super(props)
     this.handleOnClick = this.handleOnClick.bind(this)
+    this.timeOut = undefined;
   }
 
   componentDidMount() {
   }
 
   handleOnClick = () => {
-    console.log('Click')
+
   }
 
-  handleOnHover = () => {
-    console.log('Hover')
+  handleOnMouseLeave = () => {
+    clearTimeout(this.timeOut);
+  }
+
+  handleOnMouseEnter = () => {
+    this.timeOut = setTimeout(() => {
+        this.props.hoverCallback('TEST');
+      }, 2000)
+  }
+
+  checkFlags = () => {
+
   }
 
 
@@ -32,10 +45,17 @@ export default class fraudCheckList extends Component {
     // ADD CLASSES FROM THE GRID
     const statusClass = fraudCheckStatus(this.props.data.latest_fraud_status);
     return(
-      <div className="row component">
-        <div className={'fraudCheck-'+ statusClass + ' col-sm-12 fraudCheckListItem'} onClick={this.handleOnClick} onMouseOver={this.handleOnHover}>
-          <p className="heading2">{this.props.data.order_reference}</p>
-          {clientNameMapping(this.props.data.client_id)}
+      <div className="row component fraudCheckListItemContain">
+        <div className={'fraudCheck-'+ statusClass + ' col-sm-12 fraudCheckListItem'} onClick={this.handleOnClick} onMouseEnter={this.handleOnMouseEnter} onMouseLeave={this.handleOnMouseLeave}>
+          <div className="fraudCheckListItem-details">
+            <p className="heading2">{this.props.data.order_reference}</p>
+            {clientNameMapping(this.props.data.client_id)}
+          </div>
+          <div className="fraudCheck-status-icons">
+            {this.props.data.fraud.is_postcode_blacklisted && <Icon className='fraudCheckListItem-flagIcon' icon='ion-at' />}
+            {this.props.data.fraud.is_first_order && <Icon className='fraudCheckListItem-flagIcon' icon='ion-person-add' />}
+            {this.props.data.fraud.is_email_blacklisted && <Icon className='fraudCheckListItem-flagIcon' icon='ion-home' />}
+          </div>
         </div>
       </div>
     )

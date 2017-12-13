@@ -11,7 +11,8 @@ class StickyDropdown extends Component {
     this.handleClick = this.handleFilterSelect.bind(this)
     this.toggleMenuClick = this.toggleMenuClick.bind(this)
     this.state = {
-      currentValue: 'Current Value',
+      currentLabel: fraudFilterValues[0].label,
+      currentValue: fraudFilterValues[0].value,
       ddOpen: false
     }
   }
@@ -24,19 +25,23 @@ class StickyDropdown extends Component {
     }
   }
 
-  handleFilterSelect(filterValue) {
-    console.log('click - ' + filterValue)
+  handleFilterSelect(filter) {
+    console.log('click - ' + filter.label)
+    this.setState({
+      currentLabel: filter.label,
+      currentValue: filter.value
+    })
   }
 
   render() {
     return(
       <div className="sticky-dropdown">
-        <div className="" onClick={() => this.toggleMenuClick()}>{this.state.currentValue}</div>
+        <div className="sticky-dropdown-current heading1" onClick={() => this.toggleMenuClick()}>{this.state.currentLabel}</div>
         {this.state.ddOpen && <div className="sticky-dropdown-list">
           <ul>
           { fraudFilterValues.map((item, key) => {
               return (
-                <li key={key} onClick={() => this.handleFilterSelect(item.value) }>{item.label}</li>
+                <li key={key} onClick={() => this.handleFilterSelect(item) }>{item.label}</li>
               )
             })
           }

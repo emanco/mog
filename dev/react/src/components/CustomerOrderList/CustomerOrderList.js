@@ -19,8 +19,10 @@ export default class CustomerOrderList extends Component {
     }
 
   render() {
+  console.log(this.props.isLoading);
     return(
       <section className="component component-customer-orders row">
+        {this.props.isLoading && <strong>LOADING</strong>}
         <h2 className="heading2 heading">
             Orders
         {this.props.editable && <button className="btn -add">Place Order</button>}

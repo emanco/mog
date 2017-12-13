@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import buildQueryUrl from '../../helpers/buildQueryUrl'
 import { getCustomer, getOrders } from './customers'
+import fraudCheckOrderData from '../../mock-data/fraud-check-orders'
 // Actions
 const LOADING_LIST = 'myOp/fraudCheckOverviewList/LOADING';
 const LOADED_LIST = 'myOp/fraudCheckOverviewList/LOADED';
@@ -14,6 +15,8 @@ const FAILED_ORDER = 'myOp/fraudCheckOverviewList/FAILED';
 const initialState = {
     loading: true,
     success: false,
+    orderLoading: false,
+    orderSuccess: false,
     payload: {}
 }
 
@@ -60,8 +63,8 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
         case 'FRAUD_ORDER_FULFILLED' :
           return {
             ...state,
-            loading: false,
-            success: true,
+            orderLoading: false,
+            orderSuccess: true,
             orderPayload: action.payload
           }
         default:
@@ -80,6 +83,7 @@ export function getFraudCheckList (queryParams = {}) {
 
   const queryUrl = buildQueryUrl('https://virtserver.swaggerhub.com/MyOptiqueGroup/mbf-order-api/1.0.3/fraud-check-orders/', queryParams)
 
+  /*
   return (dispatch, getState) => {
     dispatch({
       types: [LOADING_LIST, LOADED_LIST, FAILED_LIST],
@@ -96,13 +100,24 @@ export function getFraudCheckList (queryParams = {}) {
       dispatch(getFraudCheckListOrder(result.payload.data[0].results[0].customer_reference))
       // Also get customer data
     })
-  };
+};
+    */
+  console.log(fraudCheckOrderData)
+
+    return (dispatch) => {
+      dispatch({
+        type: LOADED_LIST,
+        payload: fraudCheckOrderData
+      })
+
+      dispatch(getFraudCheckListOrder('CUS123456789'))
+    }
 }
 
 // Get details on the list item currently being hovered over
 export function getFraudCheckListOrder (id) {
 
-  /* @NOTE - Fetch User and Order Details
+  /* @NOTE Fetch User and Order Details
    * Call getCustomer & getOrders from the customers reducer which just returns the data then
    * put it into this reducer
    */

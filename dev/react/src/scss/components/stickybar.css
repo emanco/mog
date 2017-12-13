@@ -292,3 +292,10 @@ p {
   padding: 20px 30px;
   position: relative;
   z-index: 10; }
+
+.sticky-dropdown-current {
+  display: inline; }
+  .sticky-dropdown-current:after {
+    content: '&#8744'; }
+  .sticky-dropdown-current.heading1 {
+    color: white; }

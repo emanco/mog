@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 class CustomerInfo extends Component {
 
     render() {
-
+        console.log(this.props.data)
         // otherwise just render one customer by id
         if (this.props.customerid === undefined) {
             return (
@@ -16,7 +16,6 @@ class CustomerInfo extends Component {
             console.log(this.props.data)
             return (
                 <div>
-
                     <section className="component component-customer-info row">
                         <div className="col-sm-3">
                             <div className="user-initials">{this.props.data.client_id}</div>

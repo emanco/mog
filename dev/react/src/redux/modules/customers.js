@@ -33,8 +33,8 @@ export default function summaryReducer(state = {}, action = '') {
 }
 
 const loader = axios.create({
-    baseURL: 'https://virtserver.swaggerhub.com/MyOptiqueGroup/mbf-order-api/1.0.2/',
-    headers: {'Authorization': 'Bearer omsfire'}
+    baseURL: 'https://virtserver.swaggerhub.com/MyOptiqueGroup/mbf-order-api/1.0.3/',
+    headers: {'Authorization': 'omsfire'}
 });
 
 const getCustomer = (id) => {

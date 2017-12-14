@@ -6,7 +6,11 @@
 .sticky-dropdown-current {
   display: inline; }
   .sticky-dropdown-current:after {
-    content: '>'; }
+    font-family: "Ionicons";
+    position: absolute;
+    content: "\f123";
+    right: -35px;
+    top: 2px; }
   .sticky-dropdown-current.heading1 {
     color: white; }
 
@@ -22,7 +26,7 @@
 
 .sticky-dropdown-list {
   position: absolute;
-  right: -50%;
+  left: 100%;
   background: white;
   color: black;
   padding: 2em;

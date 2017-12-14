@@ -12,7 +12,11 @@
   display:inline;
 
   &:after {
-    content: '>'
+    font-family: "Ionicons";
+    position: absolute;
+    content: "\f123";
+    right: -35px;
+    top: 2px;
   }
 
   &.heading1 {
@@ -33,7 +37,7 @@
 
 .sticky-dropdown-list {
   position: absolute;
-  right: -50%;
+  left: 100%;
   background: white;
   color: black;
   padding: 2em;

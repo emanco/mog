@@ -24,14 +24,14 @@ import './../../scss/components/fraudCheckOverview.css';
 )
 export default class fraudCheckOverview extends Component {
 
-    constructor(props) {
-      super(props)
-      this.handleFraudCheckListHover = this.handleFraudCheckListHover.bind(this)
-    }
+  constructor(props) {
+    super(props)
+    this.handleFraudCheckListHover = this.handleFraudCheckListHover.bind(this)
+  }
 
-    componentDidMount() {
-      this.props.getFraudCheckList();
-    }
+  componentDidMount() {
+    this.props.getFraudCheckList();
+  }
 
   handleFraudCheckListHover = (orderRef) => {
     // Check we're not already displaying the order
@@ -59,26 +59,38 @@ export default class fraudCheckOverview extends Component {
     if (!this.props.data[0] || !this.props.orderData) {
       return (
         <div>
-          <StickyBar path={this.props.location.pathname}/>
+          <StickyBar
+            path={this.props.location.pathname}/>
           <div>LOADING...</div>
         </div>)
     } else {
-      const loadingClass = this.props.orderLoading ? '-loading' : '';
+      const orderLoadingClass = this.props.orderLoading ? '-loading' : '';
+      const listLoadingClass = this.props.listLoading ? '-loading' : '';
       console.log(this.props.orderLoading)
       return(
         <div>
-          <StickyBar path={this.props.location.pathname} filterListCallback={() => this.handleFraudFiltering }/>
+          <StickyBar
+            path={this.props.location.pathname}
+            filterListCallback={() => this.handleFraudFiltering }/>
           <div className="fraudCheckOverview">
             <div className="left-panel">
               <div>{this.props.data[0].count} Items</div>
-              <FraudCheckList data={this.props.data[0]} hoverCallback={this.handleFraudCheckListHover} handlePaginationChange={this.handlePaginationChange}/>
+              <FraudCheckList
+                data={this.props.data[0]}
+                hoverCallback={this.handleFraudCheckListHover}
+                handlePaginationChange={this.handlePaginationChange}/>
             </div>
-            <div className={"right-panel -light-inset cust-scroll fraudCheckOverview-order " + loadingClass}>
+            <div className={"right-panel -light-inset cust-scroll fraudCheckOverview-order " + orderLoadingClass}>
               <div className="fraudCheckOverview-right-inner">
-              <CustomerInfo customerid={this.props.data[0].results[0].customer_reference} data={this.props.orderData[0].data}/>
-              <CustomerOrderList data={this.props.orderData[1].data[0]} customerid={this.props.data[0].results[0].customer_reference} />
+              <CustomerInfo
+                customerid={this.props.data[0].results[0].customer_reference}
+                data={this.props.orderData[0].data}/>
+
+              <CustomerOrderList
+                data={this.props.orderData[1].data[0]}
+                customerid={this.props.data[0].results[0].customer_reference} />
               </div>
-              <StickyActions orderRef/>
+              <StickyActions/>
             </div>
           </div>
         </div>

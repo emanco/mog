@@ -25,6 +25,7 @@ export default class FraudCheckList extends Component {
 
   render() {
     const pageCount = Math.floor(this.props.data.count / getUrlParam(this.props.data.next, 'limit'));
+
     return(
       <div>
         {

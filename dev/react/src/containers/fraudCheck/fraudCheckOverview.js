@@ -9,6 +9,8 @@ import CustomerOrderList from '../../components/CustomerOrderList/CustomerOrderL
 import StickyBar from '../../components/StickyBar/StickyBar';
 import StickyActions from '../../components/StickyActions/StickyActions';
 
+import getUrlParam from '../../helpers/getUrlParam'
+
 import './../../scss/components/fraudCheckOverview.css';
 
 @connect(
@@ -25,7 +27,6 @@ export default class fraudCheckOverview extends Component {
     constructor(props) {
       super(props)
       this.handleFraudCheckListHover = this.handleFraudCheckListHover.bind(this)
-      console.log(this.props.custOrdersLoading)
     }
 
     componentDidMount() {
@@ -33,7 +34,6 @@ export default class fraudCheckOverview extends Component {
     }
 
   handleFraudCheckListHover = (orderRef) => {
-
     // Check we're not already displaying the order
     if (orderRef !== this.props.data[0].results[0].order_reference) {
       this.props.getFraudCheckListOrder('CUS123456789');
@@ -43,6 +43,15 @@ export default class fraudCheckOverview extends Component {
   handleFraudFilterting = (value) => {
     this.props.getFraudCheckList({
       status: value
+    })
+  }
+
+  handlePaginationChange = (page) => {
+    console.log('MAKE AN API CALL FOR PAGINATION');
+    console.log('Page Requested: ' + page)
+    const offset = getUrlParam(this.props.data[0].next, 'offset')
+    this.props.getFraudCheckList({
+      offset: offset
     })
   }
 
@@ -62,7 +71,7 @@ export default class fraudCheckOverview extends Component {
           <div className="fraudCheckOverview">
             <div className="left-panel">
               <div>{this.props.data[0].count} Items</div>
-              <FraudCheckList data={this.props.data[0]} hoverCallback={this.handleFraudCheckListHover}/>
+              <FraudCheckList data={this.props.data[0]} hoverCallback={this.handleFraudCheckListHover} handlePaginationChange={this.handlePaginationChange}/>
             </div>
             <div className={"right-panel -light-inset cust-scroll fraudCheckOverview-order " + loadingClass}>
               <div className="fraudCheckOverview-right-inner">

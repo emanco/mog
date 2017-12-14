@@ -1,6 +1,8 @@
 @import "../customBase/variables.scss";
 @import '../base/1_vars.scss';
 
+$approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
+
 .sticky-actions {
   padding: 2em;
   background: white;
@@ -33,12 +35,12 @@
 
 .button {
   box-sizing: border-box;
-  border-radius: 3px;
+  border-radius: 5px;
   text-align: center;
 }
 
 .btn-approve {
-  background-color: $color-btn-green;
-  border-color: $color-btn-green;
+  background-color: $approveColor;
+  border-color: $approveColor;
 }
 

@@ -6,7 +6,7 @@
   background: white;
   width: 100%;
   overflow:hidden;
-  border-top: 1px solid colour("grey","base");
+  border-top: 1px solid map-get($colours, 'line');
 
   & .sticky-bottom {
     bottom: 0;

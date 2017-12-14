@@ -3,7 +3,7 @@
   background: white;
   width: 100%;
   overflow: hidden;
-  border-top: 1px solid colour("grey", "base"); }
+  border-top: 1px solid #e8e9e9; }
   .sticky-actions .sticky-bottom {
     bottom: 0;
     width: 100%; }

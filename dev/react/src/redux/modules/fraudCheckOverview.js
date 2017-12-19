@@ -141,7 +141,7 @@ export function approveOrder (orderId) {
       type: APPROVE_ORDER,
       payload: {
         request: {
-          url: 'virtserver.swaggerhub.com/MyOptiqueGroup/mbf-order-api/1.0.3/order-status-updates/',
+          url: 'http://virtserver.swaggerhub.com/MyOptiqueGroup/mbf-order-api/1.0.3/order-status-updates/',
           headers: {'Authorization': 'omsfire'},
           method: 'POST',
           data: {
@@ -163,7 +163,7 @@ export function declineOrder (orderId) {
       type: REJECT_ORDER,
       payload: {
         request: {
-          url: 'virtserver.swaggerhub.com/MyOptiqueGroup/mbf-order-api/1.0.3/order-status-updates/',
+          url: 'http://virtserver.swaggerhub.com/MyOptiqueGroup/mbf-order-api/1.0.3/order-status-updates/',
           headers: {'Authorization': 'omsfire'},
           method: 'POST',
           data: {

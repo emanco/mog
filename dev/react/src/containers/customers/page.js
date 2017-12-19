@@ -54,7 +54,7 @@ export default class Summarypage extends Component {
               <StickyBar path={this.props.location.pathname}/>
 
               <div className="left-panel">
-                  <p className="sub-text">Showing {this.props.payload[1].data[0].limit} of {this.props.payload[1].count} </p>
+
                   <CustomerInfo customerid={$id} data={this.props.payload[0].data} editable={true}/>
                   <CustomerOrderList data={this.props.payload[1].data[0]} customerid={$id} editable={true}/>
                   <CustomerPrescriptionComponent customerid={$id} data={this.props.payload[2].data} name={this.props.payload[0].data.first_name+' '+this.props.payload[0].data.last_name} />

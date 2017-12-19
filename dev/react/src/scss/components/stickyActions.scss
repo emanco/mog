@@ -1,0 +1,50 @@
+@import "../customBase/variables.scss";
+@import '../base/1_vars.scss';
+
+$approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
+
+.sticky-actions {
+  padding: 2em;
+  background: white;
+  width: 100%;
+  overflow:hidden;
+  border-top: 1px solid map-get($colours, 'line');
+
+  .stickyActions-details {
+    float: left;
+  }
+
+  & .sticky-bottom {
+    bottom: 0;
+    width: 100%;
+  }
+
+  .button {
+    width: 170px;
+    height: 48px;
+    margin-left: 1em;
+  }
+
+  .stickyActions-cta {
+    float: right;
+  }
+
+  .btn-approve {
+    color: white;
+  }
+}
+
+
+// @TODO - Move to Button component
+
+.button {
+  box-sizing: border-box;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.btn-approve {
+  background-color: $approveColor;
+  border-color: $approveColor;
+}
+

@@ -1,0 +1,121 @@
+/*
+  Usage:
+  @include placeholder {
+    font-style: italic;
+    color: black;
+  }
+*/
+/*
+  Returns a media queries which scales the units relative to the xs and lg values
+  Remember, dont be lazy when using this. If you've got other things that need be
+  in media queries for the same element, dont use this.
+
+  Usage: @include scale-pixels('margin-top', 25px, 125px);
+
+  Returns:
+
+  padding:25px
+
+  @media (min-width:768px){
+    padding:50px;
+  }
+
+  @media (min-width:992px){
+    padding:80px;
+  }
+
+  @media (min-width:1200px){
+    padding:115px;
+  }
+
+  @media (min-width:1500px){
+    padding:125px;
+  }
+*/
+/*
+  Pass in a colour and it gives you a button, BOOM.
+*/
+/*
+  Pass in 2 colours and it gives you a button width a gradient, BOOM.
+*/
+/*
+  Bootstrap size mixins
+*/
+/*
+ Viewport sized typography with minimum and maximum values
+
+ @param {Number}   $min         - Minimum font size (px)
+ @param {Number}   $max         - Maximum font size (px)
+
+  Example scss - 2.79vw font size (with 53px fallback),
+  @include responsive-font(20px, 53px);
+*/
+/*
+  Icon Container sizing
+*/
+.sticky-dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer; }
+
+.sticky-dropdown-current {
+  display: inline;
+  font-size: 40px;
+  font-size: 2.08333vw; }
+  @media (max-width: 576px) {
+    .sticky-dropdown-current {
+      font-size: 12px; } }
+  @media (min-width: 1920px) {
+    .sticky-dropdown-current {
+      font-size: 40px; } }
+  .sticky-dropdown-current:after {
+    font-family: "Ionicons";
+    position: absolute;
+    content: "\f123";
+    right: -35px;
+    top: 2px; }
+  .sticky-dropdown-current.heading1 {
+    color: white; }
+
+.sticky-dropdown-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5); }
+
+.sticky-dropdown-list {
+  position: absolute;
+  left: 100%;
+  background: white;
+  color: black;
+  padding: 2em;
+  min-width: 230px;
+  z-index: 10; }
+  .sticky-dropdown-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 18px; }
+  .sticky-dropdown-list .sticky-dropdown-list-item {
+    position: relative; }
+    .sticky-dropdown-list .sticky-dropdown-list-item:before {
+      content: '';
+      height: 6px;
+      width: 6px;
+      display: inline-block;
+      border-radius: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -12px;
+      margin: auto; }
+    .sticky-dropdown-list .sticky-dropdown-list-item.sticky-item-pending:before {
+      background-color: #e8e9e9; }
+    .sticky-dropdown-list .sticky-dropdown-list-item.sticky-item-contacted:before {
+      background-color: #fcd259; }
+    .sticky-dropdown-list .sticky-dropdown-list-item.sticky-item-rejected:before {
+      background-color: #f86e61; }

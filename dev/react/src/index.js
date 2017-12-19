@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import axiosMiddleware from 'redux-axios-middleware';
+import axios from 'axios';
 import promiseMiddleware from 'redux-promise-middleware';
 import logger from 'redux-logger';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -11,22 +13,23 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 
 //pages
-import Summarypage from "./pages/customers/page";
-import Searchpage from "./pages/search/page";
+import Summarypage from "./containers/customers/page";
+import Searchpage from "./containers/search/page";
+import fraudCheckOverview from './containers/fraudCheck/fraudCheckOverview'
 
 
 //components
-import HeaderComponent from './components/header/component';
-//import BreadcrumbsComponent from './components/breadcrumbs/view';
+import HeaderComponent from './components/Header/Header';
+//import StickyBarComponent from './components/StickyBar/StickyBar';
 
-import FooterComponent from './components/footer/view';
+import FooterComponent from './components/Footer/Footer';
 
 
 //reducers
-import summaryReducer from './pages/customers/reducers';
-import searchReducer from './components/search-results/reducers';
-import userReducer from './components/search-user/reducers';
-
+import summaryReducer from './redux/modules/customers';
+import searchReducer from './redux/modules/search';
+import userReducer from './redux/modules/searchUser';
+import fraudCheckOverviewReducer from './redux/modules/fraudCheckOverview';
 // Bootstrap & jQuery
 //import $ from 'jquery';
 //import { Carousel, Modal,Button, Panel,Image,Row,Col } from 'react-bootstrap';
@@ -44,8 +47,13 @@ import "./scss/base/components.css";
 import "./scss/base/forms.css";
 import "./scss/base/general.css";
 
+// Axios Client setup. This could be moved elsewhere, but will work for now
+const client = axios.create({ //all axios can be used, shown in axios documentation
+  responseType: 'json'
+});
 
-let store = createStore(combineReducers({ summaryReducer, searchReducer, userReducer }), applyMiddleware(promiseMiddleware(), thunk, logger));
+
+let store = createStore(combineReducers({ summaryReducer, searchReducer, userReducer, fraudCheckOverviewReducer }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(promiseMiddleware(), thunk, logger, axiosMiddleware(client)));
 
 
 ReactDOM.render(
@@ -55,7 +63,7 @@ ReactDOM.render(
 
                 <HeaderComponent />
 
-                {/*<BreadcrumbsComponent />*/}
+                {/*<StickyBarComponent />*/}
 
                 <Switch>
 
@@ -68,6 +76,8 @@ ReactDOM.render(
                     {/*Search*/}
                     <Route exact path="/search" component={Searchpage} />
                     <Route exact path="/search/:searchid" component={Searchpage} />
+
+                    <Route exact path='/fraud-check' component={fraudCheckOverview} />
 
                 </Switch>
 

@@ -281,32 +281,11 @@ ul {
 p {
   line-height: 1em; }
 
-.sticky-breadcrumb {
+.sticky-bar {
   z-index: 1; }
 
-.mog-breadcrumb {
-  background-color: #212937;
-  color: #fff;
-  padding: 20px 30px;
-  position: relative;
-  z-index: 10; }
-  .mog-breadcrumb a {
-    color: #777b85; }
-  .mog-breadcrumb li.active a {
-    color: #fff; }
-  .mog-breadcrumb ul {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    position: absolute;
-    left: 30px; }
-    .mog-breadcrumb ul li:before {
-      content: "\f3d3";
-      font-family: "Ionicons";
-      padding-right: 15px;
-      color: #777b85; }
-    .mog-breadcrumb ul li:first-child:before {
-      display: none; }
+.ReactModal__Overlay {
+  z-index: 2; }
 
 .sub-text {
   color: #979797;
@@ -419,7 +398,10 @@ p {
       float: left; } }
   .left-panel.-dark-inset,
   .right-panel.-dark-inset {
-    background-color: #a0a2a9;
+    background-color: #a0a2a9; }
+  .left-panel.-dark-inset, .left-panel.-light-inset,
+  .right-panel.-dark-inset,
+  .right-panel.-light-inset {
     padding: 3%;
     box-shadow: inset 1px 1px 1px rgab(20, 20, 20, 0.3);
     position: fixed;
@@ -428,32 +410,51 @@ p {
     overflow: auto;
     top: 57px; }
     @media (min-width: 768px) {
-      .left-panel.-dark-inset,
-      .right-panel.-dark-inset {
+      .left-panel.-dark-inset, .left-panel.-light-inset,
+      .right-panel.-dark-inset,
+      .right-panel.-light-inset {
         top: 65px;
         padding-top: 65px;
         height: calc(100vh - 65px); } }
     @media (min-width: 992px) {
-      .left-panel.-dark-inset,
-      .right-panel.-dark-inset {
+      .left-panel.-dark-inset, .left-panel.-light-inset,
+      .right-panel.-dark-inset,
+      .right-panel.-light-inset {
         top: 78px;
         padding-top: 78px;
         height: calc(100vh - 78px); } }
     @media (min-width: 1200px) {
-      .left-panel.-dark-inset,
-      .right-panel.-dark-inset {
+      .left-panel.-dark-inset, .left-panel.-light-inset,
+      .right-panel.-dark-inset,
+      .right-panel.-light-inset {
         top: 89px;
         padding-top: 89px;
         height: calc(100vh - 89px); } }
     @media (min-width: 1500px) {
-      .left-panel.-dark-inset,
-      .right-panel.-dark-inset {
+      .left-panel.-dark-inset, .left-panel.-light-inset,
+      .right-panel.-dark-inset,
+      .right-panel.-light-inset {
         top: 100px;
         padding-top: 100px;
         height: calc(100vh - 100px); } }
 
 .right-panel {
-  display: none; }
+  display: none;
+  position: relative; }
+  .right-panel:after {
+    content: "";
+    background: rgba(255, 255, 255, 0.8);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 50%;
+    bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .5s; }
+  .right-panel.-loading:after {
+    visibility: visible;
+    opacity: 1; }
   @media (min-width: 992px) {
     .right-panel {
       display: inline-block !important; }

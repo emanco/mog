@@ -1,0 +1,18 @@
+@import '../customBase/variables.scss';
+
+.status {
+  border: 1px solid;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 32px;
+  display: inline-block;
+  padding: 0 12px;
+}
+
+.status-complete {
+  color: $color-green;
+}
+
+.status-lab {
+  color: $color-yellow;
+}

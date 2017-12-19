@@ -1,0 +1,8 @@
+.pagination .break {
+  display: none; }
+
+.pagination a {
+  cursor: pointer; }
+
+.pagination > .active > a {
+  background: #2671d4; }

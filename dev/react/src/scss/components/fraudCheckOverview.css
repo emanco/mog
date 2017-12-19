@@ -1,0 +1,13 @@
+.fraudCheckOverview .left-panel {
+  border-right: 1px solid #e8e9e9; }
+
+.fraudCheckOverview-order.right-panel.cust-scroll {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0; }
+  .fraudCheckOverview-order.right-panel.cust-scroll .fraudCheckOverview-right-inner {
+    padding-left: 3%;
+    padding-right: 3%; }
+  .fraudCheckOverview-order.right-panel.cust-scroll .sticky-actions {
+    position: sticky;
+    bottom: 0; }

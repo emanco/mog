@@ -56,6 +56,7 @@ $font-weights: (
 $layers: (
         'breadcrumb': 10,
         'veil' : 20,
+        'stickyDropdown': 10
 );
 
 $colours: (
@@ -69,7 +70,8 @@ $colours: (
         'blue': (
                 'base': #212937,
                 'muted-primary': #444a5a,
-                'link': #1d71d5
+                'link': #1d71d5,
+                'btn-blue': #2671d4
         ),
         'prescription' : (
                 'red':#fdd3cf,

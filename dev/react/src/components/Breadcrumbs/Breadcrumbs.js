@@ -10,5 +10,4 @@ const Breadcrumbs = () => {
       </ul>
   </div>)
 }
-
 export default Breadcrumbs;

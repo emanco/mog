@@ -32,7 +32,7 @@ class StickyBar extends Component {
             let $for = this.props.query !== undefined ? 'for' : null;
 
             return (
-                <Sticky className="sticky-bar">
+                <Sticky className="sticky-bar nav-height">
                     <div id="mog-breadcrumb" className="row mog-breadcrumb nav-height">
                         <span className="search-results">Search Results {$for} {this.props.query}</span>
                     </div>
@@ -40,13 +40,13 @@ class StickyBar extends Component {
             )
         } else if ($path.includes('fraud-check')) {
           return (
-                <Sticky className="sticky-bar">
+                <Sticky className="sticky-bar nav-height">
                     <StickyDropdown filterListCallback={this.filterListCallback }/>
                 </Sticky>
             )
         } else {
             return (
-                <Sticky className="sticky-bar">
+                <Sticky className="sticky-bar nav-height">
                     <Breadcrumbs />
                 </Sticky>
             )

@@ -18,7 +18,8 @@ import './../../scss/components/fraudCheckOverview.css';
     data: state.fraudCheckOverviewReducer.payload,
     orderData: state.fraudCheckOverviewReducer.orderPayload,
     orderLoading: state.fraudCheckOverviewReducer.orderLoading,
-    currentlyViewedOrder: state.fraudCheckOverviewReducer.currentorder
+    listLoading: state.fraudCheckOverviewReducer.loading,
+    currentlyViewedOrder: state.fraudCheckOverviewReducer.currentOrderRef
   }),
   {...fraudCheckOverviewActions}
 )
@@ -27,6 +28,7 @@ export default class fraudCheckOverview extends Component {
   constructor(props) {
     super(props)
     this.handleFraudCheckListHover = this.handleFraudCheckListHover.bind(this)
+    this.handleApproveOrder = this.handleApproveOrder.bind(this)
   }
 
   componentDidMount() {
@@ -55,6 +57,14 @@ export default class fraudCheckOverview extends Component {
     })
   }
 
+  handleApproveOrder = (orderId) => {
+    this.props.approveOrder(orderId)
+  }
+
+  handleDeclineOrder = (orderId) => {
+    this.props.declineOrder(orderId)
+  }
+
   render() {
     if (!this.props.data[0] || !this.props.orderData) {
       return (
@@ -66,14 +76,13 @@ export default class fraudCheckOverview extends Component {
     } else {
       const orderLoadingClass = this.props.orderLoading ? '-loading' : '';
       const listLoadingClass = this.props.listLoading ? '-loading' : '';
-      console.log(this.props.orderLoading)
       return(
         <div>
           <StickyBar
             path={this.props.location.pathname}
             filterListCallback={() => this.handleFraudFiltering }/>
           <div className="fraudCheckOverview">
-            <div className="left-panel">
+            <div className={"left-panel " + listLoadingClass}>
               <div>{this.props.data[0].count} Items</div>
               <FraudCheckList
                 data={this.props.data[0]}
@@ -90,7 +99,7 @@ export default class fraudCheckOverview extends Component {
                 data={this.props.orderData[1].data[0]}
                 customerid={this.props.data[0].results[0].customer_reference} />
               </div>
-              <StickyActions/>
+              <StickyActions orderRef={this.props.currentlyViewedOrder} approveCallback={this.handleApproveOrder} declineCallback={this.handleDeclineOrder} />
             </div>
           </div>
         </div>

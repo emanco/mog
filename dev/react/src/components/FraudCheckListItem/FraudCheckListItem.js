@@ -22,7 +22,7 @@ export default class fraudCheckList extends Component {
   }
 
   handleOnClick = () => {
-
+    window.location = 'http://localhost:3000/customers/CUS123456789'
   }
 
   handleOnMouseLeave = () => {

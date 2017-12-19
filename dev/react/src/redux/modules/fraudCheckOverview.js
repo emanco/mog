@@ -12,6 +12,9 @@ const LOADING_ORDER = 'myOp/fraudCheckOverviewList/LOADING';
 const LOADED_ORDER = 'myOp/fraudCheckOverviewList/LOADED';
 const FAILED_ORDER = 'myOp/fraudCheckOverviewList/FAILED';
 
+const APPROVE_ORDER = 'myOp/fraudCheckOverviewList/APPROVE_ORDER'
+const REJECT_ORDER = 'myOp/fraudCheckOverviewList/REJECT_ORDER'
+
 const initialState = {
     loading: true,
     success: false,
@@ -34,7 +37,8 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
                 ...state,
                 loading: false,
                 success: true,
-                payload: action.payload.data // Not sure why it's so deep like this but this gives the actual results
+                payload: action.payload.data, // Not sure why it's so deep like this but this gives the actual results
+                currentOrderRef: action.payload.data[0].results[0].order_reference // on the basis whenever the list updates the order showed is the first in the list
             };
         case FAILED_LIST :
             return {
@@ -61,13 +65,11 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
             }
           }
         case 'FRAUD_ORDER_FULFILLED' :
-          console.log(action.payload)
           return {
             ...state,
             orderLoading: false,
             orderSuccess: true,
-            orderPayload: action.payload,
-            currentOrder: action.payload
+            orderPayload: action.payload
           }
         default:
             return state;
@@ -104,18 +106,19 @@ export function getFraudCheckList (queryParams = {}) {
     })
 };
     */
+    console.log('GET FRAUD CHECKLIST')
     return (dispatch) => {
       dispatch({
         type: LOADED_LIST,
         payload: fraudCheckOrderData
       })
-
-      dispatch(getFraudCheckListOrder('CUS123456789'))
+      //MOCKED DATA
+      dispatch(getFraudCheckListOrder('CUS123456789', 'ORD001132422'))
     }
 }
 
 // Get details on the list item currently being hovered over
-export function getFraudCheckListOrder (id) {
+export function getFraudCheckListOrder (id, orderRef) {
 
   /* @NOTE Fetch User and Order Details
    * Call getCustomer & getOrders from the customers reducer which just returns the data then
@@ -130,4 +133,48 @@ export function getFraudCheckListOrder (id) {
     })
   }
 
+}
+
+export function approveOrder (orderId) {
+  return (dispatch) => {
+    dispatch({
+      type: APPROVE_ORDER,
+      payload: {
+        request: {
+          url: 'virtserver.swaggerhub.com/MyOptiqueGroup/mbf-order-api/1.0.3/order-status-updates/',
+          headers: {'Authorization': 'omsfire'},
+          method: 'POST',
+          data: {
+            "order_reference": "ORD000123456",
+            "status_code": "FRAUD CHECK APPROVE"
+          }
+        }
+      }
+    }).then(() => {
+      console.log('THEN')
+      getFraudCheckList()
+    })
+  }
+}
+
+export function declineOrder (orderId) {
+  return (dispatch) => {
+    dispatch({
+      type: REJECT_ORDER,
+      payload: {
+        request: {
+          url: 'virtserver.swaggerhub.com/MyOptiqueGroup/mbf-order-api/1.0.3/order-status-updates/',
+          headers: {'Authorization': 'omsfire'},
+          method: 'POST',
+          data: {
+            "order_reference": "ORD000123456",
+            "status_code": "FRAUD CHECK DECLINE"
+          }
+        }
+      }
+    }).then(() => {
+      console.log('THEN')
+      getFraudCheckList()
+    })
+  }
 }

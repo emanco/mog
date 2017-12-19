@@ -10,6 +10,10 @@ $approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
   overflow:hidden;
   border-top: 1px solid map-get($colours, 'line');
 
+  .stickyActions-details {
+    float: left;
+  }
+
   & .sticky-bottom {
     bottom: 0;
     width: 100%;

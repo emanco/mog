@@ -37,7 +37,6 @@ export default class fraudCheckList extends Component {
 
 
   render() {
-    console.log(this.props.data)
     // ADD CLASSES FROM THE GRID
     const statusClass = fraudCheckStatus(this.props.data.latest_fraud_status);
     return(

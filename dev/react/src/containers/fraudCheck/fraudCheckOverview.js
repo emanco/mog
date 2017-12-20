@@ -51,7 +51,8 @@ export default class fraudCheckOverview extends Component {
   handlePaginationChange = (page) => {
     console.log('MAKE AN API CALL FOR PAGINATION');
     console.log('Page Requested: ' + page)
-    const offset = getUrlParam(this.props.data[0].next, 'offset')
+    const offset = getUrlParam(this.props.data.next, 'offset')
+    console.log(offset)
     this.props.getFraudCheckList({
       offset: offset
     })

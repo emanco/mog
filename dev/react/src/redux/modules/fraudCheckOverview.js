@@ -88,6 +88,7 @@ export function getFraudCheckList (queryParams = {}) {
    */
 
   const queryUrl = buildQueryUrl('http://mbfoa.dev2.glassesdirecttesting.co.uk/api/v1/fraud-check-orders', queryParams)
+
   // @todo - PUT BACK WHEN THE API IS WORKING CORRECTLY
   return (dispatch, getState) => {
 

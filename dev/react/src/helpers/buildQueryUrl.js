@@ -10,6 +10,8 @@ export default function buildQueryUrl(url, queryParams) {
 
   let requestUrl = url;
 
+  console.log(query)
+
   if (query.length > 0) {
     requestUrl = requestUrl + '?' + query
   }

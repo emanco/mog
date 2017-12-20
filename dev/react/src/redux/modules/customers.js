@@ -33,6 +33,12 @@ export default function summaryReducer(state = {}, action = '') {
     }
 }
 
+const authToken = () => {
+  return (getState) => {
+    return getState().authReducer.authToken
+  }
+}
+
 const loader = axios.create({
     baseURL: 'https://virtserver.swaggerhub.com/MyOptiqueGroup/mbf-order-api/1.0.3/',
     headers: {'Authorization': 'omsfire'}

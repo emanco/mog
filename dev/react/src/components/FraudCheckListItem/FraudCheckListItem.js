@@ -35,13 +35,9 @@ export default class fraudCheckList extends Component {
       }, 1000)
   }
 
-  checkFlags = () => {
-
-  }
-
-
 
   render() {
+    console.log(this.props.data)
     // ADD CLASSES FROM THE GRID
     const statusClass = fraudCheckStatus(this.props.data.latest_fraud_status);
     return(
@@ -51,11 +47,13 @@ export default class fraudCheckList extends Component {
             <p className="heading2">{this.props.data.order_reference}</p>
             {clientNameMapping(this.props.data.client_id)}
           </div>
+          {this.props.data.fraud &&
           <div className="fraudCheck-status-icons">
             {this.props.data.fraud.is_postcode_blacklisted && <Icon className='fraudCheckListItem-flagIcon' icon='ion-at' />}
             {this.props.data.fraud.is_first_order && <Icon className='fraudCheckListItem-flagIcon' icon='ion-person-add' />}
             {this.props.data.fraud.is_email_blacklisted && <Icon className='fraudCheckListItem-flagIcon' icon='ion-home' />}
           </div>
+            }
         </div>
       </div>
     )

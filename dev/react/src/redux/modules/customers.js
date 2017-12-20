@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { authorise } from './auth';
 
 export default function summaryReducer(state = {}, action = '') {
     switch (action.type)
@@ -52,9 +53,32 @@ const getPrescriptions = (id) => {
 }
 
 const getData = (id) => {
-  return {
-    type: 'FETCH_DATA',
-    payload: axios.all([getCustomer(id), getOrders(id), getPrescriptions(id)])
+  console.log('GET DATA FOR FUCK SAKE')
+  return (dispatch, getState) => {
+
+    console.log(getState().authReducer.authToken)
+
+    if (!getState().authReducer.authToken) {
+
+      console.log('NOT AUTHORISED')
+
+      return dispatch(authorise()).then(() => {
+
+        return dispatch({
+          type: 'FETCH_DATA',
+          payload: axios.all([getCustomer(id), getOrders(id), getPrescriptions(id)])
+        })
+
+      });
+
+    } else {
+
+      return dispatch({
+        type: 'FETCH_DATA',
+        payload: axios.all([getCustomer(id), getOrders(id), getPrescriptions(id)])
+      })
+
+    }
   }
 };
 

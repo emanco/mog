@@ -37,7 +37,7 @@ export default class fraudCheckOverview extends Component {
 
   handleFraudCheckListHover = (orderRef) => {
     // Check we're not already displaying the order
-    if (orderRef !== this.props.data[0].results[0].order_reference) {
+    if (orderRef !== this.props.data.results[0].order_reference) {
       this.props.getFraudCheckListOrder('CUS123456789');
     }
   }
@@ -66,7 +66,8 @@ export default class fraudCheckOverview extends Component {
   }
 
   render() {
-    if (!this.props.data[0] || !this.props.orderData) {
+    console.log(this.props.data)
+    if (!this.props.data || !this.props.orderData) {
       return (
         <div>
           <StickyBar
@@ -83,21 +84,21 @@ export default class fraudCheckOverview extends Component {
             filterListCallback={() => this.handleFraudFiltering }/>
           <div className="fraudCheckOverview">
             <div className={"left-panel " + listLoadingClass}>
-              <div>{this.props.data[0].count} Items</div>
+              <div>{this.props.data.count} Items</div>
               <FraudCheckList
-                data={this.props.data[0]}
+                data={this.props.data}
                 hoverCallback={this.handleFraudCheckListHover}
                 handlePaginationChange={this.handlePaginationChange}/>
             </div>
             <div className={"right-panel -light-inset cust-scroll fraudCheckOverview-order " + orderLoadingClass}>
               <div className="fraudCheckOverview-right-inner">
               <CustomerInfo
-                customerid={this.props.data[0].results[0].customer_reference}
+                customerid={this.props.data.results[0].customer_reference}
                 data={this.props.orderData[0].data}/>
 
               <CustomerOrderList
                 data={this.props.orderData[1].data[0]}
-                customerid={this.props.data[0].results[0].customer_reference} />
+                customerid={this.props.data.results[0].customer_reference} />
               </div>
               <StickyActions orderRef={this.props.currentlyViewedOrder} approveCallback={this.handleApproveOrder} declineCallback={this.handleDeclineOrder} />
             </div>

@@ -22,28 +22,6 @@ $approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
     display: none;
   }
 
-  &.sticky-actions-approved {
-    .btn-decline, .btn-contacted {
-      visibility: hidden;
-    }
-  }
-
-  &.sticky-actions-declined {
-    .btn-approve {
-      display: none;
-    }
-    .btn-contacted {
-      visibility: hidden;
-    }
-  }
-
-  &.sticky-actions-contacted {
-    .btn-approve,
-    .btn-decline {
-      display: none;
-    }
-  }
-
   &.sticky-actions-open {
     border-top: 1px solid map-get($colours, 'line');
 
@@ -113,6 +91,28 @@ $approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
     display: none;
   }
 }
+
+.sticky-actions.sticky-actions-approve {
+    .btn-decline, .btn-contacted {
+      visibility: hidden;
+    }
+  }
+
+  .sticky-actions.sticky-actions-decline {
+    .btn-approve {
+      display: none;
+    }
+    .btn-contacted {
+      visibility: hidden;
+    }
+  }
+
+  .sticky-actions.sticky-actions-contact {
+    .btn-approve,
+    .btn-decline {
+      display: none;
+    }
+  }
 
 
 // @TODO - Move to Button component

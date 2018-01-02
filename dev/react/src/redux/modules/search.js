@@ -1,4 +1,5 @@
 import { getUserData } from "./searchUser";
+import { authorise } from './auth.js';
 
 // Actions
 const LOADING = 'myOp/search/LOADING';

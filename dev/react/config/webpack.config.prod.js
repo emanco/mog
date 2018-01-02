@@ -148,11 +148,9 @@ module.exports = {
             test: /\.(js|jsx|mjs)$/,
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
-            plugins: ['transform-decorators-legacy']
-            options: {
-
-              compact: true,
-            },
+            query: {
+              plugins: ['transform-decorators-legacy']
+            }
           },
           // The notation here is somewhat confusing.
           // "postcss" loader applies autoprefixer to our CSS.

@@ -39,7 +39,7 @@ export default function userReducer(state = initialState, action = '') {
 
 // declare all API calls for left hand side
 const getCustomer = (id = 1) => {
-    return axios.get('https://mog-api.herokuapp.com/customer-summary/'+id)
+    return axios.get('https://mog-api.herokuapp.com/customer-summary/'+id, {headers: { 'Authorization': 'omsfire'}})
 }
 
 const getOrders = (id) => {

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import CustomerInfo from '../../components/CustomerInfo/CustomerInfo';
-import CustomerOrderComponent from '../../components/CustomerOrder/CustomerOrder';
+import CustomerOrderList from '../../components/CustomerOrderList/CustomerOrderList';
 import CustomerPrescriptionComponent from '../../components/CustomerPrescriptions/CustomerPrescriptions';
 
 import { connect } from 'react-redux';
 
 import $ from 'jquery';
-import BreadcrumbsComponent from "../../components/Breadcrumbs/Breadcrumbs";
+import StickyBar from "../../components/StickyBar/StickyBar";
 import * as SummaryActions from '../../redux/modules/customers'
 
 @connect(
@@ -17,19 +17,10 @@ import * as SummaryActions from '../../redux/modules/customers'
 )
 export default class Summarypage extends Component {
 
-    componentWillMount() {
+    constructor(props) {
+        super(props)
         console.log('id is '+this.props.match.params.customerid);
         this.props.getData(this.props.match.params.customerid);
-    }
-
-    componentDidMount() {
-        //console.log('mounted');
-
-        $(document).on('click', '[data-pnp-toggle-class]', function () {
-            $($(this).data('pnp-target')).toggleClass($(this).data('pnp-class'));
-            $(this).toggleClass($(this).data('pnp-class'));
-            return false;
-        });
     }
 
   render() {
@@ -60,29 +51,13 @@ export default class Summarypage extends Component {
     if (this.props.payload[1]) {
       return (
           <div>
-              <BreadcrumbsComponent path={this.props.location.pathname}/>
+              <StickyBar path={this.props.location.pathname}/>
 
               <div className="left-panel">
-        <p className="sub-text">Showing {this.props.payload[1].data[0].limit} of {this.props.payload[1].count} </p>
-                  <CustomerInfo customerid={$id} data={this.props.payload[0].data}/>
 
-
-                  <section className="component component-customer-orders row">
-                      <h2 className="heading2 heading">
-                          Orders
-                          <button className="btn -add">Place Order</button>
-                      </h2>
-                      <p className="sub-text">Showing {this.props.payload[1].data[0].limit} of {this.props.payload[1].data[0].count} </p>
-
-                      {this.props.payload[1].data[0].results.map(function(order, i) {
-                          return <CustomerOrderComponent key={i} id={i} customerid={$id} data={order} />
-                      })}
-
-                  <button className="btn">View More</button>
-                  </section>
-
-                 <CustomerPrescriptionComponent customerid={$id} data={this.props.payload[2].data} name={this.props.payload[0].data.first_name+' '+this.props.payload[0].data.last_name} />
-
+                  <CustomerInfo customerid={$id} data={this.props.payload[0].data} editable={true}/>
+                  <CustomerOrderList data={this.props.payload[1].data[0]} customerid={$id} editable={true}/>
+                  <CustomerPrescriptionComponent customerid={$id} data={this.props.payload[2].data} name={this.props.payload[0].data.first_name+' '+this.props.payload[0].data.last_name} />
               </div>
 
 

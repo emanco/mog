@@ -1,0 +1,28 @@
+.sticky-actions {
+  padding: 2em;
+  background: white;
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid #e8e9e9; }
+  .sticky-actions .stickyActions-details {
+    float: left; }
+  .sticky-actions .sticky-bottom {
+    bottom: 0;
+    width: 100%; }
+  .sticky-actions .button {
+    width: 170px;
+    height: 48px;
+    margin-left: 1em; }
+  .sticky-actions .stickyActions-cta {
+    float: right; }
+  .sticky-actions .btn-approve {
+    color: white; }
+
+.button {
+  box-sizing: border-box;
+  border-radius: 5px;
+  text-align: center; }
+
+.btn-approve {
+  background-color: #2671d4;
+  border-color: #2671d4; }

@@ -2,14 +2,9 @@
 import React, { Component } from 'react';
 
 class CustomerInfo extends Component {
-    componentWillMount() {
-    }
-    // @TODO - DO SOMETHING ABOUT THIS
-    //customerid = this.props.customerid
-    //data = this.props.data
 
     render() {
-
+        console.log(this.props.data)
         // otherwise just render one customer by id
         if (this.props.customerid === undefined) {
             return (
@@ -18,10 +13,8 @@ class CustomerInfo extends Component {
                 </div>
             );
         } else {
-            console.log(this.props.data)
             return (
                 <div>
-
                     <section className="component component-customer-info row">
                         <div className="col-sm-3">
                             <div className="user-initials">{this.props.data.client_id}</div>
@@ -47,7 +40,7 @@ class CustomerInfo extends Component {
                             <p className="view-more"><a href="">View More</a></p>
                         </div>
 
-                        <div className="btn -edit">Edit Profile</div>
+                    {this.props.editable && <div className="btn -edit">Edit Profile</div>}
 
                     </section>
                 </div>

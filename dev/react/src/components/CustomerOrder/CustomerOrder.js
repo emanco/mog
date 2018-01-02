@@ -3,19 +3,18 @@ import React, { Component } from 'react';
 
 // Include dumb component
 import Moment from 'react-moment';
+import { currency } from  '../../helpers/mappings';
+
+import OrderStatus from '../OrderStatus/OrderStatus';
 
 import '../../scss/components/orders.css';
 
 class CustomerOrder extends Component {
 
-    componentWillMount() {
-        //console.log('orders for id: '+this.props.customerid);
-    }
-
     render() {
-        let $currency = this.props.data.currency;
+        console.log(this.props.data.currency)
+        let $currency = currency(this.props.data.currency);
         let $class = this.props.id === 0 ? '-in':'';
-
         return (
           <div>
 
@@ -24,13 +23,13 @@ class CustomerOrder extends Component {
                   <div className="col-sm-7">
                       <p className="order-id heading2">{this.props.data.external_id}</p>
                       <p className="sub-text">
-                          <Moment date={this.props.data.created} format="DD MMM YYYY" /> | {this.props.data.reference}
+                          <Moment date={this.props.data.created} format="ddd Do MMM YYYY" /> | {this.props.data.reference}
                       </p>
                   </div>
 
                   <div className="col-sm-5 text-right">
-                      <span className="status sub-text">{this.props.data.status}</span>
-                      <span className="price">{$currency} {this.props.data.price}</span>
+                      <OrderStatus status={this.props.data.status} />
+                      <span className="price">{$currency}{this.props.data.price}</span>
                   </div>
               </div>
 
@@ -43,13 +42,12 @@ class CustomerOrder extends Component {
                           <div key={i}>
 
                               <header className="shipment">
-                                  Shipment {$n} | {shipment.carrier_reference}
+                                  {shipment.mbf_reference} | {shipment.carrier_reference}
                               </header>
 
                               <div className="col-xs-12">
 
                                   {shipment.job.map(function(job, i) {
-
                                   return(
                                       <div key={i} className="row component card component-card-job">
                                           <div className="col-xs-4 col-sm-2">
@@ -62,8 +60,8 @@ class CustomerOrder extends Component {
                                           </div>
 
                                           <div className="col-sm-5 text-right">
-                                              <span className="status sub-text">{job.status}</span>
-                                              <span className="price">{$currency} {job.price}</span>
+                                              {/*<OrderStatus status={job.status} /> */}
+                                              <span className="price">{$currency}{job.price}</span>
                                           </div>
 
                                       </div>

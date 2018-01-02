@@ -1,0 +1,16 @@
+@import '../base/1_vars.scss';
+
+.pagination {
+
+  .break {
+    display: none;
+  }
+
+  a {
+    cursor: pointer;
+  }
+}
+
+.pagination > .active > a {
+  background: map-get(map-get($colours, 'blue'), 'btn-blue')
+}

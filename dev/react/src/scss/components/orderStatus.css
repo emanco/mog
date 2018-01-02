@@ -1,0 +1,13 @@
+.status {
+  border: 1px solid;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 32px;
+  display: inline-block;
+  padding: 0 12px; }
+
+.status-complete {
+  color: #34d9ba; }
+
+.status-lab {
+  color: #fcd259; }

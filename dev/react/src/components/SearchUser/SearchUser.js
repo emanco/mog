@@ -22,10 +22,6 @@ class SearchUser extends Component {
         this.onChange = this.onChange.bind(this);
     }
 
-    componentWillMount() {
-        //this.props.dispatch(getUserData(1));
-    }
-
     componentDidMount() {
         this.props.onRef(this);
 
@@ -63,7 +59,7 @@ class SearchUser extends Component {
         return (
             <div className='customer-info'>
 
-                    <CustomerInfo customerid={this.props.id} data={this.props.payload[0].data}/>
+                    <CustomerInfo customerid={this.props.id} data={this.props.payload[0].data} editable={true}/>
 
                     <section className="component component-customer-orders row">
                         <h2 className="heading2 heading">

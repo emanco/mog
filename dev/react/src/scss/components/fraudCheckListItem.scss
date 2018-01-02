@@ -1,0 +1,57 @@
+@import '../customBase/variables.scss';
+
+#root .fraudCheckOverview .fraudCheckListItem {
+  padding: 4%;
+}
+
+.fraudCheckListItemContain.component {
+  padding: 0
+}
+
+.fraudCheckListItem {
+  border: 1px solid #e8e9e9;
+  display: table-cell;
+  vertical-align: middle;
+  box-sizing: border-box;
+
+  &.fraudCheck-passed {
+    border-left: 2px solid $color-green;
+  }
+  &.fraudCheck-maybe {
+    border-left: 2px solid $color-yellow;
+  }
+  &.fraudCheck-failed {
+    border-left: 2px solid $color-red;
+  }
+}
+
+.fraudCheckListItem-details {
+  float: left;
+}
+
+.fraudCheck-status-icons {
+  float: right;
+}
+
+.fraudCheckListItem-flagIcon {
+  border-radius: 100%;
+  border: 1px solid $color-grey-border;
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  text-align: center;
+  font-size: 32px;
+  position: relative;
+  font-size: 1.5em;
+  margin-left: 14px;
+
+    &:before {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding-top: 22%;
+      }
+}
+

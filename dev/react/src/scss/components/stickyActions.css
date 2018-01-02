@@ -14,15 +14,6 @@
     z-index: -4;
     margin: auto;
     display: none; }
-  .sticky-actions.sticky-actions-approved .btn-decline, .sticky-actions.sticky-actions-approved .btn-contacted {
-    visibility: hidden; }
-  .sticky-actions.sticky-actions-declined .btn-approve {
-    display: none; }
-  .sticky-actions.sticky-actions-declined .btn-contacted {
-    visibility: hidden; }
-  .sticky-actions.sticky-actions-contacted .btn-approve,
-  .sticky-actions.sticky-actions-contacted .btn-decline {
-    display: none; }
   .sticky-actions.sticky-actions-open {
     border-top: 1px solid #e8e9e9; }
     .sticky-actions.sticky-actions-open:after {
@@ -62,6 +53,19 @@
     border: 0;
     width: auto;
     display: none; }
+
+.sticky-actions.sticky-actions-approve .btn-decline, .sticky-actions.sticky-actions-approve .btn-contacted {
+  visibility: hidden; }
+
+.sticky-actions.sticky-actions-decline .btn-approve {
+  display: none; }
+
+.sticky-actions.sticky-actions-decline .btn-contacted {
+  visibility: hidden; }
+
+.sticky-actions.sticky-actions-contact .btn-approve,
+.sticky-actions.sticky-actions-contact .btn-decline {
+  display: none; }
 
 .button {
   box-sizing: border-box;

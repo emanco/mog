@@ -14,25 +14,19 @@ export default class fraudCheckList extends Component {
 
   constructor(props) {
     super(props)
-    this.handleOnClick = this.handleOnClick.bind(this)
-    this.timeOut = undefined;
+    this.handleItemOnClick = this.handleItemOnClick.bind(this)
+    this.handleItemTitleClick = this.handleItemTitleClick.bind(this)
   }
 
   componentDidMount() {
   }
 
-  handleOnClick = () => {
+  handleItemTitleClick = () => {
     window.location = '/customers/CUS123456789'
   }
 
-  handleOnMouseLeave = () => {
-    clearTimeout(this.timeOut);
-  }
-
-  handleOnMouseEnter = () => {
-    this.timeOut = setTimeout(() => {
-        this.props.hoverCallback(this.props.data.order_reference);
-      }, 1000)
+  handleItemOnClick = () => {
+    this.props.itemClickCallback(this.props.data.order_reference);
   }
 
 
@@ -40,10 +34,10 @@ export default class fraudCheckList extends Component {
     // ADD CLASSES FROM THE GRID
     const statusClass = fraudCheckStatus(this.props.data.latest_fraud_status);
     return(
-      <div className="row component fraudCheckListItemContain loads">
-        <div className={'fraudCheck-'+ statusClass + ' col-xs-12 fraudCheckListItem'} onClick={this.handleOnClick} onMouseEnter={this.handleOnMouseEnter} onMouseLeave={this.handleOnMouseLeave}>
+      <div className="row component fraudCheckListItemContain">
+        <div className={'fraudCheck-'+ statusClass + ' col-xs-12 fraudCheckListItem'} onClick={this.handleItemOnClick}>
           <div className="fraudCheckListItem-details">
-            <p className="heading2">{this.props.data.order_reference}</p>
+            <p className="heading2" onClick={this.handleItemTitleClick}>{this.props.data.order_reference}</p>
             {clientNameMapping(this.props.data.client_id)}
           </div>
           {this.props.data.fraud &&

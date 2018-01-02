@@ -12,10 +12,10 @@ export default class FraudCheckList extends Component {
 
   constructor(props) {
     super(props)
-    this.handleHoverCallback = this.handleHoverCallback.bind(this)
+    this.handleOnItemClickCallback = this.handleOnItemClickCallback.bind(this)
   }
 
-  handleHoverCallback = (orderRef) => {
+  handleOnItemClickCallback = (orderRef) => {
     this.props.hoverCallback(orderRef);
   }
 
@@ -30,7 +30,7 @@ export default class FraudCheckList extends Component {
       <div>
         {
           this.props.data.results.map((result, i) => {
-            return (<FraudCheckListItem data={result} key={i} hoverCallback={this.handleHoverCallback}/>)
+            return (<FraudCheckListItem data={result} key={i} itemClickCallback={this.handleOnItemClickCallback}/>)
           })
         }
         <Pagination pageCount={pageCount} handlePaginationChange={this.handlePaginationChange} />

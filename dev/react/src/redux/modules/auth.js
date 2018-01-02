@@ -35,7 +35,7 @@ export default function authReducer(state = initialState, action = '') {
                 loading: false,
                 success: false,
                 payload: {
-                    message: action.payload.message
+                    message: action.payload
                 }
             };
         default:

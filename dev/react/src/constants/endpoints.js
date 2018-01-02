@@ -1,4 +1,6 @@
 /* Endpoints to the live API */
 export const baseURL = 'http://mbfoa.dev2.glassesdirecttesting.co.uk/api/v1';
-export const authTokenEndpoint = '/auth/token';
-export const fraudCheckOrders = '/fraud-check-orders';
+export const authTokenEndpoint = baseURL + '/auth/token';
+export const fraudCheckOrders = baseURL + '/fraud-check-orders';
+export const postOrderNoteEndpoint = baseURL + '/order-notes';
+export const orderStatusUpdateEndpoint = baseURL + '/order-status-updates';

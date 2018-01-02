@@ -4,14 +4,88 @@
 $approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
 
 .sticky-actions {
-  padding: 2em;
   background: white;
   width: 100%;
   overflow:hidden;
-  border-top: 1px solid map-get($colours, 'line');
+
+  &:after {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    background: rgba(33, 41, 55, 0.8);
+    z-index: -4;
+    margin: auto;
+    display: none;
+  }
+
+  &.sticky-actions-approved {
+    .btn-decline, .btn-contacted {
+      visibility: hidden;
+    }
+  }
+
+  &.sticky-actions-declined {
+    .btn-approve {
+      display: none;
+    }
+    .btn-contacted {
+      visibility: hidden;
+    }
+  }
+
+  &.sticky-actions-contacted {
+    .btn-approve,
+    .btn-decline {
+      display: none;
+    }
+  }
+
+  &.sticky-actions-open {
+    border-top: 1px solid map-get($colours, 'line');
+
+    &:after {
+      display: block;
+    }
+
+    .stickyActions-form {
+      display: block;
+    }
+
+    .btn-cancel {
+      display: inline-block;
+    }
+  }
 
   .stickyActions-details {
     float: left;
+  }
+
+  .stickyActions-form {
+    padding: 2em;
+    background: white;
+    display: none;
+
+    .stickyActions-form-title {
+      margin-bottom: 2em;
+      text-transform: capitalize;
+    }
+  }
+
+
+
+  .stickyActions-controls {
+    border-top: 1px solid map-get($colours, 'line');
+    padding: 2em;
+    overflow: hidden;
+    background: white;
+  }
+
+  .stickActions-comment {
+    height: 258px;
   }
 
   & .sticky-bottom {
@@ -20,7 +94,7 @@ $approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
   }
 
   .button {
-    width: 170px;
+    width: 100px;
     height: 48px;
     margin-left: 1em;
   }
@@ -31,6 +105,12 @@ $approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
 
   .btn-approve {
     color: white;
+  }
+
+  .btn-cancel {
+    border: 0;
+    width: auto;
+    display: none;
   }
 }
 

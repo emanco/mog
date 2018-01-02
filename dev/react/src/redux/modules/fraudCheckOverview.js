@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { authorise } from './auth';
+import { fraudCheckOrders, postOrderNoteEndpoint, orderStatusUpdateEndpoint } from '../../constants/endpoints'
+
 
 import buildQueryUrl from '../../helpers/buildQueryUrl'
 import { getCustomer, getOrders } from './customers'
@@ -13,8 +15,10 @@ const LOADING_ORDER = 'myOp/fraudCheckOverviewList/LOADING';
 const LOADED_ORDER = 'myOp/fraudCheckOverviewList/LOADED';
 const FAILED_ORDER = 'myOp/fraudCheckOverviewList/FAILED';
 
-const APPROVE_ORDER = 'myOp/fraudCheckOverviewList/APPROVE_ORDER'
+const UPDATE_ORDER = 'myOp/fraudCheckOverviewList/UPDATE_ORDER'
 const REJECT_ORDER = 'myOp/fraudCheckOverviewList/REJECT_ORDER'
+
+const POST_ORDER_NOTE = 'myOp/orderNotes/POST_NOTE'
 
 const initialState = {
     loading: true,
@@ -87,7 +91,7 @@ export function getFraudCheckList (queryParams = {}) {
    * Pass queryParams object when calling this method to get the correct results
    */
 
-  const queryUrl = buildQueryUrl('http://mbfoa.dev2.glassesdirecttesting.co.uk/api/v1/fraud-check-orders', queryParams)
+  const queryUrl = buildQueryUrl(fraudCheckOrders, queryParams)
 
   // @todo - PUT BACK WHEN THE API IS WORKING CORRECTLY
   return (dispatch, getState) => {
@@ -170,46 +174,48 @@ export function getFraudCheckListOrder (id, orderRef) {
 
 }
 
-export function approveOrder (orderId) {
-  return (dispatch) => {
+// @TODO - Move somewhere else as this can be used elsewhere
+export function postOrderNote (noteObj) {
+
+  return (dispatch, getState) => {
     dispatch({
-      type: APPROVE_ORDER,
+      type: POST_ORDER_NOTE,
       payload: {
         request: {
-          url: 'http://virtserver.swaggerhub.com/MyOptiqueGroup/mbf-order-api/1.0.3/order-status-updates/',
-          headers: {'Authorization': 'omsfire'},
+          url: postOrderNoteEndpoint,
+          headers: {'Authorization': 'Bearer ' + getState().authReducer.authToken},
           method: 'POST',
-          data: {
-            "order_reference": "ORD000123456",
-            "status_code": "FRAUD CHECK APPROVE"
-          }
+          data: noteObj
         }
       }
-    }).then(() => {
-      console.log('THEN')
-      getFraudCheckList()
     })
   }
 }
 
-export function declineOrder (orderId) {
-  return (dispatch) => {
+
+export function updateOrderStatus (noteObj, orderId) {
+  console.log('FRAUD CHECK OVERVIEW - UPDATE ORDER STATUS')
+  console.log(noteObj)
+  return (dispatch, getState) => {
     dispatch({
-      type: REJECT_ORDER,
+      type: UPDATE_ORDER,
       payload: {
         request: {
-          url: 'http://virtserver.swaggerhub.com/MyOptiqueGroup/mbf-order-api/1.0.3/order-status-updates/',
-          headers: {'Authorization': 'omsfire'},
+          url: orderStatusUpdateEndpoint,
+          headers: {'Authorization': 'Bearer ' + getState().authReducer.authToken},
           method: 'POST',
           data: {
             "order_reference": "ORD000123456",
-            "status_code": "FRAUD CHECK DECLINE"
+            "status_code": "FRAUD CHECK PASSED"
           }
         }
       }
     }).then(() => {
       console.log('THEN')
-      getFraudCheckList()
+      if (noteObj.content.length > 1) {
+        dispatch(postOrderNote(noteObj));
+      }
+      dispatch(getFraudCheckList())
     })
   }
 }

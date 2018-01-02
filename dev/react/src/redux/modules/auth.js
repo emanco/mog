@@ -1,4 +1,4 @@
-import {baseUrl, authTokenEndpoint} from '../../constants/endpoints';
+import {authTokenEndpoint} from '../../constants/endpoints';
 
 // Actions
 const LOADING = 'myOp/auth/LOADING';
@@ -55,7 +55,7 @@ export function authorise () {
       payload: {
         request: {
           method: 'post',
-          url: 'http://mbfoa.dev2.glassesdirecttesting.co.uk/api/v1/auth/token/',
+          url: authTokenEndpoint,
           data: {
             grant_type: 'password',
             username: 'plugandplay',

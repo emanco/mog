@@ -28,7 +28,7 @@ export default class fraudCheckOverview extends Component {
   constructor(props) {
     super(props)
     this.handleFraudCheckListHover = this.handleFraudCheckListHover.bind(this)
-    this.handleApproveOrder = this.handleApproveOrder.bind(this)
+    this.handleUpdateOrder = this.handleUpdateOrder.bind(this)
   }
 
   componentDidMount() {
@@ -58,8 +58,9 @@ export default class fraudCheckOverview extends Component {
     })
   }
 
-  handleApproveOrder = (orderId) => {
-    this.props.approveOrder(orderId)
+  handleUpdateOrder = (noteObj, orderId) => {
+    console.log('APPROVE ORDER IN OVERVIEW')
+    this.props.updateOrderStatus(noteObj, orderId)
   }
 
   handleDeclineOrder = (orderId) => {
@@ -67,7 +68,8 @@ export default class fraudCheckOverview extends Component {
   }
 
   render() {
-    console.log(this.props.data)
+    console.log(this.state)
+    //const overlay = this.state.overlay
     if (!this.props.data || !this.props.orderData) {
       return (
         <div>
@@ -101,7 +103,7 @@ export default class fraudCheckOverview extends Component {
                 data={this.props.orderData[1].data[0]}
                 customerid={this.props.data.results[0].customer_reference} />
               </div>
-              <StickyActions orderRef={this.props.currentlyViewedOrder} approveCallback={this.handleApproveOrder} declineCallback={this.handleDeclineOrder} />
+              <StickyActions orderRef={this.props.currentlyViewedOrder} updateOrderCallback={this.handleUpdateOrder} declineCallback={this.handleDeclineOrder} />
             </div>
           </div>
         </div>

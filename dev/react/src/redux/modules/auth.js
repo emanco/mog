@@ -1,3 +1,5 @@
+import {baseUrl, authTokenEndpoint} from '../../constants/endpoints';
+
 // Actions
 const LOADING = 'myOp/auth/LOADING';
 const LOADED = 'myOp/auth/LOADED';

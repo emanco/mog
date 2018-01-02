@@ -55,7 +55,8 @@
 */
 .nav-container {
   padding: 20px 30px;
-  position: relative; }
+  position: relative;
+  background: white; }
   .nav-container .ion-ios-search {
     font-size: 2em;
     opacity: 0.5;

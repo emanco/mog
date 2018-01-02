@@ -17,4 +17,16 @@
     position: sticky;
     bottom: 0;
   }
+
+  .fraudCheckOverview-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    background: rgba(33,41,55, 0.8);
+    z-index: 1;
+    margin: auto;
+  }
 }

@@ -1,22 +1,67 @@
 .sticky-actions {
-  padding: 2em;
   background: white;
   width: 100%;
-  overflow: hidden;
-  border-top: 1px solid #e8e9e9; }
+  overflow: hidden; }
+  .sticky-actions:after {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    background: rgba(33, 41, 55, 0.8);
+    z-index: -4;
+    margin: auto;
+    display: none; }
+  .sticky-actions.sticky-actions-approved .btn-decline, .sticky-actions.sticky-actions-approved .btn-contacted {
+    visibility: hidden; }
+  .sticky-actions.sticky-actions-declined .btn-approve {
+    display: none; }
+  .sticky-actions.sticky-actions-declined .btn-contacted {
+    visibility: hidden; }
+  .sticky-actions.sticky-actions-contacted .btn-approve,
+  .sticky-actions.sticky-actions-contacted .btn-decline {
+    display: none; }
+  .sticky-actions.sticky-actions-open {
+    border-top: 1px solid #e8e9e9; }
+    .sticky-actions.sticky-actions-open:after {
+      display: block; }
+    .sticky-actions.sticky-actions-open .stickyActions-form {
+      display: block; }
+    .sticky-actions.sticky-actions-open .btn-cancel {
+      display: inline-block; }
   .sticky-actions .stickyActions-details {
     float: left; }
+  .sticky-actions .stickyActions-form {
+    padding: 2em;
+    background: white;
+    display: none; }
+    .sticky-actions .stickyActions-form .stickyActions-form-title {
+      margin-bottom: 2em;
+      text-transform: capitalize; }
+  .sticky-actions .stickyActions-controls {
+    border-top: 1px solid #e8e9e9;
+    padding: 2em;
+    overflow: hidden;
+    background: white; }
+  .sticky-actions .stickActions-comment {
+    height: 258px; }
   .sticky-actions .sticky-bottom {
     bottom: 0;
     width: 100%; }
   .sticky-actions .button {
-    width: 170px;
+    width: 100px;
     height: 48px;
     margin-left: 1em; }
   .sticky-actions .stickyActions-cta {
     float: right; }
   .sticky-actions .btn-approve {
     color: white; }
+  .sticky-actions .btn-cancel {
+    border: 0;
+    width: auto;
+    display: none; }
 
 .button {
   box-sizing: border-box;

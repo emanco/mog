@@ -133,27 +133,12 @@ export function getFraudCheckList (queryParams = {}) {
       }).then((result) => {
         // @TODO - Check if offset is zero. If so we need to load the first customer and order details
         console.log(result)
-        // dispatch(getFraudCheckListOrders(result.payload.data[0].results[0].customer_reference))
         dispatch(getFraudCheckListOrder(result.payload.data.results[0].customer_reference))
-        // Also get customer data
       })
 
     }
 
 };
-
-
-  /*
-    console.log('GET FRAUD CHECKLIST')
-    return (dispatch, getState) => {
-      console.log(getState().authReducer.authToken)
-      dispatch({
-        type: LOADED_LIST,
-        payload: fraudCheckOrderData
-      })
-      //MOCKED DATA
-      dispatch(getFraudCheckListOrder('CUS123456789', 'ORD001132422'))
-    } */
 }
 
 // Get details on the list item currently being hovered over
@@ -168,7 +153,7 @@ export function getFraudCheckListOrder (id, orderRef) {
   return (dispatch) => {
     dispatch({
       type: 'FRAUD_ORDER',
-      payload: axios.all([getCustomer(testid), getOrders(testid)])
+      payload: axios.all([getCustomer(testid), getOrders(id)])
     })
   }
 
@@ -193,9 +178,23 @@ export function postOrderNote (noteObj) {
 }
 
 
-export function updateOrderStatus (noteObj, orderId) {
+export function updateOrderStatus (noteObj, orderRef, actionType) {
   console.log('FRAUD CHECK OVERVIEW - UPDATE ORDER STATUS')
-  console.log(noteObj)
+  console.log(actionType)
+  let status = '';
+
+  switch(actionType) {
+    case 'approve':
+      status = 'FRAUD CHECK PASSED';
+      break;
+    case 'decline':
+      status = 'FRAUD CHECK FAILED';
+      break;
+    case 'contact':
+      status = 'FRAUD CHECK CONTACTED';
+      break;
+  }
+
   return (dispatch, getState) => {
     dispatch({
       type: UPDATE_ORDER,
@@ -205,8 +204,8 @@ export function updateOrderStatus (noteObj, orderId) {
           headers: {'Authorization': 'Bearer ' + getState().authReducer.authToken},
           method: 'POST',
           data: {
-            "order_reference": "ORD000123456",
-            "status_code": "FRAUD CHECK PASSED"
+            "order_reference": orderRef,
+            "status_code": status
           }
         }
       }

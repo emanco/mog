@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { authorise } from './auth';
+import { baseURL } from '../../constants/endpoints';
 
 export default function summaryReducer(state = {}, action = '') {
     switch (action.type)
@@ -59,7 +60,6 @@ const getPrescriptions = (id) => {
 }
 
 const getData = (id) => {
-  console.log('GET DATA FOR FUCK SAKE')
   return (dispatch, getState) => {
 
     console.log(getState().authReducer.authToken)

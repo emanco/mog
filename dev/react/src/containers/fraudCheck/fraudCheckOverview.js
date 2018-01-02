@@ -48,7 +48,7 @@ export default class fraudCheckOverview extends Component {
     })
   }
 
-  handlePaginationChange = (page) => {
+  handlePaginationChange = (page, direction) => {
     console.log('MAKE AN API CALL FOR PAGINATION');
     console.log('Page Requested: ' + page)
     const offset = getUrlParam(this.props.data.next, 'offset')
@@ -58,9 +58,10 @@ export default class fraudCheckOverview extends Component {
     })
   }
 
-  handleUpdateOrder = (noteObj, orderId) => {
+  handleUpdateOrder = (noteObj, orderId, actionType) => {
     console.log('APPROVE ORDER IN OVERVIEW')
-    this.props.updateOrderStatus(noteObj, orderId)
+    console.log(noteObj)
+    this.props.updateOrderStatus(noteObj, orderId, actionType)
   }
 
   handleDeclineOrder = (orderId) => {
@@ -68,7 +69,6 @@ export default class fraudCheckOverview extends Component {
   }
 
   render() {
-    console.log(this.state)
     //const overlay = this.state.overlay
     if (!this.props.data || !this.props.orderData) {
       return (
@@ -80,6 +80,7 @@ export default class fraudCheckOverview extends Component {
     } else {
       const orderLoadingClass = this.props.orderLoading ? '-loading' : '';
       const listLoadingClass = this.props.listLoading ? '-loading' : '';
+
       return(
         <div>
           <StickyBar
@@ -103,7 +104,7 @@ export default class fraudCheckOverview extends Component {
                 data={this.props.orderData[1].data[0]}
                 customerid={this.props.data.results[0].customer_reference} />
               </div>
-              <StickyActions orderRef={this.props.currentlyViewedOrder} updateOrderCallback={this.handleUpdateOrder} declineCallback={this.handleDeclineOrder} />
+              <StickyActions loadingStatus={this.props.orderLoading} orderRef={this.props.currentlyViewedOrder} updateOrderCallback={this.handleUpdateOrder} declineCallback={this.handleDeclineOrder} />
             </div>
           </div>
         </div>

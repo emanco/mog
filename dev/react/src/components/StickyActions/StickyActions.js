@@ -31,7 +31,7 @@ export default class StickyActions extends Component {
       title: 'approved'
     })
 
-    this.handleSubmit()
+    this.handleSubmit(orderRef)
   }
 
   handleClickDecline = (orderRef) => {
@@ -42,7 +42,7 @@ export default class StickyActions extends Component {
       title: 'declined'
     })
 
-    this.handleSubmit()
+    this.handleSubmit(orderRef)
   }
 
   handleClickContacted = (orderRef) => {
@@ -53,7 +53,7 @@ export default class StickyActions extends Component {
       title: 'contacted'
     })
 
-    this.handleSubmit()
+    this.handleSubmit(orderRef)
   }
 
   handleToggleForm = () => {
@@ -80,7 +80,13 @@ export default class StickyActions extends Component {
     console.log('HANDLE SUBMIT IN STICKY ACTIONS');
     console.log(noteObj)
 
-    this.props.updateOrderCallback(noteObj, orderRef)
+    this.props.updateOrderCallback(noteObj, orderRef, this.state.action)
+
+    // @TODO  - Clarify the UI when this has been submitted. at present we close this and display a notification after, whether it's successful or not. Shoud we wait for confirmation of success before closing this? Not covered in requirements right now.
+    this.setState({
+      status: 'closed',
+      action: ''
+    })
   }
 
   render() {

@@ -30,3 +30,23 @@
     margin: auto;
   }
 }
+
+.fraudCheckOverview-meta {
+
+  margin-bottom: 1em;
+
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  .fraudCheckOverview-count {
+    float: left;
+  }
+
+  .Select {
+    float: right;
+    width: 185px;
+  }
+}

@@ -21,3 +21,15 @@
     background: rgba(33, 41, 55, 0.8);
     z-index: 1;
     margin: auto; }
+
+.fraudCheckOverview-meta {
+  margin-bottom: 1em; }
+  .fraudCheckOverview-meta:after {
+    content: '';
+    display: table;
+    clear: both; }
+  .fraudCheckOverview-meta .fraudCheckOverview-count {
+    float: left; }
+  .fraudCheckOverview-meta .Select {
+    float: right;
+    width: 185px; }

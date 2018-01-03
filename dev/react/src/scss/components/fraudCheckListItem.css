@@ -11,10 +11,12 @@
   box-sizing: border-box; }
   .fraudCheckListItem.fraudCheck-passed {
     border-left: 2px solid #34d9ba; }
-  .fraudCheckListItem.fraudCheck-maybe {
+  .fraudCheckListItem.fraudCheck-contacted {
     border-left: 2px solid #fcd259; }
   .fraudCheckListItem.fraudCheck-failed {
     border-left: 2px solid #f86e61; }
+  .fraudCheckListItem.fraudCheck-pending {
+    border-left: 2px solid #e8e9e9; }
 
 .fraudCheckListItem-details {
   float: left; }

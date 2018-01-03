@@ -77,9 +77,25 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
             orderSuccess: true,
             orderPayload: action.payload
           }
+        case 'FRAUD_LIST_FILTER' :
+        console.log('FRAUD LIST FILTER')
+        console.log(action)
+          return {
+            ...state,
+            fraudFilter: action.fraudFilter
+          }
         default:
             return state;
     }
+}
+
+export function upateFilter (filterValue) {
+  return (dispatch) => {
+    dispatch({
+      type: 'FRAUD_LIST_FILTER',
+      fraudFilter: filterValue
+    })
+  }
 }
 
 // get Search results with this action, separated by the combined above
@@ -113,7 +129,6 @@ export function getFraudCheckList (queryParams = {}) {
         }).then((result) => {
           // @TODO - Check if offset is zero. If so we need to load the first customer and order details
           console.log(result)
-          // dispatch(getFraudCheckListOrders(result.payload.data[0].results[0].customer_reference))
           dispatch(getFraudCheckListOrder(result.payload.data.results[0].customer_reference))
           // Also get customer data
         })
@@ -178,7 +193,7 @@ export function postOrderNote (noteObj) {
 }
 
 
-export function updateOrderStatus (noteObj, orderRef, actionType) {
+export function updateOrderStatus (noteObj, orderRef, actionType, fraudFilter) {
   console.log('FRAUD CHECK OVERVIEW - UPDATE ORDER STATUS')
   console.log(actionType)
   let status = '';
@@ -214,7 +229,9 @@ export function updateOrderStatus (noteObj, orderRef, actionType) {
       if (noteObj.content.length > 1) {
         dispatch(postOrderNote(noteObj));
       }
-      dispatch(getFraudCheckList())
+      dispatch(getFraudCheckList({
+        status: fraudFilter
+      }))
     })
   }
 }

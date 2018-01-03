@@ -8,7 +8,7 @@ import CustomerInfo from '../../components/CustomerInfo/CustomerInfo';
 import CustomerOrderList from '../../components/CustomerOrderList/CustomerOrderList';
 import StickyBar from '../../components/StickyBar/StickyBar';
 import StickyActions from '../../components/StickyActions/StickyActions';
-
+import fraudFilterValues from '../../constants/fraudFilterValues';
 import getUrlParam from '../../helpers/getUrlParam'
 
 import './../../scss/components/fraudCheckOverview.css';
@@ -19,7 +19,8 @@ import './../../scss/components/fraudCheckOverview.css';
     orderData: state.fraudCheckOverviewReducer.orderPayload,
     orderLoading: state.fraudCheckOverviewReducer.orderLoading,
     listLoading: state.fraudCheckOverviewReducer.loading,
-    currentlyViewedOrder: state.fraudCheckOverviewReducer.currentOrderRef
+    currentlyViewedOrder: state.fraudCheckOverviewReducer.currentOrderRef,
+    fraudFilter: state.fraudCheckOverviewReducer.fraudFilter
   }),
   {...fraudCheckOverviewActions}
 )
@@ -29,10 +30,11 @@ export default class fraudCheckOverview extends Component {
     super(props)
     this.handleFraudCheckListHover = this.handleFraudCheckListHover.bind(this)
     this.handleUpdateOrder = this.handleUpdateOrder.bind(this)
+    this.handleFraudFiltering = this.handleFraudFiltering.bind(this)
   }
 
   componentDidMount() {
-    this.props.getFraudCheckList();
+    this.props.getFraudCheckList({status: 'FRAUD CHECK NOT CHECKED'});
   }
 
   handleFraudCheckListHover = (orderRef) => {
@@ -42,9 +44,12 @@ export default class fraudCheckOverview extends Component {
     }
   }
 
-  handleFraudFilterting = (value) => {
+  handleFraudFiltering = (value) => {
+    console.log(value)
+    this.props.upateFilter(value)
     this.props.getFraudCheckList({
-      status: value
+      status: value,
+      limit: 20
     })
   }
 
@@ -54,14 +59,16 @@ export default class fraudCheckOverview extends Component {
     const offset = getUrlParam(this.props.data.next, 'offset')
     console.log(offset)
     this.props.getFraudCheckList({
-      offset: offset
+      offset: offset,
+      limit: 20
     })
   }
 
   handleUpdateOrder = (noteObj, orderId, actionType) => {
     console.log('APPROVE ORDER IN OVERVIEW')
     console.log(noteObj)
-    this.props.updateOrderStatus(noteObj, orderId, actionType)
+    console.log(this.props.fraudFilter)
+    this.props.updateOrderStatus(noteObj, orderId, actionType, this.props.fraudFilter)
   }
 
   handleDeclineOrder = (orderId) => {
@@ -85,7 +92,7 @@ export default class fraudCheckOverview extends Component {
         <div>
           <StickyBar
             path={this.props.location.pathname}
-            filterListCallback={() => this.handleFraudFiltering }/>
+            filterListCallback={this.handleFraudFiltering }/>
           <div className="fraudCheckOverview">
             <div className={"left-panel " + listLoadingClass}>
               <div>{this.props.data.count} Items</div>

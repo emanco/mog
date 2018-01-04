@@ -39,19 +39,17 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
                 success: false
             };
         case LOADED_LIST :
-        console.log(action.payload.data)
+            console.log(action.payload.data)
+            let ref = null;
+            if (action.payload.data.results[0]) {
+              ref = action.payload.data.results[0].order_reference;
+            }
             return {
                 ...state,
                 loading: false,
                 success: true,
-                payload: action.payload.data, // Not sure why it's so deep like this but this gives the actual results
-                currentOrderRef: () => {
-                  if (action.payload.data.results[0]) {
-                    return action.payload.data.results[0].order_reference
-                  } else {
-                    return null
-                  }
-                }
+                payload: action.payload.data,
+                currentOrderRef: ref
             };
         case FAILED_LIST :
             return {
@@ -85,8 +83,6 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
             orderPayload: action.payload
           }
         case 'FRAUD_LIST_FILTER' :
-        console.log('FRAUD LIST FILTER')
-        console.log(action)
           return {
             ...state,
             fraudStatus: action.fraudStatus
@@ -116,7 +112,6 @@ export function getFraudCheckList (queryParams = {}) {
 
   const queryUrl = buildQueryUrl(fraudCheckOrders, queryParams)
 
-  // @todo - PUT BACK WHEN THE API IS WORKING CORRECTLY
   return (dispatch, getState) => {
 
     if (!getState().authReducer.authToken) {

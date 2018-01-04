@@ -92,6 +92,7 @@ export default class StickyActions extends Component {
   render() {
     const stateClass = this.state.status
     const actionClass = this.state.action
+    console.log(this.props.orderRef)
     return(
       <div className={'sticky-actions sticky-actions-' + stateClass + ' sticky-actions-' + actionClass}>
         <div className="stickyActions-form">

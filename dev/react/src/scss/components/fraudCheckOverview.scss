@@ -14,7 +14,9 @@
     padding-right: 3%;
   }
   .sticky-actions {
-    position: sticky;
+    position: fixed;
+    width: 50%;
+    left: 50%;
     bottom: 0;
   }
 
@@ -28,5 +30,25 @@
     background: rgba(33,41,55, 0.8);
     z-index: 1;
     margin: auto;
+  }
+}
+
+.fraudCheckOverview-meta {
+
+  margin-bottom: 1em;
+
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  .fraudCheckOverview-count {
+    float: left;
+  }
+
+  .Select {
+    float: right;
+    width: 185px;
   }
 }

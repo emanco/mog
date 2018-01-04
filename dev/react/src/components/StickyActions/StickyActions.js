@@ -23,37 +23,42 @@ export default class StickyActions extends Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.state.status === "open") {
+      setTimeout(() => {
+        this.textArea.focus();
+      }, 200)
+    }
+  }
+
   handleClickApprove = (orderRef) => {
-    // this.props.toggleOpenCallback()
     this.setState({
       status: 'open',
       action: 'approve',
       title: 'approved'
     })
 
-    this.handleSubmit()
+    this.handleSubmit(orderRef)
   }
 
   handleClickDecline = (orderRef) => {
-    // this.props.toggleOpenCallback()
     this.setState({
       status: 'open',
       action: 'decline',
       title: 'declined'
     })
 
-    this.handleSubmit()
+    this.handleSubmit(orderRef)
   }
 
   handleClickContacted = (orderRef) => {
-    // this.props.toggleOpenCallback()
     this.setState({
       status: 'open',
       action: 'contact',
       title: 'contacted'
     })
 
-    this.handleSubmit()
+    this.handleSubmit(orderRef)
   }
 
   handleToggleForm = () => {
@@ -77,22 +82,27 @@ export default class StickyActions extends Component {
       order_reference: orderRef,
       content: this.state.noteValue
     }
-    console.log('HANDLE SUBMIT IN STICKY ACTIONS');
-    console.log(noteObj)
 
-    this.props.updateOrderCallback(noteObj, orderRef)
+    this.props.updateOrderCallback(noteObj, orderRef, this.state.action)
+    this.setState({
+      status: 'closed',
+      action: '',
+      noteValue: ''
+    })
   }
 
   render() {
     const stateClass = this.state.status
     const actionClass = this.state.action
+
     return(
       <div className={'sticky-actions sticky-actions-' + stateClass + ' sticky-actions-' + actionClass}>
+        <div className='sticky-actions-overlay' onClick={this.handleToggleForm}></div>
         <div className="stickyActions-form">
           <div className="stickyActions-form-title">
             <h3 className='h3'>{this.state.title}</h3>
           </div>
-          <textarea className="form-control stickActions-comment" onChange={this.handleNoteChange} placeholder="Enter Note"></textarea>
+          <textarea className="form-control stickActions-comment" onChange={this.handleNoteChange} placeholder="Enter Note" value={this.state.noteValue} ref={(input) => { this.textArea = input; }}></textarea>
         </div>
         <div className="stickyActions-controls">
           <div className="stickyActions-details">

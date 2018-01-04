@@ -1,19 +1,16 @@
-const fraudFilterValues = [
+const fraudStatusValues = [
   {
-    'label': 'Pending fraud check',
-    'value': 'FRAUD CHECK NOT CHECKED',
-    class: 'pending'
+    'label': 'Email Blacklisted',
+    'value': 'is_email_blacklisted'
   },
   {
-    'label': 'Customer contacted',
-    'value': 'FRAUD CHECK CUSTOMER CONTACTED',
-    'class': 'contacted'
+    'label': 'Postcode Blacklisted',
+    'value': 'is_postcode_blacklisted'
   },
   {
-    'label': 'Rejected',
-    'value': 'FRAUD CHECK FAILED',
-    'class': 'rejected'
+    'label': 'First Orders',
+    'value': 'is_first_order'
   }
 ];
 
-export default fraudFilterValues
+export default fraudStatusValues

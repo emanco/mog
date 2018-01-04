@@ -19,6 +19,12 @@ export function fraudCheckStatus(statusVal) {
   if (testVal.indexOf('FAILED') > -1) {
     return 'failed'
   }
+  if(testVal.indexOf('CONTACTED') > -1) {
+    return 'contacted'
+  }
+  if(testVal.indexOf('NOT CHECKED') > -1) {
+    return 'pending'
+  }
 }
 
 export function currency(currencyCode) {

@@ -1,6 +1,6 @@
 // Common libraries
 import React, { Component } from 'react';
-import fraudFilterValues from '../../constants/fraudFilterValues';
+import fraudStatusValues from '../../constants/fraudStatusValues';
 import '../../scss/components/stickyDropdown.css';
 
 class StickyDropdown extends Component {
@@ -11,8 +11,8 @@ class StickyDropdown extends Component {
     this.toggleMenuClick = this.toggleMenuClick.bind(this)
     this.handleFilterSelect = this.handleFilterSelect.bind(this)
     this.state = {
-      currentLabel: fraudFilterValues[0].label,
-      currentValue: fraudFilterValues[0].value,
+      currentLabel: fraudStatusValues[0].label,
+      currentValue: fraudStatusValues[0].value,
       ddOpen: false
     }
   }
@@ -42,7 +42,7 @@ class StickyDropdown extends Component {
         <div className="sticky-dropdown-current heading1" onClick={() => this.toggleMenuClick()}>{this.state.currentLabel}</div>
         {this.state.ddOpen && <div className="sticky-dropdown-list">
           <ul>
-          { fraudFilterValues.map((item, key) => {
+          { fraudStatusValues.map((item, key) => {
               return (
                 <li key={key} onClick={() => this.handleFilterSelect(item) } className={"sticky-dropdown-list-item sticky-item-" + item.class}>{item.label}</li>
               )

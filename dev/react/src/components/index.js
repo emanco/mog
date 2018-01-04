@@ -10,3 +10,5 @@ export {Tags} from './Tags/Tags'
 
 export {FraudCheckList} from './FraudCheckList/FraudCheckList'
 export {FraudCheckListItem} from './FraudCheckListItem/FraudCheckListItem'
+
+export {SelectBox} from './SelectBox/SelectBox'

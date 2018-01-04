@@ -8,7 +8,10 @@ import CustomerInfo from '../../components/CustomerInfo/CustomerInfo';
 import CustomerOrderList from '../../components/CustomerOrderList/CustomerOrderList';
 import StickyBar from '../../components/StickyBar/StickyBar';
 import StickyActions from '../../components/StickyActions/StickyActions';
+import SelectBox from '../../components/SelectBox/SelectBox';
 
+import fraudStatusValues from '../../constants/fraudStatusValues';
+import fraudFilterValues from '../../constants/fraudFilterValues';
 import getUrlParam from '../../helpers/getUrlParam'
 
 import './../../scss/components/fraudCheckOverview.css';
@@ -19,7 +22,8 @@ import './../../scss/components/fraudCheckOverview.css';
     orderData: state.fraudCheckOverviewReducer.orderPayload,
     orderLoading: state.fraudCheckOverviewReducer.orderLoading,
     listLoading: state.fraudCheckOverviewReducer.loading,
-    currentlyViewedOrder: state.fraudCheckOverviewReducer.currentOrderRef
+    currentlyViewedOrder: state.fraudCheckOverviewReducer.currentOrderRef,
+    fraudStatus: state.fraudCheckOverviewReducer.fraudStatus
   }),
   {...fraudCheckOverviewActions}
 )
@@ -27,12 +31,12 @@ export default class fraudCheckOverview extends Component {
 
   constructor(props) {
     super(props)
-    this.handleFraudCheckListHover = this.handleFraudCheckListHover.bind(this)
     this.handleUpdateOrder = this.handleUpdateOrder.bind(this)
+    this.handleFraudStatus = this.handleFraudStatus.bind(this)
   }
 
   componentDidMount() {
-    this.props.getFraudCheckList();
+    this.props.getFraudCheckList({status: 'FRAUD CHECK NOT CHECKED'});
   }
 
   handleFraudCheckListHover = (orderRef) => {
@@ -42,25 +46,32 @@ export default class fraudCheckOverview extends Component {
     }
   }
 
-  handleFraudFilterting = (value) => {
+  handleFraudStatus = (value) => {
+    this.props.upateFilter(value)
     this.props.getFraudCheckList({
-      status: value
+      status: value,
+      limit: 20
     })
   }
 
-  handlePaginationChange = (page) => {
-    console.log('MAKE AN API CALL FOR PAGINATION');
-    console.log('Page Requested: ' + page)
+  handleFilterChange = (filterName) => {
+    // Call Action to go update the view.
+    this.props.getFraudCheckList({
+      [filterName] : true,
+      status : this.props.fraudStatus
+    })
+  }
+
+  handlePaginationChange = (page, direction) => {
     const offset = getUrlParam(this.props.data.next, 'offset')
-    console.log(offset)
     this.props.getFraudCheckList({
-      offset: offset
+      offset: offset,
+      limit: 20
     })
   }
 
-  handleUpdateOrder = (noteObj, orderId) => {
-    console.log('APPROVE ORDER IN OVERVIEW')
-    this.props.updateOrderStatus(noteObj, orderId)
+  handleUpdateOrder = (noteObj, orderId, actionType) => {
+    this.props.updateOrderStatus(noteObj, orderId, actionType, this.props.fraudStatus)
   }
 
   handleDeclineOrder = (orderId) => {
@@ -68,7 +79,6 @@ export default class fraudCheckOverview extends Component {
   }
 
   render() {
-    console.log(this.state)
     //const overlay = this.state.overlay
     if (!this.props.data || !this.props.orderData) {
       return (
@@ -80,20 +90,32 @@ export default class fraudCheckOverview extends Component {
     } else {
       const orderLoadingClass = this.props.orderLoading ? '-loading' : '';
       const listLoadingClass = this.props.listLoading ? '-loading' : '';
+
       return(
         <div>
           <StickyBar
             path={this.props.location.pathname}
-            filterListCallback={() => this.handleFraudFiltering }/>
+            filterListCallback={this.handleFraudStatus }/>
           <div className="fraudCheckOverview">
             <div className={"left-panel " + listLoadingClass}>
-              <div>{this.props.data.count} Items</div>
+              <div className="fraudCheckOverview-meta">
+                <div className="fraudCheckOverview-count">{this.props.data.count} Items</div>
+
+                <SelectBox
+                  options={fraudFilterValues}
+                  handleChange={this.handleFilterChange}
+                  placeholder='Filter by'
+                  />
+              </div>
+              {this.props.data.count < 1 && <h3 className='h3'>No Results</h3>}
               <FraudCheckList
                 data={this.props.data}
                 hoverCallback={this.handleFraudCheckListHover}
                 handlePaginationChange={this.handlePaginationChange}/>
             </div>
             <div className={"right-panel -light-inset cust-scroll fraudCheckOverview-order " + orderLoadingClass}>
+            {this.props.data.results[0] &&
+            <div className="fraudCheck-right-wrap">
               <div className="fraudCheckOverview-right-inner">
               <CustomerInfo
                 customerid={this.props.data.results[0].customer_reference}
@@ -103,7 +125,9 @@ export default class fraudCheckOverview extends Component {
                 data={this.props.orderData[1].data[0]}
                 customerid={this.props.data.results[0].customer_reference} />
               </div>
-              <StickyActions orderRef={this.props.currentlyViewedOrder} updateOrderCallback={this.handleUpdateOrder} declineCallback={this.handleDeclineOrder} />
+              <StickyActions loadingStatus={this.props.orderLoading} orderRef={this.props.currentlyViewedOrder} updateOrderCallback={this.handleUpdateOrder} declineCallback={this.handleDeclineOrder} />
+              </div>
+              }
             </div>
           </div>
         </div>

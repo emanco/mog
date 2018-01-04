@@ -23,9 +23,14 @@ export default class FraudCheckList extends Component {
     this.props.handlePaginationChange(page);
   }
 
-  render() {
-    const pageCount = Math.floor(this.props.data.count / getUrlParam(this.props.data.next, 'limit'));
+  calculatePagination = () => {
+    if (this.props.data.next !== null) {
+      return Math.floor(this.props.data.count / getUrlParam(this.props.data.next, 'limit'));
+    }
+  }
 
+  render() {
+    const pageCount = this.calculatePagination(this.props.data.next);
     return(
       <div>
         {
@@ -33,7 +38,7 @@ export default class FraudCheckList extends Component {
             return (<FraudCheckListItem data={result} key={i} itemClickCallback={this.handleOnItemClickCallback}/>)
           })
         }
-        <Pagination pageCount={pageCount} handlePaginationChange={this.handlePaginationChange} />
+        {pageCount && <Pagination pageCount={pageCount} handlePaginationChange={this.handlePaginationChange} />}
       </div>
     )
   }

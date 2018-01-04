@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { authorise } from './auth';
 import { fraudCheckOrders, postOrderNoteEndpoint, orderStatusUpdateEndpoint } from '../../constants/endpoints'
-
+import fraudStatusValues from '../../constants/fraudStatusValues';
 
 import buildQueryUrl from '../../helpers/buildQueryUrl'
-import { getCustomer, getOrders } from './customers'
+import { getCustomer, getOrders, getSingleCustomerOrders } from './customers'
 import fraudCheckOrderData from '../../mock-data/fraud-check-orders'
 // Actions
 const LOADING_LIST = 'myOp/fraudCheckOverviewList/LOADING';
@@ -25,7 +25,8 @@ const initialState = {
     success: false,
     orderLoading: false,
     orderSuccess: false,
-    payload: {}
+    payload: {},
+    fraudStatus: fraudStatusValues[0].value
 }
 
 export default function fraudCheckOverviewReducer(state = initialState, action = '') {
@@ -38,13 +39,17 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
                 success: false
             };
         case LOADED_LIST :
-        console.log(action.payload.data)
+            console.log(action.payload.data)
+            let ref = null;
+            if (action.payload.data.results[0]) {
+              ref = action.payload.data.results[0].order_reference;
+            }
             return {
                 ...state,
                 loading: false,
                 success: true,
-                payload: action.payload.data, // Not sure why it's so deep like this but this gives the actual results
-                currentOrderRef: action.payload.data.results[0].order_reference // on the basis whenever the list updates the order showed is the first in the list
+                payload: action.payload.data,
+                currentOrderRef: ref
             };
         case FAILED_LIST :
             return {
@@ -77,9 +82,23 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
             orderSuccess: true,
             orderPayload: action.payload
           }
+        case 'FRAUD_LIST_FILTER' :
+          return {
+            ...state,
+            fraudStatus: action.fraudStatus
+          }
         default:
             return state;
     }
+}
+
+export function upateFilter (filterValue) {
+  return (dispatch) => {
+    dispatch({
+      type: 'FRAUD_LIST_FILTER',
+      fraudStatus: filterValue
+    })
+  }
 }
 
 // get Search results with this action, separated by the combined above
@@ -93,7 +112,6 @@ export function getFraudCheckList (queryParams = {}) {
 
   const queryUrl = buildQueryUrl(fraudCheckOrders, queryParams)
 
-  // @todo - PUT BACK WHEN THE API IS WORKING CORRECTLY
   return (dispatch, getState) => {
 
     if (!getState().authReducer.authToken) {
@@ -113,7 +131,6 @@ export function getFraudCheckList (queryParams = {}) {
         }).then((result) => {
           // @TODO - Check if offset is zero. If so we need to load the first customer and order details
           console.log(result)
-          // dispatch(getFraudCheckListOrders(result.payload.data[0].results[0].customer_reference))
           dispatch(getFraudCheckListOrder(result.payload.data.results[0].customer_reference))
           // Also get customer data
         })
@@ -121,39 +138,24 @@ export function getFraudCheckList (queryParams = {}) {
       });
 
     } else {
-
-      return dispatch({
-        types: [LOADING_LIST, LOADED_LIST, FAILED_LIST],
-        payload: {
-          request: {
-            url: queryUrl,
-            headers: {'Authorization': 'Bearer ' + getState().authReducer.authToken}
+       return dispatch({
+          types: [LOADING_LIST, LOADED_LIST, FAILED_LIST],
+          payload: {
+            request: {
+              url: queryUrl,
+              headers: {'Authorization': 'Bearer ' + getState().authReducer.authToken}
+            }
           }
-        }
-      }).then((result) => {
-        // @TODO - Check if offset is zero. If so we need to load the first customer and order details
-        console.log(result)
-        // dispatch(getFraudCheckListOrders(result.payload.data[0].results[0].customer_reference))
-        dispatch(getFraudCheckListOrder(result.payload.data.results[0].customer_reference))
-        // Also get customer data
-      })
-
+        }).then((result) => {
+          // @TODO - Check if offset is zero. If so we need to load the first customer and order details
+          console.log(result)
+          if (result.payload.data.count > 0) {
+           dispatch(getFraudCheckListOrder(result.payload.data.results[0].customer_reference))
+          }
+        })
     }
 
 };
-
-
-  /*
-    console.log('GET FRAUD CHECKLIST')
-    return (dispatch, getState) => {
-      console.log(getState().authReducer.authToken)
-      dispatch({
-        type: LOADED_LIST,
-        payload: fraudCheckOrderData
-      })
-      //MOCKED DATA
-      dispatch(getFraudCheckListOrder('CUS123456789', 'ORD001132422'))
-    } */
 }
 
 // Get details on the list item currently being hovered over
@@ -165,10 +167,10 @@ export function getFraudCheckListOrder (id, orderRef) {
    */
   let testid = 'CUS123456789' /* @TODO - MAKE THIS DYNAMIC */
   console.log('CHECKLIST ORDER')
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type: 'FRAUD_ORDER',
-      payload: axios.all([getCustomer(testid), getOrders(testid)])
+      payload: axios.all([getCustomer(testid), getOrders(id)])
     })
   }
 
@@ -193,9 +195,23 @@ export function postOrderNote (noteObj) {
 }
 
 
-export function updateOrderStatus (noteObj, orderId) {
+export function updateOrderStatus (noteObj, orderRef, actionType, fraudStatus) {
   console.log('FRAUD CHECK OVERVIEW - UPDATE ORDER STATUS')
-  console.log(noteObj)
+  console.log(actionType)
+  let status = '';
+
+  switch(actionType) {
+    case 'approve':
+      status = 'FRAUD CHECK PASSED';
+      break;
+    case 'decline':
+      status = 'FRAUD CHECK FAILED';
+      break;
+    case 'contact':
+      status = 'FRAUD CHECK CONTACTED';
+      break;
+  }
+
   return (dispatch, getState) => {
     dispatch({
       type: UPDATE_ORDER,
@@ -205,8 +221,8 @@ export function updateOrderStatus (noteObj, orderId) {
           headers: {'Authorization': 'Bearer ' + getState().authReducer.authToken},
           method: 'POST',
           data: {
-            "order_reference": "ORD000123456",
-            "status_code": "FRAUD CHECK PASSED"
+            "order_reference": orderRef,
+            "status_code": status
           }
         }
       }
@@ -215,7 +231,9 @@ export function updateOrderStatus (noteObj, orderId) {
       if (noteObj.content.length > 1) {
         dispatch(postOrderNote(noteObj));
       }
-      dispatch(getFraudCheckList())
+      dispatch(getFraudCheckList({
+        status: fraudStatus
+      }))
     })
   }
 }

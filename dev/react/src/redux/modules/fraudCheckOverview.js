@@ -4,7 +4,7 @@ import { fraudCheckOrders, postOrderNoteEndpoint, orderStatusUpdateEndpoint } fr
 import fraudStatusValues from '../../constants/fraudStatusValues';
 
 import buildQueryUrl from '../../helpers/buildQueryUrl'
-import { getCustomer, getOrders } from './customers'
+import { getCustomer, getOrders, getSingleCustomerOrders } from './customers'
 import fraudCheckOrderData from '../../mock-data/fraud-check-orders'
 // Actions
 const LOADING_LIST = 'myOp/fraudCheckOverviewList/LOADING';
@@ -167,7 +167,7 @@ export function getFraudCheckListOrder (id, orderRef) {
    */
   let testid = 'CUS123456789' /* @TODO - MAKE THIS DYNAMIC */
   console.log('CHECKLIST ORDER')
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type: 'FRAUD_ORDER',
       payload: axios.all([getCustomer(testid), getOrders(id)])

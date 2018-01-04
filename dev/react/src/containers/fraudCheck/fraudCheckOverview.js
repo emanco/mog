@@ -33,6 +33,10 @@ export default class fraudCheckOverview extends Component {
     super(props)
     this.handleUpdateOrder = this.handleUpdateOrder.bind(this)
     this.handleFraudStatus = this.handleFraudStatus.bind(this)
+
+    this.state = {
+      paginationPage: 0
+    }
   }
 
   componentDidMount() {
@@ -64,10 +68,15 @@ export default class fraudCheckOverview extends Component {
 
   handlePaginationChange = (page, direction) => {
     const offset = getUrlParam(this.props.data.next, 'offset')
+
     this.props.getFraudCheckList({
-      offset: offset,
+      offset: page * 20,
       limit: 20
     })
+
+    this.setState({
+      paginationPage: page
+    });
   }
 
   handleUpdateOrder = (noteObj, orderId, actionType) => {

@@ -12,6 +12,11 @@
   .fraudCheckOverview-right-inner {
     padding-left: 3%;
     padding-right: 3%;
+    padding-bottom: 20%;
+
+    .view-more {
+      display:none;
+    }
   }
   .sticky-actions {
     position: fixed;
@@ -50,5 +55,9 @@
   .Select {
     float: right;
     width: 185px;
+
+    .Select-clear {
+      line-height: inherit;
+    }
   }
 }

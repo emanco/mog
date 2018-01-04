@@ -7,7 +7,10 @@
   padding-bottom: 0; }
   .fraudCheckOverview-order.right-panel.cust-scroll .fraudCheckOverview-right-inner {
     padding-left: 3%;
-    padding-right: 3%; }
+    padding-right: 3%;
+    padding-bottom: 20%; }
+    .fraudCheckOverview-order.right-panel.cust-scroll .fraudCheckOverview-right-inner .view-more {
+      display: none; }
   .fraudCheckOverview-order.right-panel.cust-scroll .sticky-actions {
     position: fixed;
     width: 50%;
@@ -35,3 +38,5 @@
   .fraudCheckOverview-meta .Select {
     float: right;
     width: 185px; }
+    .fraudCheckOverview-meta .Select .Select-clear {
+      line-height: inherit; }

@@ -84,10 +84,10 @@ export default class StickyActions extends Component {
     }
 
     this.props.updateOrderCallback(noteObj, orderRef, this.state.action)
-
     this.setState({
       status: 'closed',
-      action: ''
+      action: '',
+      noteValue: ''
     })
   }
 
@@ -101,7 +101,7 @@ export default class StickyActions extends Component {
           <div className="stickyActions-form-title">
             <h3 className='h3'>{this.state.title}</h3>
           </div>
-          <textarea className="form-control stickActions-comment" onChange={this.handleNoteChange} placeholder="Enter Note" ref={(input) => { this.textArea = input; }}></textarea>
+          <textarea className="form-control stickActions-comment" onChange={this.handleNoteChange} placeholder="Enter Note" value={this.state.noteValue} ref={(input) => { this.textArea = input; }}></textarea>
         </div>
         <div className="stickyActions-controls">
           <div className="stickyActions-details">

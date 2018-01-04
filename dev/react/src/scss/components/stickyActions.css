@@ -1,7 +1,29 @@
+@-webkit-keyframes fade-in-out {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 0.8; } }
+
+@-moz-keyframes fade-in-out {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 0.8; } }
+
+@-webkit-keyframes slide-in {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 0.8; } }
+
+@-moz-keyframes slide-in {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 0.8; } }
+
 .sticky-actions {
-  background: white;
-  width: 100%;
-  overflow: hidden; }
+  background: white; }
   .sticky-actions .sticky-actions-overlay {
     content: '';
     position: fixed;
@@ -13,24 +35,32 @@
     background: rgba(33, 41, 55, 0.8);
     z-index: -4;
     margin: auto;
-    display: none; }
+    display: none;
+    -webkit-animation: fade-in-out .2s ease-in;
+    -moz-animation: fade-in-out .2s ease-in; }
+  .sticky-actions .stickyActions-form {
+    padding: 2em;
+    background: white;
+    position: absolute;
+    top: 0;
+    transition: all .3s ease-out;
+    z-index: -1;
+    overflow: hidden;
+    width: 100%; }
+    .sticky-actions .stickyActions-form .stickyActions-form-title {
+      margin-bottom: 2em;
+      text-transform: capitalize; }
   .sticky-actions.sticky-actions-open {
     border-top: 1px solid #e8e9e9; }
     .sticky-actions.sticky-actions-open .sticky-actions-overlay {
       display: block; }
     .sticky-actions.sticky-actions-open .stickyActions-form {
-      display: block; }
+      top: -388px;
+      height: auto; }
     .sticky-actions.sticky-actions-open .btn-cancel {
       display: inline-block; }
   .sticky-actions .stickyActions-details {
     float: left; }
-  .sticky-actions .stickyActions-form {
-    padding: 2em;
-    background: white;
-    display: none; }
-    .sticky-actions .stickyActions-form .stickyActions-form-title {
-      margin-bottom: 2em;
-      text-transform: capitalize; }
   .sticky-actions .stickyActions-controls {
     border-top: 1px solid #e8e9e9;
     padding: 2em;

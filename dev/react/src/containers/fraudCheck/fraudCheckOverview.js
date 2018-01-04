@@ -115,7 +115,7 @@ export default class fraudCheckOverview extends Component {
             </div>
             <div className={"right-panel -light-inset cust-scroll fraudCheckOverview-order " + orderLoadingClass}>
             {this.props.data.results[0] &&
-            <div>
+            <div className="fraudCheck-right-wrap">
               <div className="fraudCheckOverview-right-inner">
               <CustomerInfo
                 customerid={this.props.data.results[0].customer_reference}

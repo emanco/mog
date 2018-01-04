@@ -25,7 +25,9 @@ export default class StickyActions extends Component {
 
   componentDidUpdate() {
     if (this.state.status === "open") {
-      this.textArea.focus();
+      setTimeout(() => {
+        this.textArea.focus();
+      }, 200)
     }
   }
 
@@ -40,7 +42,6 @@ export default class StickyActions extends Component {
   }
 
   handleClickDecline = (orderRef) => {
-    // this.props.toggleOpenCallback()
     this.setState({
       status: 'open',
       action: 'decline',
@@ -51,7 +52,6 @@ export default class StickyActions extends Component {
   }
 
   handleClickContacted = (orderRef) => {
-    // this.props.toggleOpenCallback()
     this.setState({
       status: 'open',
       action: 'contact',
@@ -94,7 +94,7 @@ export default class StickyActions extends Component {
   render() {
     const stateClass = this.state.status
     const actionClass = this.state.action
-    console.log(this.props.orderRef)
+
     return(
       <div className={'sticky-actions sticky-actions-' + stateClass + ' sticky-actions-' + actionClass}>
         <div className='sticky-actions-overlay' onClick={this.handleToggleForm}></div>

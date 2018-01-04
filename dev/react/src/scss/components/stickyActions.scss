@@ -1,12 +1,29 @@
 @import "../customBase/variables.scss";
 @import '../base/1_vars.scss';
 
+@-webkit-keyframes fade-in-out {
+      0% { opacity: 0;}
+    100% { opacity: 0.8;}
+}
+@-moz-keyframes fade-in-out {
+      0% { opacity: 0;}
+    100% { opacity: 0.8;}
+}
+
+
+@-webkit-keyframes slide-in {
+      0% { opacity: 0;}
+    100% { opacity: 0.8;}
+}
+@-moz-keyframes slide-in {
+      0% { opacity: 0;}
+    100% { opacity: 0.8;}
+}
+
 $approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
 
 .sticky-actions {
   background: white;
-  width: 100%;
-  overflow:hidden;
 
   .sticky-actions-overlay {
     content: '';
@@ -20,7 +37,26 @@ $approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
     z-index: -4;
     margin: auto;
     display: none;
+    -webkit-animation: fade-in-out .2s ease-in;
+    -moz-animation: fade-in-out .2s ease-in;
   }
+
+  .stickyActions-form {
+    padding: 2em;
+    background: white;
+    position: absolute;
+    top: 0;
+    transition: all .3s ease-out;
+    z-index: -1;
+    overflow: hidden;
+    width: 100%;
+
+    .stickyActions-form-title {
+      margin-bottom: 2em;
+      text-transform: capitalize;
+    }
+  }
+
 
   &.sticky-actions-open {
     border-top: 1px solid map-get($colours, 'line');
@@ -30,7 +66,8 @@ $approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
     }
 
     .stickyActions-form {
-      display: block;
+      top: -388px;
+      height: auto;
     }
 
     .btn-cancel {
@@ -41,18 +78,6 @@ $approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
   .stickyActions-details {
     float: left;
   }
-
-  .stickyActions-form {
-    padding: 2em;
-    background: white;
-    display: none;
-
-    .stickyActions-form-title {
-      margin-bottom: 2em;
-      text-transform: capitalize;
-    }
-  }
-
 
 
   .stickyActions-controls {

@@ -1,5 +1,7 @@
 @import '../base/1_vars.scss';
 
+$blue : map-get(map-get($colours, 'blue'), 'base');
+
 .pagination {
 
   .break {
@@ -10,7 +12,11 @@
     cursor: pointer;
   }
 }
-
-.pagination > .active > a {
-  background: map-get(map-get($colours, 'blue'), 'btn-blue')
+.pagination > li > a {
+  color: $colour-text;
+}
+.pagination > .active > a,
+.pagination > .active > a:focus {
+  background: $blue;
+  border-color: $blue;
 }

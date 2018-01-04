@@ -4,5 +4,10 @@
 .pagination a {
   cursor: pointer; }
 
-.pagination > .active > a {
-  background: #2671d4; }
+.pagination > li > a {
+  color: #222222; }
+
+.pagination > .active > a,
+.pagination > .active > a:focus {
+  background: #212937;
+  border-color: #212937; }

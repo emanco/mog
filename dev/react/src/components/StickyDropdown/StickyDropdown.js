@@ -44,7 +44,7 @@ class StickyDropdown extends Component {
           <ul>
           { fraudStatusValues.map((item, key) => {
               return (
-                <li key={key} onClick={() => this.handleFilterSelect(item) } className={"sticky-dropdown-list-item sticky-item-" + item.class}>{item.label}</li>
+                <li key={key} onClick={() => this.handleFilterSelect(item) } className={"f36 sticky-dropdown-list-item sticky-item-" + item.class}>{item.label}</li>
               )
             })
           }

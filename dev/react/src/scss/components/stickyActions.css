@@ -55,7 +55,7 @@
     .sticky-actions.sticky-actions-open .sticky-actions-overlay {
       display: block; }
     .sticky-actions.sticky-actions-open .stickyActions-form {
-      top: -388px;
+      top: -206px;
       height: auto; }
     .sticky-actions.sticky-actions-open .btn-cancel {
       display: inline-block; }
@@ -67,7 +67,8 @@
     overflow: hidden;
     background: white; }
   .sticky-actions .stickActions-comment {
-    height: 258px; }
+    height: auto;
+    resize: none; }
   .sticky-actions .sticky-bottom {
     bottom: 0;
     width: 100%; }

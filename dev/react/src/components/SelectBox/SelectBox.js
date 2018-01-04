@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Select from 'react-select-plus';
 import 'react-select-plus/dist/react-select-plus.css';
 
+import fraudStatusValue from '../../constants/fraudStatusValues';
+
 class SelectBox extends Component {
 
   constructor(props) {
@@ -15,9 +17,14 @@ class SelectBox extends Component {
 
   handleChange = (selectedOption) => {
     this.setState({ selectedOption });
-    this.props.handleChange(selectedOption.value)
-    console.log(selectedOption)
-    console.log(`Selected: ${selectedOption.label}`);
+    let option = selectedOption
+    if (!selectedOption) {
+      option = {
+        value: ''
+      }
+    }
+
+    this.props.handleChange(option.value);
   }
 
   render() {
@@ -27,7 +34,6 @@ class SelectBox extends Component {
         value={this.state.selectedOption}
         placeholder={this.props.placeholder}
         onChange={this.handleChange}
-        clearable={false}
         options={this.props.options}
       />
     );

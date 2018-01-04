@@ -4,7 +4,7 @@ import { fraudCheckOrders, postOrderNoteEndpoint, orderStatusUpdateEndpoint } fr
 import fraudStatusValues from '../../constants/fraudStatusValues';
 
 import buildQueryUrl from '../../helpers/buildQueryUrl'
-import { getCustomer, getOrders } from './customers'
+import { getCustomer, getOrders, getSingleCustomerOrders } from './customers'
 import fraudCheckOrderData from '../../mock-data/fraud-check-orders'
 // Actions
 const LOADING_LIST = 'myOp/fraudCheckOverviewList/LOADING';
@@ -39,19 +39,17 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
                 success: false
             };
         case LOADED_LIST :
-        console.log(action.payload.data)
+            console.log(action.payload.data)
+            let ref = null;
+            if (action.payload.data.results[0]) {
+              ref = action.payload.data.results[0].order_reference;
+            }
             return {
                 ...state,
                 loading: false,
                 success: true,
-                payload: action.payload.data, // Not sure why it's so deep like this but this gives the actual results
-                currentOrderRef: () => {
-                  if (action.payload.data.results[0]) {
-                    return action.payload.data.results[0].order_reference
-                  } else {
-                    return null
-                  }
-                }
+                payload: action.payload.data,
+                currentOrderRef: ref
             };
         case FAILED_LIST :
             return {
@@ -85,8 +83,6 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
             orderPayload: action.payload
           }
         case 'FRAUD_LIST_FILTER' :
-        console.log('FRAUD LIST FILTER')
-        console.log(action)
           return {
             ...state,
             fraudStatus: action.fraudStatus
@@ -116,7 +112,6 @@ export function getFraudCheckList (queryParams = {}) {
 
   const queryUrl = buildQueryUrl(fraudCheckOrders, queryParams)
 
-  // @todo - PUT BACK WHEN THE API IS WORKING CORRECTLY
   return (dispatch, getState) => {
 
     if (!getState().authReducer.authToken) {
@@ -172,7 +167,7 @@ export function getFraudCheckListOrder (id, orderRef) {
    */
   let testid = 'CUS123456789' /* @TODO - MAKE THIS DYNAMIC */
   console.log('CHECKLIST ORDER')
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type: 'FRAUD_ORDER',
       payload: axios.all([getCustomer(testid), getOrders(id)])

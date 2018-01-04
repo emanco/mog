@@ -23,8 +23,15 @@ export default class StickyActions extends Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.state.status === "open") {
+      setTimeout(() => {
+        this.textArea.focus();
+      }, 200)
+    }
+  }
+
   handleClickApprove = (orderRef) => {
-    // this.props.toggleOpenCallback()
     this.setState({
       status: 'open',
       action: 'approve',
@@ -35,7 +42,6 @@ export default class StickyActions extends Component {
   }
 
   handleClickDecline = (orderRef) => {
-    // this.props.toggleOpenCallback()
     this.setState({
       status: 'open',
       action: 'decline',
@@ -46,7 +52,6 @@ export default class StickyActions extends Component {
   }
 
   handleClickContacted = (orderRef) => {
-    // this.props.toggleOpenCallback()
     this.setState({
       status: 'open',
       action: 'contact',
@@ -77,28 +82,27 @@ export default class StickyActions extends Component {
       order_reference: orderRef,
       content: this.state.noteValue
     }
-    console.log('HANDLE SUBMIT IN STICKY ACTIONS');
-    console.log(noteObj)
 
     this.props.updateOrderCallback(noteObj, orderRef, this.state.action)
-
-    // @TODO  - Clarify the UI when this has been submitted. at present we close this and display a notification after, whether it's successful or not. Shoud we wait for confirmation of success before closing this? Not covered in requirements right now.
     this.setState({
       status: 'closed',
-      action: ''
+      action: '',
+      noteValue: ''
     })
   }
 
   render() {
     const stateClass = this.state.status
     const actionClass = this.state.action
+
     return(
       <div className={'sticky-actions sticky-actions-' + stateClass + ' sticky-actions-' + actionClass}>
+        <div className='sticky-actions-overlay' onClick={this.handleToggleForm}></div>
         <div className="stickyActions-form">
           <div className="stickyActions-form-title">
             <h3 className='h3'>{this.state.title}</h3>
           </div>
-          <textarea className="form-control stickActions-comment" onChange={this.handleNoteChange} placeholder="Enter Note"></textarea>
+          <textarea className="form-control stickActions-comment" onChange={this.handleNoteChange} placeholder="Enter Note" value={this.state.noteValue} ref={(input) => { this.textArea = input; }}></textarea>
         </div>
         <div className="stickyActions-controls">
           <div className="stickyActions-details">

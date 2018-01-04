@@ -65,6 +65,8 @@ export function authorise () {
           }
         }
       }
+    }).then((data) => {
+      window.localStorage.setItem('apiKey', data.payload.data['access_token'])
     })
   }
 };

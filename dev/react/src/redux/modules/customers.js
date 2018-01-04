@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { authorise } from './auth';
-import { baseURL } from '../../constants/endpoints';
+import { customersEndpoint } from '../../constants/endpoints';
 
 export default function summaryReducer(state = {}, action = '') {
     switch (action.type)
@@ -55,6 +55,14 @@ const getOrders = (id) => {
     return axios.get('https://mog-api.herokuapp.com/orders/');
 };
 
+const getSingleCustomerOrders = (id) => {
+    return axios({
+      method: 'GET',
+      url: customersEndpoint + '/' + id + '/orders',
+      headers: {Authorization: 'Bearer ' + window.localStorage.getItem('apiKey')}
+    });
+}
+
 const getPrescriptions = (id) => {
     return axios.get('https://mog-api.herokuapp.com/prescriptions/')
 }
@@ -90,4 +98,4 @@ const getData = (id) => {
 
 
 
-export { getData, getCustomer, getOrders };
+export { getData, getCustomer, getOrders, getSingleCustomerOrders };

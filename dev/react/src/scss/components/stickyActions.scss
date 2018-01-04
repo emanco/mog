@@ -8,7 +8,7 @@ $approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
   width: 100%;
   overflow:hidden;
 
-  &:after {
+  .sticky-actions-overlay {
     content: '';
     position: fixed;
     top: 0;
@@ -25,7 +25,7 @@ $approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
   &.sticky-actions-open {
     border-top: 1px solid map-get($colours, 'line');
 
-    &:after {
+    .sticky-actions-overlay {
       display: block;
     }
 

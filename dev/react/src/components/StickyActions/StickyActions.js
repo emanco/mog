@@ -97,6 +97,7 @@ export default class StickyActions extends Component {
     console.log(this.props.orderRef)
     return(
       <div className={'sticky-actions sticky-actions-' + stateClass + ' sticky-actions-' + actionClass}>
+        <div className='sticky-actions-overlay' onClick={this.handleToggleForm}></div>
         <div className="stickyActions-form">
           <div className="stickyActions-form-title">
             <h3 className='h3'>{this.state.title}</h3>

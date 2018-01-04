@@ -2,7 +2,7 @@
   background: white;
   width: 100%;
   overflow: hidden; }
-  .sticky-actions:after {
+  .sticky-actions .sticky-actions-overlay {
     content: '';
     position: fixed;
     top: 0;
@@ -16,7 +16,7 @@
     display: none; }
   .sticky-actions.sticky-actions-open {
     border-top: 1px solid #e8e9e9; }
-    .sticky-actions.sticky-actions-open:after {
+    .sticky-actions.sticky-actions-open .sticky-actions-overlay {
       display: block; }
     .sticky-actions.sticky-actions-open .stickyActions-form {
       display: block; }

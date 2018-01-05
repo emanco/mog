@@ -99,7 +99,6 @@ export default class StickyActions extends Component {
 
   handleShortcutSubmit = (keyName, e, handle) => {
     // Handles all actions and submits the action
-    console.log('SHORTCUT')
     if (keyName === 'shift+return'){
       this.handleSubmit(this.props.orderRef)
     }
@@ -108,7 +107,6 @@ export default class StickyActions extends Component {
   handleKeyboardOpen = (keyName, e, handle) => {
     switch(keyName) {
         case 'shift+a':
-        console.log(keyName)
           this.setState({
             status: 'open',
             action: 'contact',
@@ -147,7 +145,7 @@ export default class StickyActions extends Component {
             className="form-control stickyActions-comment"
             rows="2"
             onChange={this.handleNoteChange}
-            placeholder="Enter Note"
+            placeholder="Enter Note..."
             value={this.state.noteValue}
             ref={(input) => { this.textArea = input; }}
             ></textarea>

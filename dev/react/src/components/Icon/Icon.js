@@ -11,10 +11,6 @@ export default class Icon extends Component {
    *
    */
 
-  componentDidMount() {
-
-    }
-
   render() {
     const classString = 'icon ' + this.props.className + ' ' + this.props.icon;
     return(

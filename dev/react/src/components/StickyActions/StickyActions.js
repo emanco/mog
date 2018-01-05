@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import Hotkeys from 'react-hot-keys';
 import Moment from 'react-moment';
 
 import './../../scss/components/stickyActions.css';
@@ -14,6 +15,9 @@ export default class StickyActions extends Component {
     this.handleClickDecline = this.handleClickDecline.bind(this)
 
     this.handleNoteChange = this.handleNoteChange.bind(this);
+    this.handleShortcutSubmit = this.handleShortcutSubmit.bind(this);
+    this.handleToggleForm = this.handleToggleForm.bind(this);
+    this.handleShortcutOpen = this.handleShortcutOpen(this);
 
     this.state = {
       status: 'closed',
@@ -27,7 +31,7 @@ export default class StickyActions extends Component {
     if (this.state.status === "open") {
       setTimeout(() => {
         this.textArea.focus();
-      }, 200)
+      }, 200) // This needs to match the animation time set in CSS otherwise the view will jump
     }
   }
 
@@ -89,6 +93,44 @@ export default class StickyActions extends Component {
       action: '',
       noteValue: ''
     })
+
+    console.log(this.state.noteValue)
+  }
+
+  handleShortcutSubmit = (keyName, e, handle) => {
+    // Handles all actions and submits the action
+    console.log('SHORTCUT')
+    if (keyName === 'shift+return'){
+      this.handleSubmit(this.props.orderRef)
+    }
+  }
+
+  handleShortcutOpen = (keyName,e,handle) => {
+    console.log(keyName)
+    switch(keyName) {
+        case 'shift+a':
+        console.log(keyName)
+          this.setState({
+            status: 'open',
+            action: 'contact',
+            title: 'contacted'
+          });
+          break;
+        case 'shift+d':
+          this.setState({
+            status: 'open',
+            action: 'decline',
+            title: 'declined'
+          });
+          break;
+        case 'shift+c':
+          this.setState({
+            status: 'open',
+            action: 'contact',
+            title: 'contacted'
+          });
+          break;
+    }
   }
 
   render() {
@@ -102,18 +144,49 @@ export default class StickyActions extends Component {
           <div className="stickyActions-form-title">
             <h3 className='h3'>{this.state.title}</h3>
           </div>
-          <textarea className="form-control stickyActions-comment" rows="2" onChange={this.handleNoteChange} placeholder="Enter Note" value={this.state.noteValue} ref={(input) => { this.textArea = input; }}></textarea>
+          <textarea
+            className="form-control stickyActions-comment"
+            rows="2"
+            onChange={this.handleNoteChange}
+            placeholder="Enter Note"
+            value={this.state.noteValue}
+            ref={(input) => { this.textArea = input; }}
+            ></textarea>
         </div>
         <div className="stickyActions-controls">
           <div className="stickyActions-details">
             <div className="stickyActions-orderRef heading2">{this.props.orderRef}</div>
-            <div className="stickyActions-meta"><Moment date={'2017-12-01T12:34:38.934712'} format="ddd Do MMM YYYY" /></div>
+            <div className="stickyActions-meta">
+              <Moment
+                date={'2017-12-01T12:34:38.934712'}
+                format="ddd Do MMM YYYY" />
+            </div>
           </div>
           <div className="stickyActions-cta">
-            <button className="button btn-cancel" onClick={() => { this.handleToggleForm()}}>Cancel</button>
-            <button className="button btn-approve" onClick={() => {this.handleClickApprove(this.props.orderRef)}}>Approve</button>
-            <button className="button btn-decline" onClick={() => {this.handleClickDecline(this.props.orderRef)}}>Decline</button>
-            <button className="button btn-contacted" onClick={() => {this.handleClickContacted(this.props.orderRef)}}>Contacted</button>
+            <Hotkeys
+              keyName="shift+return"
+              onKeyUp={this.handleShortcutSubmit}>
+              <button
+                className="button btn-cancel"
+                onClick={this.handleToggleForm}>
+                Cancel
+              </button>
+                <button
+                  className="button btn-approve"
+                  onClick={() => {this.handleClickApprove(this.props.orderRef)}}>
+                  Approve
+                </button>
+
+            <button className="button btn-decline"
+              onClick={() => {this.handleClickDecline(this.props.orderRef)}}>
+              Decline
+            </button>
+            <button
+              className="button btn-contacted"
+              onClick={() => {this.handleClickContacted(this.props.orderRef)}}>
+              Contacted
+            </button>
+            </Hotkeys>
           </div>
         </div>
       </div>

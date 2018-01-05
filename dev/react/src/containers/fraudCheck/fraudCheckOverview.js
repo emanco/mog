@@ -38,13 +38,6 @@ export default class fraudCheckOverview extends Component {
     this.props.getFraudCheckList({status: 'FRAUD CHECK NOT CHECKED'});
   }
 
-  handleFraudCheckListHover = (orderRef) => {
-    // Check we're not already displaying the order
-    if (orderRef !== this.props.data.results[0].order_reference) {
-      this.props.getFraudCheckListOrder('CUS123456789');
-    }
-  }
-
   handleFraudStatus = (value) => {
     this.props.upateFilter(value)
     this.props.getFraudCheckList({
@@ -114,7 +107,6 @@ export default class fraudCheckOverview extends Component {
               {this.props.data.count < 1 && <h3 className='h3'>No Results</h3>}
               <FraudCheckList
                 data={this.props.data}
-                hoverCallback={this.handleFraudCheckListHover}
                 handlePaginationChange={this.handlePaginationChange}/>
             </div>
             <div className={"right-panel -light-inset cust-scroll fraudCheckOverview-order " + orderLoadingClass}>

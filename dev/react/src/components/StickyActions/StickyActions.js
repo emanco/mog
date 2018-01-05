@@ -208,8 +208,6 @@ export default class StickyActions extends Component {
 
 
 StickyActions.propTypes = {
-  /*
-  *   Array of orders to be displayed in the list
-  */
-  data: PropTypes.object
+  data: PropTypes.object,
+  orderRef: PropTypes.string
 }

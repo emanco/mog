@@ -1,5 +1,6 @@
 // Common libraries
 import React, { Component } from 'react';
+import {PropTypes} from 'prop-types';
 
 // Include dumb component
 import Moment from 'react-moment';
@@ -86,3 +87,12 @@ class CustomerOrder extends Component {
 }
 
 export default CustomerOrder;
+
+CustomerOrder.propTypes = {
+
+  data: PropTypes.object.isRequired
+  /*
+    Data - Holds all data used in the render method. It should be an object and is required
+    or this component will fail
+  */
+}

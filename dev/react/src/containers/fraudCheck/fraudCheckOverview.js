@@ -3,12 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as fraudCheckOverviewActions from '../../redux/modules/fraudCheckOverview'
-import FraudCheckList from '../../components/FraudCheckList/FraudCheckList'
-import CustomerInfo from '../../components/CustomerInfo/CustomerInfo';
-import CustomerOrderList from '../../components/CustomerOrderList/CustomerOrderList';
-import StickyBar from '../../components/StickyBar/StickyBar';
-import StickyActions from '../../components/StickyActions/StickyActions';
-import SelectBox from '../../components/SelectBox/SelectBox';
+import {FraudCheckList, CustomerInfo, CustomerOrderList, StickyBar, StickyActions, SelectBox } from '../../components';
 
 import fraudStatusValues from '../../constants/fraudStatusValues';
 import fraudFilterValues from '../../constants/fraudFilterValues';

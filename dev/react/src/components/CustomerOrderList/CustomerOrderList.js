@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {PropTypes} from 'prop-types';
 import {CustomerOrder} from '../../components';
 import $ from 'jquery';
 
@@ -35,4 +36,17 @@ export default class CustomerOrderList extends Component {
       </section>
     )
   }
+}
+
+CustomerOrderList.propTypes = {
+
+  data: PropTypes.object,
+  /*
+    Data - Holds all data used in the render method. It should be an object and is required
+    or this component will fail
+  */
+  editable: PropTypes.bool
+  /*
+    Editable - Boolean flag to decide whether to show editable ontrols
+  */
 }

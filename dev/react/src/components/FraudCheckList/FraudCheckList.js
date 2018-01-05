@@ -5,8 +5,7 @@ import PropTypes from 'prop-types'
 import * as fraudCheckOverviewActions from '../../redux/modules/fraudCheckOverview'
 import getUrlParam from '../../helpers/getUrlParam'
 
-import {FraudCheckListItem} from '../../components'
-import {Pagination} from '../../components'
+import {FraudCheckListItem, Pagination} from '../../components'
 
 export default class FraudCheckList extends Component {
 
@@ -46,8 +45,10 @@ export default class FraudCheckList extends Component {
 
 
 FraudCheckList.propTypes = {
+
+  data: PropTypes.object,
   /*
-  *   Array of orders to be displayed in the list
+    Data - Holds all data used in the render method. It should be an object and is required
+    or this component will fail
   */
-  data: PropTypes.object
 }

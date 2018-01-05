@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Hotkeys from 'react-hot-keys';
 import Moment from 'react-moment';
@@ -17,7 +16,7 @@ export default class StickyActions extends Component {
     this.handleNoteChange = this.handleNoteChange.bind(this);
     this.handleShortcutSubmit = this.handleShortcutSubmit.bind(this);
     this.handleToggleForm = this.handleToggleForm.bind(this);
-    this.handleShortcutOpen = this.handleShortcutOpen(this);
+    this.handleKeyboardOpen = this.handleKeyboardOpen.bind(this);
 
     this.state = {
       status: 'closed',
@@ -66,9 +65,11 @@ export default class StickyActions extends Component {
   }
 
   handleToggleForm = () => {
+    this.textArea.blur();
     this.setState({
       status: 'closed',
-      action: ''
+      action: '',
+      noteValue: ''
     })
   }
 
@@ -94,25 +95,21 @@ export default class StickyActions extends Component {
       noteValue: ''
     })
 
-    console.log(this.state.noteValue)
   }
 
   handleShortcutSubmit = (keyName, e, handle) => {
     // Handles all actions and submits the action
-    console.log('SHORTCUT')
     if (keyName === 'shift+return'){
       this.handleSubmit(this.props.orderRef)
     }
   }
 
-  handleShortcutOpen = (keyName,e,handle) => {
-    console.log(keyName)
+  handleKeyboardOpen = (keyName, e, handle) => {
     switch(keyName) {
         case 'shift+a':
-        console.log(keyName)
           this.setState({
             status: 'open',
-            action: 'contact',
+            action: 'approve',
             title: 'contacted'
           });
           break;
@@ -130,6 +127,8 @@ export default class StickyActions extends Component {
             title: 'contacted'
           });
           break;
+      default:
+        return;
     }
   }
 
@@ -148,7 +147,7 @@ export default class StickyActions extends Component {
             className="form-control stickyActions-comment"
             rows="2"
             onChange={this.handleNoteChange}
-            placeholder="Enter Note"
+            placeholder="Enter Note..."
             value={this.state.noteValue}
             ref={(input) => { this.textArea = input; }}
             ></textarea>
@@ -166,26 +165,41 @@ export default class StickyActions extends Component {
             <Hotkeys
               keyName="shift+return"
               onKeyUp={this.handleShortcutSubmit}>
-              <button
-                className="button btn-cancel"
-                onClick={this.handleToggleForm}>
-                Cancel
-              </button>
+              <Hotkeys
+                keyName="shift+escape"
+                onKeyUp={this.handleToggleForm}>
+                <button
+                  className="button btn-cancel"
+                  onClick={this.handleToggleForm}>
+                  Cancel
+                </button>
+              </Hotkeys>
+              <Hotkeys
+                keyName="shift+a"
+                onKeyDown={this.handleKeyboardOpen}>
                 <button
                   className="button btn-approve"
                   onClick={() => {this.handleClickApprove(this.props.orderRef)}}>
                   Approve
                 </button>
-
-            <button className="button btn-decline"
-              onClick={() => {this.handleClickDecline(this.props.orderRef)}}>
-              Decline
-            </button>
-            <button
-              className="button btn-contacted"
-              onClick={() => {this.handleClickContacted(this.props.orderRef)}}>
-              Contacted
-            </button>
+              </Hotkeys>
+              <Hotkeys
+                keyName="shift+d"
+                onKeyUp={this.handleKeyboardOpen}>
+                <button className="button btn-decline"
+                  onClick={() => {this.handleClickDecline(this.props.orderRef)}}>
+                  Decline
+                </button>
+              </Hotkeys>
+              <Hotkeys
+                keyName="shift+c"
+                onKeyUp={this.handleKeyboardOpen}>
+                <button
+                  className="button btn-contacted"
+                  onClick={() => {this.handleClickContacted(this.props.orderRef)}}>
+                  Contacted
+                </button>
+              </Hotkeys>
             </Hotkeys>
           </div>
         </div>
@@ -196,8 +210,6 @@ export default class StickyActions extends Component {
 
 
 StickyActions.propTypes = {
-  /*
-  *   Array of orders to be displayed in the list
-  */
-  data: PropTypes.object
+  data: PropTypes.object,
+  orderRef: PropTypes.string
 }

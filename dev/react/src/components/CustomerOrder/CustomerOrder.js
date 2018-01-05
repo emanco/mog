@@ -1,11 +1,12 @@
 // Common libraries
 import React, { Component } from 'react';
+import {PropTypes} from 'prop-types';
 
 // Include dumb component
 import Moment from 'react-moment';
 import { currency } from  '../../helpers/mappings';
 
-import OrderStatus from '../OrderStatus/OrderStatus';
+import {OrderStatus} from '../../components';
 
 import '../../scss/components/orders.css';
 
@@ -36,8 +37,6 @@ class CustomerOrder extends Component {
               <div className={"row component component-card-order-info order-1 "+$class}>
 
                   {this.props.data.shipment.map(function(shipment, i) {
-                      let $n = i+1;
-
                       return (
                           <div key={i}>
 
@@ -86,3 +85,12 @@ class CustomerOrder extends Component {
 }
 
 export default CustomerOrder;
+
+CustomerOrder.propTypes = {
+
+  data: PropTypes.object.isRequired
+  /*
+    Data - Holds all data used in the render method. It should be an object and is required
+    or this component will fail
+  */
+}

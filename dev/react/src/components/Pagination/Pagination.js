@@ -7,10 +7,6 @@ import './../../scss/components/pagination.css';
 
 export default class Pagination extends Component {
 
-  constructor(props) {
-    super(props)
-  }
-
   handlePageChange = (data) => {
     this.props.handlePaginationChange(data.selected)
   }

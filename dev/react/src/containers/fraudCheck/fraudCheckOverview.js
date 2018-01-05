@@ -3,16 +3,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as fraudCheckOverviewActions from '../../redux/modules/fraudCheckOverview'
-import FraudCheckList from '../../components/FraudCheckList/FraudCheckList'
-import CustomerInfo from '../../components/CustomerInfo/CustomerInfo';
-import CustomerOrderList from '../../components/CustomerOrderList/CustomerOrderList';
-import StickyBar from '../../components/StickyBar/StickyBar';
-import StickyActions from '../../components/StickyActions/StickyActions';
-import SelectBox from '../../components/SelectBox/SelectBox';
+import {FraudCheckList, CustomerInfo, CustomerOrderList, StickyBar, StickyActions, SelectBox } from '../../components';
 
-import fraudStatusValues from '../../constants/fraudStatusValues';
 import fraudFilterValues from '../../constants/fraudFilterValues';
-import getUrlParam from '../../helpers/getUrlParam'
 
 import './../../scss/components/fraudCheckOverview.css';
 
@@ -33,6 +26,7 @@ export default class fraudCheckOverview extends Component {
     super(props)
     this.handleUpdateOrder = this.handleUpdateOrder.bind(this)
     this.handleFraudStatus = this.handleFraudStatus.bind(this)
+    this.handleFraudCheckListClick = this.handleFraudCheckListClick.bind(this)
 
     this.state = {
       paginationPage: 0
@@ -43,19 +37,19 @@ export default class fraudCheckOverview extends Component {
     this.props.getFraudCheckList({status: 'FRAUD CHECK NOT CHECKED'});
   }
 
-  handleFraudCheckListHover = (orderRef) => {
-    // Check we're not already displaying the order
-    if (orderRef !== this.props.data.results[0].order_reference) {
-      this.props.getFraudCheckListOrder('CUS123456789');
-    }
-  }
-
   handleFraudStatus = (value) => {
     this.props.upateFilter(value)
     this.props.getFraudCheckList({
       status: value,
       limit: 20
     })
+  }
+
+  handleFraudCheckListClick = (orderRef) => {
+    // Check we're not already displaying the order
+    if (orderRef !== this.props.data.results[0].order_reference) {
+      this.props.getFraudCheckListOrder('CUS123456789');
+    }
   }
 
   handleFilterChange = (filterName) => {
@@ -66,8 +60,7 @@ export default class fraudCheckOverview extends Component {
     })
   }
 
-  handlePaginationChange = (page, direction) => {
-    const offset = getUrlParam(this.props.data.next, 'offset')
+  handlePaginationChange = (page) => {
 
     this.props.getFraudCheckList({
       offset: page * 20,
@@ -119,7 +112,7 @@ export default class fraudCheckOverview extends Component {
               {this.props.data.count < 1 && <h3 className='h3'>No Results</h3>}
               <FraudCheckList
                 data={this.props.data}
-                hoverCallback={this.handleFraudCheckListHover}
+                hoverCallback={this.handleFraudCheckListClick}
                 handlePaginationChange={this.handlePaginationChange}/>
             </div>
             <div className={"right-panel -light-inset cust-scroll fraudCheckOverview-order " + orderLoadingClass}>

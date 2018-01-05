@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import CustomerInfo from '../../components/CustomerInfo/CustomerInfo';
-import CustomerOrderList from '../../components/CustomerOrderList/CustomerOrderList';
-import CustomerPrescriptionComponent from '../../components/CustomerPrescriptions/CustomerPrescriptions';
-
 import { connect } from 'react-redux';
+import {CustomerInfo, CustomerOrderList, CustomerPrescriptions} from '../../components';
 
-import $ from 'jquery';
 import StickyBar from "../../components/StickyBar/StickyBar";
 import * as SummaryActions from '../../redux/modules/customers'
 
@@ -45,9 +41,8 @@ export default class Summarypage extends Component {
           );
       }
 
+    let $id = this.props.match.params.customerid;
 
-
-      let $id = this.props.match.params.customerid;
     if (this.props.payload[1]) {
       return (
           <div>
@@ -57,17 +52,8 @@ export default class Summarypage extends Component {
 
                   <CustomerInfo customerid={$id} data={this.props.payload[0].data} editable={true}/>
                   <CustomerOrderList data={this.props.payload[1].data[0]} customerid={$id} editable={true}/>
-                  <CustomerPrescriptionComponent customerid={$id} data={this.props.payload[2].data} name={this.props.payload[0].data.first_name+' '+this.props.payload[0].data.last_name} />
+                  <CustomerPrescriptions customerid={$id} data={this.props.payload[2].data} name={this.props.payload[0].data.first_name+' '+this.props.payload[0].data.last_name} />
               </div>
-
-
-
-
-
-
-
-
-
 
               {/*just placeholder for now*/}
 
@@ -424,8 +410,6 @@ export default class Summarypage extends Component {
                                                   </div>
                                               </div>
                                           </div>
-
-                                          <div className="clearfix"></div>
                                       </div>
                                   </div>
 

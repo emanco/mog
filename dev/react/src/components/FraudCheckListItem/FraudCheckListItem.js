@@ -1,8 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
-import * as fraudCheckOverviewActions from '../../redux/modules/fraudCheckOverview'
 
 import Icon from '../Icon/Icon'
 
@@ -16,9 +13,6 @@ export default class fraudCheckList extends Component {
     super(props)
     this.handleItemOnClick = this.handleItemOnClick.bind(this)
     this.handleItemTitleClick = this.handleItemTitleClick.bind(this)
-  }
-
-  componentDidMount() {
   }
 
   handleItemTitleClick = () => {

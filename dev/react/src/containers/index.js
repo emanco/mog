@@ -1,4 +1,11 @@
-export { Summarypage } from './customers/page'
-export { Searchpage } from './search/page'
-export {fraudCheckOverview} from './fraudCheck/fraudCheckOverview'
-export {fraudCheckOrder} from './fraudCheck/fraudCheckOrder'
+import Summarypage from './customers/page'
+import Searchpage from './search/page'
+import fraudCheckOverview from './fraudCheck/fraudCheckOverview'
+import fraudCheckOrder from './fraudCheck/fraudCheckOrder'
+
+export {
+  Summarypage,
+  Searchpage,
+  fraudCheckOverview,
+  fraudCheckOrder
+}

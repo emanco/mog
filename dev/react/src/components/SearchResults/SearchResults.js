@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types'
 // CSS
 import './../../scss/components/search-results.css';
 
@@ -57,22 +57,22 @@ export default class SearchResults extends Component {
                 <div>
                 {this.props.data[0].hits.hit.map(function(result, i) {
                         return (
-                            <div className="row component card" key={i} >
-                                    <div className="col-sm-12" id={i}>
-                                        <a href={"../customers/"+result.fields.customer_id}>
-                                            <p className="heading2">
-                                                {result.fields.customer_first_name} {result.fields.customer_last_name}
-                                            </p>
-                                            <p className="sub-text">
-                                                {result.fields.customer_id} | {result.fields.customer_billing_postcode}
-                                            </p>
-                                        </a>
-
-                                        <p className="col-sm2 text-right" onMouseOver={$this.handleHover} >
-                                            <i className="ion-more actions" id={result.fields.customer_id}/>
+                        <div className="row component card" key={i} >
+                                <div className="col-sm-12" id={i}>
+                                    <a href={"../customers/"+result.fields.customer_id}>
+                                        <p className="heading2">
+                                            {result.fields.customer_first_name} {result.fields.customer_last_name}
                                         </p>
-                                    </div>
+                                        <p className="sub-text">
+                                            {result.fields.customer_id} | {result.fields.customer_billing_postcode}
+                                        </p>
+                                    </a>
+
+                                    <p className="col-sm2 text-right" onMouseOver={$this.handleHover} >
+                                        <i className="ion-more actions" id={result.fields.customer_id}/>
+                                    </p>
                                 </div>
+                            </div>
                         )
                     })}
                 </div>
@@ -80,4 +80,19 @@ export default class SearchResults extends Component {
             )
         }
     }
+}
+
+
+SearchResults.propTypes = {
+
+  loading: PropTypes.boolean,
+  /*
+    loading - Detect status of and react accordingly
+  */
+  data: PropTypes.object,
+  /*
+    Data - holds all data required to render the component
+  */
+  success: PropTypes.boolean,
+  searchid: PropTypes.string
 }

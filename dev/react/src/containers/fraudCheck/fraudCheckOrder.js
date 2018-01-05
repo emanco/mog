@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import StickyBarComponent from "../../components/StickyBar/StickyBar";
+import {StickyBar} from '../../components';
 import * as fraudCheckOverviewActions from '../../redux/modules/fraudCheckOverview'
 
 @connect(

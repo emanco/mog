@@ -1,6 +1,15 @@
-export summaryReducer from "./customers"
-export fraudCheckOrderReducer from './fraudCheckOrder'
-export fraudCheckOverviewReducer from './fraudCheckOverview'
-export searchReducer from './search'
-export userReducer from './searchUser'
-export authReducer from './auth'
+import summaryReducer from "./customers"
+import fraudCheckOrderReducer from './fraudCheckOrder'
+import fraudCheckOverviewReducer from './fraudCheckOverview'
+import searchReducer from './search'
+import userReducer from './searchUser'
+import authReducer from './auth'
+
+export {
+  summaryReducer,
+  fraudCheckOrderReducer,
+  fraudCheckOverviewReducer,
+  searchReducer,
+  userReducer,
+  authReducer
+}

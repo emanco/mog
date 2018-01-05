@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select-plus';
 import 'react-select-plus/dist/react-select-plus.css';
-
-import fraudStatusValue from '../../constants/fraudStatusValues';
-
 class SelectBox extends Component {
 
   constructor(props) {

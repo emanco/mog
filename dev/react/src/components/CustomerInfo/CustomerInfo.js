@@ -1,12 +1,10 @@
 // Common libraries
 import React, { Component } from 'react';
-
+import {PropTypes} from 'prop-types';
 class CustomerInfo extends Component {
 
     render() {
-        console.log(this.props.data)
-        // otherwise just render one customer by id
-        if (this.props.customerid === undefined) {
+        if (!this.props.customerid) {
             return (
                 <div>
                     No ID!
@@ -50,3 +48,17 @@ class CustomerInfo extends Component {
 }
 
 export default CustomerInfo;
+
+
+CustomerInfo.propTypes = {
+
+  data: PropTypes.object,
+  /*
+    Data - Holds all data used in the render method. It should be an object and is required
+    or this component will fail
+  */
+  editable: PropTypes.bool
+  /*
+    Editable - Boolean flag to decide whether to show editable ontrols
+  */
+}

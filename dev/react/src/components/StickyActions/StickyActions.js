@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Hotkeys from 'react-hot-keys';
 import Moment from 'react-moment';
@@ -109,7 +108,7 @@ export default class StickyActions extends Component {
         case 'shift+a':
           this.setState({
             status: 'open',
-            action: 'contact',
+            action: 'approve',
             title: 'contacted'
           });
           break;
@@ -127,6 +126,8 @@ export default class StickyActions extends Component {
             title: 'contacted'
           });
           break;
+      default:
+        return;
     }
   }
 
@@ -208,8 +209,6 @@ export default class StickyActions extends Component {
 
 
 StickyActions.propTypes = {
-  /*
-  *   Array of orders to be displayed in the list
-  */
-  data: PropTypes.object
+  data: PropTypes.object,
+  orderRef: PropTypes.string
 }

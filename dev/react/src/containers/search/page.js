@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-import StickyBar from "../../components/StickyBar/StickyBar";
-import SearchResults from "../../components/SearchResults/SearchResults";
-import SearchUser from "../../components/SearchUser/SearchUser";
+import { StickyBar, SearchResults, SearchUser } from '../../components';
 import { connect } from 'react-redux';
 
 import * as SearchActions from '../../redux/modules/search'
@@ -25,22 +23,11 @@ class Searchpage extends Component {
     }
 
     componentWillMount() {
-        console.log('id is '+this.props.match.params.searchid);
         this.props.getSearch(this.props.match.params.searchid);
-
-        //TODO: refactor actions into getData for right side page and getSearch for left side!
-        //this.props.dispatch(getUser(this.props.match.params.searchid));
-
-        //let $searchid= this.props.match.params.searchid;
-        //this.props.dispatch(getSearch($searchid));
-
-      // Don't care about pre-loading data,
     }
 
     handleChange(id) {
         console.log('new id to load is: '+id);
-
-        //calling child function
         this.props.onChange(id);
     }
 
@@ -48,12 +35,7 @@ class Searchpage extends Component {
   render() {
 
       let $id = this.props.match.params.searchid;
-          //$searchData = this.props.payload.data[0];
-      console.log('HERE ------------------')
-      console.log(this.props.userData);
       return (
-
-
           <div>
               {/*<StickyBarComponent number={$searchData.hits.hit.length} path={this.props.location.pathname} query={$id}/>*/}
               <StickyBar number={this.props.getNumber} path={this.props.location.pathname} query={$id} onRef={ref => (this.bread = ref)}/>

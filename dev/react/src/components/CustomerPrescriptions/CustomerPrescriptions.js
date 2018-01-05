@@ -1,11 +1,12 @@
 // Common libraries
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import Moment from 'react-moment';
 
 import '../../scss/components/orders.css';
 
 
-class CustomerPrescription extends Component {
+class CustomerPrescriptions extends Component {
 
     componentWillMount() {
         //console.log('orders for id: '+this.props.customerid);
@@ -51,4 +52,18 @@ class CustomerPrescription extends Component {
     }
 }
 
-export default CustomerPrescription;
+export default CustomerPrescriptions;
+
+
+CustomerPrescriptions.propTypes = {
+
+  data: PropTypes.object,
+  /*
+    Data - Holds all data used in the render method. It should be an object and is required
+    or this component will fail
+  */
+  editable: PropTypes.boolean
+  /*
+    Editable - Boolean flag to decide whether to show editable ontrols
+  */
+}

@@ -22,7 +22,8 @@
   float: left; }
 
 .fraudCheck-status-icons {
-  float: right; }
+  float: right;
+  line-height: 0; }
 
 .fraudCheckListItem-flagIcon {
   border-radius: 100%;

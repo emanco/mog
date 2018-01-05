@@ -20,7 +20,7 @@
     100% { opacity: 0.8;}
 }
 
-$approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
+$approveColor : $color-green;
 
 .sticky-actions {
   background: white;
@@ -87,9 +87,13 @@ $approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
     background: white;
   }
 
-  .stickActions-comment {
+  .stickyActions-comment {
     height: auto;
     resize: none;
+
+    &:focus {
+      border-color: map-get($colours, 'line') !important;
+    }
   }
 
   & .sticky-bottom {
@@ -130,6 +134,11 @@ $approveColor : map-get(map-get($colours, 'blue'), 'btn-blue');
     }
     .btn-contacted {
       visibility: hidden;
+    }
+    .btn-decline {
+      background-color: $color-btn-red;
+      border-color: $color-btn-red;
+      color: white;
     }
   }
 

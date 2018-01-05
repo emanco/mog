@@ -102,7 +102,7 @@ export default class StickyActions extends Component {
           <div className="stickyActions-form-title">
             <h3 className='h3'>{this.state.title}</h3>
           </div>
-          <textarea className="form-control stickActions-comment" rows="2" onChange={this.handleNoteChange} placeholder="Enter Note" value={this.state.noteValue} ref={(input) => { this.textArea = input; }}></textarea>
+          <textarea className="form-control stickyActions-comment" rows="2" onChange={this.handleNoteChange} placeholder="Enter Note" value={this.state.noteValue} ref={(input) => { this.textArea = input; }}></textarea>
         </div>
         <div className="stickyActions-controls">
           <div className="stickyActions-details">

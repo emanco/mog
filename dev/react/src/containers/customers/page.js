@@ -41,9 +41,8 @@ export default class Summarypage extends Component {
           );
       }
 
+    let $id = this.props.match.params.customerid;
 
-
-      let $id = this.props.match.params.customerid;
     if (this.props.payload[1]) {
       return (
           <div>
@@ -411,8 +410,6 @@ export default class Summarypage extends Component {
                                                   </div>
                                               </div>
                                           </div>
-
-                                          <div className="clearfix"></div>
                                       </div>
                                   </div>
 

@@ -32,7 +32,7 @@ export default class fraudCheckList extends Component {
 
   render() {
     // ADD CLASSES FROM THE GRID
-    const statusClass = fraudCheckStatus(this.props.data.latest_fraud_status);
+    const statusClass = fraudCheckStatus(this.props.data.status);
     return(
       <div className="row component fraudCheckListItemContain">
         <div className={'fraudCheck-'+ statusClass + ' col-xs-12 fraudCheckListItem'} onClick={this.handleItemOnClick}>

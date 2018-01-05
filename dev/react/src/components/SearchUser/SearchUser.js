@@ -1,8 +1,6 @@
 // Common libraries
 import React, { Component } from 'react';
-import CustomerInfo from "../CustomerInfo/CustomerInfo";
-import CustomerOrderComponent from "../CustomerOrder/CustomerOrder";
-import CustomerPrescriptionComponent from "../CustomerPrescriptions/CustomerPrescriptions";
+import {CustomerInfo, CustomerOrder, CustomerPrescriptions} from "../../components";
 
 import { connect } from 'react-redux';
 import { getUserData } from "../../redux/modules/searchUser";
@@ -69,13 +67,13 @@ class SearchUser extends Component {
                         <p className="sub-text">Showing {this.props.payload[1].data[0].limit} of {this.props.payload[1].data[0].count} </p>
 
                         {this.props.payload[1].data[0].results.map(function(order, i) {
-                            return <CustomerOrderComponent key={i} id={i} customerid={$this.props.id} data={order} />
+                            return <CustomerOrder key={i} id={i} customerid={$this.props.id} data={order} />
                         })}
 
                         <button className="btn">View More</button>
                     </section>
 
-                    <CustomerPrescriptionComponent customerid={this.props.id} data={this.props.payload[2].data} name={this.props.payload[0].data.first_name+' '+this.props.payload[0].data.last_name} />
+                    <CustomerPrescriptions customerid={this.props.id} data={this.props.payload[2].data} name={this.props.payload[0].data.first_name+' '+this.props.payload[0].data.last_name} />
 
 
             </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CustomerOrderComponent from '../../components/CustomerOrder/CustomerOrder';
+import {CustomerOrder} from '../../components';
 import $ from 'jquery';
 
 export default class CustomerOrderList extends Component {
@@ -28,7 +28,7 @@ export default class CustomerOrderList extends Component {
         <p className="sub-text">Showing {this.props.data.limit} of {this.props.data.count} </p>
 
         {this.props.data.results.map((order, i) => {
-            return <CustomerOrderComponent key={i} id={i} customerid={this.props.customerid} data={order}/>
+            return <CustomerOrder key={i} id={i} customerid={this.props.customerid} data={order}/>
         })}
 
         <button className="btn">View More</button>

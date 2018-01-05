@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import Moment from 'react-moment';
 import { currency } from  '../../helpers/mappings';
 
-import OrderStatus from '../OrderStatus/OrderStatus';
+import {OrderStatus} from '../../components';
 
 import '../../scss/components/orders.css';
 

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import * as fraudCheckOverviewActions from '../../redux/modules/fraudCheckOverview'
-
 import Icon from '../Icon/Icon'
 
 import {clientNameMapping, fraudCheckStatus} from '../../helpers/mappings'

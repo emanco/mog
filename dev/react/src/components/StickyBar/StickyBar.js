@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import "./../../scss/components/stickybar.css";
-import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
-import StickyDropdown from "../StickyDropdown/StickyDropdown"
+import {Breadcrumbs, StickyDropdown} from "../../components"
 
 // Ionicons
 //import Ionicon from 'react-ionicons';

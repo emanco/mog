@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 import * as fraudCheckOverviewActions from '../../redux/modules/fraudCheckOverview'
 import getUrlParam from '../../helpers/getUrlParam'
 
-import FraudCheckListItem from '../../components/FraudCheckListItem/FraudCheckListItem'
-import Pagination from '../../components/Pagination/Pagination'
+import {FraudCheckListItem} from '../../components'
+import {Pagination} from '../../components'
 
 export default class FraudCheckList extends Component {
 

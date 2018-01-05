@@ -7,7 +7,9 @@ import * as AuthActions from '../../redux/modules/auth'
 
 @asyncConnect([{
   promise: ({store: {dispatch}}) => {
-    Promise.resolve(dispatch(AuthActions.authorise()));
+    Promise.resolve(
+      dispatch(AuthActions.authorise())
+    );
   }
 }])
 @connect(

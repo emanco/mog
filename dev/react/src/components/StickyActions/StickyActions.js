@@ -65,6 +65,7 @@ export default class StickyActions extends Component {
   }
 
   handleToggleForm = () => {
+    this.textArea.blur();
     this.setState({
       status: 'closed',
       action: '',
@@ -165,7 +166,7 @@ export default class StickyActions extends Component {
               keyName="shift+return"
               onKeyUp={this.handleShortcutSubmit}>
               <Hotkeys
-                keyName="shift+x"
+                keyName="shift+escape"
                 onKeyUp={this.handleToggleForm}>
                 <button
                   className="button btn-cancel"

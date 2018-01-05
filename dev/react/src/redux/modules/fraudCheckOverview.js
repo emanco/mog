@@ -4,19 +4,13 @@ import { fraudCheckOrders, postOrderNoteEndpoint, orderStatusUpdateEndpoint } fr
 import fraudStatusValues from '../../constants/fraudStatusValues';
 
 import buildQueryUrl from '../../helpers/buildQueryUrl'
-import { getCustomer, getOrders, getSingleCustomerOrders } from './customers'
-import fraudCheckOrderData from '../../mock-data/fraud-check-orders'
+import { getCustomer, getOrders } from './customers'
 // Actions
 const LOADING_LIST = 'myOp/fraudCheckOverviewList/LOADING';
 const LOADED_LIST = 'myOp/fraudCheckOverviewList/LOADED';
 const FAILED_LIST = 'myOp/fraudCheckOverviewList/FAILED';
 
-const LOADING_ORDER = 'myOp/fraudCheckOverviewList/LOADING';
-const LOADED_ORDER = 'myOp/fraudCheckOverviewList/LOADED';
-const FAILED_ORDER = 'myOp/fraudCheckOverviewList/FAILED';
-
 const UPDATE_ORDER = 'myOp/fraudCheckOverviewList/UPDATE_ORDER'
-const REJECT_ORDER = 'myOp/fraudCheckOverviewList/REJECT_ORDER'
 
 const POST_ORDER_NOTE = 'myOp/orderNotes/POST_NOTE'
 
@@ -102,7 +96,7 @@ export function upateFilter (filterValue) {
 }
 
 // get Search results with this action, separated by the combined above
-export function getFraudCheckList (queryParams = {}) {
+export const getFraudCheckList = (queryParams = {}) => {
 
   /* @NOTE - getFraudCheckList API
    * Method: Get
@@ -113,49 +107,28 @@ export function getFraudCheckList (queryParams = {}) {
   const queryUrl = buildQueryUrl(fraudCheckOrders, queryParams)
 
   return (dispatch, getState) => {
-
-    if (!getState().authReducer.authToken) {
-
-      console.log('NOT AUTHORISED')
-
-      return dispatch(authorise()).then(() => {
-
-        return dispatch({
-          types: [LOADING_LIST, LOADED_LIST, FAILED_LIST],
-          payload: {
-            request: {
-              url: queryUrl,
-              headers: {'Authorization': 'Bearer ' + getState().authReducer.authToken}
-            }
+     return dispatch({
+        types: [LOADING_LIST, LOADED_LIST, FAILED_LIST],
+        payload: {
+          request: {
+            url: queryUrl,
+            headers: {'Authorization': 'Bearer ' + getState().authReducer.authToken}
           }
-        }).then((result) => {
-          // @TODO - Check if offset is zero. If so we need to load the first customer and order details
-          console.log(result)
-          dispatch(getFraudCheckListOrder(result.payload.data.results[0].customer_reference))
-          // Also get customer data
+        }
+      }).then((result) => {
+        if (result.payload.data.count > 0) {
+         dispatch(getFraudCheckListOrder(result.payload.data.results[0].customer_reference))
+        }
+      }).catch(() => {
+          /*
+           If there's an error, re-authorise against the API and try again. This is NOT
+           going to work long term, only for development purposes.
+          */
+          dispatch(authorise()).then(() => {
+            dispatch(getFraudCheckList())
+          })
         })
-
-      });
-
-    } else {
-       return dispatch({
-          types: [LOADING_LIST, LOADED_LIST, FAILED_LIST],
-          payload: {
-            request: {
-              url: queryUrl,
-              headers: {'Authorization': 'Bearer ' + getState().authReducer.authToken}
-            }
-          }
-        }).then((result) => {
-          // @TODO - Check if offset is zero. If so we need to load the first customer and order details
-          console.log(result)
-          if (result.payload.data.count > 0) {
-           dispatch(getFraudCheckListOrder(result.payload.data.results[0].customer_reference))
-          }
-        })
-    }
-
-};
+  }
 }
 
 // Get details on the list item currently being hovered over
@@ -210,6 +183,9 @@ export function updateOrderStatus (noteObj, orderRef, actionType, fraudStatus) {
     case 'contact':
       status = 'FRAUD CHECK CUSTOMER CONTACTED';
       break;
+    default:
+      status = 'FRAUD CHECK PASSED';
+      break;
   }
 
   return (dispatch, getState) => {
@@ -227,7 +203,6 @@ export function updateOrderStatus (noteObj, orderRef, actionType, fraudStatus) {
         }
       }
     }).then(() => {
-      console.log('THEN')
       if (noteObj.content.length > 1) {
         dispatch(postOrderNote(noteObj));
       }

@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 import * as fraudCheckOverviewActions from '../../redux/modules/fraudCheckOverview'
 import {FraudCheckList, CustomerInfo, CustomerOrderList, StickyBar, StickyActions, SelectBox } from '../../components';
 
-import fraudStatusValues from '../../constants/fraudStatusValues';
 import fraudFilterValues from '../../constants/fraudFilterValues';
-import getUrlParam from '../../helpers/getUrlParam'
 
 import './../../scss/components/fraudCheckOverview.css';
 
@@ -28,6 +26,7 @@ export default class fraudCheckOverview extends Component {
     super(props)
     this.handleUpdateOrder = this.handleUpdateOrder.bind(this)
     this.handleFraudStatus = this.handleFraudStatus.bind(this)
+    this.handleFraudCheckListClick = this.handleFraudCheckListClick.bind(this)
 
     this.state = {
       paginationPage: 0
@@ -46,6 +45,13 @@ export default class fraudCheckOverview extends Component {
     })
   }
 
+  handleFraudCheckListClick = (orderRef) => {
+    // Check we're not already displaying the order
+    if (orderRef !== this.props.data.results[0].order_reference) {
+      this.props.getFraudCheckListOrder('CUS123456789');
+    }
+  }
+
   handleFilterChange = (filterName) => {
     // Call Action to go update the view.
     this.props.getFraudCheckList({
@@ -54,8 +60,7 @@ export default class fraudCheckOverview extends Component {
     })
   }
 
-  handlePaginationChange = (page, direction) => {
-    const offset = getUrlParam(this.props.data.next, 'offset')
+  handlePaginationChange = (page) => {
 
     this.props.getFraudCheckList({
       offset: page * 20,
@@ -107,6 +112,7 @@ export default class fraudCheckOverview extends Component {
               {this.props.data.count < 1 && <h3 className='h3'>No Results</h3>}
               <FraudCheckList
                 data={this.props.data}
+                hoverCallback={this.handleFraudCheckListClick}
                 handlePaginationChange={this.handlePaginationChange}/>
             </div>
             <div className={"right-panel -light-inset cust-scroll fraudCheckOverview-order " + orderLoadingClass}>

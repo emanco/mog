@@ -1,10 +1,5 @@
 import {authTokenEndpoint} from '../../constants/endpoints';
 
-// Actions
-const LOADING = 'myOp/auth/LOADING';
-const LOADED = 'myOp/auth/LOADED';
-const FAILED = 'myOp/auth/FAILED';
-
 const initialState = {
     loading: true,
     success: false,
@@ -65,8 +60,6 @@ export function authorise () {
           }
         }
       }
-    }).then((data) => {
-      window.localStorage.setItem('apiKey', data.payload.data['access_token'])
     })
   }
 };

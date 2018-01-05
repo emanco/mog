@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import * as fraudCheckOverviewActions from '../../redux/modules/fraudCheckOverview'
 import getUrlParam from '../../helpers/getUrlParam'
 
 import {FraudCheckListItem, Pagination} from '../../components'

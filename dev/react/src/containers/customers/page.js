@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {CustomerInfo, CustomerOrderList, CustomerPrescriptions} from '../../components';
 
-import $ from 'jquery';
 import StickyBar from "../../components/StickyBar/StickyBar";
 import * as SummaryActions from '../../redux/modules/customers'
 
@@ -56,15 +55,6 @@ export default class Summarypage extends Component {
                   <CustomerOrderList data={this.props.payload[1].data[0]} customerid={$id} editable={true}/>
                   <CustomerPrescriptions customerid={$id} data={this.props.payload[2].data} name={this.props.payload[0].data.first_name+' '+this.props.payload[0].data.last_name} />
               </div>
-
-
-
-
-
-
-
-
-
 
               {/*just placeholder for now*/}
 

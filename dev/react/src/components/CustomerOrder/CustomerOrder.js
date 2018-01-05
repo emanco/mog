@@ -37,8 +37,6 @@ class CustomerOrder extends Component {
               <div className={"row component component-card-order-info order-1 "+$class}>
 
                   {this.props.data.shipment.map(function(shipment, i) {
-                      let $n = i+1;
-
                       return (
                           <div key={i}>
 

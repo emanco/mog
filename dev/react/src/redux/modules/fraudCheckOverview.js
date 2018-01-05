@@ -208,7 +208,7 @@ export function updateOrderStatus (noteObj, orderRef, actionType, fraudStatus) {
       status = 'FRAUD CHECK FAILED';
       break;
     case 'contact':
-      status = 'FRAUD CHECK CONTACTED';
+      status = 'FRAUD CHECK CUSTOMER CONTACTED';
       break;
   }
 

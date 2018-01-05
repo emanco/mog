@@ -12,7 +12,6 @@ export default class Pagination extends Component {
   }
 
   handlePageChange = (data) => {
-    console.log(data)
     this.props.handlePaginationChange(data.selected)
   }
 

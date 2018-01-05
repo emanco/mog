@@ -32,7 +32,7 @@ export default class fraudCheckList extends Component {
 
   render() {
     // ADD CLASSES FROM THE GRID
-    const statusClass = fraudCheckStatus(this.props.data.latest_fraud_status);
+    const statusClass = fraudCheckStatus(this.props.data.status);
     return(
       <div className="row component fraudCheckListItemContain">
         <div className={'fraudCheck-'+ statusClass + ' col-xs-12 fraudCheckListItem'} onClick={this.handleItemOnClick}>
@@ -42,9 +42,9 @@ export default class fraudCheckList extends Component {
           </div>
           {this.props.data.fraud &&
           <div className="fraudCheck-status-icons">
-            {this.props.data.fraud.is_postcode_blacklisted && <Icon className='fraudCheckListItem-flagIcon' icon='ion-at' />}
-            {this.props.data.fraud.is_first_order && <Icon className='fraudCheckListItem-flagIcon' icon='ion-person-add' />}
-            {this.props.data.fraud.is_email_blacklisted && <Icon className='fraudCheckListItem-flagIcon' icon='ion-home' />}
+            {this.props.data.fraud.is_postcode_blacklisted && <Icon title="Email Blacklisted" className='fraudCheckListItem-flagIcon' icon='ion-at' />}
+            {this.props.data.fraud.is_first_order && <Icon title="First Order" className='fraudCheckListItem-flagIcon' icon='ion-person-add' />}
+            {this.props.data.fraud.is_email_blacklisted && <Icon title="Postcode Blacklisted" className='fraudCheckListItem-flagIcon' icon='ion-home' />}
           </div>
             }
         </div>

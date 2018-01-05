@@ -66,9 +66,11 @@
     padding: 2em;
     overflow: hidden;
     background: white; }
-  .sticky-actions .stickActions-comment {
+  .sticky-actions .stickyActions-comment {
     height: auto;
     resize: none; }
+    .sticky-actions .stickyActions-comment:focus {
+      border-color: #e8e9e9 !important; }
   .sticky-actions .sticky-bottom {
     bottom: 0;
     width: 100%; }
@@ -94,6 +96,11 @@
 .sticky-actions.sticky-actions-decline .btn-contacted {
   visibility: hidden; }
 
+.sticky-actions.sticky-actions-decline .btn-decline {
+  background-color: #f86e61;
+  border-color: #f86e61;
+  color: white; }
+
 .sticky-actions.sticky-actions-contact .btn-approve,
 .sticky-actions.sticky-actions-contact .btn-decline {
   display: none; }
@@ -104,5 +111,5 @@
   text-align: center; }
 
 .btn-approve {
-  background-color: #2671d4;
-  border-color: #2671d4; }
+  background-color: #34d9ba;
+  border-color: #34d9ba; }

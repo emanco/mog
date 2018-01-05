@@ -17,7 +17,7 @@ export default class StickyActions extends Component {
     this.handleNoteChange = this.handleNoteChange.bind(this);
     this.handleShortcutSubmit = this.handleShortcutSubmit.bind(this);
     this.handleToggleForm = this.handleToggleForm.bind(this);
-    this.handleShortcutOpen = this.handleShortcutOpen(this);
+    this.handleKeyboardOpen = this.handleKeyboardOpen.bind(this);
 
     this.state = {
       status: 'closed',
@@ -68,7 +68,8 @@ export default class StickyActions extends Component {
   handleToggleForm = () => {
     this.setState({
       status: 'closed',
-      action: ''
+      action: '',
+      noteValue: ''
     })
   }
 
@@ -94,7 +95,6 @@ export default class StickyActions extends Component {
       noteValue: ''
     })
 
-    console.log(this.state.noteValue)
   }
 
   handleShortcutSubmit = (keyName, e, handle) => {
@@ -105,8 +105,7 @@ export default class StickyActions extends Component {
     }
   }
 
-  handleShortcutOpen = (keyName,e,handle) => {
-    console.log(keyName)
+  handleKeyboardOpen = (keyName, e, handle) => {
     switch(keyName) {
         case 'shift+a':
         console.log(keyName)
@@ -166,26 +165,41 @@ export default class StickyActions extends Component {
             <Hotkeys
               keyName="shift+return"
               onKeyUp={this.handleShortcutSubmit}>
-              <button
-                className="button btn-cancel"
-                onClick={this.handleToggleForm}>
-                Cancel
-              </button>
+              <Hotkeys
+                keyName="shift+x"
+                onKeyUp={this.handleToggleForm}>
+                <button
+                  className="button btn-cancel"
+                  onClick={this.handleToggleForm}>
+                  Cancel
+                </button>
+              </Hotkeys>
+              <Hotkeys
+                keyName="shift+a"
+                onKeyDown={this.handleKeyboardOpen}>
                 <button
                   className="button btn-approve"
                   onClick={() => {this.handleClickApprove(this.props.orderRef)}}>
                   Approve
                 </button>
-
-            <button className="button btn-decline"
-              onClick={() => {this.handleClickDecline(this.props.orderRef)}}>
-              Decline
-            </button>
-            <button
-              className="button btn-contacted"
-              onClick={() => {this.handleClickContacted(this.props.orderRef)}}>
-              Contacted
-            </button>
+              </Hotkeys>
+              <Hotkeys
+                keyName="shift+d"
+                onKeyUp={this.handleKeyboardOpen}>
+                <button className="button btn-decline"
+                  onClick={() => {this.handleClickDecline(this.props.orderRef)}}>
+                  Decline
+                </button>
+              </Hotkeys>
+              <Hotkeys
+                keyName="shift+c"
+                onKeyUp={this.handleKeyboardOpen}>
+                <button
+                  className="button btn-contacted"
+                  onClick={() => {this.handleClickContacted(this.props.orderRef)}}>
+                  Contacted
+                </button>
+              </Hotkeys>
             </Hotkeys>
           </div>
         </div>

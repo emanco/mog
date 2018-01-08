@@ -4,7 +4,9 @@ const initialState = {
     loading: true,
     success: false,
     authToken: null,
-    test: null
+    test: null,
+    loginRequired: true,
+    formVisible: true
 }
 
 export default function authReducer(state = initialState, action = '') {
@@ -15,7 +17,8 @@ export default function authReducer(state = initialState, action = '') {
             return {
                 ...state,
                 loading: true,
-                success: false
+                success: false,
+                error: false
             };
         case 'AUTH_FULFILLED' :
             console.log('AUTH LOADED');
@@ -24,13 +27,19 @@ export default function authReducer(state = initialState, action = '') {
                 ...state,
                 loading: false,
                 success: true,
-                authToken: action.payload.data['access_token']
+                error: false,
+                authToken: action.payload.data['access_token'],
+                loginRequired: false,
+                formVisible: true // TEMP
             };
         case 'AUTH_REJECTED' :
             return {
                 ...state,
                 loading: false,
                 success: false,
+                error: true,
+                loginRequired: true,
+                formVisible: true,
                 payload: {
                     message: action.payload
                 }
@@ -55,6 +64,29 @@ export function authorise () {
             grant_type: 'password',
             username: 'plugandplay',
             password: 'november55',
+            client_id: '1d1iLrbz7pmuObdMZ4mwcoAB4GuWHPorvfmpQ7Pq',
+            client_secret: '714dE2J2opmlevocDfz4XjIWzpih0uoWHYM8TNSYV7LYILZczbrvQcjRSSMvp0GtZ6BJRJQCDip44lqFuBZr0U4zk6vOrM1iJeOL1ohSxNDuKQHdKHMifFCMaT7E2xH0'
+          }
+        }
+      }
+    })
+  }
+};
+
+export function login (user, pass) {
+  //return axios.get('https://mog-api.herokuapp.com/search/');
+  console.log('AUTHORISE')
+  return (dispatch, getState) => {
+    return dispatch({
+      types: ['AUTH_PENDING', 'AUTH_FULFILLED','AUTH_REJECTED'],
+      payload: {
+        request: {
+          method: 'post',
+          url: authTokenEndpoint,
+          data: {
+            grant_type: 'password',
+            username: user,
+            password: pass,
             client_id: '1d1iLrbz7pmuObdMZ4mwcoAB4GuWHPorvfmpQ7Pq',
             client_secret: '714dE2J2opmlevocDfz4XjIWzpih0uoWHYM8TNSYV7LYILZczbrvQcjRSSMvp0GtZ6BJRJQCDip44lqFuBZr0U4zk6vOrM1iJeOL1ohSxNDuKQHdKHMifFCMaT7E2xH0'
           }

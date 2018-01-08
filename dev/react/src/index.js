@@ -16,6 +16,7 @@ import App from './containers/App/App';
 import Summarypage from "./containers/customers/page";
 import Searchpage from "./containers/search/page";
 import fraudCheckOverview from './containers/fraudCheck/fraudCheckOverview'
+import Login from './containers/login/login'
 
 
 //components
@@ -79,6 +80,8 @@ ReactDOM.render(
                       <Route exact path="/search/:searchid" component={Searchpage} />
 
                       <Route exact path='/fraud-check' component={fraudCheckOverview} />
+
+                      <Route exact path='/login' component={Login} />
 
                   </Switch>
 

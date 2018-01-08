@@ -1,0 +1,15 @@
+@import "../base/1_vars.scss";
+@import "../base/2_mixins.scss";
+@import "../base/4_global.scss";
+@import "../customBase/variables.scss";
+
+.login-form {
+
+  .form-element {
+    margin-bottom: 1em;
+  }
+
+  label {
+    font-weight: normal;
+  }
+}

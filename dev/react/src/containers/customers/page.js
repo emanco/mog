@@ -15,8 +15,8 @@ export default class Summarypage extends Component {
 
     constructor(props) {
         super(props)
-        console.log('id is '+this.props.match.params.customerid);
-        this.props.getData(this.props.match.params.customerid);
+        console.log('id is '+this.props.params.customerid);
+        this.props.getData(this.props.params.customerid);
     }
 
   render() {
@@ -41,7 +41,7 @@ export default class Summarypage extends Component {
           );
       }
 
-    let $id = this.props.match.params.customerid;
+    let $id = this.props.params.customerid;
 
     if (this.props.payload[1]) {
       return (

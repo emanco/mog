@@ -80,6 +80,10 @@ export default class StickyActions extends Component {
   }
 
   handleSubmit = (orderRef) => {
+    // taking advtange of the react flow here. Even though
+    // we set status to be open, it isn't until the cycle is
+    // complete so this will be false and it won't attempt to
+    // post ont he first click. There may be a better way
     if (this.state.status !== 'open') {
       return;
     }

@@ -6,7 +6,8 @@ import axiosMiddleware from 'redux-axios-middleware';
 import axios from 'axios';
 import promiseMiddleware from 'redux-promise-middleware';
 import logger from 'redux-logger';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+//import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, browserHistory, Redirect } from 'react-router'
 
 //store
 import { applyMiddleware, createStore, combineReducers } from 'redux';
@@ -16,6 +17,7 @@ import App from './containers/App/App';
 import Summarypage from "./containers/customers/page";
 import Searchpage from "./containers/search/page";
 import fraudCheckOverview from './containers/fraudCheck/fraudCheckOverview'
+import Login from './containers/login/login'
 
 
 //components
@@ -23,7 +25,6 @@ import HeaderComponent from './components/Header/Header';
 //import StickyBarComponent from './components/StickyBar/StickyBar';
 
 import FooterComponent from './components/Footer/Footer';
-
 
 //reducers
 import authReducer from './redux/modules/auth';
@@ -54,38 +55,36 @@ const client = axios.create({ //all axios can be used, shown in axios documentat
 });
 
 
-let store = createStore(combineReducers({ authReducer, summaryReducer, searchReducer, userReducer, fraudCheckOverviewReducer}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(promiseMiddleware(), thunk, logger, axiosMiddleware(client)));
+let store = createStore(
+  combineReducers({ authReducer, summaryReducer, searchReducer, userReducer, fraudCheckOverviewReducer}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(promiseMiddleware(), thunk, logger, axiosMiddleware(client)));
 
+const authCheck = () => {
+
+  const storedJWT = window.localStorage.getItem('jwtToken')
+
+  if (!storedJWT && window.location.pathname !== '/login') {
+    window.location = '/login'
+  }
+
+}
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router>
             <div>
-                <App>
-                  <HeaderComponent />
-
-                  {/*<StickyBarComponent />*/}
-
-                  <Switch>
-
-                      <Route exact path="/" component={Summarypage} />
-
-                      {/*Customers*/}
-                      <Route exact path="/customers" component={Summarypage} />
-                      <Route exact path="/customers/:customerid" component={Summarypage} />
-
-                      {/*Search*/}
-                      <Route exact path="/search" component={Searchpage} />
-                      <Route exact path="/search/:searchid" component={Searchpage} />
-
-                      <Route exact path='/fraud-check' component={fraudCheckOverview} />
-
-                  </Switch>
-
-                  <FooterComponent />
-                </App>
+              <Router history={browserHistory}>
+                <Route component={App} onEnter={authCheck}>
+                  <Route path="/" component={Summarypage} />
+                  {/*Customers*/}
+                  <Route path="/customers" component={Summarypage} />
+                  <Route path="/customers/:customerid" component={Summarypage} />
+                  {/*Search*/}
+                  <Route path="/search" component={Searchpage} />
+                  <Route path="/search/:searchid" component={Searchpage} />
+                  <Route path='/fraud-check' component={fraudCheckOverview} />
+                  <Route path='/login' component={Login} />
+                </Route>
+              </Router>
             </div>
-        </Router>
     </Provider>,
     document.getElementById('root')
 );

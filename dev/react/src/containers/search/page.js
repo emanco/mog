@@ -23,7 +23,7 @@ class Searchpage extends Component {
     }
 
     componentWillMount() {
-        this.props.getSearch(this.props.match.params.searchid);
+        this.props.getSearch(this.props.params.searchid);
     }
 
     handleChange(id) {
@@ -34,7 +34,7 @@ class Searchpage extends Component {
 
   render() {
 
-      let $id = this.props.match.params.searchid;
+      let $id = this.props.params.searchid;
       return (
           <div>
               {/*<StickyBarComponent number={$searchData.hits.hit.length} path={this.props.location.pathname} query={$id}/>*/}

@@ -20,6 +20,8 @@
 
 .fraudCheckListItem-details {
   float: left; }
+  .fraudCheckListItem-details a {
+    color: inherit; }
 
 .fraudCheck-status-icons {
   float: right;

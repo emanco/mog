@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TagsInput from 'react-tagsinput';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 import {onSubmit, getSearch} from "../../redux/modules/search";
 
@@ -56,7 +56,7 @@ class Tags extends Component {
 
         this.props.dispatch(onSubmit(query));
 
-        this.props.history.push('/search/'+query);
+        this.props.router.push('/search/'+query);
         console.log('HANDLE TAG SUBMIT');
         this.props.dispatch(getSearch(query));
     }

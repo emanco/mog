@@ -2,9 +2,11 @@ import axios from 'axios';
 import { authorise } from './auth';
 import { fraudCheckOrders, postOrderNoteEndpoint, orderStatusUpdateEndpoint } from '../../constants/endpoints'
 import fraudStatusValues from '../../constants/fraudStatusValues';
-
+import { browserHistory } from 'react-router'
 import buildQueryUrl from '../../helpers/buildQueryUrl'
 import { getCustomer, getOrders } from './customers'
+import checkCallSuccess from '../../helpers/checkCallSuccess'
+import * as AuthActions from './auth'
 // Actions
 const LOADING_LIST = 'myOp/fraudCheckOverviewList/LOADING';
 const LOADED_LIST = 'myOp/fraudCheckOverviewList/LOADED';
@@ -33,7 +35,6 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
                 success: false
             };
         case LOADED_LIST :
-            console.log(action.payload.data)
             let ref = null;
             if (action.payload.data.results[0]) {
               ref = action.payload.data.results[0].order_reference;
@@ -49,10 +50,7 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
             return {
                 ...state,
                 loading: false,
-                success: false,
-                payload: {
-                    message: action.payload.message
-                }
+                success: false
             };
         case 'FRAUD_ORDER_PENDING' :
           return {
@@ -64,10 +62,7 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
           return {
             ...state,
             orderLoading: false,
-            orderSuccess: false,
-            orderPayload: {
-              message: action.payload.message
-            }
+            orderSuccess: false
           }
         case 'FRAUD_ORDER_FULFILLED' :
           return {
@@ -97,13 +92,7 @@ export function upateFilter (filterValue) {
 
 // get Search results with this action, separated by the combined above
 export const getFraudCheckList = (queryParams = {}) => {
-
-  /* @NOTE - getFraudCheckList API
-   * Method: Get
-   * Swagger: https://app.swaggerhub.com/apis/MyOptiqueGroup/mbf-order-api/1.0.3#/Orders/get_fraud_check_orders
-   * Pass queryParams object when calling this method to get the correct results
-   */
-
+console.log('GET FRAUD CHECK LIST');
   const queryUrl = buildQueryUrl(fraudCheckOrders, queryParams)
 
   return (dispatch, getState) => {
@@ -112,22 +101,19 @@ export const getFraudCheckList = (queryParams = {}) => {
         payload: {
           request: {
             url: queryUrl,
-            headers: {'Authorization': 'Bearer ' + getState().authReducer.authToken}
+            headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')}
           }
         }
       }).then((result) => {
-        if (result.payload.data.count > 0) {
-         dispatch(getFraudCheckListOrder(result.payload.data.results[0].customer_reference))
-        }
-      }).catch(() => {
-          /*
-           If there's an error, re-authorise against the API and try again. This is NOT
-           going to work long term, only for development purposes.
-          */
-          dispatch(authorise()).then(() => {
-            dispatch(getFraudCheckList())
-          })
-        })
+       console.log(result)
+
+        checkCallSuccess(result.type, () => {
+          if (result.payload.data.count > 0) {
+           dispatch(getFraudCheckListOrder(result.payload.data.results[0].customer_reference))
+          }
+        }, () => {dispatch(AuthActions.logOut())});
+
+      })
   }
 }
 
@@ -144,6 +130,10 @@ export function getFraudCheckListOrder (id, orderRef) {
     dispatch({
       type: 'FRAUD_ORDER',
       payload: axios.all([getCustomer(testid), getOrders(id)])
+    }).then((result) => {
+      console.log(result)
+      // check result. We don't need a success callback, but log out if it fails
+      checkCallSuccess(result.action.type, () => {}, () => {dispatch(AuthActions.logOut())});
     })
   }
 
@@ -158,7 +148,7 @@ export function postOrderNote (noteObj) {
       payload: {
         request: {
           url: postOrderNoteEndpoint,
-          headers: {'Authorization': 'Bearer ' + getState().authReducer.authToken},
+          headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')},
           method: 'POST',
           data: noteObj
         }
@@ -194,7 +184,7 @@ export function updateOrderStatus (noteObj, orderRef, actionType, fraudStatus) {
       payload: {
         request: {
           url: orderStatusUpdateEndpoint,
-          headers: {'Authorization': 'Bearer ' + getState().authReducer.authToken},
+          headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')},
           method: 'POST',
           data: {
             "order_reference": orderRef,

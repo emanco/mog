@@ -31,6 +31,10 @@
 
 .fraudCheckListItem-details {
   float: left;
+
+  a {
+    color: inherit;
+  }
 }
 
 .fraudCheck-status-icons {

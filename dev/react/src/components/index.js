@@ -1,3 +1,4 @@
+import Alert from './Alert/Alert'
 import Breadcrumbs from './Breadcrumbs/Breadcrumbs'
 import CustomerInfo from './CustomerInfo/CustomerInfo'
 import CustomerOrder from './CustomerOrder/CustomerOrder'
@@ -8,6 +9,8 @@ import FraudCheckList from './FraudCheckList/FraudCheckList'
 import FraudCheckListItem from './FraudCheckListItem/FraudCheckListItem'
 import Header from './Header/Header'
 import Icon from './Icon/Icon'
+import LoginModal from './LoginModal/LoginModal'
+import LoginForm from './LoginForm/LoginForm'
 import OrderStatus from './OrderStatus/OrderStatus'
 import Pagination from './Pagination/Pagination'
 import SearchResults from './SearchResults/SearchResults'
@@ -19,6 +22,7 @@ import StickyDropdown from './StickyDropdown/StickyDropdown'
 import Tags from './Tags/Tags'
 
 export {
+  Alert,
   Breadcrumbs,
   CustomerInfo,
   CustomerOrder,
@@ -29,6 +33,8 @@ export {
   FraudCheckListItem,
   Header,
   Icon,
+  LoginModal,
+  LoginForm,
   OrderStatus,
   Pagination,
   SearchResults,

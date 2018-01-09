@@ -2,9 +2,11 @@ import axios from 'axios';
 import { authorise } from './auth';
 import { fraudCheckOrders, postOrderNoteEndpoint, orderStatusUpdateEndpoint } from '../../constants/endpoints'
 import fraudStatusValues from '../../constants/fraudStatusValues';
-
+import { browserHistory } from 'react-router'
 import buildQueryUrl from '../../helpers/buildQueryUrl'
 import { getCustomer, getOrders } from './customers'
+import checkCallSuccess from '../../helpers/checkCallSuccess'
+import * as AuthActions from './auth'
 // Actions
 const LOADING_LIST = 'myOp/fraudCheckOverviewList/LOADING';
 const LOADED_LIST = 'myOp/fraudCheckOverviewList/LOADED';
@@ -104,12 +106,12 @@ console.log('GET FRAUD CHECK LIST');
         }
       }).then((result) => {
        console.log(result)
-        // CHECK RESPONSE AND HANDLE FAILURE
-        handleResponse(result.type, () => {
+
+        checkCallSuccess(result.type, () => {
           if (result.payload.data.count > 0) {
            dispatch(getFraudCheckListOrder(result.payload.data.results[0].customer_reference))
           }
-        })
+        }, () => {dispatch(AuthActions.logOut())});
 
       })
   }
@@ -128,8 +130,10 @@ export function getFraudCheckListOrder (id, orderRef) {
     dispatch({
       type: 'FRAUD_ORDER',
       payload: axios.all([getCustomer(testid), getOrders(id)])
-    }).then((res) => {
-      console.log(res)
+    }).then((result) => {
+      console.log(result)
+      // check result. We don't need a success callback, but log out if it fails
+      checkCallSuccess(result.action.type, () => {}, () => {dispatch(AuthActions.logOut())});
     })
   }
 
@@ -196,15 +200,5 @@ export function updateOrderStatus (noteObj, orderRef, actionType, fraudStatus) {
         status: fraudStatus
       }))
     })
-  }
-}
-
-
-export function handleResponse (resStatus, callback) {
-  if (resStatus.indexOf('FAIL') > -1) {
-    // JWT Token is likely invalid. Redirect ot login
-    //window.location = '/login'
-  } else {
-    callback()
   }
 }

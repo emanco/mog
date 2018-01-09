@@ -150,6 +150,7 @@ export function logOut() {
     })
 
     window.localStorage.removeItem('jwtToken');
+    browserHistory.push('/login')
   }
 }
 

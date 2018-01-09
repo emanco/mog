@@ -35,6 +35,7 @@ export default class fraudCheckOverview extends Component {
 
   componentDidMount() {
     this.props.getFraudCheckList({status: 'FRAUD CHECK NOT CHECKED'});
+    console.log(this.props.data)
   }
 
   handleFraudStatus = (value) => {
@@ -81,6 +82,7 @@ export default class fraudCheckOverview extends Component {
   }
 
   render() {
+    console.log(this.props.data)
     //const overlay = this.state.overlay
     if (!this.props.data || !this.props.orderData) {
       return (

@@ -186,3 +186,10 @@
   outline: none;
   padding: 5px;
   width: 300px; }
+
+.temp-nav {
+  position: absolute;
+  z-index: 99;
+  right: 0; }
+  .temp-nav li {
+    display: inline-block; }

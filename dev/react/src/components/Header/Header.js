@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 import {onSubmit, getSearch} from "../../redux/modules/search";
-
+import { Link } from 'react-router'
 import './../../scss/components/header.css';
 
 import TagsComponent from './../Tags/Tags';
@@ -27,7 +27,7 @@ class Header extends Component {
 
         this.props.dispatch(onSubmit(query));
 
-        this.props.history.push('/search/'+query);
+        this.props.router.push('/search/'+query);
         getSearch(query);
 
     };
@@ -43,6 +43,10 @@ class Header extends Component {
 
         return (
             <div>
+                <ul className="nav temp-nav">
+                  <li><Link to='/login'>Login</Link></li>
+                  <li><Link to='/fraud-check'>Fraud Check</Link></li>
+                </ul>
                 <header className="nav-container nav-height">
                     <i className="ion-ios-search" />
 

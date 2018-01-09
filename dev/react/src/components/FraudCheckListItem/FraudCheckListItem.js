@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import Icon from '../Icon/Icon'
+import { Link } from 'react-router'
 
 import {clientNameMapping, fraudCheckStatus} from '../../helpers/mappings'
 
@@ -12,11 +13,6 @@ export default class fraudCheckList extends Component {
   constructor(props) {
     super(props)
     this.handleItemOnClick = this.handleItemOnClick.bind(this)
-    this.handleItemTitleClick = this.handleItemTitleClick.bind(this)
-  }
-
-  handleItemTitleClick = () => {
-    window.location = '/customers/CUS123456789'
   }
 
   handleItemOnClick = () => {
@@ -31,7 +27,7 @@ export default class fraudCheckList extends Component {
       <div className="row component fraudCheckListItemContain">
         <div className={'fraudCheck-'+ statusClass + ' col-xs-12 fraudCheckListItem'} onClick={this.handleItemOnClick}>
           <div className="fraudCheckListItem-details">
-            <p className="heading2" onClick={this.handleItemTitleClick}>{this.props.data.order_reference}</p>
+            <p className="heading2"><Link to='/customers/CUS123456789'>{this.props.data.order_reference}</Link></p>
             {clientNameMapping(this.props.data.client_id)}
           </div>
           {this.props.data.fraud &&

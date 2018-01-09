@@ -53,7 +53,7 @@ const getSingleCustomerOrders = (id) => {
     return axios({
       method: 'GET',
       url: customersEndpoint + '/' + id + '/orders',
-      headers: {Authorization: 'Bearer ' + window.localStorage.getItem('apiKey')}
+      headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')}
     });
 }
 
@@ -66,27 +66,10 @@ const getData = (id) => {
 
     console.log(getState().authReducer.authToken)
 
-    if (!getState().authReducer.authToken) {
-
-      console.log('NOT AUTHORISED')
-
-      return dispatch(authorise()).then(() => {
-
-        return dispatch({
-          type: 'FETCH_DATA',
-          payload: axios.all([getCustomer(id), getOrders(id), getPrescriptions(id)])
-        })
-
-      });
-
-    } else {
-
       return dispatch({
         type: 'FETCH_DATA',
         payload: axios.all([getCustomer(id), getOrders(id), getPrescriptions(id)])
       })
-
-    }
   }
 };
 

@@ -1,12 +1,13 @@
 import {authTokenEndpoint} from '../../constants/endpoints';
+import { browserHistory } from 'react-router';
 
 const initialState = {
     loading: true,
     success: false,
     authToken: null,
-    test: null,
     loginRequired: true,
-    formVisible: true
+    formVisible: true,
+    loggedIn: false
 }
 
 export default function authReducer(state = initialState, action = '') {
@@ -22,15 +23,13 @@ export default function authReducer(state = initialState, action = '') {
             };
         case 'AUTH_FULFILLED' :
             console.log('AUTH LOADED');
-            console.log(action.payload.data['access_token']);
             return {
                 ...state,
                 loading: false,
                 success: true,
                 error: false,
                 authToken: action.payload.data['access_token'],
-                loginRequired: false,
-                formVisible: true // TEMP
+                loggedIn: true
             };
         case 'AUTH_REJECTED' :
             return {
@@ -40,10 +39,21 @@ export default function authReducer(state = initialState, action = '') {
                 error: true,
                 loginRequired: true,
                 formVisible: true,
+                loggedIn: false,
                 payload: {
                     message: action.payload
                 }
             };
+        case 'SET_AUTHORISED':
+            return {
+              ...state,
+              loggedIn: action.payload.loggedIn
+            }
+        case 'LOG_OUT':
+          return {
+            ...state,
+            loggedIn: action.payload.loggedIn
+          }
         default:
             return state;
     }
@@ -92,22 +102,54 @@ export function login (user, pass) {
           }
         }
       }
+    }).then((res) => {
+      // The response is a success. For now just go back one in history
+      if (res.type === 'AUTH_FULFILLED') {
+
+        window.localStorage.setItem('jwtToken', res.payload.data['access_token'])
+
+        setTimeout(() => {
+          browserHistory.push('/');
+        }, 1000)
+
+      } else {
+        console.log('Login Failed')
+      }
+
     })
   }
 };
 
-export function isAuthorised () {
-  return (dispatch, getState) => {
-    if (getState().authReducer.test) {
-      console.log('AUTHORISED TESTING HEREE')
-      return true
-    } else {
-      dispatch(
-        console.log('DISPATCH AUTH CALL'),
-        authorise()
-      ).then(() => {
-        //return true
-      })
-    }
+export function isAuthorised() {
+  const token = window.localStorage.getItem('jwtToken');
+  let loggedInStatus = token ? true : false;
+
+  console.log(loggedInStatus)
+
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_AUTHORISED',
+      payload: {
+        loggedIn: loggedInStatus
+      }
+    })
+
+    if (!loggedInStatus) {
+        browserHistory.push('/login');
+      }
   }
 }
+
+export function logOut() {
+  return (dispatch) => {
+    dispatch({
+      type: 'LOG_OUT',
+      payload: {
+        loggedIn: false
+      }
+    })
+
+    window.localStorage.removeItem('jwtToken');
+  }
+}
+

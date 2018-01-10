@@ -3,13 +3,17 @@ import PropTypes from 'prop-types'
 
 import getUrlParam from '../../helpers/getUrlParam'
 
-import {FraudCheckListItem, Pagination} from '../../components'
+import {Pagination, FraudCheckListItem, HomeTrialListItem} from '../../components'
 
-export default class FraudCheckList extends Component {
-
+export default class OrderList extends Component {
   constructor(props) {
     super(props)
     this.handleOnItemClickCallback = this.handleOnItemClickCallback.bind(this)
+  }
+
+  childComponents = {
+    FraudCheckList: FraudCheckListItem,
+    HomeTrial: HomeTrialListItem
   }
 
   handleOnItemClickCallback = (orderRef) => {
@@ -27,26 +31,18 @@ export default class FraudCheckList extends Component {
   }
 
   render() {
+    console.log(this.props.listItemComponent);
     const pageCount = this.calculatePagination(this.props.data.next);
+    const ListItem = this.childComponents[this.props.listType || 'FraudCheckList']
     return(
       <div>
         {
           this.props.data.results.map((result, i) => {
-            return (<FraudCheckListItem data={result} key={i} itemClickCallback={this.handleOnItemClickCallback}/>)
+            return (<ListItem data={result} key={i} itemClickCallback={this.handleOnItemClickCallback}/>)
           })
         }
         {pageCount && <Pagination pageCount={pageCount} handlePaginationChange={this.handlePaginationChange} />}
       </div>
     )
   }
-}
-
-
-FraudCheckList.propTypes = {
-
-  data: PropTypes.object,
-  /*
-    Data - Holds all data used in the render method. It should be an object and is required
-    or this component will fail
-  */
 }

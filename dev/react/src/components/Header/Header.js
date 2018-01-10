@@ -49,13 +49,10 @@ class Header extends Component {
                 </ul>
                 <header className="nav-container nav-height">
                     <i className="ion-ios-search" />
-
                     <TagsComponent />
-
                     {/*<form onSubmit={this.onSubmit}>*/}
                         {/*<input ref="search" type="text" className="form-control search" placeholder="" onChange={this.onChange}/>*/}
                     {/*</form>*/}
-
                     <div className="burger-container">
                         <button className="burger" id="nav-burger" type="button">
                             <span className="sr-only">Toggle navigation</span>

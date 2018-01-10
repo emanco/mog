@@ -17,13 +17,12 @@ import App from './containers/App/App';
 import Summarypage from "./containers/customers/page";
 import Searchpage from "./containers/search/page";
 import fraudCheckOverview from './containers/fraudCheck/fraudCheckOverview'
+import homeTrialOverview from './containers/homeTrial/homeTrialOverview'
 import Login from './containers/login/login'
 
 
 //components
 import HeaderComponent from './components/Header/Header';
-//import StickyBarComponent from './components/StickyBar/StickyBar';
-
 import FooterComponent from './components/Footer/Footer';
 
 //reducers
@@ -32,10 +31,7 @@ import summaryReducer from './redux/modules/customers';
 import searchReducer from './redux/modules/search';
 import userReducer from './redux/modules/searchUser';
 import fraudCheckOverviewReducer from './redux/modules/fraudCheckOverview';
-// Bootstrap & jQuery
-//import $ from 'jquery';
-//import { Carousel, Modal,Button, Panel,Image,Row,Col } from 'react-bootstrap';
-
+import homeTrialOverviewReducer from './redux/modules/homeTrialOverview';
 
 // styles
 import "./scss/base/0_fonts.css";
@@ -56,7 +52,7 @@ const client = axios.create({ //all axios can be used, shown in axios documentat
 
 
 let store = createStore(
-  combineReducers({ authReducer, summaryReducer, searchReducer, userReducer, fraudCheckOverviewReducer}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(promiseMiddleware(), thunk, logger, axiosMiddleware(client)));
+  combineReducers({ authReducer, summaryReducer, searchReducer, userReducer, fraudCheckOverviewReducer, homeTrialOverviewReducer}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(promiseMiddleware(), thunk, logger, axiosMiddleware(client)));
 
 const authCheck = () => {
 
@@ -81,6 +77,7 @@ ReactDOM.render(
                   <Route path="/search" component={Searchpage} />
                   <Route path="/search/:searchid" component={Searchpage} />
                   <Route path='/fraud-check' component={fraudCheckOverview} />
+                  <Route path='/hometrial-orders' component={homeTrialOverview} />
                   <Route path='/login' component={Login} />
                 </Route>
               </Router>

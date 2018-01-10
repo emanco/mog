@@ -5,12 +5,13 @@ import CustomerOrder from './CustomerOrder/CustomerOrder'
 import CustomerOrderList from './CustomerOrderList/CustomerOrderList'
 import CustomerPrescriptions from './CustomerPrescriptions/CustomerPrescriptions'
 import Footer from './Footer/Footer'
-import FraudCheckList from './FraudCheckList/FraudCheckList'
 import FraudCheckListItem from './FraudCheckListItem/FraudCheckListItem'
 import Header from './Header/Header'
+import HomeTrialListItem from './HomeTrialListItem/HomeTrialListItem'
 import Icon from './Icon/Icon'
 import LoginModal from './LoginModal/LoginModal'
 import LoginForm from './LoginForm/LoginForm'
+import OrderList from './OrderList/OrderList'
 import OrderStatus from './OrderStatus/OrderStatus'
 import Pagination from './Pagination/Pagination'
 import SearchResults from './SearchResults/SearchResults'
@@ -29,12 +30,13 @@ export {
   CustomerOrderList,
   CustomerPrescriptions,
   Footer,
-  FraudCheckList,
   FraudCheckListItem,
   Header,
+  HomeTrialListItem,
   Icon,
   LoginModal,
   LoginForm,
+  OrderList,
   OrderStatus,
   Pagination,
   SearchResults,

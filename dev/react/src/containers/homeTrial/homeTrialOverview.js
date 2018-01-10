@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import * as fraudCheckOverviewActions from '../../redux/modules/fraudCheckOverview'
-import {OrderList, CustomerInfo, CustomerOrderList, StickyBar, StickyActions, SelectBox } from '../../components';
+import * as homeTrialOverviewActions from '../../redux/modules/homeTrialOverview'
+import {FraudCheckList, CustomerInfo, CustomerOrderList, StickyBar, StickyActions, SelectBox, OrderList } from '../../components';
 
 import fraudFilterValues from '../../constants/fraudFilterValues';
 
@@ -11,16 +11,16 @@ import './../../scss/components/fraudCheckOverview.css';
 
 @connect(
   (state, ownProps) => ({
-    data: state.fraudCheckOverviewReducer.payload,
-    orderData: state.fraudCheckOverviewReducer.orderPayload,
-    orderLoading: state.fraudCheckOverviewReducer.orderLoading,
-    listLoading: state.fraudCheckOverviewReducer.loading,
-    currentlyViewedOrder: state.fraudCheckOverviewReducer.currentOrderRef,
-    fraudStatus: state.fraudCheckOverviewReducer.fraudStatus
+    data: state.homeTrialOverviewReducer.payload,
+    orderData: state.homeTrialOverviewReducer.orderPayload,
+    orderLoading: state.homeTrialOverviewReducer.orderLoading,
+    listLoading: state.homeTrialOverviewReducer.loading,
+    currentlyViewedOrder: state.homeTrialOverviewReducer.currentOrderRef,
+    fraudStatus: state.homeTrialOverviewReducer.fraudStatus
   }),
-  {...fraudCheckOverviewActions}
+  {...homeTrialOverviewActions}
 )
-export default class fraudCheckOverview extends Component {
+export default class homeTrialOverview extends Component {
 
   constructor(props) {
     super(props)
@@ -34,13 +34,13 @@ export default class fraudCheckOverview extends Component {
   }
 
   componentDidMount() {
-    this.props.getFraudCheckList({status: 'FRAUD CHECK NOT CHECKED'});
+    this.props.getHomeTrialList();
     console.log(this.props.data)
   }
 
   handleFraudStatus = (value) => {
     this.props.upateFilter(value)
-    this.props.getFraudCheckList({
+    this.props.getHomeTrialList({
       status: value,
       limit: 20
     })
@@ -49,13 +49,13 @@ export default class fraudCheckOverview extends Component {
   handleFraudCheckListClick = (orderRef) => {
     // Check we're not already displaying the order
     if (orderRef !== this.props.data.results[0].order_reference) {
-      this.props.getFraudCheckListOrder('CUS123456789');
+      this.props.getHomeTrialListOrder('CUS123456789');
     }
   }
 
   handleFilterChange = (filterName) => {
     // Call Action to go update the view.
-    this.props.getFraudCheckList({
+    this.props.getHomeTrialList({
       [filterName] : true,
       status : this.props.fraudStatus
     })
@@ -63,7 +63,7 @@ export default class fraudCheckOverview extends Component {
 
   handlePaginationChange = (page) => {
 
-    this.props.getFraudCheckList({
+    this.props.getHomeTrialList({
       offset: page * 20,
       limit: 20
     })
@@ -82,8 +82,9 @@ export default class fraudCheckOverview extends Component {
   }
 
   render() {
+    console.log(this.props.data)
     //const overlay = this.state.overlay
-    if (!this.props.data.results || !this.props.orderData) {
+    if (!this.props.data || !this.props.orderData) {
       return (
         <div>
           <StickyBar
@@ -112,6 +113,7 @@ export default class fraudCheckOverview extends Component {
               </div>
               {this.props.data.count < 1 && <h3 className='h3'>No Results</h3>}
               <OrderList
+                listType="HomeTrial"
                 data={this.props.data}
                 hoverCallback={this.handleFraudCheckListClick}
                 handlePaginationChange={this.handlePaginationChange}/>

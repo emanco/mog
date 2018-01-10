@@ -5,6 +5,8 @@ import getUrlParam from '../../helpers/getUrlParam'
 
 import {Pagination, FraudCheckListItem, HomeTrialListItem} from '../../components'
 
+import './../../scss/components/orderList.css';
+
 export default class OrderList extends Component {
   constructor(props) {
     super(props)
@@ -35,7 +37,7 @@ export default class OrderList extends Component {
     const pageCount = this.calculatePagination(this.props.data.next);
     const ListItem = this.childComponents[this.props.listType || 'FraudCheckList']
     return(
-      <div>
+      <div className="orderList">
         {
           this.props.data.results.map((result, i) => {
             return (<ListItem data={result} key={i} itemClickCallback={this.handleOnItemClickCallback}/>)

@@ -1,35 +1,35 @@
 @import '../customBase/variables.scss';
 @import '../base/1_vars.scss';
 
-#root .fraudCheckOverview .fraudCheckListItem {
+#root .orderList .orderListItem {
   padding: 4%;
 }
 
-.fraudCheckListItemContain.component {
+.orderListItemContain.component {
   padding: 0
 }
 
-.fraudCheckListItem {
+.orderListItem {
   border: 1px solid #e8e9e9;
   display: table-cell;
   vertical-align: middle;
   box-sizing: border-box;
 
-  &.fraudCheck-passed {
+  &.orderList-passed {
     border-left: 2px solid $color-green;
   }
-  &.fraudCheck-contacted {
+  &.orderList-contacted {
     border-left: 2px solid $color-yellow;
   }
-  &.fraudCheck-failed {
+  &.orderList-failed {
     border-left: 2px solid $color-red;
   }
-  &.fraudCheck-pending {
+  &.lorderList-pending {
     border-left: 2px solid $color-grey-border;
   }
 }
 
-.fraudCheckListItem-details {
+.orderListItem-details {
   float: left;
 
   a {
@@ -37,12 +37,12 @@
   }
 }
 
-.fraudCheck-status-icons {
+.orderList-status-icons {
   float: right;
   line-height: 0;
 }
 
-.fraudCheckListItem-flagIcon {
+.orderListItem-flagIcon {
   border-radius: 100%;
   border: 1px solid $color-grey-border;
   height: 40px;

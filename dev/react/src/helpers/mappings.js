@@ -27,6 +27,25 @@ export function fraudCheckStatus(statusVal) {
   }
 }
 
+export function homeTrialStatus(statusVal) {
+  const testVal = statusVal.toUpperCase();
+  if (testVal.indexOf('HT COMPLETE') > -1) {
+    return 'complete'
+  }
+  else if (testVal.indexOf('FULFILLED') > -1) {
+    return 'fulfilled'
+  }
+  else if (testVal.indexOf('HT RECEIVED IN WAREHOUSE') > -1) {
+    return 'warehouse'
+  }
+  else if(testVal.indexOf('HT CUSTOMER CONTACTED') > -1) {
+    return 'contacted'
+  }
+  else {
+    return ''
+  }
+}
+
 export function currency(currencyCode) {
   switch(currencyCode) {
     case 'GBP' :

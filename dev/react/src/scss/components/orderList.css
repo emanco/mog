@@ -1,0 +1,48 @@
+#root .orderList .orderListItem {
+  padding: 4%; }
+
+.orderListItemContain.component {
+  padding: 0; }
+
+.orderListItem {
+  border: 1px solid #e8e9e9;
+  display: table-cell;
+  vertical-align: middle;
+  box-sizing: border-box; }
+  .orderListItem.orderList-passed {
+    border-left: 2px solid #34d9ba; }
+  .orderListItem.orderList-contacted {
+    border-left: 2px solid #fcd259; }
+  .orderListItem.orderList-failed {
+    border-left: 2px solid #f86e61; }
+  .orderListItem.lorderList-pending {
+    border-left: 2px solid #e8e9e9; }
+
+.orderListItem-details {
+  float: left; }
+  .orderListItem-details a {
+    color: inherit; }
+
+.orderList-status-icons {
+  float: right;
+  line-height: 0; }
+
+.orderListItem-flagIcon {
+  border-radius: 100%;
+  border: 1px solid #e8e9e9;
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  text-align: center;
+  font-size: 32px;
+  position: relative;
+  font-size: 1.5em;
+  margin: 2px 0 0 14px; }
+  .orderListItem-flagIcon:before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-top: 22%;
+    color: #4a4a4a; }

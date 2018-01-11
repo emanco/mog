@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import Hotkeys from 'react-hot-keys';
 import Moment from 'react-moment';
 
+import {FormDatePicker} from '../../components/'
+
+import './../../scss/components/stickyActions.css';
 import './../../scss/components/stickyActionsHomeTrial.css';
 
 export default class StickyActionsHomeTrial extends Component {
@@ -135,12 +138,13 @@ export default class StickyActionsHomeTrial extends Component {
     const actionClass = this.state.action
 
     return(
-      <div className={'sticky-actions sticky-actions-' + stateClass + ' sticky-actions-' + actionClass}>
+      <div className={'sticky-actions-homeTrial sticky-actions-' + stateClass + ' sticky-actions-' + actionClass}>
         <div className='sticky-actions-overlay' onClick={this.handleToggleForm}></div>
         <div className="stickyActions-form">
           <div className="stickyActions-form-title">
             <h3 className='h3'>{this.state.title}</h3>
           </div>
+          <FormDatePicker/>
           <textarea
             className="form-control stickyActions-comment"
             rows="2"
@@ -176,7 +180,7 @@ export default class StickyActionsHomeTrial extends Component {
                 keyName="shift+a"
                 onKeyDown={this.handleKeyboardOpen}>
                 <button
-                  className="button btn-approve"
+                  className="button btn-updateDate"
                   onClick={() => {this.handleClickUpdateDate(this.props.orderRef)}}>
                   Update Date
                 </button>
@@ -184,7 +188,7 @@ export default class StickyActionsHomeTrial extends Component {
               <Hotkeys
                 keyName="shift+d"
                 onKeyUp={this.handleKeyboardOpen}>
-                <button className="button btn-decline"
+                <button className="button btn-updateStatus"
                   onClick={() => {this.handleClickUpdateStatus(this.props.orderRef)}}>
                   Change Status
                 </button>

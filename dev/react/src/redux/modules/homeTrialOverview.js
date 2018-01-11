@@ -127,7 +127,7 @@ export function getHomeTrialListOrder (id, orderRef) {
   return (dispatch, getState) => {
     dispatch({
       type: 'FRAUD_ORDER',
-      payload: axios.all([getCustomer(testid), getOrders(id)])
+      payload: axios.all([getOrders(id)])
     }).then((result) => {
       console.log(result)
       // check result. We don't need a success callback, but log out if it fails

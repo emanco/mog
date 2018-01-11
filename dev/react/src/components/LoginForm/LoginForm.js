@@ -33,10 +33,10 @@ export default class LoginForm extends Component {
                 </div>
                 <div className='form-element'>
                   <label htmlFor="password">Password</label>
-                  <input type='password' name="password" className="form-control" ref={(input) => { this.password = input}}/>
+                  <input type='password' name="password" className="form-control invalid" ref={(input) => { this.password = input}}/>
                 </div>
                 <div className='form-element'>
-                  <button className="button" onClick={this.onSubmit}>Log In</button>
+                  <button className="btn -blue" onClick={this.onSubmit}>Log In</button>
                 </div>
                 {this.props.error && <div className='form-element'>
                   <Alert type="error" msg="Log in failed. Please check your details and try again" />
@@ -47,7 +47,7 @@ export default class LoginForm extends Component {
             {this.props.loggedIn &&
               <div>
                 <Alert type="success" msg="You are logged in" />
-                <button className="button" onClick={this.onLogOut}>Log out</button>
+                <button className="btn -dark" onClick={this.onLogOut}>Log out</button>
               </div>}
           </div>
         );

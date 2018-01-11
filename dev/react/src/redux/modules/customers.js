@@ -5,32 +5,32 @@ import { customersEndpoint } from '../../constants/endpoints';
 export default function summaryReducer(state = {}, action = '') {
     switch (action.type)
     {
-         case 'FETCH_DATA_PENDING' :
-            return {
-                ...state,
-                loading: true,
-                success: false,
-                payload: {}
-            }
-        case 'FETCH_DATA_FULFILLED' :
-            //console.log(action.payload);
-            return {
-                ...state,
-                loading: false,
-                success: true,
-                payload: action.payload
-            }
-        case 'FETCH_DATA_REJECTED' :
-            return {
-                ...state,
-                loading: false,
-                success: false,
-                payload: {
-                    message: action.payload.message
-                }
-            }
-        default:
-            return state;
+    case 'FETCH_DATA_PENDING' :
+      return {
+        ...state,
+        loading: true,
+        success: false,
+        payload: {}
+      }
+    case 'FETCH_DATA_FULFILLED' :
+      //console.log(action.payload);
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        payload: action.payload
+      }
+    case 'FETCH_DATA_REJECTED' :
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        payload: {
+            message: action.payload.message
+        }
+      }
+    default:
+        return state;
     }
 }
 

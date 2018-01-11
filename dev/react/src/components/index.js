@@ -4,6 +4,7 @@ import CustomerInfo from './CustomerInfo/CustomerInfo'
 import CustomerOrder from './CustomerOrder/CustomerOrder'
 import CustomerOrderList from './CustomerOrderList/CustomerOrderList'
 import CustomerPrescriptions from './CustomerPrescriptions/CustomerPrescriptions'
+import FormDatePicker from './FormDatePicker/FormDatePicker'
 import Footer from './Footer/Footer'
 import FraudCheckListItem from './FraudCheckListItem/FraudCheckListItem'
 import Header from './Header/Header'
@@ -30,6 +31,7 @@ export {
   CustomerOrder,
   CustomerOrderList,
   CustomerPrescriptions,
+  FormDatePicker,
   Footer,
   FraudCheckListItem,
   Header,

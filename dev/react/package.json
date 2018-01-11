@@ -41,6 +41,7 @@
     "raf": "3.4.0",
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.3",
+    "react-datepicker": "^1.0.4",
     "react-dev-utils": "^4.2.1",
     "react-dom": "^16.0.0",
     "react-hot-keys": "^1.0.5",

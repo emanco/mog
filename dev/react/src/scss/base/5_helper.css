@@ -340,6 +340,12 @@
 .bg-colour-dark-grey {
   background-color: #222222; }
 
+.colour-form-border-grey {
+  color: #d8d8d8; }
+
+.bg-colour-form-border-grey {
+  background-color: #d8d8d8; }
+
 .colour-blue {
   color: #212937; }
 
@@ -363,6 +369,12 @@
 
 .bg-colour-btn-blue-blue {
   background-color: #2671d4; }
+
+.colour-label-blue {
+  color: #889ca6; }
+
+.bg-colour-label-blue {
+  background-color: #889ca6; }
 
 .colour-red-prescription {
   color: #fdd3cf; }

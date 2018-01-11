@@ -1,0 +1,165 @@
+@import "../customBase/variables.scss";
+@import '../base/1_vars.scss';
+
+@-webkit-keyframes fade-in-out {
+      0% { opacity: 0;}
+    100% { opacity: 0.8;}
+}
+@-moz-keyframes fade-in-out {
+      0% { opacity: 0;}
+    100% { opacity: 0.8;}
+}
+
+
+@-webkit-keyframes slide-in {
+      0% { opacity: 0;}
+    100% { opacity: 0.8;}
+}
+@-moz-keyframes slide-in {
+      0% { opacity: 0;}
+    100% { opacity: 0.8;}
+}
+
+$approveColor : $color-green;
+
+.sticky-actions {
+  background: white;
+
+  .sticky-actions-overlay {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    background: rgba(33, 41, 55, 0.8);
+    z-index: -4;
+    margin: auto;
+    display: none;
+    -webkit-animation: fade-in-out .2s ease-in;
+    -moz-animation: fade-in-out .2s ease-in;
+  }
+
+  .stickyActions-form {
+    padding: 2em;
+    background: white;
+    position: absolute;
+    top: 0;
+    transition: all .3s ease-out;
+    z-index: -1;
+    overflow: hidden;
+    width: 100%;
+
+    .stickyActions-form-title {
+      margin-bottom: 2em;
+      text-transform: capitalize;
+    }
+  }
+
+
+  &.sticky-actions-open {
+    border-top: 1px solid map-get($colours, 'line');
+
+    .sticky-actions-overlay {
+      display: block;
+    }
+
+    .stickyActions-form {
+      top: -206px;
+      height: auto;
+    }
+
+    .btn-cancel {
+      display: inline-block;
+    }
+  }
+
+  .stickyActions-details {
+    float: left;
+  }
+
+
+  .stickyActions-controls {
+    border-top: 1px solid map-get($colours, 'line');
+    padding: 2em;
+    overflow: hidden;
+    background: white;
+  }
+
+  .stickyActions-comment {
+    height: auto;
+    resize: none;
+
+    &:focus {
+      border-color: map-get($colours, 'line') !important;
+    }
+  }
+
+  & .sticky-bottom {
+    bottom: 0;
+    width: 100%;
+  }
+
+  .button {
+    width: 120px;
+    height: 48px;
+    margin-left: 1em;
+  }
+
+  .stickyActions-cta {
+    float: right;
+  }
+
+  .btn-approve {
+    color: white;
+  }
+
+  .btn-cancel {
+    border: 0;
+    width: auto;
+    display: none;
+  }
+}
+
+.sticky-actions.sticky-actions-approve {
+    .btn-decline, .btn-contacted {
+      visibility: hidden;
+    }
+  }
+
+  .sticky-actions.sticky-actions-decline {
+    .btn-approve {
+      display: none;
+    }
+    .btn-contacted {
+      visibility: hidden;
+    }
+    .btn-decline {
+      background-color: $color-btn-red;
+      border-color: $color-btn-red;
+      color: white;
+    }
+  }
+
+  .sticky-actions.sticky-actions-contact {
+    .btn-approve,
+    .btn-decline {
+      display: none;
+    }
+  }
+
+
+// @TODO - Move to Button component
+
+.button {
+  box-sizing: border-box;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.btn-approve {
+  background-color: $approveColor;
+  border-color: $approveColor;
+}
+

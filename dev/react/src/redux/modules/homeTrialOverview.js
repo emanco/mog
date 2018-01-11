@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { authorise } from './auth';
 import { homeTrialEndpoint, postOrderNoteEndpoint, orderStatusUpdateEndpoint } from '../../constants/endpoints'
-import fraudStatusValues from '../../constants/fraudStatusValues';
+import homeTrialStatusValues from '../../constants/homeTrialStatusValues';
 import { browserHistory } from 'react-router'
 import buildQueryUrl from '../../helpers/buildQueryUrl'
 import { getCustomer, getOrders } from './customers'
@@ -22,7 +22,7 @@ const initialState = {
     orderLoading: false,
     orderSuccess: false,
     payload: {},
-    fraudStatus: fraudStatusValues[0].value
+    homeTrialStatus: homeTrialStatusValues[0].value
 }
 
 export default function homeTrialOverviewReducer(state = initialState, action = '') {
@@ -72,20 +72,21 @@ export default function homeTrialOverviewReducer(state = initialState, action = 
             orderPayload: action.payload
           }
         case 'FRAUD_LIST_FILTER' :
+        console.log(action)
           return {
             ...state,
-            fraudStatus: action.fraudStatus
+            homeTrialStatus: action.fraudStatus
           }
         default:
             return state;
     }
 }
 
-export function upateFilter (filterValue) {
+export function updateFilter (filterValue) {
   return (dispatch) => {
     dispatch({
       type: 'FRAUD_LIST_FILTER',
-      fraudStatus: filterValue
+      homeTrialStatus: filterValue
     })
   }
 }

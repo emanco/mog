@@ -7,6 +7,7 @@
   border-radius: 3px;
   padding: 2px 4px;
   text-transform:lowercase;
+  margin-top: 8px;
 }
 
 .homeTrialListItem-complete {
@@ -20,6 +21,13 @@
   .homeTrialList-status {
     color: $color-purple;
     border-color: $color-purple;
+  }
+}
+
+.homeTrialListItem-fulfilled {
+  .homeTrialList-status {
+    color: $color-green;
+    border-color: $color-green;
   }
 }
 

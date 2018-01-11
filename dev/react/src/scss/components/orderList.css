@@ -22,6 +22,8 @@
   float: left; }
   .orderListItem-details a {
     color: inherit; }
+  .orderListItem-details .heading2 {
+    margin-bottom: 4px; }
 
 .orderList-status-icons {
   float: right;

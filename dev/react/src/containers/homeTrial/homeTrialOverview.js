@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as homeTrialOverviewActions from '../../redux/modules/homeTrialOverview'
-import {FraudCheckList, CustomerInfo, CustomerOrderList, StickyBar, StickyActions, SelectBox, OrderList } from '../../components';
+import {FraudCheckList, CustomerInfo, CustomerOrderList, StickyBar, StickyActionsHomeTrial, SelectBox, OrderList } from '../../components';
 
-import fraudFilterValues from '../../constants/fraudFilterValues';
+import homeTrialFilterValues from '../../constants/homeTrialFilterValues';
 
 import './../../scss/components/fraudCheckOverview.css';
 
@@ -16,7 +16,7 @@ import './../../scss/components/fraudCheckOverview.css';
     orderLoading: state.homeTrialOverviewReducer.orderLoading,
     listLoading: state.homeTrialOverviewReducer.loading,
     currentlyViewedOrder: state.homeTrialOverviewReducer.currentOrderRef,
-    fraudStatus: state.homeTrialOverviewReducer.fraudStatus
+    homeTrialStatus: state.homeTrialOverviewReducer.homeTrialStatus
   }),
   {...homeTrialOverviewActions}
 )
@@ -25,7 +25,7 @@ export default class homeTrialOverview extends Component {
   constructor(props) {
     super(props)
     this.handleUpdateOrder = this.handleUpdateOrder.bind(this)
-    this.handleFraudStatus = this.handleFraudStatus.bind(this)
+    this.handleStatus = this.handleStatus.bind(this)
     this.handleFraudCheckListClick = this.handleFraudCheckListClick.bind(this)
 
     this.state = {
@@ -34,14 +34,27 @@ export default class homeTrialOverview extends Component {
   }
 
   componentDidMount() {
-    this.props.getHomeTrialList();
-    console.log(this.props.data)
+    this.props.getHomeTrialList({
+      'pending_review': true,
+    });
   }
 
-  handleFraudStatus = (value) => {
-    this.props.upateFilter(value)
+  handleStatus = (value) => {
+    this.props.updateFilter(value)
+    let params = {}
+
+    if (value === 'pending') {
+      params = {
+        'pending_review': true
+      }
+    } else if(value === 'contacted') {
+      params = {
+        status: 'HT CUSTOMER CONTACTED'
+      }
+    }
+
     this.props.getHomeTrialList({
-      status: value,
+      ...params,
       limit: 20
     })
   }
@@ -55,10 +68,18 @@ export default class homeTrialOverview extends Component {
 
   handleFilterChange = (filterName) => {
     // Call Action to go update the view.
-    this.props.getHomeTrialList({
-      [filterName] : true,
-      status : this.props.fraudStatus
-    })
+
+    let params = {
+      state: this.props.homeTrialStatus
+    }
+
+    if (filterName) {
+      params = {
+        ...params,
+        [filterName]:true
+      }
+    }
+    this.props.getHomeTrialList(params)
   }
 
   handlePaginationChange = (page) => {
@@ -99,14 +120,14 @@ export default class homeTrialOverview extends Component {
         <div>
           <StickyBar
             path={this.props.location.pathname}
-            filterListCallback={this.handleFraudStatus }/>
+            filterListCallback={this.handleStatus }/>
           <div className="fraudCheckOverview">
             <div className={"left-panel " + listLoadingClass}>
               <div className="fraudCheckOverview-meta">
                 <div className="fraudCheckOverview-count">{this.props.data.count} Items</div>
 
                 <SelectBox
-                  options={fraudFilterValues}
+                  options={homeTrialFilterValues}
                   handleChange={this.handleFilterChange}
                   placeholder='Filter by'
                   />
@@ -130,7 +151,7 @@ export default class homeTrialOverview extends Component {
                 data={this.props.orderData[1].data[0]}
                 customerid={this.props.data.results[0].customer_reference} />
               </div>
-              <StickyActions loadingStatus={this.props.orderLoading} orderRef={this.props.currentlyViewedOrder} updateOrderCallback={this.handleUpdateOrder} declineCallback={this.handleDeclineOrder} />
+              <StickyActionsHomeTrial loadingStatus={this.props.orderLoading} orderRef={this.props.currentlyViewedOrder} updateOrderCallback={this.handleUpdateOrder} declineCallback={this.handleDeclineOrder} />
               </div>
               }
             </div>

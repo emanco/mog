@@ -18,6 +18,7 @@ import SearchResults from './SearchResults/SearchResults'
 import SearchUser from './SearchUser/SearchUser'
 import SelectBox from './SelectBox/SelectBox'
 import StickyActions from './StickyActions/StickyActions'
+import StickyActionsHomeTrial from './StickyActionsHomeTrial/StickyActionsHomeTrial'
 import StickyBar from './StickyBar/StickyBar'
 import StickyDropdown from './StickyDropdown/StickyDropdown'
 import Tags from './Tags/Tags'
@@ -43,6 +44,7 @@ export {
   SearchUser,
   SelectBox,
   StickyActions,
+  StickyActionsHomeTrial,
   StickyBar,
   StickyDropdown,
   Tags

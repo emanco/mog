@@ -3,15 +3,15 @@ import PropTypes from 'prop-types'
 import Hotkeys from 'react-hot-keys';
 import Moment from 'react-moment';
 
-import './../../scss/components/stickyActions.css';
+import './../../scss/components/stickyActionsHomeTrial.css';
 
-export default class StickyActions extends Component {
+export default class StickyActionsHomeTrial extends Component {
 
   constructor(props) {
     super(props)
 
-    this.handleClickApprove = this.handleClickApprove.bind(this)
-    this.handleClickDecline = this.handleClickDecline.bind(this)
+    this.handleClickUpdateDate = this.handleClickUpdateDate.bind(this)
+    this.handleClickUpdateStatus = this.handleClickUpdateStatus.bind(this)
 
     this.handleNoteChange = this.handleNoteChange.bind(this);
     this.handleShortcutSubmit = this.handleShortcutSubmit.bind(this);
@@ -34,31 +34,21 @@ export default class StickyActions extends Component {
     }
   }
 
-  handleClickApprove = (orderRef) => {
+  handleClickUpdateDate = (orderRef) => {
     this.setState({
       status: 'open',
-      action: 'approve',
-      title: 'approved'
+      action: 'updateDate',
+      title: 'Update Date'
     })
 
     this.handleSubmit(orderRef)
   }
 
-  handleClickDecline = (orderRef) => {
+  handleClickUpdateStatus = (orderRef) => {
     this.setState({
       status: 'open',
-      action: 'decline',
-      title: 'declined'
-    })
-
-    this.handleSubmit(orderRef)
-  }
-
-  handleClickContacted = (orderRef) => {
-    this.setState({
-      status: 'open',
-      action: 'contact',
-      title: 'contacted'
+      action: 'statusChange',
+      title: 'Change Status'
     })
 
     this.handleSubmit(orderRef)
@@ -80,6 +70,8 @@ export default class StickyActions extends Component {
   }
 
   handleSubmit = (orderRef) => {
+    return // @TODO - Temp while I work
+
     // taking advtange of the react flow here. Even though
     // we set status to be open, it isn't until the cycle is
     // complete so this will be false and it won't attempt to
@@ -94,6 +86,7 @@ export default class StickyActions extends Component {
     }
 
     this.props.updateOrderCallback(noteObj, orderRef, this.state.action)
+
     this.setState({
       status: 'closed',
       action: '',
@@ -184,25 +177,16 @@ export default class StickyActions extends Component {
                 onKeyDown={this.handleKeyboardOpen}>
                 <button
                   className="button btn-approve"
-                  onClick={() => {this.handleClickApprove(this.props.orderRef)}}>
-                  Approve
+                  onClick={() => {this.handleClickUpdateDate(this.props.orderRef)}}>
+                  Update Date
                 </button>
               </Hotkeys>
               <Hotkeys
                 keyName="shift+d"
                 onKeyUp={this.handleKeyboardOpen}>
                 <button className="button btn-decline"
-                  onClick={() => {this.handleClickDecline(this.props.orderRef)}}>
-                  Decline
-                </button>
-              </Hotkeys>
-              <Hotkeys
-                keyName="shift+c"
-                onKeyUp={this.handleKeyboardOpen}>
-                <button
-                  className="button btn-contacted"
-                  onClick={() => {this.handleClickContacted(this.props.orderRef)}}>
-                  Contacted
+                  onClick={() => {this.handleClickUpdateStatus(this.props.orderRef)}}>
+                  Change Status
                 </button>
               </Hotkeys>
             </Hotkeys>
@@ -214,7 +198,7 @@ export default class StickyActions extends Component {
 }
 
 
-StickyActions.propTypes = {
+StickyActionsHomeTrial.propTypes = {
   data: PropTypes.object,
   orderRef: PropTypes.string
 }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import Icon from '../Icon/Icon'
 import { Link } from 'react-router'
+import Moment from 'react-moment'
 
 import {clientNameMapping, homeTrialStatus} from '../../helpers/mappings'
 
@@ -28,7 +29,7 @@ export default class HomeTrialListItem extends Component {
         <div className={'homeTrialListItem-'+ statusClass + ' col-xs-12 orderListItem'} onClick={this.handleItemOnClick}>
           <div className="orderListItem-details">
             <p className="heading2"><Link to='/customers/CUS123456789'>{this.props.data.order_reference}</Link></p>
-            {clientNameMapping(this.props.data.client_id)}
+            Client: {this.props.data.client_id} | Order Date: <Moment date={this.props.data.placed_at} format="ddd Do MMM YYYY" />
           </div>
           {this.props.data.fraud &&
           <div className="orderList-status-icons">

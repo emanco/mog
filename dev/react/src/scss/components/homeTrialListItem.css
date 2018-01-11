@@ -3,7 +3,8 @@
   border: 1px solid;
   border-radius: 3px;
   padding: 2px 4px;
-  text-transform: lowercase; }
+  text-transform: lowercase;
+  margin-top: 8px; }
 
 .homeTrialListItem-complete .homeTrialList-status {
   color: #f86e61;
@@ -12,6 +13,10 @@
 .homeTrialListItem-contacted .homeTrialList-status {
   color: #644c73;
   border-color: #644c73; }
+
+.homeTrialListItem-fulfilled .homeTrialList-status {
+  color: #34d9ba;
+  border-color: #34d9ba; }
 
 .homeTrialListItem- .homeTrialList-status {
   display: none; }

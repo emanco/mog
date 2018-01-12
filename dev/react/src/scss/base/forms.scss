@@ -7,10 +7,10 @@ $labelColour : map-get(map-get($colours, 'blue'), 'label');
 $formBorderColour: map-get(map-get($colours, 'grey'), 'form-border');
 
 .form-element {
-  input
-  & label {
+  label {
     @include scale-pixels('font-size', 14px, 16px);
-    color: $labelColour
+    color: $labelColour;
+    font-weight: normal;
   }
 }
 
@@ -103,7 +103,7 @@ textarea.form-control{
 .selectric-wrapper .label{
   padding-right:30px;
 }
-.btn-round{
+.btn-round {
   $btn-transition: 0.9s $cubic-bezier1;
   border-radius:2em;
   border:1px solid rgba(255,255,255,.5);

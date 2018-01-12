@@ -281,20 +281,21 @@ ul {
 p {
   line-height: 1em; }
 
-input .form-element label {
+.form-element label {
   font-size: 14px;
-  color: #889ca6; }
+  color: #889ca6;
+  font-weight: normal; }
   @media (min-width: 768px) {
-    input .form-element label {
+    .form-element label {
       font-size: 14px; } }
   @media (min-width: 992px) {
-    input .form-element label {
+    .form-element label {
       font-size: 14px; } }
   @media (min-width: 1200px) {
-    input .form-element label {
+    .form-element label {
       font-size: 14px; } }
   @media (min-width: 1500px) {
-    input .form-element label {
+    .form-element label {
       font-size: 16px; } }
 
 .form-control {

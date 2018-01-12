@@ -281,11 +281,5 @@ ul {
 p {
   line-height: 1em; }
 
-.login-form {
-  width: 460px;
-  margin: auto;
-  padding: 5em 2em 2em 2em; }
-  .login-form .form-element {
-    margin-bottom: 1em; }
-  .login-form label {
-    font-weight: normal; }
+.create-customer .form-element {
+  margin-bottom: 2.5em; }

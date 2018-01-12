@@ -33,7 +33,7 @@ export default class LoginForm extends Component {
                 </div>
                 <div className='form-element'>
                   <label htmlFor="password">Password</label>
-                  <input type='password' name="password" className="form-control invalid" ref={(input) => { this.password = input}}/>
+                  <input type='password' name="password" className="form-control" ref={(input) => { this.password = input}}/>
                 </div>
                 <div className='form-element'>
                   <button className="btn -blue" onClick={this.onSubmit}>Log In</button>

@@ -3,16 +3,9 @@
 @import "../base/4_global.scss";
 @import "../customBase/variables.scss";
 
-.login-form {
-    width: 460px;
-    margin: auto;
-    padding:5em 2em 2em 2em;
 
+.create-customer {
   .form-element {
-    margin-bottom: 1em;
-  }
-
-  label {
-    font-weight: normal;
+    margin-bottom: 2.5em;
   }
 }

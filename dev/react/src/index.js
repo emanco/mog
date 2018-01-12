@@ -18,6 +18,7 @@ import Summarypage from "./containers/customers/page";
 import Searchpage from "./containers/search/page";
 import fraudCheckOverview from './containers/fraudCheck/fraudCheckOverview'
 import homeTrialOverview from './containers/homeTrial/homeTrialOverview'
+import CreateCustomer from './containers/createCustomer/createCustomer'
 import Login from './containers/login/login'
 
 
@@ -79,6 +80,7 @@ ReactDOM.render(
                   <Route path='/fraud-check' component={fraudCheckOverview} />
                   <Route path='/hometrial-orders' component={homeTrialOverview} />
                   <Route path='/login' component={Login} />
+                  <Route path='/create-customer' component={CreateCustomer} />
                 </Route>
               </Router>
             </div>

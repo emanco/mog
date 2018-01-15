@@ -102,7 +102,6 @@ export default class homeTrialOverview extends Component {
   }
 
   render() {
-    console.log(this.props.orderData)
     //const overlay = this.state.overlay
     if (!this.props.data || !this.props.orderData) {
       return (
@@ -114,7 +113,7 @@ export default class homeTrialOverview extends Component {
     } else {
       const orderLoadingClass = this.props.orderLoading ? '-loading' : '';
       const listLoadingClass = this.props.listLoading ? '-loading' : '';
-      console.log(this.props.orderData[1])
+
       return(
         <div>
           <StickyBar

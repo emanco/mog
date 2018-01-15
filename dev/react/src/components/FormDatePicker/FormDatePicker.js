@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import moment from 'react-moment'
+import Moment from 'react-moment'
 import DatePicker from 'react-datepicker'
 import './../../scss/components/loginModal.css';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -9,13 +9,29 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 export default class FormDatePicker extends Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      startDate: ''
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(date) {
+    this.setState({
+      startDate: date
+    })
   }
 
   render() {
     return(
-     <DatePicker/>
+     <DatePicker
+       className="form-control"
+       selected={this.state.startDate}
+       onChange={this.handleChange}
+       />
     )
   }
 }

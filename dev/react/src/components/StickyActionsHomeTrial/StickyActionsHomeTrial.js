@@ -41,7 +41,9 @@ export default class StickyActionsHomeTrial extends Component {
     this.setState({
       status: 'open',
       action: 'updateDate',
-      title: 'Update Date'
+      title: 'Update Date',
+      changeStatus: false,
+      updateDate: true
     })
 
     this.handleSubmit(orderRef)
@@ -51,7 +53,9 @@ export default class StickyActionsHomeTrial extends Component {
     this.setState({
       status: 'open',
       action: 'statusChange',
-      title: 'Change Status'
+      title: 'Change Status',
+      changeStatus: true,
+      updateDate: false
     })
 
     this.handleSubmit(orderRef)
@@ -138,21 +142,39 @@ export default class StickyActionsHomeTrial extends Component {
     const actionClass = this.state.action
 
     return(
-      <div className={'sticky-actions-homeTrial sticky-actions-' + stateClass + ' sticky-actions-' + actionClass}>
+      <div className={'sticky-actions sticky-actions-homeTrial sticky-actions-' + stateClass + ' sticky-actions-' + actionClass}>
         <div className='sticky-actions-overlay' onClick={this.handleToggleForm}></div>
         <div className="stickyActions-form">
           <div className="stickyActions-form-title">
             <h3 className='h3'>{this.state.title}</h3>
           </div>
-          <FormDatePicker/>
-          <textarea
-            className="form-control stickyActions-comment"
-            rows="2"
-            onChange={this.handleNoteChange}
-            placeholder="Enter Note..."
-            value={this.state.noteValue}
-            ref={(input) => { this.textArea = input; }}
-            ></textarea>
+
+          {this.state.updateDate &&
+            <div>
+              <div className="updatePicker">
+              <div className="updatePicker-field-wrap">
+                <div className="form-element">
+                  <label>Update return DUE Date</label>
+                  <FormDatePicker/>
+                </div>
+                <div className="form-element">
+                  <label>Update change DUE date</label>
+                  <FormDatePicker/>
+                </div>
+              </div>
+              <button className="updatePicker-save btn -blue">Save Changes</button>
+            </div>
+          </div>
+          }
+          {this.state.changeStatus && <div>Change Status Code</div>}
+            <textarea
+              className="form-control stickyActions-comment"
+              rows="2"
+              onChange={this.handleNoteChange}
+              placeholder="Enter Note..."
+              value={this.state.noteValue}
+              ref={(input) => { this.textArea = input; }}
+              ></textarea>
         </div>
         <div className="stickyActions-controls">
           <div className="stickyActions-details">

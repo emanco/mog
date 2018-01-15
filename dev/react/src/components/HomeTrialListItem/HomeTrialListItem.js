@@ -28,7 +28,7 @@ export default class HomeTrialListItem extends Component {
       <div className="row component orderListItemContain">
         <div className={'homeTrialListItem-'+ statusClass + ' col-xs-12 orderListItem'} onClick={this.handleItemOnClick}>
           <div className="orderListItem-details">
-            <p className="heading2"><Link to='/customers/CUS123456789'>{this.props.data.order_reference}</Link></p>
+            <p className="heading2"><Link to={'/customers/'+this.props.data.customer_reference}>{this.props.data.order_reference}</Link></p>
             Client: {this.props.data.client_id} | Order Date: <Moment date={this.props.data.placed_at} format="ddd Do MMM YYYY" />
           </div>
           {this.props.data.fraud &&

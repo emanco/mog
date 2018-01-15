@@ -46,10 +46,10 @@ export default class fraudCheckOverview extends Component {
     })
   }
 
-  handleFraudCheckListClick = (orderRef) => {
+  handleFraudCheckListClick = (orderRef, custId) => {
     // Check we're not already displaying the order
     if (orderRef !== this.props.data.results[0].order_reference) {
-      this.props.getFraudCheckListOrder('CUS123456789');
+      this.props.getFraudCheckListOrder(custId);
     }
   }
 
@@ -125,7 +125,7 @@ export default class fraudCheckOverview extends Component {
                 data={this.props.orderData[0].data}/>
 
               <CustomerOrderList
-                data={this.props.orderData[1].data[0]}
+                data={this.props.orderData[1].data}
                 customerid={this.props.data.results[0].customer_reference} />
               </div>
               <StickyActions loadingStatus={this.props.orderLoading} orderRef={this.props.currentlyViewedOrder} updateOrderCallback={this.handleUpdateOrder} declineCallback={this.handleDeclineOrder} />

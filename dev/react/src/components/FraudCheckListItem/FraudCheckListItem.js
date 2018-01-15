@@ -14,7 +14,7 @@ export default class fraudCheckList extends Component {
   }
 
   handleItemOnClick = () => {
-    this.props.itemClickCallback(this.props.data.order_reference);
+    this.props.itemClickCallback(this.props.data.order_reference, this.props.data.customer_reference);
   }
 
 

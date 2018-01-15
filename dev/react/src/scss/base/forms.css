@@ -294,7 +294,7 @@ p {
   @media (min-width: 1200px) {
     .form-element label {
       font-size: 14px; } }
-  @media (min-width: 1500px) {
+  @media (min-width: 2000px) {
     .form-element label {
       font-size: 16px; } }
 
@@ -321,7 +321,7 @@ p {
   @media (min-width: 1200px) {
     .form-control {
       font-size: 16px; } }
-  @media (min-width: 1500px) {
+  @media (min-width: 2000px) {
     .form-control {
       font-size: 18px; } }
   .form-control::-webkit-input-placeholder, .form-control:-moz-placeholder, .form-control::-moz-placeholder, .form-control:-ms-input-placeholder {
@@ -337,7 +337,7 @@ p {
     @media (min-width: 1200px) {
       .form-control::-webkit-input-placeholder, .form-control:-moz-placeholder, .form-control::-moz-placeholder, .form-control:-ms-input-placeholder {
         font-size: 16px; } }
-    @media (min-width: 1500px) {
+    @media (min-width: 2000px) {
       .form-control::-webkit-input-placeholder, .form-control:-moz-placeholder, .form-control::-moz-placeholder, .form-control:-ms-input-placeholder {
         font-size: 18px; } }
   html.browser-ie .form-control {
@@ -358,7 +358,7 @@ p {
       height: 50px;
       padding: 13px 16px;
       line-height: 1.5; } }
-  @media (min-width: 1500px) {
+  @media (min-width: 2000px) {
     .form-control {
       height: 60px;
       padding: 17px 16px; } }
@@ -376,7 +376,7 @@ p {
         text-indent: 46px;
         line-height: 67px;
         padding: 32px 16px; } }
-    @media (min-width: 1500px) {
+    @media (min-width: 2000px) {
       .form-control.-nav {
         height: 77px;
         line-height: 77px;
@@ -578,7 +578,7 @@ input[type=checkbox], input[type=radio] {
     @media (min-width: 1200px) {
       .checkbox-container input[type=checkbox] + label, .checkbox-container input[type=radio] + label {
         padding-left: 28px; } }
-    @media (min-width: 1500px) {
+    @media (min-width: 2000px) {
       .checkbox-container input[type=checkbox] + label, .checkbox-container input[type=radio] + label {
         padding-left: 32px; } }
     .checkbox-container input[type=checkbox] + label:before, .checkbox-container input[type=radio] + label:before {

@@ -40,13 +40,21 @@ const loader = axios.create({
 });
 
 const getCustomer = (id) => {
-    return loader.get('customers/'+id+'/customer-summary/');
+    return axios({
+      method: 'GET',
+      url: customersEndpoint + '/' + id,
+      headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')}
+    });
 };
 
 const getOrders = (id) => {
     //return loader.get('customers/'+id+'/customer-summary/', );
     // user heroku for the time being until swagger is okay to go
-    return axios.get('https://mog-api.herokuapp.com/orders/');
+     return axios({
+      method: 'GET',
+      url: customersEndpoint + '/' + id + '/order-summary',
+      headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')}
+    });
 };
 
 const getSingleCustomerOrders = (id) => {

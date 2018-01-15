@@ -26,7 +26,7 @@ export default class CustomerOrderList extends Component {
             Orders
         {this.props.editable && <button className="btn -add">Place Order</button>}
         </h2>
-        <p className="sub-text">Showing {this.props.data.limit} of {this.props.data.count} </p>
+        {/*<p className="sub-text">Showing {this.props.data.limit} of {this.props.data.count} </p>*/}
 
         {this.props.data.results.map((order, i) => {
             return <CustomerOrder key={i} id={i} customerid={this.props.customerid} data={order}/>

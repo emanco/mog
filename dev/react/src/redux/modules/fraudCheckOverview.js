@@ -124,12 +124,11 @@ export function getFraudCheckListOrder (id, orderRef) {
    * Call getCustomer & getOrders from the customers reducer which just returns the data then
    * put it into this reducer
    */
-  let testid = 'CUS123456789' /* @TODO - MAKE THIS DYNAMIC */
   console.log('CHECKLIST ORDER')
   return (dispatch, getState) => {
     dispatch({
       type: 'FRAUD_ORDER',
-      payload: axios.all([getCustomer(testid), getOrders(id)])
+      payload: axios.all([getCustomer(id), getOrders(id)])
     }).then((result) => {
       console.log(result)
       // check result. We don't need a success callback, but log out if it fails

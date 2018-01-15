@@ -16,6 +16,7 @@ class CustomerOrder extends Component {
         console.log(this.props.data.currency)
         let $currency = currency(this.props.data.currency);
         let $class = this.props.id === 0 ? '-in':'';
+        console.log(this.props.data)
         return (
           <div>
 
@@ -36,7 +37,7 @@ class CustomerOrder extends Component {
 
               <div className={"row component component-card-order-info order-1 "+$class}>
 
-                  {this.props.data.shipment.map(function(shipment, i) {
+                  {this.props.data.shipments.map(function(shipment, i) {
                       return (
                           <div key={i}>
 
@@ -46,7 +47,7 @@ class CustomerOrder extends Component {
 
                               <div className="col-xs-12">
 
-                                  {shipment.job.map(function(job, i) {
+                                  {shipment.jobs.map(function(job, i) {
                                   return(
                                       <div key={i} className="row component card component-card-job">
                                           <div className="col-xs-4 col-sm-2">

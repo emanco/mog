@@ -18,8 +18,8 @@ export default class OrderList extends Component {
     HomeTrial: HomeTrialListItem
   }
 
-  handleOnItemClickCallback = (orderRef) => {
-    this.props.hoverCallback(orderRef);
+  handleOnItemClickCallback = (orderRef, custId) => {
+    this.props.hoverCallback(orderRef, custId);
   }
 
   handlePaginationChange = (page) => {

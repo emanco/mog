@@ -22,8 +22,8 @@ export default class createCustomer extends Component {
         </div>
 
         <div className="form-element">
-          <label for="first-name">Last Name</label>
-          <input type="text" name="last-name" className="form-control"/>
+          <label for="last-name">Last Name</label>
+          <input type="text" name="last-name" className="form-control invalid"/>
         </div>
 
         <div className="form-element">

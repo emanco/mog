@@ -17,7 +17,7 @@ export default class HomeTrialListItem extends Component {
   }
 
   handleItemOnClick = () => {
-    this.props.itemClickCallback(this.props.data.order_reference);
+    this.props.itemClickCallback(this.props.data.order_reference, this.props.data.customer_reference);
   }
 
 

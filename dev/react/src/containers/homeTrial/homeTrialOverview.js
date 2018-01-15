@@ -59,10 +59,9 @@ export default class homeTrialOverview extends Component {
     })
   }
 
-  handleFraudCheckListClick = (orderRef) => {
-    // Check we're not already displaying the order
+  handleFraudCheckListClick = (orderRef, custId) => {
     if (orderRef !== this.props.data.results[0].order_reference) {
-      this.props.getHomeTrialListOrder('CUS123456789');
+      this.props.getHomeTrialListOrder(custId);
     }
   }
 
@@ -103,7 +102,7 @@ export default class homeTrialOverview extends Component {
   }
 
   render() {
-    console.log(this.props.data)
+    console.log(this.props.orderData)
     //const overlay = this.state.overlay
     if (!this.props.data || !this.props.orderData) {
       return (
@@ -115,7 +114,7 @@ export default class homeTrialOverview extends Component {
     } else {
       const orderLoadingClass = this.props.orderLoading ? '-loading' : '';
       const listLoadingClass = this.props.listLoading ? '-loading' : '';
-
+      console.log(this.props.orderData[1])
       return(
         <div>
           <StickyBar
@@ -148,7 +147,7 @@ export default class homeTrialOverview extends Component {
                 data={this.props.orderData[0].data}/>
 
               <CustomerOrderList
-                data={this.props.orderData[1].data[0]}
+                data={this.props.orderData[1].data}
                 customerid={this.props.data.results[0].customer_reference} />
               </div>
               <StickyActionsHomeTrial loadingStatus={this.props.orderLoading} orderRef={this.props.currentlyViewedOrder} updateOrderCallback={this.handleUpdateOrder} declineCallback={this.handleDeclineOrder} />

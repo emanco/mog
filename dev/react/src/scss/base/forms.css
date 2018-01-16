@@ -281,7 +281,24 @@ ul {
 p {
   line-height: 1em; }
 
-.form-control, .selectric-wrapper .label {
+.form-element label {
+  font-size: 14px;
+  color: #889ca6;
+  font-weight: normal; }
+  @media (min-width: 768px) {
+    .form-element label {
+      font-size: 14px; } }
+  @media (min-width: 992px) {
+    .form-element label {
+      font-size: 14px; } }
+  @media (min-width: 1200px) {
+    .form-element label {
+      font-size: 14px; } }
+  @media (min-width: 2000px) {
+    .form-element label {
+      font-size: 16px; } }
+
+.form-control {
   transition: all .3s;
   -webkit-appearance: none;
   border-radius: 0;
@@ -296,53 +313,56 @@ p {
   width: 100%;
   font-size: 16px; }
   @media (min-width: 768px) {
-    .form-control, .selectric-wrapper .label {
+    .form-control {
       font-size: 16px; } }
   @media (min-width: 992px) {
-    .form-control, .selectric-wrapper .label {
+    .form-control {
       font-size: 16px; } }
   @media (min-width: 1200px) {
-    .form-control, .selectric-wrapper .label {
+    .form-control {
       font-size: 16px; } }
-  @media (min-width: 1500px) {
-    .form-control, .selectric-wrapper .label {
+  @media (min-width: 2000px) {
+    .form-control {
       font-size: 18px; } }
-  .form-control::-webkit-input-placeholder, .form-control:-moz-placeholder, .form-control::-moz-placeholder, .form-control:-ms-input-placeholder, .selectric-wrapper .label::-webkit-input-placeholder, .selectric-wrapper .label:-moz-placeholder, .selectric-wrapper .label::-moz-placeholder, .selectric-wrapper .label:-ms-input-placeholder {
+  .form-control::-webkit-input-placeholder, .form-control:-moz-placeholder, .form-control::-moz-placeholder, .form-control:-ms-input-placeholder {
     font-size: 16px;
     font-weight: 300;
     color: #888888; }
     @media (min-width: 768px) {
-      .form-control::-webkit-input-placeholder, .form-control:-moz-placeholder, .form-control::-moz-placeholder, .form-control:-ms-input-placeholder, .selectric-wrapper .label::-webkit-input-placeholder, .selectric-wrapper .label:-moz-placeholder, .selectric-wrapper .label::-moz-placeholder, .selectric-wrapper .label:-ms-input-placeholder {
+      .form-control::-webkit-input-placeholder, .form-control:-moz-placeholder, .form-control::-moz-placeholder, .form-control:-ms-input-placeholder {
         font-size: 16px; } }
     @media (min-width: 992px) {
-      .form-control::-webkit-input-placeholder, .form-control:-moz-placeholder, .form-control::-moz-placeholder, .form-control:-ms-input-placeholder, .selectric-wrapper .label::-webkit-input-placeholder, .selectric-wrapper .label:-moz-placeholder, .selectric-wrapper .label::-moz-placeholder, .selectric-wrapper .label:-ms-input-placeholder {
+      .form-control::-webkit-input-placeholder, .form-control:-moz-placeholder, .form-control::-moz-placeholder, .form-control:-ms-input-placeholder {
         font-size: 16px; } }
     @media (min-width: 1200px) {
-      .form-control::-webkit-input-placeholder, .form-control:-moz-placeholder, .form-control::-moz-placeholder, .form-control:-ms-input-placeholder, .selectric-wrapper .label::-webkit-input-placeholder, .selectric-wrapper .label:-moz-placeholder, .selectric-wrapper .label::-moz-placeholder, .selectric-wrapper .label:-ms-input-placeholder {
+      .form-control::-webkit-input-placeholder, .form-control:-moz-placeholder, .form-control::-moz-placeholder, .form-control:-ms-input-placeholder {
         font-size: 16px; } }
-    @media (min-width: 1500px) {
-      .form-control::-webkit-input-placeholder, .form-control:-moz-placeholder, .form-control::-moz-placeholder, .form-control:-ms-input-placeholder, .selectric-wrapper .label::-webkit-input-placeholder, .selectric-wrapper .label:-moz-placeholder, .selectric-wrapper .label::-moz-placeholder, .selectric-wrapper .label:-ms-input-placeholder {
+    @media (min-width: 2000px) {
+      .form-control::-webkit-input-placeholder, .form-control:-moz-placeholder, .form-control::-moz-placeholder, .form-control:-ms-input-placeholder {
         font-size: 18px; } }
-  html.browser-ie .form-control, html.browser-ie .selectric-wrapper .label {
+  html.browser-ie .form-control {
     transition: none; }
-  .form-control.valid, .selectric-wrapper .label.valid {
+  .form-control.valid {
     border: 1px solid #ccc;
     background-image: none; }
+  .form-control.invalid {
+    border-color: #f86e61;
+    color: #f86e61; }
   @media (min-width: 768px) {
-    .form-control, .selectric-wrapper .label {
+    .form-control {
       height: 43px;
       padding: 11px 16px;
       line-height: 1.333333; } }
   @media (min-width: 1200px) {
-    .form-control, .selectric-wrapper .label {
+    .form-control {
       height: 50px;
       padding: 13px 16px;
       line-height: 1.5; } }
-  @media (min-width: 1500px) {
-    .form-control, .selectric-wrapper .label {
+  @media (min-width: 2000px) {
+    .form-control {
       height: 60px;
       padding: 17px 16px; } }
-  .form-control.-nav, .selectric-wrapper .label.-nav {
+  .form-control.-nav {
     background-color: transparent;
     text-indent: 26px;
     letter-spacing: -0.01em;
@@ -351,13 +371,13 @@ p {
     line-height: 56px;
     padding: 26px 16px; }
     @media (min-width: 992px) {
-      .form-control.-nav, .selectric-wrapper .label.-nav {
+      .form-control.-nav {
         height: 67px;
         text-indent: 46px;
         line-height: 67px;
         padding: 32px 16px; } }
-    @media (min-width: 1500px) {
-      .form-control.-nav, .selectric-wrapper .label.-nav {
+    @media (min-width: 2000px) {
+      .form-control.-nav {
         height: 77px;
         line-height: 77px;
         text-indent: 66px;
@@ -365,13 +385,6 @@ p {
 
 textarea.form-control {
   height: 130px; }
-
-.selectric {
-  border: 1px solid #ccc; }
-  .selectric .label {
-    border: none; }
-    .selectric-placeholder .selectric .label {
-      color: #888888; }
 
 .selectric-wrapper .label {
   padding-right: 30px; }
@@ -456,6 +469,20 @@ textarea.form-control {
         color: #FFF; }
     .btn.-dark:hover {
       background-color: #344157; }
+  .btn.-blue {
+    background-color: #2671d4;
+    color: #FFF;
+    border-color: #2671d4;
+    color: #fff; }
+    .btn.-blue.-outline {
+      border-color: #2671d4;
+      color: #2671d4;
+      background-color: transparent; }
+      html.no-touch .btn.-blue.-outline:hover {
+        background-color: #2671d4;
+        color: #FFF; }
+    .btn.-blue:hover {
+      background-color: #4e8cdf; }
   .btn.-edit, .btn.-add {
     background-color: transparent;
     position: absolute;
@@ -551,7 +578,7 @@ input[type=checkbox], input[type=radio] {
     @media (min-width: 1200px) {
       .checkbox-container input[type=checkbox] + label, .checkbox-container input[type=radio] + label {
         padding-left: 28px; } }
-    @media (min-width: 1500px) {
+    @media (min-width: 2000px) {
       .checkbox-container input[type=checkbox] + label, .checkbox-container input[type=radio] + label {
         padding-left: 32px; } }
     .checkbox-container input[type=checkbox] + label:before, .checkbox-container input[type=radio] + label:before {

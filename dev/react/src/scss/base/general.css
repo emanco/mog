@@ -309,7 +309,7 @@ p {
   @media (min-width: 1200px) {
     .user-initials {
       height: 116px; } }
-  @media (min-width: 1500px) {
+  @media (min-width: 2000px) {
     .user-initials {
       height: 140px; } }
   @media (min-width: 768px) {
@@ -321,7 +321,7 @@ p {
   @media (min-width: 1200px) {
     .user-initials {
       line-height: 116px; } }
-  @media (min-width: 1500px) {
+  @media (min-width: 2000px) {
     .user-initials {
       line-height: 140px; } }
   @media (min-width: 768px) {
@@ -333,7 +333,7 @@ p {
   @media (min-width: 1200px) {
     .user-initials {
       width: 116px; } }
-  @media (min-width: 1500px) {
+  @media (min-width: 2000px) {
     .user-initials {
       width: 140px; } }
   .user-initials.-small {
@@ -350,7 +350,7 @@ p {
     @media (min-width: 1200px) {
       .user-initials.-small {
         height: 39px; } }
-    @media (min-width: 1500px) {
+    @media (min-width: 2000px) {
       .user-initials.-small {
         height: 45px; } }
     @media (min-width: 768px) {
@@ -362,7 +362,7 @@ p {
     @media (min-width: 1200px) {
       .user-initials.-small {
         line-height: 39px; } }
-    @media (min-width: 1500px) {
+    @media (min-width: 2000px) {
       .user-initials.-small {
         line-height: 45px; } }
     @media (min-width: 768px) {
@@ -374,7 +374,7 @@ p {
     @media (min-width: 1200px) {
       .user-initials.-small {
         width: 39px; } }
-    @media (min-width: 1500px) {
+    @media (min-width: 2000px) {
       .user-initials.-small {
         width: 45px; } }
   .user-initials.-user {
@@ -430,7 +430,7 @@ p {
         top: 89px;
         padding-top: 89px;
         height: calc(100vh - 89px); } }
-    @media (min-width: 1500px) {
+    @media (min-width: 2000px) {
       .left-panel.-dark-inset, .left-panel.-light-inset,
       .right-panel.-dark-inset,
       .right-panel.-light-inset {

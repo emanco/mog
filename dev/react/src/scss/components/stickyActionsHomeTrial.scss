@@ -1,0 +1,52 @@
+@import "../customBase/variables.scss";
+@import '../base/1_vars.scss';
+
+
+$approveColor : $color-green;
+
+.sticky-actions-homeTrial {
+
+  &.sticky-actions-open{
+    .stickyActions-form {
+      top: -380px;
+      min-height: 380px;
+    }
+  }
+
+  &.sticky-actions-statusChange {
+    .stickyActions-form {
+      top: -252px;
+    }
+  }
+
+  .updatePicker {
+
+    margin-bottom: 1em;
+
+    .updatePicker-field-wrap {
+      overflow: hidden;
+      margin-bottom: 1em;
+    }
+
+    .form-element {
+      float: left;
+      margin-right: 1em;
+    }
+
+    .updatePicker-save {
+      margin: 0;
+      background: $colour-blue;
+    }
+  }
+
+  .homeTrial-changeStatus-dropdown {
+    margin-bottom: 1em;
+  }
+
+  .button {
+    width: 120px;
+    height: 48px;
+    margin-left: 1em;
+    clear: both;
+  }
+}

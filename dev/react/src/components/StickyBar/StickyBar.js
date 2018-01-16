@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import "./../../scss/components/stickybar.css";
 import {Breadcrumbs, StickyDropdown} from "../../components"
+import fraudStatusValues from '../../constants/fraudStatusValues';
+import homeTrialStatusValues from '../../constants/homeTrialStatusValues';
 
 // Ionicons
 //import Ionicon from 'react-ionicons';
@@ -40,7 +42,13 @@ class StickyBar extends Component {
         } else if ($path.includes('fraud-check')) {
           return (
                 <Sticky className="sticky-bar nav-height">
-                    <StickyDropdown filterListCallback={this.filterListCallback }/>
+                    <StickyDropdown values={fraudStatusValues} filterListCallback={this.filterListCallback }/>
+                </Sticky>
+            )
+        } else if ($path.includes('hometrial-orders')) {
+          return (
+                <Sticky className="sticky-bar nav-height">
+                    <StickyDropdown values={homeTrialStatusValues} filterListCallback={this.filterListCallback }/>
                 </Sticky>
             )
         } else {

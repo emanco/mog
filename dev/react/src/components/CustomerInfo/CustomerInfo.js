@@ -25,7 +25,7 @@ class CustomerInfo extends Component {
                                 <div className="col-sm-6">
                                     <p>{this.props.data.reference}</p>
                                     <p><a href={"mailto:"+this.props.data.email}>{this.props.data.email}</a></p>
-                                    <p><a href={"tel:"+this.props.data.phones.map(i=> {return (i.phone);})}>{this.props.data.phones.map(i=> {return (i.phone);})}</a></p>
+                                    <p><a href={"tel:"+this.props.data.telephones.map(i=> {return (i.phone);})}>{this.props.data.telephones.map(i=> {return (i.phone);})}</a></p>
                                 </div>
 
                                 <div className="col-sm-6">

@@ -60,7 +60,7 @@
   .text-center-sm {
     text-align: center; } }
 
-@media (min-width: 1500px) {
+@media (min-width: 2000px) {
   .hidden-xlg {
     display: none; } }
 
@@ -79,7 +79,7 @@
   @media (min-width: 1200px) {
     .icon-container {
       padding: 8px; } }
-  @media (min-width: 1500px) {
+  @media (min-width: 2000px) {
     .icon-container {
       padding: 9px; } }
   .icon-container.-rounded {
@@ -108,7 +108,7 @@
         width: 30px;
         height: 30px;
         line-height: 30px; } }
-    @media (min-width: 1500px) {
+    @media (min-width: 2000px) {
       .icon-container i {
         font-size: 36px;
         width: 36px;
@@ -125,7 +125,7 @@
     @media (min-width: 1200px) {
       .icon-container.-size-1 {
         padding: 16px; } }
-    @media (min-width: 1500px) {
+    @media (min-width: 2000px) {
       .icon-container.-size-1 {
         padding: 20px; } }
   .icon-container.-size-2 {
@@ -139,7 +139,7 @@
     @media (min-width: 1200px) {
       .icon-container.-size-2 {
         padding: 13px; } }
-    @media (min-width: 1500px) {
+    @media (min-width: 2000px) {
       .icon-container.-size-2 {
         padding: 15px; } }
   @media (min-width: 768px) {
@@ -230,7 +230,7 @@
   @media (min-width: 1200px) {
     .full-height {
       height: calc(100vh - 89px); } }
-  @media (min-width: 1500px) {
+  @media (min-width: 2000px) {
     .full-height {
       height: calc(100vh - 100px); } }
 
@@ -251,7 +251,7 @@
   @media (min-width: 768px) and (min-width: 1200px) {
     .full-height-sm {
       height: calc(100vh - 89px); } }
-  @media (min-width: 768px) and (min-width: 1500px) {
+  @media (min-width: 768px) and (min-width: 2000px) {
     .full-height-sm {
       height: calc(100vh - 100px); } }
 
@@ -266,7 +266,7 @@
   @media (min-width: 1200px) {
     .nav-height {
       height: 89px; } }
-  @media (min-width: 1500px) {
+  @media (min-width: 2000px) {
     .nav-height {
       height: 100px; } }
 
@@ -285,7 +285,7 @@
     .nav-size {
       width: 89px;
       height: 89px; } }
-  @media (min-width: 1500px) {
+  @media (min-width: 2000px) {
     .nav-size {
       width: 100px;
       height: 100px; } }
@@ -305,7 +305,7 @@
     .nav-line-height {
       height: 89px;
       line-height: 89px; } }
-  @media (min-width: 1500px) {
+  @media (min-width: 2000px) {
     .nav-line-height {
       height: 100px;
       line-height: 100px; } }
@@ -340,6 +340,12 @@
 .bg-colour-dark-grey {
   background-color: #222222; }
 
+.colour-form-border-grey {
+  color: #d8d8d8; }
+
+.bg-colour-form-border-grey {
+  background-color: #d8d8d8; }
+
 .colour-blue {
   color: #212937; }
 
@@ -363,6 +369,12 @@
 
 .bg-colour-btn-blue-blue {
   background-color: #2671d4; }
+
+.colour-label-blue {
+  color: #889ca6; }
+
+.bg-colour-label-blue {
+  background-color: #889ca6; }
 
 .colour-red-prescription {
   color: #fdd3cf; }

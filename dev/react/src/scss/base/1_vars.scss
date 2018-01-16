@@ -4,7 +4,7 @@ $breakpoints: (
         'sm': 768px,
         'md': 992px,
         'lg': 1200px,
-        'xlg': 1500px
+        'xlg': 2000px
 );
 
 // Navigation heights
@@ -65,13 +65,15 @@ $colours: (
                 'light': #bfbfbd,
                 'base': #63676a,
                 'panel': #a0a2a9,
-                'dark':#222222
+                'dark':#222222,
+                'form-border': #d8d8d8
         ),
         'blue': (
                 'base': #212937,
                 'muted-primary': #444a5a,
                 'link': #1d71d5,
-                'btn-blue': #2671d4
+                'btn-blue': #2671d4,
+                'label': #889ca6
         ),
         'prescription' : (
                 'red':#fdd3cf,
@@ -89,4 +91,5 @@ $colour-text-secondary: #979797;
 $colour-placeholder: lighten(#222222, 40%);
 $colour-primary: #212937;
 $colour-secondary: #f4b400;
+$colour-blue: #2671d4;
 $colour-grey-icons: #4a4a4a;

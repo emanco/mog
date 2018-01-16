@@ -1,0 +1,36 @@
+@import '../customBase/variables.scss';
+@import '../base/1_vars.scss';
+
+.homeTrialList-status {
+  float: right;
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 2px 4px;
+  text-transform:lowercase;
+  margin-top: 8px;
+}
+
+.homeTrialListItem-complete {
+  .homeTrialList-status {
+    color: $color-red;
+    border-color: $color-red;
+  }
+}
+
+.homeTrialListItem-contacted {
+  .homeTrialList-status {
+    color: $color-purple;
+    border-color: $color-purple;
+  }
+}
+
+.homeTrialListItem-fulfilled {
+  .homeTrialList-status {
+    color: $color-green;
+    border-color: $color-green;
+  }
+}
+
+.homeTrialListItem- .homeTrialList-status {
+  display: none;
+}

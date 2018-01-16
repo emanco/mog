@@ -1,8 +1,20 @@
+@import "../customBase/variables.scss";
 @import "./1_vars.scss";
 @import "./2_mixins.scss";
 @import "./4_global.scss";
 
-.form-control, .selectric-wrapper .label{
+$labelColour : map-get(map-get($colours, 'blue'), 'label');
+$formBorderColour: map-get(map-get($colours, 'grey'), 'form-border');
+
+.form-element {
+  label {
+    @include scale-pixels('font-size', 14px, 16px);
+    color: $labelColour;
+    font-weight: normal;
+  }
+}
+
+.form-control {
   transition:all .3s;
   -webkit-appearance: none;
   border-radius:0;
@@ -33,6 +45,11 @@
   &.valid{
     border:1px solid #ccc;
     background-image:none;
+  }
+
+  &.invalid {
+    border-color: $color-red;
+    color: $color-red;
   }
 
   @include sm{
@@ -83,22 +100,10 @@ textarea.form-control{
   height:130px;
 }
 
-.selectric{
-  border:1px solid #ccc;
-
-  .label{
-    border:none;
-
-    .selectric-placeholder &{
-      color:$colour-placeholder;
-    }
-  }
-}
-
 .selectric-wrapper .label{
   padding-right:30px;
 }
-.btn-round{
+.btn-round {
   $btn-transition: 0.9s $cubic-bezier1;
   border-radius:2em;
   border:1px solid rgba(255,255,255,.5);
@@ -184,6 +189,15 @@ textarea.form-control{
 
     &:hover{
       background-color: lighten($colour-primary, 10%);
+    }
+  }
+
+  &.-blue {
+    @include custom-button($colour-blue);
+    color:#fff;
+
+    &:hover{
+      background-color: lighten($colour-blue, 10%);
     }
   }
 

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as fraudCheckOverviewActions from '../../redux/modules/fraudCheckOverview'
-import {FraudCheckList, CustomerInfo, CustomerOrderList, StickyBar, StickyActions, SelectBox } from '../../components';
+import {OrderList, CustomerInfo, CustomerOrderList, StickyBar, StickyActions, SelectBox } from '../../components';
 
 import fraudFilterValues from '../../constants/fraudFilterValues';
 
@@ -46,10 +46,10 @@ export default class fraudCheckOverview extends Component {
     })
   }
 
-  handleFraudCheckListClick = (orderRef) => {
+  handleFraudCheckListClick = (orderRef, custId) => {
     // Check we're not already displaying the order
     if (orderRef !== this.props.data.results[0].order_reference) {
-      this.props.getFraudCheckListOrder('CUS123456789');
+      this.props.getFraudCheckListOrder(custId);
     }
   }
 
@@ -82,9 +82,8 @@ export default class fraudCheckOverview extends Component {
   }
 
   render() {
-    console.log(this.props.data)
     //const overlay = this.state.overlay
-    if (!this.props.data || !this.props.orderData) {
+    if (!this.props.data.results || !this.props.orderData) {
       return (
         <div>
           <StickyBar
@@ -112,7 +111,7 @@ export default class fraudCheckOverview extends Component {
                   />
               </div>
               {this.props.data.count < 1 && <h3 className='h3'>No Results</h3>}
-              <FraudCheckList
+              <OrderList
                 data={this.props.data}
                 hoverCallback={this.handleFraudCheckListClick}
                 handlePaginationChange={this.handlePaginationChange}/>
@@ -126,7 +125,7 @@ export default class fraudCheckOverview extends Component {
                 data={this.props.orderData[0].data}/>
 
               <CustomerOrderList
-                data={this.props.orderData[1].data[0]}
+                data={this.props.orderData[1].data}
                 customerid={this.props.data.results[0].customer_reference} />
               </div>
               <StickyActions loadingStatus={this.props.orderLoading} orderRef={this.props.currentlyViewedOrder} updateOrderCallback={this.handleUpdateOrder} declineCallback={this.handleDeclineOrder} />

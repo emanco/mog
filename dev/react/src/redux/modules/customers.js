@@ -5,32 +5,32 @@ import { customersEndpoint } from '../../constants/endpoints';
 export default function summaryReducer(state = {}, action = '') {
     switch (action.type)
     {
-         case 'FETCH_DATA_PENDING' :
-            return {
-                ...state,
-                loading: true,
-                success: false,
-                payload: {}
-            }
-        case 'FETCH_DATA_FULFILLED' :
-            //console.log(action.payload);
-            return {
-                ...state,
-                loading: false,
-                success: true,
-                payload: action.payload
-            }
-        case 'FETCH_DATA_REJECTED' :
-            return {
-                ...state,
-                loading: false,
-                success: false,
-                payload: {
-                    message: action.payload.message
-                }
-            }
-        default:
-            return state;
+    case 'FETCH_DATA_PENDING' :
+      return {
+        ...state,
+        loading: true,
+        success: false,
+        payload: {}
+      }
+    case 'FETCH_DATA_FULFILLED' :
+      //console.log(action.payload);
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        payload: action.payload
+      }
+    case 'FETCH_DATA_REJECTED' :
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        payload: {
+            message: action.payload.message
+        }
+      }
+    default:
+        return state;
     }
 }
 
@@ -40,13 +40,21 @@ const loader = axios.create({
 });
 
 const getCustomer = (id) => {
-    return loader.get('customers/'+id+'/customer-summary/');
+    return axios({
+      method: 'GET',
+      url: customersEndpoint + '/' + id,
+      headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')}
+    });
 };
 
 const getOrders = (id) => {
     //return loader.get('customers/'+id+'/customer-summary/', );
     // user heroku for the time being until swagger is okay to go
-    return axios.get('https://mog-api.herokuapp.com/orders/');
+     return axios({
+      method: 'GET',
+      url: customersEndpoint + '/' + id + '/order-summary',
+      headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')}
+    });
 };
 
 const getSingleCustomerOrders = (id) => {

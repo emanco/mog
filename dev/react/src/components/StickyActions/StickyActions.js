@@ -87,6 +87,7 @@ export default class StickyActions extends Component {
     if (this.state.status !== 'open') {
       return;
     }
+
     const noteObj = {
       order_reference: orderRef,
       content: this.state.noteValue

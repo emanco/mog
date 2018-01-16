@@ -1,0 +1,71 @@
+@import '../customBase/variables.scss';
+@import '../base/1_vars.scss';
+
+#root .orderList .orderListItem {
+  padding: 4%;
+}
+
+.orderListItemContain.component {
+  padding: 0
+}
+
+.orderListItem {
+  border: 1px solid #e8e9e9;
+  display: table-cell;
+  vertical-align: middle;
+  box-sizing: border-box;
+
+  &.orderList-passed {
+    border-left: 2px solid $color-green;
+  }
+  &.orderList-contacted {
+    border-left: 2px solid $color-yellow;
+  }
+  &.orderList-failed {
+    border-left: 2px solid $color-red;
+  }
+  &.lorderList-pending {
+    border-left: 2px solid $color-grey-border;
+  }
+}
+
+.orderListItem-details {
+  float: left;
+
+  a {
+    color: inherit;
+  }
+
+  .heading2 {
+    margin-bottom: 4px;
+  }
+}
+
+.orderList-status-icons {
+  float: right;
+  line-height: 0;
+}
+
+.orderListItem-flagIcon {
+  border-radius: 100%;
+  border: 1px solid $color-grey-border;
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  text-align: center;
+  font-size: 32px;
+  position: relative;
+  font-size: 1.5em;
+  margin: 2px 0 0 14px;
+
+    &:before {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding-top: 22%;
+        color: $colour-grey-icons;
+      }
+}
+

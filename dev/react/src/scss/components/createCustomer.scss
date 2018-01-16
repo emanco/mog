@@ -1,0 +1,11 @@
+@import "../base/1_vars.scss";
+@import "../base/2_mixins.scss";
+@import "../base/4_global.scss";
+@import "../customBase/variables.scss";
+
+
+.create-customer {
+  .form-element {
+    margin-bottom: 2.5em;
+  }
+}

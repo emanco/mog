@@ -1,0 +1,27 @@
+.sticky-actions-homeTrial.sticky-actions-open .stickyActions-form {
+  top: -380px;
+  min-height: 380px; }
+
+.sticky-actions-homeTrial.sticky-actions-statusChange .stickyActions-form {
+  top: -252px; }
+
+.sticky-actions-homeTrial .updatePicker {
+  margin-bottom: 1em; }
+  .sticky-actions-homeTrial .updatePicker .updatePicker-field-wrap {
+    overflow: hidden;
+    margin-bottom: 1em; }
+  .sticky-actions-homeTrial .updatePicker .form-element {
+    float: left;
+    margin-right: 1em; }
+  .sticky-actions-homeTrial .updatePicker .updatePicker-save {
+    margin: 0;
+    background: #2671d4; }
+
+.sticky-actions-homeTrial .homeTrial-changeStatus-dropdown {
+  margin-bottom: 1em; }
+
+.sticky-actions-homeTrial .button {
+  width: 120px;
+  height: 48px;
+  margin-left: 1em;
+  clear: both; }

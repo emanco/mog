@@ -140,7 +140,7 @@ export default class StickyActionsHomeTrial extends Component {
   render() {
     const stateClass = this.state.status
     const actionClass = this.state.action
-
+    console.log(this.props.currentReturnDate)
     return(
       <div className={'sticky-actions sticky-actions-homeTrial sticky-actions-' + stateClass + ' sticky-actions-' + actionClass}>
         <div className='sticky-actions-overlay' onClick={this.handleToggleForm}></div>
@@ -155,11 +155,11 @@ export default class StickyActionsHomeTrial extends Component {
               <div className="updatePicker-field-wrap">
                 <div className="form-element">
                   <label>Update return DUE Date</label>
-                  <FormDatePicker/>
+                  <FormDatePicker startDate={this.props.currentReturnDate} />
                 </div>
                 <div className="form-element">
                   <label>Update change DUE date</label>
-                  <FormDatePicker/>
+                  <FormDatePicker startDate={this.props.currentChargeDate} />
                 </div>
               </div>
               <button className="updatePicker-save btn -blue">Save Changes</button>
@@ -181,7 +181,7 @@ export default class StickyActionsHomeTrial extends Component {
             <div className="stickyActions-orderRef heading2">{this.props.orderRef}</div>
             <div className="stickyActions-meta">
               <Moment
-                date={'2017-12-01T12:34:38.934712'}
+                date={this.props.currentOrderDate}
                 format="ddd Do MMM YYYY" />
             </div>
           </div>

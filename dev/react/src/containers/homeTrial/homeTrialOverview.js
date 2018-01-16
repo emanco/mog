@@ -16,7 +16,10 @@ import './../../scss/components/fraudCheckOverview.css';
     orderLoading: state.homeTrialOverviewReducer.orderLoading,
     listLoading: state.homeTrialOverviewReducer.loading,
     currentlyViewedOrder: state.homeTrialOverviewReducer.currentOrderRef,
-    homeTrialStatus: state.homeTrialOverviewReducer.homeTrialStatus
+    homeTrialStatus: state.homeTrialOverviewReducer.homeTrialStatus,
+    currentOrderDate: state.homeTrialOverviewReducer.currentOrderDate,
+    currentChargeDate: state.homeTrialOverviewReducer.currentOrderChargeDate,
+    currentReturnDate: state.homeTrialOverviewReducer.currentOrderReturnDate
   }),
   {...homeTrialOverviewActions}
 )
@@ -59,9 +62,10 @@ export default class homeTrialOverview extends Component {
     })
   }
 
-  handleFraudCheckListClick = (orderRef, custId) => {
+  handleFraudCheckListClick = (orderRef, custId, key) => {
     if (orderRef !== this.props.data.results[0].order_reference) {
-      this.props.getHomeTrialListOrder(custId);
+      let order = this.props.data.results[key]; // get the order using the array key we've been passed
+      this.props.getHomeTrialListOrder(orderRef, custId, this.props.data.results[key]);
     }
   }
 
@@ -149,7 +153,15 @@ export default class homeTrialOverview extends Component {
                 data={this.props.orderData[1].data}
                 customerid={this.props.data.results[0].customer_reference} />
               </div>
-              <StickyActionsHomeTrial loadingStatus={this.props.orderLoading} orderRef={this.props.currentlyViewedOrder} updateOrderCallback={this.handleUpdateOrder} declineCallback={this.handleDeclineOrder} />
+              <StickyActionsHomeTrial
+                loadingStatus={this.props.orderLoading}
+                orderRef={this.props.currentlyViewedOrder}
+                updateOrderCallback={this.handleUpdateOrder}
+                declineCallback={this.handleDeclineOrder}
+                currentOrderDate={this.props.currentOrderDate}
+                currentChargeDate={this.props.currentChargeDate}
+                currentReturnDate={this.props.currentReturnDate}
+                />
               </div>
               }
             </div>

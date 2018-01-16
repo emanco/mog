@@ -77,6 +77,15 @@ export default function homeTrialOverviewReducer(state = initialState, action = 
             ...state,
             homeTrialStatus: action.fraudStatus
           }
+        case 'CURRENT_ORDER_REFERENCE' :
+          console.log(action)
+          return {
+            ...state,
+            currentOrderRef: action.currentOrderRef,
+            currentOrderDate: action.currentOrderDate,
+            currentOrderReturnDate: action.currentOrderReturnDate,
+            currentOrderChargeDate: action.currentOrderChargeDate
+          }
         default:
             return state;
     }
@@ -87,6 +96,19 @@ export function updateFilter (filterValue) {
     dispatch({
       type: 'FRAUD_LIST_FILTER',
       homeTrialStatus: filterValue
+    })
+  }
+}
+
+export function updateOrderRef (order) {
+  console.log(order);
+  return (dispatch) => {
+    dispatch({
+      type: 'CURRENT_ORDER_REFERENCE',
+      currentOrderRef: order.order_reference,
+      currentOrderDate: order.placed_at,
+      currentOrderReturnDate: order.hometrial.return_due_at,
+      currentOrderChargeDate: order.hometrial.charge_due_at
     })
   }
 }
@@ -108,7 +130,7 @@ console.log('GET FRAUD CHECK LIST');
       }).then((result) => {
         checkCallSuccess(result.type, () => {
           if (result.payload.data.count > 0) {
-           dispatch(getHomeTrialListOrder(result.payload.data.results[0].customer_reference))
+           dispatch(getHomeTrialListOrder(null, result.payload.data.results[0].customer_reference))
           }
         }, () => {dispatch(AuthActions.logOut())});
       })
@@ -116,22 +138,25 @@ console.log('GET FRAUD CHECK LIST');
 }
 
 // Get details on the list item currently being hovered over
-export function getHomeTrialListOrder (id, orderRef) {
+export function getHomeTrialListOrder (orderRef, custId, order) {
 
   /* @NOTE Fetch User and Order Details
    * Call getCustomer & getOrders from the customers reducer which just returns the data then
    * put it into this reducer
    */
-  console.log('CHECKLIST ORDER')
-
   return (dispatch, getState) => {
     dispatch({
       type: 'FRAUD_ORDER',
-      payload: axios.all([getCustomer(id),getOrders(id)])
+      payload: axios.all([getCustomer(custId),getOrders(custId)])
     }).then((result) => {
       console.log(result)
       // check result. We don't need a success callback, but log out if it fails
-      checkCallSuccess(result.action.type, () => {}, () => {dispatch(AuthActions.logOut())});
+      checkCallSuccess(result.action.type, () => {
+        if (order){
+          dispatch(updateOrderRef(order)) // Pass the relevant order from the list so we can update the app state with knoweldge of which we're currently viewing on the right hand side
+        }
+
+      }, () => {dispatch(AuthActions.logOut())});
     })
   }
 

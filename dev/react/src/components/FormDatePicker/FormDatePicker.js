@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Moment from 'react-moment'
+import moment from 'moment'
 import DatePicker from 'react-datepicker'
 import './../../scss/components/loginModal.css';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -13,7 +13,7 @@ export default class FormDatePicker extends Component {
     super(props)
 
     this.state = {
-      startDate: ''
+      startDate: moment(this.props.startDate)
     };
 
     this.handleChange = this.handleChange.bind(this);

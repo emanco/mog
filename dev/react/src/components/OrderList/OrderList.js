@@ -18,8 +18,8 @@ export default class OrderList extends Component {
     HomeTrial: HomeTrialListItem
   }
 
-  handleOnItemClickCallback = (orderRef, custId) => {
-    this.props.hoverCallback(orderRef, custId);
+  handleOnItemClickCallback = (orderRef, custId, key) => {
+    this.props.hoverCallback(orderRef, custId, key);
   }
 
   handlePaginationChange = (page) => {
@@ -40,7 +40,7 @@ export default class OrderList extends Component {
       <div className="orderList">
         {
           this.props.data.results.map((result, i) => {
-            return (<ListItem data={result} key={i} itemClickCallback={this.handleOnItemClickCallback}/>)
+            return (<ListItem data={result} key={i} orderKey={i} itemClickCallback={this.handleOnItemClickCallback}/>)
           })
         }
         {pageCount && <Pagination pageCount={pageCount} handlePaginationChange={this.handlePaginationChange} />}

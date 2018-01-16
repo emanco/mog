@@ -289,3 +289,6 @@ p {
     margin-bottom: 1em; }
   .login-form label {
     font-weight: normal; }
+
+.login .nav-container {
+  display: none; }

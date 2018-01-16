@@ -46,6 +46,7 @@ class Header extends Component {
                 <ul className="nav temp-nav">
                   <li><Link to='/login'>Login</Link></li>
                   <li><Link to='/fraud-check'>Fraud Check</Link></li>
+                  <li><Link to='/hometrial-orders'>Home Trial Orders</Link></li>
                 </ul>
                 <header className="nav-container nav-height">
                     <i className="ion-ios-search" />

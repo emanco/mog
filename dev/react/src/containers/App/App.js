@@ -53,9 +53,15 @@ export default class App extends Component {
     })
   }
 
+  setPageClass() {
+    return this.props.location.pathname.replace('/','');
+  }
+
   render() {
+    console.log(this.props)
+    const pageClass = this.setPageClass()
     return(
-      <div>
+      <div className={pageClass}>
         <Header/>
         <div>{this.props.children}</div>
         <Footer/>

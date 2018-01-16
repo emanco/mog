@@ -8,7 +8,14 @@ $approveColor : $color-green;
 
   &.sticky-actions-open{
     .stickyActions-form {
-      top: -374px;
+      top: -380px;
+      min-height: 380px;
+    }
+  }
+
+  &.sticky-actions-statusChange {
+    .stickyActions-form {
+      top: -252px;
     }
   }
 
@@ -30,6 +37,10 @@ $approveColor : $color-green;
       margin: 0;
       background: $colour-blue;
     }
+  }
+
+  .homeTrial-changeStatus-dropdown {
+    margin-bottom: 1em;
   }
 
   .button {

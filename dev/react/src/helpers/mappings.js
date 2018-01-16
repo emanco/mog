@@ -8,7 +8,7 @@ export function clientNameMapping(clientCode) {
     }
 }
 
-export function fraudCheckStatus(statusVal) {
+export function fraudCheckStatus(statusVal = '') {
   const testVal = statusVal.toUpperCase();
   if (testVal.indexOf('PASSED') > -1) {
     return 'passed'
@@ -27,7 +27,7 @@ export function fraudCheckStatus(statusVal) {
   }
 }
 
-export function homeTrialStatus(statusVal) {
+export function homeTrialStatus(statusVal = '') {
   const testVal = statusVal.toUpperCase();
   if (testVal.indexOf('HT COMPLETE') > -1) {
     return 'complete'
@@ -55,8 +55,7 @@ export function currency(currencyCode) {
   }
 }
 
-export function getStatusClass(statusVal) {
-  console.log(statusVal)
+export function getStatusClass(statusVal = '') {
   const testVal = statusVal.toUpperCase();
   switch(testVal)
     {

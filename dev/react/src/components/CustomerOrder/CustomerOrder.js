@@ -16,7 +16,6 @@ class CustomerOrder extends Component {
         console.log(this.props.data.currency)
         let $currency = currency(this.props.data.currency);
         let $class = this.props.id === 0 ? '-in':'';
-        console.log(this.props.data)
         return (
           <div>
 

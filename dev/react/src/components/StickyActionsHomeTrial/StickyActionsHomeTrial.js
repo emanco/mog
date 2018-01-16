@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import Hotkeys from 'react-hot-keys';
 import Moment from 'react-moment';
 
-import {FormDatePicker} from '../../components/'
-
+import {FormDatePicker, SelectBox} from '../../components/'
+import homeTrialStatusValues from '../../constants/homeTrialStatusValues'
 import './../../scss/components/stickyActions.css';
 import './../../scss/components/stickyActionsHomeTrial.css';
 
@@ -21,11 +21,15 @@ export default class StickyActionsHomeTrial extends Component {
     this.handleToggleForm = this.handleToggleForm.bind(this);
     this.handleKeyboardOpen = this.handleKeyboardOpen.bind(this);
 
+    this.handleUpdateReturnDate = this.handleUpdateReturnDate.bind(this);
+    this.handleUpdateChargeDate = this.handleUpdateReturnDate.bind(this);
+
     this.state = {
       status: 'closed',
       action: '',
       title: '',
-      noteValue: ''
+      noteValue: '',
+      newStatus: null
     }
   }
 
@@ -76,15 +80,23 @@ export default class StickyActionsHomeTrial extends Component {
     })
   }
 
+  handleFilterChange = (value) =>{
+    console.log('IT CHANGED')
+    console.log(value)
+    this.setState({
+      newStatus: value
+    })
+  }
+
   handleSubmit = (orderRef) => {
-    return // @TODO - Temp while I work
+    //return // @TODO - Temp while I work
 
     // taking advtange of the react flow here. Even though
     // we set status to be open, it isn't until the cycle is
     // complete so this will be false and it won't attempt to
     // post ont he first click. There may be a better way
     if (this.state.status !== 'open') {
-      return;
+      return
     }
 
     const noteObj = {
@@ -92,7 +104,40 @@ export default class StickyActionsHomeTrial extends Component {
       content: this.state.noteValue
     }
 
-    this.props.updateOrderCallback(noteObj, orderRef, this.state.action)
+    console.log(this.state.newReturnDate)
+    return
+
+    /*
+      Logic
+      - If status is open
+        - If action is updateDate
+          - get both datepicker date values
+          - get form value
+          - send to callback action
+        - If action is statusChange
+          - get status value from state
+          - get form value
+          - send to callback action
+    */
+
+    if (this.state.action === 'updateDate') {
+        // Call updateDate
+        const dates = {
+          returnDueDate: this.state.newReturnDate,
+          chargeDueDate: this.state.newChargeDate
+        }
+        this.props.updateDates(noteObj, dates)
+      }
+
+    if (this.state.action === 'statusChange') {
+        // Call updateDate
+        const status = {
+          status: this.state.newStatus
+        }
+        this.props.updateStatus(noteObj, status)
+      }
+
+   // this.props.updateOrderCallback(noteObj, orderRef, this.state.action)
 
     this.setState({
       status: 'closed',
@@ -137,6 +182,19 @@ export default class StickyActionsHomeTrial extends Component {
     }
   }
 
+  handleUpdateReturnDate = (date) => {
+    console.log(date)
+    this.setState({
+      newReturnDate: date
+    })
+  }
+
+  handleUpdateChargeDate = (date) => {
+    this.setState({
+      newChargeDate: date
+    })
+  }
+
   render() {
     const stateClass = this.state.status
     const actionClass = this.state.action
@@ -155,18 +213,31 @@ export default class StickyActionsHomeTrial extends Component {
               <div className="updatePicker-field-wrap">
                 <div className="form-element">
                   <label>Update return DUE Date</label>
-                  <FormDatePicker startDate={this.props.currentReturnDate} />
+                  <FormDatePicker
+                    startDate={this.props.currentReturnDate}
+                    handleChangeUpdate={this.handleUpdateReturnDate}
+                    />
                 </div>
                 <div className="form-element">
                   <label>Update change DUE date</label>
-                  <FormDatePicker startDate={this.props.currentChargeDate} />
+                  <FormDatePicker
+                    startDate={this.props.currentChargeDate}
+                    handleChangeUpdate={this.handleUpdateChargeDate}
+                    />
                 </div>
               </div>
-              <button className="updatePicker-save btn -blue">Save Changes</button>
             </div>
           </div>
           }
-          {this.state.changeStatus && <div>Change Status Code</div>}
+          {this.state.changeStatus &&
+            <div className="homeTrial-changeStatus-dropdown">
+              <SelectBox
+                options={homeTrialStatusValues}
+                handleChange={this.handleFilterChange}
+                placeholder='Change Status'
+              />
+            </div>
+          }
             <textarea
               className="form-control stickyActions-comment"
               rows="2"

@@ -73,7 +73,7 @@ export default class homeTrialOverview extends Component {
     // Call Action to go update the view.
 
     let params = {
-      state: this.props.homeTrialStatus
+      status: this.props.homeTrialStatus
     }
 
     if (filterName) {
@@ -117,7 +117,6 @@ export default class homeTrialOverview extends Component {
     } else {
       const orderLoadingClass = this.props.orderLoading ? '-loading' : '';
       const listLoadingClass = this.props.listLoading ? '-loading' : '';
-
       return(
         <div>
           <StickyBar

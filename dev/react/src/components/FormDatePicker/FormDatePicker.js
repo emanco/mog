@@ -12,23 +12,10 @@ export default class FormDatePicker extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      startDate: moment(this.props.startDate)
-    };
-
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillReceiveProps() {
-    this.setState({
-      startDate: moment(this.props.startDate)
-    })
-  }
-
   handleChange(date) {
-    this.setState({
-      startDate: date
-    })
     const utcFormat = moment(date).utc().format('YYYY-MM-DDTHH:MM:SS')
     this.props.handleChangeUpdate(utcFormat);
   }
@@ -37,7 +24,7 @@ export default class FormDatePicker extends Component {
     return(
      <DatePicker
        className="form-control"
-       selected={this.state.startDate}
+       selected={moment(this.props.startDate)}
        onChange={this.handleChange}
        dateFormat='DD/MM/YYYY'
        />

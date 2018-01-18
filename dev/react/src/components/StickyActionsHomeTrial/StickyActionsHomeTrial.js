@@ -8,6 +8,28 @@ import homeTrialStatusValues from '../../constants/homeTrialStatusValues'
 import './../../scss/components/stickyActions.css';
 import './../../scss/components/stickyActionsHomeTrial.css';
 
+const updateDatesState = {
+      status: 'open',
+      action: 'updateDate',
+      title: 'Update Date',
+      changeStatus: false,
+      updateDate: true
+    }
+
+const statusChangeState = {
+      status: 'open',
+      action: 'statusChange',
+      title: 'Change Status',
+      changeStatus: true,
+      updateDate: false
+    }
+
+const closedState = {
+      status: 'closed',
+      action: '',
+      noteValue: ''
+    }
+
 export default class StickyActionsHomeTrial extends Component {
 
   constructor(props) {
@@ -42,36 +64,20 @@ export default class StickyActionsHomeTrial extends Component {
   }
 
   handleClickUpdateDate = (orderRef) => {
-    this.setState({
-      status: 'open',
-      action: 'updateDate',
-      title: 'Update Date',
-      changeStatus: false,
-      updateDate: true
-    })
+    this.setState(updateDatesState)
 
     this.handleSubmit(orderRef)
   }
 
   handleClickUpdateStatus = (orderRef) => {
-    this.setState({
-      status: 'open',
-      action: 'statusChange',
-      title: 'Change Status',
-      changeStatus: true,
-      updateDate: false
-    })
+    this.setState(statusChangeState)
 
     this.handleSubmit(orderRef)
   }
 
   handleToggleForm = () => {
     this.textArea.blur();
-    this.setState({
-      status: 'closed',
-      action: '',
-      noteValue: ''
-    })
+    this.setState(closedState)
   }
 
   handleNoteChange = (event) => {
@@ -91,10 +97,10 @@ export default class StickyActionsHomeTrial extends Component {
   handleSubmit = (orderRef) => {
     //return // @TODO - Temp while I work
 
-    // taking advtange of the react flow here. Even though
+    // taking advtange of the react lifecycle here. Even though
     // we set status to be open, it isn't until the cycle is
     // complete so this will be false and it won't attempt to
-    // post ont he first click. There may be a better way
+    // post on the first click. There may be a better way
     if (this.state.status !== 'open') {
       return
     }
@@ -137,13 +143,7 @@ export default class StickyActionsHomeTrial extends Component {
         this.props.updateStatus(noteObj, status)
       }
 
-   // this.props.updateOrderCallback(noteObj, orderRef, this.state.action)
-
-    this.setState({
-      status: 'closed',
-      action: '',
-      noteValue: ''
-    })
+    this.setState(closedState)
 
   }
 
@@ -156,26 +156,11 @@ export default class StickyActionsHomeTrial extends Component {
 
   handleKeyboardOpen = (keyName, e, handle) => {
     switch(keyName) {
-        case 'shift+a':
-          this.setState({
-            status: 'open',
-            action: 'approve',
-            title: 'contacted'
-          });
+        case 'shift+u':
+          this.setState(updateDatesState);
           break;
-        case 'shift+d':
-          this.setState({
-            status: 'open',
-            action: 'decline',
-            title: 'declined'
-          });
-          break;
-        case 'shift+c':
-          this.setState({
-            status: 'open',
-            action: 'contact',
-            title: 'contacted'
-          });
+        case 'shift+s':
+          this.setState(statusChangeState);
           break;
       default:
         return;

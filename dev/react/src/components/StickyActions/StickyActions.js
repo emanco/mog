@@ -38,7 +38,7 @@ export default class StickyActions extends Component {
     this.setState({
       status: 'open',
       action: 'approve',
-      title: 'approved'
+      title: 'approve this order'
     })
 
     this.handleSubmit(orderRef)
@@ -48,7 +48,7 @@ export default class StickyActions extends Component {
     this.setState({
       status: 'open',
       action: 'decline',
-      title: 'declined'
+      title: 'decline this order'
     })
 
     this.handleSubmit(orderRef)
@@ -58,7 +58,7 @@ export default class StickyActions extends Component {
     this.setState({
       status: 'open',
       action: 'contact',
-      title: 'contacted'
+      title: 'mark as customer contacted'
     })
 
     this.handleSubmit(orderRef)
@@ -115,21 +115,21 @@ export default class StickyActions extends Component {
           this.setState({
             status: 'open',
             action: 'approve',
-            title: 'contacted'
+            title: 'approve this order'
           });
           break;
         case 'shift+d':
           this.setState({
             status: 'open',
             action: 'decline',
-            title: 'declined'
+            title: 'decline this order'
           });
           break;
         case 'shift+c':
           this.setState({
             status: 'open',
             action: 'contact',
-            title: 'contacted'
+            title: 'mark as customer contacted'
           });
           break;
       default:
@@ -162,7 +162,7 @@ export default class StickyActions extends Component {
             <div className="stickyActions-orderRef heading2">{this.props.orderRef}</div>
             <div className="stickyActions-meta">
               <Moment
-                date={'2017-12-01T12:34:38.934712'}
+                date={this.props.currentOrderDate}
                 format="ddd Do MMM YYYY" />
             </div>
           </div>

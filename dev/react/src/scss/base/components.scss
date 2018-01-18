@@ -84,6 +84,10 @@
     color:$colour-text;
   }
 
+  .component-customer-info-email-phone {
+    padding-right: 15px;
+  }
+
   .btn.-edit{
     margin-top:-30px;
   }
@@ -94,6 +98,12 @@
       color: colour('blue', 'link');
       @extend .f18;
     }
+  }
+}
+
+.component-customer-orders {
+  .heading {
+    margin-bottom: 2%;
   }
 }
 

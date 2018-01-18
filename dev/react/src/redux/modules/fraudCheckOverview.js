@@ -76,6 +76,12 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
             ...state,
             fraudStatus: action.fraudStatus
           }
+        case 'CURRENT_ORDER_REFERENCE' :
+          return {
+            ...state,
+            currentOrderRef: action.currentOrderRef,
+            currentOrderDate: action.currentOrderDate
+          }
         default:
             return state;
     }
@@ -89,6 +95,18 @@ export function upateFilter (filterValue) {
     })
   }
 }
+
+export function updateOrderRef (order) {
+  return (dispatch) => {
+    dispatch({
+      type: 'CURRENT_ORDER_REFERENCE',
+      currentOrderRef: order.order_reference,
+      currentOrderDate: order.placed_at
+    })
+  }
+}
+
+
 
 // get Search results with this action, separated by the combined above
 export const getFraudCheckList = (queryParams = {}) => {
@@ -105,11 +123,9 @@ console.log('GET FRAUD CHECK LIST');
           }
         }
       }).then((result) => {
-       console.log(result)
-
         checkCallSuccess(result.type, () => {
           if (result.payload.data.count > 0) {
-           dispatch(getFraudCheckListOrder(result.payload.data.results[0].customer_reference))
+           dispatch(getFraudCheckListOrder(null, result.payload.data.results[0].customer_reference))
           }
         }, () => {dispatch(AuthActions.logOut())});
 
@@ -118,7 +134,7 @@ console.log('GET FRAUD CHECK LIST');
 }
 
 // Get details on the list item currently being hovered over
-export function getFraudCheckListOrder (id, orderRef) {
+export function getFraudCheckListOrder (orderRef, custId, order) {
 
   /* @NOTE Fetch User and Order Details
    * Call getCustomer & getOrders from the customers reducer which just returns the data then
@@ -128,11 +144,15 @@ export function getFraudCheckListOrder (id, orderRef) {
   return (dispatch, getState) => {
     dispatch({
       type: 'FRAUD_ORDER',
-      payload: axios.all([getCustomer(id), getOrders(id)])
+      payload: axios.all([getCustomer(custId), getOrders(custId)])
     }).then((result) => {
-      console.log(result)
       // check result. We don't need a success callback, but log out if it fails
-      checkCallSuccess(result.action.type, () => {}, () => {dispatch(AuthActions.logOut())});
+      checkCallSuccess(result.action.type, () => {
+        if (order){
+          dispatch(updateOrderRef(order)) // Pass the relevant order from the list so we can update the app state with knoweldge of which we're currently viewing on the right hand side
+        }
+
+      }, () => {dispatch(AuthActions.logOut())});
     })
   }
 
@@ -159,7 +179,6 @@ export function postOrderNote (noteObj) {
 
 export function updateOrderStatus (noteObj, orderRef, actionType, fraudStatus) {
   console.log('FRAUD CHECK OVERVIEW - UPDATE ORDER STATUS')
-  console.log(actionType)
   let status = '';
 
   switch(actionType) {

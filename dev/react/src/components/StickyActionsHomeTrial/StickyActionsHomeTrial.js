@@ -270,7 +270,7 @@ export default class StickyActionsHomeTrial extends Component {
                 </button>
               </Hotkeys>
               <Hotkeys
-                keyName="shift+a"
+                keyName="shift+u"
                 onKeyDown={this.handleKeyboardOpen}>
                 <button
                   className="button btn-updateDate"
@@ -279,7 +279,7 @@ export default class StickyActionsHomeTrial extends Component {
                 </button>
               </Hotkeys>
               <Hotkeys
-                keyName="shift+d"
+                keyName="shift+s"
                 onKeyUp={this.handleKeyboardOpen}>
                 <button className="button btn-updateStatus"
                   onClick={() => {this.handleClickUpdateStatus(this.props.orderRef)}}>

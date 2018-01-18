@@ -336,6 +336,9 @@ p {
   padding-bottom: 2%;
   color: #222222; }
 
+.component-customer-info .component-customer-info-email-phone {
+  padding-right: 15px; }
+
 .component-customer-info .btn.-edit {
   margin-top: -30px; }
 
@@ -343,6 +346,9 @@ p {
   padding-top: 5%; }
   .component-customer-info .view-more a {
     color: #1d71d5; }
+
+.component-customer-orders .heading {
+  margin-bottom: 2%; }
 
 .component-customer-orders,
 .component-customer-prescriptions,

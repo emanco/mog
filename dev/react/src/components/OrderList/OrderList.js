@@ -48,7 +48,7 @@ export default class OrderList extends Component {
   }
 }
 
-OrderList.PropTypes = {
+OrderList.propTypes = {
   data: PropTypes.object,
   handlePaginationChange: PropTypes.func,
   handleOnItemClickCallback: PropTypes.func,

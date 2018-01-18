@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { authorise } from './auth';
-import { customersEndpoint } from '../../constants/endpoints';
+import axios from 'axios'
+import { customersEndpoint } from '../../constants/endpoints'
 
 export default function summaryReducer(state = {}, action = '') {
     switch (action.type)

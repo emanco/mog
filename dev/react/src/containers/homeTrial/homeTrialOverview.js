@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 
 import * as homeTrialOverviewActions from '../../redux/modules/homeTrialOverview'
-import {FraudCheckList, CustomerInfo, CustomerOrderList, StickyBar, StickyActionsHomeTrial, SelectBox, OrderList } from '../../components';
+import { CustomerInfo, CustomerOrderList, StickyBar, StickyActionsHomeTrial, SelectBox, OrderList } from '../../components'
 
-import homeTrialFilterValues from '../../constants/homeTrialFilterValues';
+import homeTrialFilterValues from '../../constants/homeTrialFilterValues'
 
-import './../../scss/components/fraudCheckOverview.css';
+import './../../scss/components/fraudCheckOverview.css'
 
 @connect(
   (state, ownProps) => ({
@@ -64,7 +64,6 @@ export default class homeTrialOverview extends Component {
 
   handleFraudCheckListClick = (orderRef, custId, key) => {
     if (orderRef !== this.props.data.results[0].order_reference) {
-      let order = this.props.data.results[key]; // get the order using the array key we've been passed
       this.props.getHomeTrialListOrder(orderRef, custId, this.props.data.results[key]);
     }
   }

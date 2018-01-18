@@ -5,9 +5,9 @@ import Icon from '../Icon/Icon'
 import { Link } from 'react-router'
 import Moment from 'react-moment'
 
-import {clientNameMapping, homeTrialStatus} from '../../helpers/mappings'
+import {homeTrialStatus} from '../../helpers/mappings'
 
-import './../../scss/components/homeTrialListItem.css';
+import './../../scss/components/homeTrialListItem.css'
 
 export default class HomeTrialListItem extends Component {
 

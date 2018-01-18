@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { Link } from 'react-router'
 import { asyncConnect } from 'redux-connect';
 import * as AuthActions from '../../redux/modules/auth'
 import {Header, Footer} from '../../components'

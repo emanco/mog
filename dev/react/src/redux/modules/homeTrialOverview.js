@@ -1,8 +1,6 @@
 import axios from 'axios';
-import { authorise } from './auth';
 import { homeTrialEndpoint, postOrderNoteEndpoint, orderStatusUpdateEndpoint } from '../../constants/endpoints'
 import homeTrialStatusValues from '../../constants/homeTrialStatusValues';
-import { browserHistory } from 'react-router'
 import buildQueryUrl from '../../helpers/buildQueryUrl'
 import { getCustomer, getOrders } from './customers'
 import checkCallSuccess from '../../helpers/checkCallSuccess'

@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Hotkeys from 'react-hot-keys';
-import Moment from 'react-moment';
+import Hotkeys from 'react-hot-keys'
+import Moment from 'react-moment'
 
 import {FormDatePicker, SelectBox} from '../../components/'
 import homeTrialStatusValues from '../../constants/homeTrialStatusValues'
-import './../../scss/components/stickyActions.css';
-import './../../scss/components/stickyActionsHomeTrial.css';
+import './../../scss/components/stickyActions.css'
+import './../../scss/components/stickyActionsHomeTrial.css'
 
 const updateDatesState = {
       status: 'open',
@@ -38,13 +38,13 @@ export default class StickyActionsHomeTrial extends Component {
     this.handleClickUpdateDate = this.handleClickUpdateDate.bind(this)
     this.handleClickUpdateStatus = this.handleClickUpdateStatus.bind(this)
 
-    this.handleNoteChange = this.handleNoteChange.bind(this);
-    this.handleShortcutSubmit = this.handleShortcutSubmit.bind(this);
-    this.handleToggleForm = this.handleToggleForm.bind(this);
-    this.handleKeyboardOpen = this.handleKeyboardOpen.bind(this);
+    this.handleNoteChange = this.handleNoteChange.bind(this)
+    this.handleShortcutSubmit = this.handleShortcutSubmit.bind(this)
+    this.handleToggleForm = this.handleToggleForm.bind(this)
+    this.handleKeyboardOpen = this.handleKeyboardOpen.bind(this)
 
-    this.handleUpdateReturnDate = this.handleUpdateReturnDate.bind(this);
-    this.handleUpdateChargeDate = this.handleUpdateReturnDate.bind(this);
+    this.handleUpdateReturnDate = this.handleUpdateReturnDate.bind(this)
+    this.handleUpdateChargeDate = this.handleUpdateReturnDate.bind(this)
 
     this.state = {
       status: 'closed',
@@ -86,7 +86,7 @@ export default class StickyActionsHomeTrial extends Component {
     })
   }
 
-  handleFilterChange = (value) =>{
+  handleFilterChange = (value) => {
     console.log('IT CHANGED')
     console.log(value)
     this.setState({
@@ -110,7 +110,6 @@ export default class StickyActionsHomeTrial extends Component {
       content: this.state.noteValue
     }
 
-    console.log(this.state.newReturnDate)
     return
 
     /*
@@ -184,6 +183,7 @@ export default class StickyActionsHomeTrial extends Component {
     const stateClass = this.state.status
     const actionClass = this.state.action
     console.log(this.props.currentReturnDate)
+
     return(
       <div className={'sticky-actions sticky-actions-homeTrial sticky-actions-' + stateClass + ' sticky-actions-' + actionClass}>
         <div className='sticky-actions-overlay' onClick={this.handleToggleForm}></div>

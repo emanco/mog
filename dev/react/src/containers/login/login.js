@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
-import { StickyBar, SearchResults, SearchUser } from '../../components';
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux';
 
-import { Alert, LoginForm } from '../../components'
+import { LoginForm } from '../../components'
 
 import * as AuthActions from '../../redux/modules/auth'
 

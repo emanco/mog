@@ -1,19 +1,15 @@
 import axios from 'axios';
-import { authorise } from './auth';
 import { fraudCheckOrders, postOrderNoteEndpoint, orderStatusUpdateEndpoint } from '../../constants/endpoints'
-import fraudStatusValues from '../../constants/fraudStatusValues';
-import { browserHistory } from 'react-router'
+import fraudStatusValues from '../../constants/fraudStatusValues'
 import buildQueryUrl from '../../helpers/buildQueryUrl'
 import { getCustomer, getOrders } from './customers'
 import checkCallSuccess from '../../helpers/checkCallSuccess'
 import * as AuthActions from './auth'
 // Actions
-const LOADING_LIST = 'myOp/fraudCheckOverviewList/LOADING';
-const LOADED_LIST = 'myOp/fraudCheckOverviewList/LOADED';
-const FAILED_LIST = 'myOp/fraudCheckOverviewList/FAILED';
-
+const LOADING_LIST = 'myOp/fraudCheckOverviewList/LOADING'
+const LOADED_LIST = 'myOp/fraudCheckOverviewList/LOADED'
+const FAILED_LIST = 'myOp/fraudCheckOverviewList/FAILED'
 const UPDATE_ORDER = 'myOp/fraudCheckOverviewList/UPDATE_ORDER'
-
 const POST_ORDER_NOTE = 'myOp/orderNotes/POST_NOTE'
 
 const initialState = {
@@ -110,7 +106,9 @@ export function updateOrderRef (order) {
 
 // get Search results with this action, separated by the combined above
 export const getFraudCheckList = (queryParams = {}) => {
-console.log('GET FRAUD CHECK LIST');
+
+  console.log('GET FRAUD CHECK LIST');
+
   const queryUrl = buildQueryUrl(fraudCheckOrders, queryParams)
 
   return (dispatch, getState) => {
@@ -141,6 +139,7 @@ export function getFraudCheckListOrder (orderRef, custId, order) {
    * put it into this reducer
    */
   console.log('CHECKLIST ORDER')
+
   return (dispatch, getState) => {
     dispatch({
       type: 'FRAUD_ORDER',

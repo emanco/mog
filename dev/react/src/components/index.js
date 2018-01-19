@@ -10,7 +10,6 @@ import FraudCheckListItem from './FraudCheckListItem/FraudCheckListItem'
 import Header from './Header/Header'
 import HomeTrialListItem from './HomeTrialListItem/HomeTrialListItem'
 import Icon from './Icon/Icon'
-import LoginModal from './LoginModal/LoginModal'
 import LoginForm from './LoginForm/LoginForm'
 import OrderList from './OrderList/OrderList'
 import OrderStatus from './OrderStatus/OrderStatus'
@@ -37,7 +36,6 @@ export {
   Header,
   HomeTrialListItem,
   Icon,
-  LoginModal,
   LoginForm,
   OrderList,
   OrderStatus,
@@ -50,4 +48,4 @@ export {
   StickyBar,
   StickyDropdown,
   Tags
-};
+}

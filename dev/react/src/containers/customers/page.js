@@ -42,7 +42,7 @@ export default class Summarypage extends Component {
       }
 
     let $id = this.props.params.customerid;
-
+    console.log(this.props.payload);
     if (this.props.payload[1]) {
       return (
           <div>
@@ -51,7 +51,7 @@ export default class Summarypage extends Component {
               <div className="left-panel">
 
                   <CustomerInfo customerid={$id} data={this.props.payload[0].data} editable={true}/>
-                  <CustomerOrderList data={this.props.payload[1].data[0]} customerid={$id} editable={true}/>
+                  <CustomerOrderList data={this.props.payload[1].data} customerid={$id} editable={true}/>
                   <CustomerPrescriptions customerid={$id} data={this.props.payload[2].data} name={this.props.payload[0].data.first_name+' '+this.props.payload[0].data.last_name} />
               </div>
 

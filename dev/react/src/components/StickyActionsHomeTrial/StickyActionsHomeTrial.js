@@ -1,12 +1,34 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Hotkeys from 'react-hot-keys';
-import Moment from 'react-moment';
+import Hotkeys from 'react-hot-keys'
+import Moment from 'react-moment'
 
 import {FormDatePicker, SelectBox} from '../../components/'
 import homeTrialStatusValues from '../../constants/homeTrialStatusValues'
-import './../../scss/components/stickyActions.css';
-import './../../scss/components/stickyActionsHomeTrial.css';
+import './../../scss/components/stickyActions.css'
+import './../../scss/components/stickyActionsHomeTrial.css'
+
+const updateDatesState = {
+      status: 'open',
+      action: 'updateDate',
+      title: 'Update Date',
+      changeStatus: false,
+      updateDate: true
+    }
+
+const statusChangeState = {
+      status: 'open',
+      action: 'statusChange',
+      title: 'Change Status',
+      changeStatus: true,
+      updateDate: false
+    }
+
+const closedState = {
+      status: 'closed',
+      action: '',
+      noteValue: ''
+    }
 
 export default class StickyActionsHomeTrial extends Component {
 
@@ -16,20 +38,22 @@ export default class StickyActionsHomeTrial extends Component {
     this.handleClickUpdateDate = this.handleClickUpdateDate.bind(this)
     this.handleClickUpdateStatus = this.handleClickUpdateStatus.bind(this)
 
-    this.handleNoteChange = this.handleNoteChange.bind(this);
-    this.handleShortcutSubmit = this.handleShortcutSubmit.bind(this);
-    this.handleToggleForm = this.handleToggleForm.bind(this);
-    this.handleKeyboardOpen = this.handleKeyboardOpen.bind(this);
+    this.handleNoteChange = this.handleNoteChange.bind(this)
+    this.handleShortcutSubmit = this.handleShortcutSubmit.bind(this)
+    this.handleToggleForm = this.handleToggleForm.bind(this)
+    this.handleKeyboardOpen = this.handleKeyboardOpen.bind(this)
 
-    this.handleUpdateReturnDate = this.handleUpdateReturnDate.bind(this);
-    this.handleUpdateChargeDate = this.handleUpdateReturnDate.bind(this);
+    this.handleUpdateReturnDate = this.handleUpdateReturnDate.bind(this)
+    this.handleUpdateChargeDate = this.handleUpdateChargeDate.bind(this)
 
     this.state = {
       status: 'closed',
       action: '',
       title: '',
       noteValue: '',
-      newStatus: null
+      newStatus: null,
+      returnDate: this.props.currentReturnDate,
+      chargeDate: this.props.currentChargeDate
     }
   }
 
@@ -42,36 +66,20 @@ export default class StickyActionsHomeTrial extends Component {
   }
 
   handleClickUpdateDate = (orderRef) => {
-    this.setState({
-      status: 'open',
-      action: 'updateDate',
-      title: 'Update Date',
-      changeStatus: false,
-      updateDate: true
-    })
+    this.setState(updateDatesState)
 
     this.handleSubmit(orderRef)
   }
 
   handleClickUpdateStatus = (orderRef) => {
-    this.setState({
-      status: 'open',
-      action: 'statusChange',
-      title: 'Change Status',
-      changeStatus: true,
-      updateDate: false
-    })
+    this.setState(statusChangeState)
 
     this.handleSubmit(orderRef)
   }
 
   handleToggleForm = () => {
     this.textArea.blur();
-    this.setState({
-      status: 'closed',
-      action: '',
-      noteValue: ''
-    })
+    this.setState(closedState)
   }
 
   handleNoteChange = (event) => {
@@ -80,9 +88,7 @@ export default class StickyActionsHomeTrial extends Component {
     })
   }
 
-  handleFilterChange = (value) =>{
-    console.log('IT CHANGED')
-    console.log(value)
+  handleFilterChange = (value) => {
     this.setState({
       newStatus: value
     })
@@ -91,10 +97,10 @@ export default class StickyActionsHomeTrial extends Component {
   handleSubmit = (orderRef) => {
     //return // @TODO - Temp while I work
 
-    // taking advtange of the react flow here. Even though
+    // taking advtange of the react lifecycle here. Even though
     // we set status to be open, it isn't until the cycle is
     // complete so this will be false and it won't attempt to
-    // post ont he first click. There may be a better way
+    // post on the first click. There may be a better way
     if (this.state.status !== 'open') {
       return
     }
@@ -104,29 +110,14 @@ export default class StickyActionsHomeTrial extends Component {
       content: this.state.noteValue
     }
 
-    console.log(this.state.newReturnDate)
-    return
-
-    /*
-      Logic
-      - If status is open
-        - If action is updateDate
-          - get both datepicker date values
-          - get form value
-          - send to callback action
-        - If action is statusChange
-          - get status value from state
-          - get form value
-          - send to callback action
-    */
-
     if (this.state.action === 'updateDate') {
         // Call updateDate
-        const dates = {
-          returnDueDate: this.state.newReturnDate,
-          chargeDueDate: this.state.newChargeDate
-        }
-        this.props.updateDates(noteObj, dates)
+        const dates = {}
+
+        this.state.returnDate ? dates.return_due_at = this.state.returnDate : null;
+        this.state.chargeDate ? dates.charge_due_at = this.state.chargeDate : null;
+
+        this.props.updateDatesCallback(noteObj, dates)
       }
 
     if (this.state.action === 'statusChange') {
@@ -137,13 +128,7 @@ export default class StickyActionsHomeTrial extends Component {
         this.props.updateStatus(noteObj, status)
       }
 
-   // this.props.updateOrderCallback(noteObj, orderRef, this.state.action)
-
-    this.setState({
-      status: 'closed',
-      action: '',
-      noteValue: ''
-    })
+    this.setState(closedState)
 
   }
 
@@ -156,49 +141,34 @@ export default class StickyActionsHomeTrial extends Component {
 
   handleKeyboardOpen = (keyName, e, handle) => {
     switch(keyName) {
-        case 'shift+a':
-          this.setState({
-            status: 'open',
-            action: 'approve',
-            title: 'contacted'
-          });
+        case 'shift+u':
+          this.setState(updateDatesState);
           break;
-        case 'shift+d':
-          this.setState({
-            status: 'open',
-            action: 'decline',
-            title: 'declined'
-          });
-          break;
-        case 'shift+c':
-          this.setState({
-            status: 'open',
-            action: 'contact',
-            title: 'contacted'
-          });
+        case 'shift+s':
+          this.setState(statusChangeState);
           break;
       default:
         return;
     }
   }
 
+  // @TODO - DRY - One function for the two below accept a param that indicates which date is being updated
   handleUpdateReturnDate = (date) => {
-    console.log(date)
     this.setState({
-      newReturnDate: date
+      returnDate: date
     })
   }
 
   handleUpdateChargeDate = (date) => {
     this.setState({
-      newChargeDate: date
+      chargeDate: date
     })
   }
 
   render() {
     const stateClass = this.state.status
     const actionClass = this.state.action
-    console.log(this.props.currentReturnDate)
+
     return(
       <div className={'sticky-actions sticky-actions-homeTrial sticky-actions-' + stateClass + ' sticky-actions-' + actionClass}>
         <div className='sticky-actions-overlay' onClick={this.handleToggleForm}></div>
@@ -214,14 +184,14 @@ export default class StickyActionsHomeTrial extends Component {
                 <div className="form-element">
                   <label>Update return DUE Date</label>
                   <FormDatePicker
-                    startDate={this.props.currentReturnDate}
+                    startDate={this.state.returnDate}
                     handleChangeUpdate={this.handleUpdateReturnDate}
                     />
                 </div>
                 <div className="form-element">
                   <label>Update change DUE date</label>
                   <FormDatePicker
-                    startDate={this.props.currentChargeDate}
+                    startDate={this.state.chargeDate}
                     handleChangeUpdate={this.handleUpdateChargeDate}
                     />
                 </div>

@@ -23,6 +23,7 @@
   border-radius:50%;
   border:1px solid colour('line');
   text-align: center;
+  text-transform: uppercase;
   @include scale-pixels('height',80px,140px);
   @include scale-pixels('line-height',80px,140px);
   @include scale-pixels('width',80px,140px);

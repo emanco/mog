@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import './../../scss/components/createCustomer.css';
-import './../../scss/base/forms.css';
+import './../../scss/components/createCustomer.css'
+import './../../scss/base/forms.css'
 
 export default class createCustomer extends Component {
 

@@ -1,15 +1,9 @@
-import React, { Component } from 'react';
-import "./../../scss/components/stickybar.css";
+import React, { Component } from 'react'
+import "./../../scss/components/stickybar.css"
 import {Breadcrumbs, StickyDropdown} from "../../components"
-import fraudStatusValues from '../../constants/fraudStatusValues';
-import homeTrialStatusValues from '../../constants/homeTrialStatusValues';
+import fraudStatusValues from '../../constants/fraudStatusValues'
+import homeTrialStatusValues from '../../constants/homeTrialStatusValues'
 
-// Ionicons
-//import Ionicon from 'react-ionicons';
-
-
-
-import Sticky from 'react-sticky-el';
 
 class StickyBar extends Component {
 
@@ -33,29 +27,29 @@ class StickyBar extends Component {
             let $for = this.props.query !== undefined ? 'for' : null;
 
             return (
-                <Sticky className="sticky-bar nav-height">
+                <div className="sticky-bar nav-height">
                     <div id="mog-breadcrumb" className="row mog-breadcrumb nav-height">
                         <span className="search-results">Search Results {$for} {this.props.query}</span>
                     </div>
-                </Sticky>
+                </div>
             )
         } else if ($path.includes('fraud-check')) {
           return (
-                <Sticky className="sticky-bar nav-height">
+                <div className="sticky-bar nav-height">
                     <StickyDropdown values={fraudStatusValues} filterListCallback={this.filterListCallback }/>
-                </Sticky>
+                </div>
             )
         } else if ($path.includes('hometrial-orders')) {
           return (
-                <Sticky className="sticky-bar nav-height">
+                <div className="sticky-bar nav-height">
                     <StickyDropdown values={homeTrialStatusValues} filterListCallback={this.filterListCallback }/>
-                </Sticky>
+                </div>
             )
         } else {
             return (
-                <Sticky className="sticky-bar nav-height">
+                <div className="sticky-bar nav-height">
                     <Breadcrumbs />
-                </Sticky>
+                </div>
             )
         }
     }

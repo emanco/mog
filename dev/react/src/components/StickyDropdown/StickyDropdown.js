@@ -6,9 +6,8 @@ class StickyDropdown extends Component {
 
   constructor(props) {
     super(props)
-    this.handleClick = this.handleFilterSelect.bind(this)
     this.toggleMenuClick = this.toggleMenuClick.bind(this)
-    this.handleFilterSelect = this.handleFilterSelect.bind(this)
+    this.handleStatusSelect = this.handleStatusSelect.bind(this)
     this.state = {
       currentLabel: this.props.values[0].label,
       currentValue: this.props.values[0].value,
@@ -24,7 +23,7 @@ class StickyDropdown extends Component {
     }
   }
 
-  handleFilterSelect(filter) {
+  handleStatusSelect(filter) {
     this.setState({
       currentLabel: filter.label,
       currentValue: filter.value
@@ -43,7 +42,7 @@ class StickyDropdown extends Component {
           <ul>
           { this.props.values.map((item, key) => {
               return (
-                <li key={key} onClick={() => this.handleFilterSelect(item) } className={"f36 sticky-dropdown-list-item sticky-item-" + item.class}>{item.label}</li>
+                <li key={key} onClick={() => this.handleStatusSelect(item) } className={"f36 sticky-dropdown-list-item sticky-item-" + item.class}>{item.label}</li>
               )
             })
           }

@@ -5,7 +5,7 @@ import getUrlParam from '../../helpers/getUrlParam'
 
 import {Pagination, FraudCheckListItem, HomeTrialListItem} from '../../components'
 
-import './../../scss/components/orderList.css';
+import './../../scss/components/orderList.css'
 
 export default class OrderList extends Component {
   constructor(props) {
@@ -46,4 +46,12 @@ export default class OrderList extends Component {
       </div>
     )
   }
+}
+
+OrderList.propTypes = {
+  data: PropTypes.object,
+  handlePaginationChange: PropTypes.func,
+  handleOnItemClickCallback: PropTypes.func,
+  hoverCallback: PropTypes.func,
+  listType: PropTypes.string
 }

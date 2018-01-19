@@ -48,7 +48,7 @@ export default class fraudCheckOverview extends Component {
   }
 
   handleFraudCheckListClick = (orderRef, custId, key) => {
-    if (orderRef !== this.props.data.results[0].order_reference) {
+    if (orderRef !== this.props.currentlyViewedOrder) {
       this.props.getFraudCheckListOrder(orderRef, custId, this.props.data.results[key]);
     }
   }

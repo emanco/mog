@@ -52,7 +52,7 @@ export default class homeTrialOverview extends Component {
   }
 
   handleFraudCheckListClick = (orderRef, custId, key) => {
-    if (orderRef !== this.props.data.results[0].order_reference) {
+    if (orderRef !== this.props.currentlyViewedOrder) {
       this.props.getHomeTrialListOrder(orderRef, custId, this.props.data.results[key]);
     }
   }

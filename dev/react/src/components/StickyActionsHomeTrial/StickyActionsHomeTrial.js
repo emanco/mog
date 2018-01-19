@@ -95,8 +95,6 @@ export default class StickyActionsHomeTrial extends Component {
   }
 
   handleSubmit = (orderRef) => {
-    //return // @TODO - Temp while I work
-
     // taking advtange of the react lifecycle here. Even though
     // we set status to be open, it isn't until the cycle is
     // complete so this will be false and it won't attempt to
@@ -134,7 +132,7 @@ export default class StickyActionsHomeTrial extends Component {
 
   handleShortcutSubmit = (keyName, e, handle) => {
     // Handles all actions and submits the action
-    if (keyName === 'shift+return'){
+    if (keyName === 'shift+return') {
       this.handleSubmit(this.props.orderRef)
     }
   }

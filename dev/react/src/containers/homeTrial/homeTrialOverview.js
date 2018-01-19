@@ -46,6 +46,9 @@ export default class homeTrialOverview extends Component {
 
   handleStatusChange = (value) => {
     this.props.updateStatus(value)
+    this.setState({
+      paginationPage: 0
+    })
   }
 
   handleFraudCheckListClick = (orderRef, custId, key) => {
@@ -57,6 +60,9 @@ export default class homeTrialOverview extends Component {
   handleFilterChange = (filterValue) => {
     // Call Action to go update the view.
     this.props.updateFilter(filterValue)
+    this.setState({
+      paginationPage: 0
+    })
   }
 
   handlePaginationChange = (page) => {
@@ -125,7 +131,9 @@ export default class homeTrialOverview extends Component {
                 listType="HomeTrial"
                 data={this.props.data}
                 hoverCallback={this.handleFraudCheckListClick}
-                handlePaginationChange={this.handlePaginationChange}/> }
+                handlePaginationChange={this.handlePaginationChange}
+                paginationPage={this.state.paginationPage}
+                />}
             </div>
             <div className={"right-panel -light-inset cust-scroll fraudCheckOverview-order " + orderLoadingClass}>
             {render &&

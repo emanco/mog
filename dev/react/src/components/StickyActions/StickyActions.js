@@ -9,19 +9,19 @@ import './../../scss/components/stickyActions.css';
 const approveState = {
       status: 'open',
       action: 'approve',
-      title: 'approve this order'
+      title: 'Approve this order'
     }
 
 const declineState = {
       status: 'open',
       action: 'decline',
-      title: 'decline this order'
+      title: 'Decline this order'
     }
 
 const contactState = {
       status: 'open',
       action: 'contact',
-      title: 'mark as customer contacted'
+      title: 'Mark as customer contacted'
     }
 
 const closedState = {

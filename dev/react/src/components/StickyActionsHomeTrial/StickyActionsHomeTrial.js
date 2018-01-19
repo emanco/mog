@@ -4,14 +4,14 @@ import Hotkeys from 'react-hot-keys'
 import Moment from 'react-moment'
 
 import {FormDatePicker, SelectBox} from '../../components/'
-import homeTrialStatusValues from '../../constants/homeTrialStatusValues'
+import homeTrialStatusValues from '../../constants/homeTrialStatusChangeValues'
 import './../../scss/components/stickyActions.css'
 import './../../scss/components/stickyActionsHomeTrial.css'
 
 const updateDatesState = {
       status: 'open',
       action: 'updateDate',
-      title: 'Update Date',
+      title: 'Update date',
       changeStatus: false,
       updateDate: true
     }
@@ -19,7 +19,7 @@ const updateDatesState = {
 const statusChangeState = {
       status: 'open',
       action: 'statusChange',
-      title: 'Change Status',
+      title: 'Change status',
       changeStatus: true,
       updateDate: false
     }

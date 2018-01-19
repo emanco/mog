@@ -33,6 +33,7 @@ export default class OrderList extends Component {
   }
 
   render() {
+    console.log(this.props.paginationPage)
     const pageCount = this.calculatePagination(this.props.data.next);
     const ListItem = this.childComponents[this.props.listType || 'FraudCheckList']
     return(
@@ -42,7 +43,7 @@ export default class OrderList extends Component {
             return (<ListItem data={result} key={i} orderKey={i} itemClickCallback={this.handleOnItemClickCallback}/>)
           })
         }
-        {pageCount && <Pagination pageCount={pageCount} handlePaginationChange={this.handlePaginationChange} />}
+        {pageCount && <Pagination pageCount={pageCount} handlePaginationChange={this.handlePaginationChange} currentPage={this.props.paginationPage} />}
       </div>
     )
   }

@@ -95,6 +95,13 @@ export default function homeTrialOverviewReducer(state = initialState, action = 
             currentOrderChargeDate: action.currentOrderChargeDate,
             currentOrderHtId: action.currentOrderHtId
           }
+        case 'HT_MORE_CUSTOMER_ORDERS' :
+          return {
+            ...state,
+            payload : {
+              results: action.customerOrders
+            }
+          }
         default:
           return state;
     }
@@ -253,6 +260,35 @@ export const getHomeTrialList = (queryParams = {}) => {
         }, () => {dispatch(AuthActions.logOut())});
       })
   }
+}
+
+export function loadMoreCustomerOrders () {
+  // @TODO - Dispatch an action that only refreshes the orders list
+  // and appends it to the state
+  // get length of results from state and append 5 to it, use that as the value to load
+  // this will always be correct and avoids having to pass a value up the parental chain.
+
+  // @TODO - DRY - This is going to be used elsewhere i.e. the fraudCheckOverview
+  // NEED CUSTOMER ID
+  // QUERY CUSTOMER ORDER SUMMARY ENDPOINT AND REPLACE ORDERS WITH THE RESULTS
+
+  return (dispatch, getState) => {
+    const currentOrderTotal = getState().homeTrialOverviewReducer.orderPayload[1].results.length;
+    console.log(currentOrderTotal + 5)
+
+    dispatch({
+      type: 'HT_MORE_CUSTOMER_ORDERS',
+      payload: {
+        request: {
+          url: postOrderNoteEndpoint,
+          headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')},
+          method: 'GET'
+        }
+      }
+    })
+
+  }
+
 }
 
 // Get details on the list item currently being hovered over

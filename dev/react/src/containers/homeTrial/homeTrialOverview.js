@@ -33,6 +33,7 @@ export default class homeTrialOverview extends Component {
     this.handleStatusChange = this.handleStatusChange.bind(this)
     this.handleFraudCheckListClick = this.handleFraudCheckListClick.bind(this)
     this.dataIsAvailable = this.dataIsAvailable.bind(this)
+    this.handleViewMoreCustomerOrders = this.handleViewMoreCustomerOrders.bind(this)
     this.state = {
       paginationPage: 0
     }
@@ -82,6 +83,10 @@ export default class homeTrialOverview extends Component {
 
   handleUpdateDates = (note, dates) => {
     this.props.handleUpdateDates(note,dates)
+  }
+
+  handleViewMoreCustomerOrders = () => {
+    this.props.loadMoreCustomerOrders()
   }
 
   dataIsAvailable = () => {
@@ -145,7 +150,9 @@ export default class homeTrialOverview extends Component {
 
               <CustomerOrderList
                 data={this.props.orderData[1].data}
-                customerid={this.props.data.results[0].customer_reference} />
+                customerid={this.props.data.results[0].customer_reference}
+                viewMoreCallback={this.handleViewMoreCustomerOrders}
+              />
               </div>
               <StickyActionsHomeTrial
                 loadingStatus={this.props.orderLoading}

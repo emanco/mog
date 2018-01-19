@@ -272,6 +272,7 @@ export function getHomeTrialListOrder (orderRef, custId, order) {
         if (order){
           dispatch(updateOrderRef(order)) // Pass the relevant order from the list so we can update the app state with knoweldge of which we're currently viewing on the right hand side
         }
+
       }, () => {dispatch(AuthActions.logOut())});
     })
   }

@@ -348,7 +348,12 @@ p {
     color: #1d71d5; }
 
 .component-customer-orders .heading {
-  margin-bottom: 2%; }
+  margin-bottom: 2%;
+  display: inline-block;
+  width: 100%; }
+  .component-customer-orders .heading .btn.-add {
+    position: relative;
+    float: right; }
 
 .component-customer-orders,
 .component-customer-prescriptions,

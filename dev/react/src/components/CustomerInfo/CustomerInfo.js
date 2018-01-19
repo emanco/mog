@@ -1,7 +1,7 @@
 // Common libraries
 import React, { Component } from 'react'
 import {PropTypes} from 'prop-types'
-import userInitials from '../../helpers/userInitials'
+import getUserInitials from '../../helpers/userInitials'
 class CustomerInfo extends Component {
 
     render() {
@@ -16,7 +16,7 @@ class CustomerInfo extends Component {
                 <div>
                     <section className="component component-customer-info row">
                         <div className="col-sm-3">
-                            <div className="user-initials">{userInitials(this.props.data.first_name+this.props.data.last_name)}</div>
+                            <div className="user-initials">{getUserInitials(this.props.data.first_name+' '+this.props.data.last_name)}</div>
                         </div>
 
                         <div className="col-sm-9">

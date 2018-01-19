@@ -11,6 +11,7 @@ import { Router, Route, browserHistory } from 'react-router'
 
 //store
 import { applyMiddleware, createStore, combineReducers } from 'redux'
+import { ReduxAsyncConnect, asyncConnect, reducer as reduxAsyncConnect } from 'redux-connect'
 
 //pages
 import App from './containers/App/App'
@@ -48,7 +49,17 @@ const client = axios.create({ //all axios can be used, shown in axios documentat
 
 
 let store = createStore(
-  combineReducers({ authReducer, summaryReducer, searchReducer, userReducer, fraudCheckOverviewReducer, homeTrialOverviewReducer}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(promiseMiddleware(), thunk, logger, axiosMiddleware(client)));
+  combineReducers({
+    authReducer,
+    summaryReducer,
+    searchReducer,
+    userReducer,
+    fraudCheckOverviewReducer,
+    homeTrialOverviewReducer,
+    reduxAsyncConnect
+  }),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(promiseMiddleware(), thunk, logger, axiosMiddleware(client))
+);
 
 const authCheck = () => {
 
@@ -62,8 +73,11 @@ const authCheck = () => {
 
 ReactDOM.render(
     <Provider store={store}>
-            <div>
-              <Router history={browserHistory}>
+
+              <Router render={(props) =>
+                <ReduxAsyncConnect {...props}/>
+              } history={browserHistory}>
+
                 <Route component={App} onEnter={authCheck}>
                   <Route path="/" component={Summarypage} />
                   {/*Customers*/}
@@ -78,7 +92,6 @@ ReactDOM.render(
                   <Route path='/create-customer' component={CreateCustomer} />
                 </Route>
               </Router>
-            </div>
     </Provider>,
     document.getElementById('root')
 );

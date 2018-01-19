@@ -10,16 +10,16 @@ export default class CustomerOrderList extends Component {
    */
 
   componentDidMount() {
-        //console.log('mounted');
-
-        $(document).on('click', '[data-pnp-toggle-class]', function () {
-            $($(this).data('pnp-target')).toggleClass($(this).data('pnp-class'));
-            $(this).toggleClass($(this).data('pnp-class'));
-            return false;
-        });
+      //console.log('mounted');
+      $(document).on('click', '[data-pnp-toggle-class]', function () {
+          $($(this).data('pnp-target')).toggleClass($(this).data('pnp-class'));
+          $(this).toggleClass($(this).data('pnp-class'));
+          return false;
+      });
     }
 
   render() {
+    console.log(this.props.data)
     return(
       <section className="component component-customer-orders row">
         <h2 className="heading2 heading">

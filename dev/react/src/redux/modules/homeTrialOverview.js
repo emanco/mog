@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { homeTrialEndpoint, postOrderNoteEndpoint, orderStatusUpdateEndpoint } from '../../constants/endpoints'
-import homeTrialStatusValues from '../../constants/homeTrialStatusValues';
+import { homeTrialEndpoint, homeTrialPatchEndpoint, postOrderNoteEndpoint, orderStatusUpdateEndpoint } from '../../constants/endpoints'
+import homeTrialStatusValues from '../../constants/homeTrialStatusValues'
+import homeTrialFilterValues from '../../constants/homeTrialFilterValues'
 import buildQueryUrl from '../../helpers/buildQueryUrl'
 import { getCustomer, getOrders } from './customers'
 import checkCallSuccess from '../../helpers/checkCallSuccess'
@@ -34,15 +35,18 @@ export default function homeTrialOverviewReducer(state = initialState, action = 
             };
         case LOADED_LIST :
             let ref = null;
+            let htId = null
             if (action.payload.data.results[0]) {
               ref = action.payload.data.results[0].order_reference;
+              htId = action.payload.data.results[0].hometrial.id;
             }
             return {
                 ...state,
                 loading: false,
                 success: true,
                 payload: action.payload.data,
-                currentOrderRef: ref
+                currentOrderRef: ref,
+                currentOrderHtId: htId
             };
         case FAILED_LIST :
             return {
@@ -50,30 +54,36 @@ export default function homeTrialOverviewReducer(state = initialState, action = 
                 loading: false,
                 success: false
             };
-        case 'FRAUD_ORDER_PENDING' :
+        case 'HT_ORDER_PENDING' :
           return {
             ...state,
             orderLoading: true,
             orderSuccess: false
           }
-        case 'FRAUD_ORDER_FAILED' :
+        case 'HT_ORDER_FAILED' :
           return {
             ...state,
             orderLoading: false,
             orderSuccess: false
           }
-        case 'FRAUD_ORDER_FULFILLED' :
+        case 'HT_ORDER_FULFILLED' :
           return {
             ...state,
             orderLoading: false,
             orderSuccess: true,
             orderPayload: action.payload
           }
-        case 'FRAUD_LIST_FILTER' :
+        case 'HT_LIST_STATUS_CHANGE' :
         console.log(action)
           return {
             ...state,
-            homeTrialStatus: action.fraudStatus
+            homeTrialStatus: action.homeTrialStatus
+          }
+        case 'HT_FILTER_CHANGE' :
+        console.log(action)
+          return {
+            ...state,
+            homeTrialFilter: action.homeTrialFilter
           }
         case 'CURRENT_ORDER_REFERENCE' :
           console.log(action)
@@ -82,38 +92,148 @@ export default function homeTrialOverviewReducer(state = initialState, action = 
             currentOrderRef: action.currentOrderRef,
             currentOrderDate: action.currentOrderDate,
             currentOrderReturnDate: action.currentOrderReturnDate,
-            currentOrderChargeDate: action.currentOrderChargeDate
+            currentOrderChargeDate: action.currentOrderChargeDate,
+            currentOrderHtId: action.currentOrderHtId
           }
         default:
-            return state;
+          return state;
     }
 }
 
-export function updateFilter (filterValue) {
+export function handleUpdateDates (noteObj, datesObj) {
+
   return (dispatch) => {
+
+    if (Object.keys(datesObj).length > 0) {
+      // we have dates, dispatch update dates
+      dispatch(updateDates(datesObj))
+    }
+
+    if (noteObj.content.length > 0 ) {
+      // dispatch postNote
+      dispatch(postOrderNote(noteObj))
+    }
+
+  }
+
+  // @TODO - Once complete, go full refresh so we're using the latest data from the server
+
+}
+
+export function updateDates (datesObj) {
+
+  return (dispatch, getState) => {
     dispatch({
-      type: 'FRAUD_LIST_FILTER',
-      homeTrialStatus: filterValue
+      type: 'UPDATE_DATES',
+      payload: {
+        request: {
+          url: homeTrialPatchEndpoint + '/' + getState().homeTrialOverviewReducer.currentOrderHtId ,
+          headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')},
+          method: 'PATCH',
+          data: datesObj
+        }
+      }
     })
+
+  }
+
+}
+
+export function getParams (statusValue, filterValue) {
+  const params = {}
+
+  if (filterValue) {
+    params.chargeable_reasons = filterValue
+  }
+
+  if (statusValue === 'pending') {
+    params.pending_review = true
+  } else if (statusValue === 'contacted') {
+    params.status = 'HT CUSTOMER CONTACTED'
+  }
+
+  return params;
+}
+
+
+export function updateStatus (statusValue) {
+
+  return (dispatch, getState) => {
+
+    const params = getParams(
+      statusValue,
+      getState().homeTrialOverviewReducer.homeTrialFilter
+    )
+
+    dispatch({
+      type: 'HT_LIST_STATUS_CHANGE',
+      homeTrialStatus: statusValue
+    })
+
+    dispatch(getHomeTrialList(params))
+
+  }
+
+}
+
+export function updateFilter (filterValue) {
+
+  return (dispatch, getState) => {
+    const statusValue = getState().homeTrialOverviewReducer.homeTrialStatus
+    let params = {}
+
+    dispatch({
+      type: 'HT_FILTER_CHANGE',
+      homeTrialFilter: filterValue
+    })
+
+    if (statusValue === 'pending') {
+      params = {
+        pending_review: true
+      }
+    } else if (statusValue === 'contacted') {
+      params = {
+        status: 'HT CUSTOMER CONTACTED'
+      }
+    }
+
+    params.chargeable_reasons = filterValue
+
+    dispatch(getHomeTrialList(params))
   }
 }
 
 export function updateOrderRef (order) {
-  console.log(order);
   return (dispatch) => {
     dispatch({
       type: 'CURRENT_ORDER_REFERENCE',
       currentOrderRef: order.order_reference,
       currentOrderDate: order.placed_at,
+      currentOrderHtId: order.hometrial.id,
       currentOrderReturnDate: order.hometrial.return_due_at,
       currentOrderChargeDate: order.hometrial.charge_due_at
     })
   }
 }
 
+export function getHomeTrialListPaginated (params) {
+  return (dispatch,getState) => {
+
+    const paginatedParams = getParams(
+      getState().homeTrialOverviewReducer.homeTrialStatus,
+      getState().homeTrialOverviewReducer.homeTrialFilter
+    );
+
+    paginatedParams.offset = params.offset
+    paginatedParams.limit = params.limit
+
+    dispatch(getHomeTrialList(paginatedParams))
+  }
+}
+
 // get Search results with this action, separated by the combined above
 export const getHomeTrialList = (queryParams = {}) => {
-console.log('GET FRAUD CHECK LIST');
+  console.log('GET FRAUD CHECK LIST');
   const queryUrl = buildQueryUrl(homeTrialEndpoint, queryParams)
 
   return (dispatch, getState) => {
@@ -144,16 +264,14 @@ export function getHomeTrialListOrder (orderRef, custId, order) {
    */
   return (dispatch, getState) => {
     dispatch({
-      type: 'FRAUD_ORDER',
+      type: 'HT_ORDER',
       payload: axios.all([getCustomer(custId),getOrders(custId)])
     }).then((result) => {
-      console.log(result)
       // check result. We don't need a success callback, but log out if it fails
       checkCallSuccess(result.action.type, () => {
         if (order){
           dispatch(updateOrderRef(order)) // Pass the relevant order from the list so we can update the app state with knoweldge of which we're currently viewing on the right hand side
         }
-
       }, () => {dispatch(AuthActions.logOut())});
     })
   }

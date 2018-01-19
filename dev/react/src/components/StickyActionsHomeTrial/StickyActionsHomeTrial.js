@@ -44,14 +44,16 @@ export default class StickyActionsHomeTrial extends Component {
     this.handleKeyboardOpen = this.handleKeyboardOpen.bind(this)
 
     this.handleUpdateReturnDate = this.handleUpdateReturnDate.bind(this)
-    this.handleUpdateChargeDate = this.handleUpdateReturnDate.bind(this)
+    this.handleUpdateChargeDate = this.handleUpdateChargeDate.bind(this)
 
     this.state = {
       status: 'closed',
       action: '',
       title: '',
       noteValue: '',
-      newStatus: null
+      newStatus: null,
+      returnDate: this.props.currentReturnDate,
+      chargeDate: this.props.currentChargeDate
     }
   }
 
@@ -87,8 +89,6 @@ export default class StickyActionsHomeTrial extends Component {
   }
 
   handleFilterChange = (value) => {
-    console.log('IT CHANGED')
-    console.log(value)
     this.setState({
       newStatus: value
     })
@@ -110,28 +110,14 @@ export default class StickyActionsHomeTrial extends Component {
       content: this.state.noteValue
     }
 
-    return
-
-    /*
-      Logic
-      - If status is open
-        - If action is updateDate
-          - get both datepicker date values
-          - get form value
-          - send to callback action
-        - If action is statusChange
-          - get status value from state
-          - get form value
-          - send to callback action
-    */
-
     if (this.state.action === 'updateDate') {
         // Call updateDate
-        const dates = {
-          returnDueDate: this.state.newReturnDate,
-          chargeDueDate: this.state.newChargeDate
-        }
-        this.props.updateDates(noteObj, dates)
+        const dates = {}
+
+        this.state.returnDate ? dates.return_due_at = this.state.returnDate : null;
+        this.state.chargeDate ? dates.charge_due_at = this.state.chargeDate : null;
+
+        this.props.updateDatesCallback(noteObj, dates)
       }
 
     if (this.state.action === 'statusChange') {
@@ -166,23 +152,22 @@ export default class StickyActionsHomeTrial extends Component {
     }
   }
 
+  // @TODO - DRY - One function for the two below accept a param that indicates which date is being updated
   handleUpdateReturnDate = (date) => {
-    console.log(date)
     this.setState({
-      newReturnDate: date
+      returnDate: date
     })
   }
 
   handleUpdateChargeDate = (date) => {
     this.setState({
-      newChargeDate: date
+      chargeDate: date
     })
   }
 
   render() {
     const stateClass = this.state.status
     const actionClass = this.state.action
-    console.log(this.props.currentReturnDate)
 
     return(
       <div className={'sticky-actions sticky-actions-homeTrial sticky-actions-' + stateClass + ' sticky-actions-' + actionClass}>
@@ -199,14 +184,14 @@ export default class StickyActionsHomeTrial extends Component {
                 <div className="form-element">
                   <label>Update return DUE Date</label>
                   <FormDatePicker
-                    startDate={this.props.currentReturnDate}
+                    startDate={this.state.returnDate}
                     handleChangeUpdate={this.handleUpdateReturnDate}
                     />
                 </div>
                 <div className="form-element">
                   <label>Update change DUE date</label>
                   <FormDatePicker
-                    startDate={this.props.currentChargeDate}
+                    startDate={this.state.chargeDate}
                     handleChangeUpdate={this.handleUpdateChargeDate}
                     />
                 </div>

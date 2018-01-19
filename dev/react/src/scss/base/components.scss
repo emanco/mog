@@ -104,6 +104,13 @@
 .component-customer-orders {
   .heading {
     margin-bottom: 2%;
+    display: inline-block;
+    width: 100%;
+
+    .btn.-add {
+      position: relative;
+      float: right;
+    }
   }
 }
 

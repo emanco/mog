@@ -55,7 +55,7 @@ export default class SearchResults extends Component {
             return (
               <section className="component component-results">
                 <div>
-                {this.props.data[0].hits.hit.map(function(result, i) {
+                {this.props.data.hits.hit.map(function(result, i) {
                         return (
                         <div className="row component card" key={i} >
                                 <div className="col-sm-12" id={i}>

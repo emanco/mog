@@ -65,7 +65,7 @@ export function getSearch (id) {
         types: [LOADING, LOADED, FAILED],
         payload: {
           request: {
-            url: 'https://mog-api.herokuapp.com/search/'
+            url: 'https://demo4984566.mockable.io/search'
           }
         }
       }).then(() => {

@@ -110,6 +110,9 @@ export default class StickyActionsHomeTrial extends Component {
     // we set status to be open, it isn't until the cycle is
     // complete so this will be false and it won't attempt to
     // post on the first click. There may be a better way
+
+    // @TODO - Bug - handleSubmit is occuring when you click on any
+    // button once open.
     if (this.state.status !== 'open') {
       return
     }

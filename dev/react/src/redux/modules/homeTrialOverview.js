@@ -6,13 +6,12 @@ import buildQueryUrl from '../../helpers/buildQueryUrl'
 import { getCustomer, getOrders } from './customers'
 import checkCallSuccess from '../../helpers/checkCallSuccess'
 import * as AuthActions from './auth'
+
 // Actions
 const LOADING_LIST = 'myOp/homeTrialOverviewList/LOADING';
 const LOADED_LIST = 'myOp/homeTrialOverviewList/LOADED';
 const FAILED_LIST = 'myOp/homeTrialOverviewList/FAILED';
-
 const UPDATE_ORDER = 'myOp/homeTrialOverviewList/UPDATE_ORDER'
-
 const POST_ORDER_NOTE = 'myOp/orderNotes/POST_NOTE'
 
 const initialState = {
@@ -322,7 +321,6 @@ export function postOrderNote (noteObj) {
     })
   }
 }
-
 
 export function updateOrderStatus (noteObj, orderRef, actionType, fraudStatus) {
   console.log('FRAUD CHECK OVERVIEW - UPDATE ORDER STATUS')

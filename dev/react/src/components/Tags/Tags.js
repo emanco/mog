@@ -34,6 +34,7 @@ class Tags extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        this.textInput.blur();
         console.log('tags '+this.state.tags);
         console.log('input '+this.state.tag);
 
@@ -79,6 +80,7 @@ class Tags extends Component {
 
     render() {
         return <TagsInput
+                ref={(input) => {this.textInput = input}}
                 inputProps={{placeholder: "Enter search terms divided by commas",}}
                 renderLayout={this.defaultRenderLayout.bind(this)}
                 value={this.state.tags}

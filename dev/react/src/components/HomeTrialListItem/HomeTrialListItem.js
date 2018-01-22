@@ -28,15 +28,15 @@ export default class HomeTrialListItem extends Component {
   handleIconDisplay = () => {
     // Loop through chargeable_reasons and set each true or false
     if (!this.props.data.hometrial) {
-      return false;
+      return false; // same data lacks the above so return if so
     }
 
-    const chargeableReasons = this.props.data.hometrial.chargeable_reasons;
-    console.log(chargeableReasons);
+    const chargeableReasons = this.props.data.hometrial.chargeable_reasons
+
     const icons = {
       damaged: false,
       missing: false,
-      chargeable_reasons: false,
+      chargeable_reasons: false
     };
 
     for (let i = 0; i < chargeableReasons.length; i += 1 ) {
@@ -61,7 +61,6 @@ export default class HomeTrialListItem extends Component {
     // ADD CLASSES FROM THE GRID
     const statusClass = homeTrialStatus(this.props.data.status);
     const iconDisplay = this.handleIconDisplay();
-    console.log(iconDisplay)
     return(
       <div className="row component orderListItemContain">
         <div className={'homeTrialListItem-'+ statusClass + ' col-xs-12 orderListItem'} onClick={this.handleItemOnClick}>

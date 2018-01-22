@@ -37,6 +37,8 @@ export default class homeTrialOverview extends Component {
     this.state = {
       paginationPage: 0
     }
+
+    console.log(this.props.currentOrderDate)
   }
 
   componentDidMount() {
@@ -77,8 +79,8 @@ export default class homeTrialOverview extends Component {
     });
   }
 
-  handleUpdateOrder = (noteObj, orderId, actionType) => {
-    this.props.updateOrderStatus(noteObj, orderId, actionType, this.props.fraudStatus)
+  handleUpdateOrder = (noteObj, status) => {
+    this.props.updateHTOrderStatus(noteObj, status)
   }
 
   handleUpdateDates = (note, dates) => {

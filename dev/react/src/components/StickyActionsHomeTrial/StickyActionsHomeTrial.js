@@ -4,7 +4,7 @@ import Hotkeys from 'react-hot-keys'
 import Moment from 'react-moment'
 
 import {FormDatePicker, SelectBox} from '../../components/'
-import homeTrialStatusValues from '../../constants/homeTrialStatusChangeValues'
+import homeTrialStatusChangeValues from '../../constants/homeTrialStatusChangeValues'
 import './../../scss/components/stickyActions.css'
 import './../../scss/components/stickyActionsHomeTrial.css'
 
@@ -55,13 +55,24 @@ export default class StickyActionsHomeTrial extends Component {
       returnDate: this.props.currentReturnDate,
       chargeDate: this.props.currentChargeDate
     }
+
   }
 
   componentDidUpdate() {
+    console.log(this.props.currentReturnDate)
     if (this.state.status === "open") {
       setTimeout(() => {
         this.textArea.focus();
       }, 200) // This needs to match the animation time set in CSS otherwise the view will jump
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.orderRef !== nextProps.orderRef) {
+      this.setState({
+        returnDate: nextProps.currentReturnDate,
+        chargeDate: nextProps.currentChargeDate
+      })
     }
   }
 
@@ -123,7 +134,7 @@ export default class StickyActionsHomeTrial extends Component {
         const status = {
           status: this.state.newStatus
         }
-        this.props.updateStatus(noteObj, status)
+        this.props.updateOrderCallback(noteObj, this.state.newStatus)
       }
 
     this.setState(closedState)
@@ -200,7 +211,7 @@ export default class StickyActionsHomeTrial extends Component {
           {this.state.changeStatus &&
             <div className="homeTrial-changeStatus-dropdown">
               <SelectBox
-                options={homeTrialStatusValues}
+                options={homeTrialStatusChangeValues}
                 handleChange={this.handleFilterChange}
                 placeholder='Change Status'
               />

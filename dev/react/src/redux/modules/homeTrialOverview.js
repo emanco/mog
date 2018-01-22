@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 import { homeTrialEndpoint, homeTrialPatchEndpoint, postOrderNoteEndpoint, orderStatusUpdateEndpoint, customersEndpoint } from '../../constants/endpoints'
 import homeTrialStatusValues from '../../constants/homeTrialStatusValues'
 import homeTrialFilterValues from '../../constants/homeTrialFilterValues'
@@ -137,6 +138,12 @@ export function updateDates (datesObj) {
           data: datesObj
         }
       }
+    }).then(() => {
+      const params = getParams(
+        getState().homeTrialOverviewReducer.homeTrialStatus,
+        getState().homeTrialOverviewReducer.homeTrialFilter
+      )
+      dispatch(getHomeTrialList(params))
     })
 
   }
@@ -171,9 +178,9 @@ export function updateStatus (statusValue) {
     dispatch({
       type: 'HT_LIST_STATUS_CHANGE',
       homeTrialStatus: statusValue
+    }).then(() => {
+      dispatch(getHomeTrialList(params))
     })
-
-    dispatch(getHomeTrialList(params))
 
   }
 
@@ -322,37 +329,22 @@ export function postOrderNote (noteObj) {
   }
 }
 
-export function updateOrderStatus (noteObj, orderRef, actionType, fraudStatus) {
-  console.log('FRAUD CHECK OVERVIEW - UPDATE ORDER STATUS')
-  console.log(actionType)
-  let status = '';
+export function updateHTOrderStatus (noteObj, homeTrialStatus) {
 
-  switch(actionType) {
-    case 'approve':
-      status = 'FRAUD CHECK PASSED';
-      break;
-    case 'decline':
-      status = 'FRAUD CHECK FAILED';
-      break;
-    case 'contact':
-      status = 'FRAUD CHECK CUSTOMER CONTACTED';
-      break;
-    default:
-      status = 'FRAUD CHECK PASSED';
-      break;
-  }
+  console.log(homeTrialStatus)
+
+  let status = '';
 
   return (dispatch, getState) => {
     dispatch({
       type: UPDATE_ORDER,
       payload: {
         request: {
-          url: orderStatusUpdateEndpoint,
+          url: homeTrialPatchEndpoint + '/' + getState().homeTrialOverviewReducer.currentOrderHtId,
           headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')},
-          method: 'POST',
+          method: 'PATCH',
           data: {
-            "order_reference": orderRef,
-            "status_code": status
+            [homeTrialStatus]: moment()
           }
         }
       }
@@ -360,9 +352,9 @@ export function updateOrderStatus (noteObj, orderRef, actionType, fraudStatus) {
       if (noteObj.content.length > 1) {
         dispatch(postOrderNote(noteObj));
       }
-      dispatch(getHomeTrialList({
-        status: fraudStatus
-      }))
+//      dispatch(getHomeTrialList({
+//        status: hom
+//      }))
     })
   }
 }

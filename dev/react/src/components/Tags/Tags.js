@@ -19,16 +19,6 @@ class Tags extends Component {
     }
 
     handleInputChange(value) {
-
-        //console.log('input changed '+value);
-
-        // if (value.length > 2) {
-        //     console.log(this.refs);
-        //     return value.accept();
-        //
-        //     //return this.refs.tagsinput.accept()
-        // }
-
         this.setState({tag: value})
     }
 
@@ -46,9 +36,6 @@ class Tags extends Component {
             if (this.state.tag!=='') {
                 query = this.state.tags;    // query all tags
             } else {
-
-                //let $tags = this.state.tags.push(this.state.tag)   // append the input here to tags
-                //this.setState({tags: $tags});
                 query = this.state.tags;
             }
         }
@@ -58,7 +45,6 @@ class Tags extends Component {
         this.props.dispatch(onSubmit(query));
 
         this.props.router.push('/search/'+query);
-        console.log('HANDLE TAG SUBMIT');
         this.props.dispatch(getSearch(query));
     }
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
 
 import * as fraudCheckOverviewActions from '../../redux/modules/fraudCheckOverview'
@@ -16,6 +15,7 @@ import './../../scss/components/fraudCheckOverview.css';
     orderLoading: state.fraudCheckOverviewReducer.orderLoading,
     listLoading: state.fraudCheckOverviewReducer.loading,
     currentlyViewedOrder: state.fraudCheckOverviewReducer.currentOrderRef,
+    currentOrderDate: state.fraudCheckOverviewReducer.currentOrderDate,
     fraudStatus: state.fraudCheckOverviewReducer.fraudStatus
   }),
   {...fraudCheckOverviewActions}
@@ -46,10 +46,9 @@ export default class fraudCheckOverview extends Component {
     })
   }
 
-  handleFraudCheckListClick = (orderRef, custId) => {
-    // Check we're not already displaying the order
-    if (orderRef !== this.props.data.results[0].order_reference) {
-      this.props.getFraudCheckListOrder(custId);
+  handleFraudCheckListClick = (orderRef, custId, key) => {
+    if (orderRef !== this.props.currentlyViewedOrder) {
+      this.props.getFraudCheckListOrder(orderRef, custId, this.props.data.results[key]);
     }
   }
 
@@ -82,6 +81,7 @@ export default class fraudCheckOverview extends Component {
   }
 
   render() {
+    console.log(this.props.currentOrderDate)
     //const overlay = this.state.overlay
     if (!this.props.data.results || !this.props.orderData) {
       return (
@@ -128,7 +128,7 @@ export default class fraudCheckOverview extends Component {
                 data={this.props.orderData[1].data}
                 customerid={this.props.data.results[0].customer_reference} />
               </div>
-              <StickyActions loadingStatus={this.props.orderLoading} orderRef={this.props.currentlyViewedOrder} updateOrderCallback={this.handleUpdateOrder} declineCallback={this.handleDeclineOrder} />
+              <StickyActions currentOrderDate={this.props.currentOrderDate} loadingStatus={this.props.orderLoading} orderRef={this.props.currentlyViewedOrder} updateOrderCallback={this.handleUpdateOrder} declineCallback={this.handleDeclineOrder} />
               </div>
               }
             </div>

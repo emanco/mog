@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 
 import * as homeTrialOverviewActions from '../../redux/modules/homeTrialOverview'
-import {FraudCheckList, CustomerInfo, CustomerOrderList, StickyBar, StickyActionsHomeTrial, SelectBox, OrderList } from '../../components';
+import { CustomerInfo, CustomerOrderList, StickyBar, StickyActionsHomeTrial, SelectBox, OrderList } from '../../components'
 
-import homeTrialFilterValues from '../../constants/homeTrialFilterValues';
+import homeTrialFilterValues from '../../constants/homeTrialFilterValues'
 
-import './../../scss/components/fraudCheckOverview.css';
+import './../../scss/components/homeTrialOverview.css'
 
 @connect(
   (state, ownProps) => ({
@@ -27,13 +27,18 @@ export default class homeTrialOverview extends Component {
 
   constructor(props) {
     super(props)
-    this.handleUpdateOrder = this.handleUpdateOrder.bind(this)
-    this.handleStatus = this.handleStatus.bind(this)
-    this.handleFraudCheckListClick = this.handleFraudCheckListClick.bind(this)
 
+    this.handleUpdateDates = this.handleUpdateDates.bind(this)
+    this.handleUpdateOrder = this.handleUpdateOrder.bind(this)
+    this.handleStatusChange = this.handleStatusChange.bind(this)
+    this.handleFraudCheckListClick = this.handleFraudCheckListClick.bind(this)
+    this.dataIsAvailable = this.dataIsAvailable.bind(this)
+    this.handleViewMoreCustomerOrders = this.handleViewMoreCustomerOrders.bind(this)
     this.state = {
       paginationPage: 0
     }
+
+    console.log(this.props.currentOrderDate)
   }
 
   componentDidMount() {
@@ -42,52 +47,29 @@ export default class homeTrialOverview extends Component {
     });
   }
 
-  handleStatus = (value) => {
-    this.props.updateFilter(value)
-    let params = {}
-
-    if (value === 'pending') {
-      params = {
-        'pending_review': true
-      }
-    } else if(value === 'contacted') {
-      params = {
-        status: 'HT CUSTOMER CONTACTED'
-      }
-    }
-
-    this.props.getHomeTrialList({
-      ...params,
-      limit: 20
+  handleStatusChange = (value) => {
+    this.props.updateStatus(value)
+    this.setState({
+      paginationPage: 0
     })
   }
 
   handleFraudCheckListClick = (orderRef, custId, key) => {
-    if (orderRef !== this.props.data.results[0].order_reference) {
-      let order = this.props.data.results[key]; // get the order using the array key we've been passed
+    if (orderRef !== this.props.currentlyViewedOrder) {
       this.props.getHomeTrialListOrder(orderRef, custId, this.props.data.results[key]);
     }
   }
 
-  handleFilterChange = (filterName) => {
+  handleFilterChange = (filterValue) => {
     // Call Action to go update the view.
-
-    let params = {
-      status: this.props.homeTrialStatus
-    }
-
-    if (filterName) {
-      params = {
-        ...params,
-        [filterName]:true
-      }
-    }
-    this.props.getHomeTrialList(params)
+    this.props.updateFilter(filterValue)
+    this.setState({
+      paginationPage: 0
+    })
   }
 
   handlePaginationChange = (page) => {
-
-    this.props.getHomeTrialList({
+    this.props.getHomeTrialListPaginated({
       offset: page * 20,
       limit: 20
     })
@@ -97,17 +79,35 @@ export default class homeTrialOverview extends Component {
     });
   }
 
-  handleUpdateOrder = (noteObj, orderId, actionType) => {
-    this.props.updateOrderStatus(noteObj, orderId, actionType, this.props.fraudStatus)
+  handleUpdateOrder = (noteObj, status) => {
+    this.props.updateHTOrderStatus(noteObj, status)
   }
 
-  handleDeclineOrder = (orderId) => {
-    this.props.declineOrder(orderId)
+  handleUpdateDates = (note, dates) => {
+    this.props.handleUpdateDates(note,dates)
+  }
+
+  handleViewMoreCustomerOrders = () => {
+    this.props.loadMoreCustomerOrders(this.props.data.results[0].customer_reference)
+  }
+
+  dataIsAvailable = () => {
+    if (this.props.data.results) {
+      if (this.props.data.results.length > 0 && this.props.orderData) {
+        if (this.props.orderData[0]) {
+          return true
+        }
+      }
+    }
+
+    return false;
   }
 
   render() {
-    //const overlay = this.state.overlay
-    if (!this.props.data || !this.props.orderData) {
+
+    const render = this.dataIsAvailable();
+
+    if (!this.props.data.results || !this.props.orderData) {
       return (
         <div>
           <StickyBar
@@ -121,7 +121,7 @@ export default class homeTrialOverview extends Component {
         <div>
           <StickyBar
             path={this.props.location.pathname}
-            filterListCallback={this.handleStatus }/>
+            filterListCallback={this.handleStatusChange }/>
           <div className="fraudCheckOverview">
             <div className={"left-panel " + listLoadingClass}>
               <div className="fraudCheckOverview-meta">
@@ -134,14 +134,16 @@ export default class homeTrialOverview extends Component {
                   />
               </div>
               {this.props.data.count < 1 && <h3 className='h3'>No Results</h3>}
-              <OrderList
+             {render && <OrderList
                 listType="HomeTrial"
                 data={this.props.data}
                 hoverCallback={this.handleFraudCheckListClick}
-                handlePaginationChange={this.handlePaginationChange}/>
+                handlePaginationChange={this.handlePaginationChange}
+                paginationPage={this.state.paginationPage}
+                />}
             </div>
             <div className={"right-panel -light-inset cust-scroll fraudCheckOverview-order " + orderLoadingClass}>
-            {this.props.data.results[0] &&
+            {render &&
             <div className="fraudCheck-right-wrap">
               <div className="fraudCheckOverview-right-inner">
               <CustomerInfo
@@ -150,7 +152,9 @@ export default class homeTrialOverview extends Component {
 
               <CustomerOrderList
                 data={this.props.orderData[1].data}
-                customerid={this.props.data.results[0].customer_reference} />
+                customerid={this.props.data.results[0].customer_reference}
+                viewMoreCallback={this.handleViewMoreCustomerOrders}
+              />
               </div>
               <StickyActionsHomeTrial
                 loadingStatus={this.props.orderLoading}
@@ -160,6 +164,7 @@ export default class homeTrialOverview extends Component {
                 currentOrderDate={this.props.currentOrderDate}
                 currentChargeDate={this.props.currentChargeDate}
                 currentReturnDate={this.props.currentReturnDate}
+                updateDatesCallback={this.handleUpdateDates}
                 />
               </div>
               }

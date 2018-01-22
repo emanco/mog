@@ -1,19 +1,15 @@
 import axios from 'axios';
-import { authorise } from './auth';
 import { fraudCheckOrders, postOrderNoteEndpoint, orderStatusUpdateEndpoint } from '../../constants/endpoints'
-import fraudStatusValues from '../../constants/fraudStatusValues';
-import { browserHistory } from 'react-router'
+import fraudStatusValues from '../../constants/fraudStatusValues'
 import buildQueryUrl from '../../helpers/buildQueryUrl'
 import { getCustomer, getOrders } from './customers'
 import checkCallSuccess from '../../helpers/checkCallSuccess'
 import * as AuthActions from './auth'
 // Actions
-const LOADING_LIST = 'myOp/fraudCheckOverviewList/LOADING';
-const LOADED_LIST = 'myOp/fraudCheckOverviewList/LOADED';
-const FAILED_LIST = 'myOp/fraudCheckOverviewList/FAILED';
-
+const LOADING_LIST = 'myOp/fraudCheckOverviewList/LOADING'
+const LOADED_LIST = 'myOp/fraudCheckOverviewList/LOADED'
+const FAILED_LIST = 'myOp/fraudCheckOverviewList/FAILED'
 const UPDATE_ORDER = 'myOp/fraudCheckOverviewList/UPDATE_ORDER'
-
 const POST_ORDER_NOTE = 'myOp/orderNotes/POST_NOTE'
 
 const initialState = {
@@ -76,6 +72,12 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
             ...state,
             fraudStatus: action.fraudStatus
           }
+        case 'CURRENT_ORDER_REFERENCE' :
+          return {
+            ...state,
+            currentOrderRef: action.currentOrderRef,
+            currentOrderDate: action.currentOrderDate
+          }
         default:
             return state;
     }
@@ -90,9 +92,23 @@ export function upateFilter (filterValue) {
   }
 }
 
+export function updateOrderRef (order) {
+  return (dispatch) => {
+    dispatch({
+      type: 'CURRENT_ORDER_REFERENCE',
+      currentOrderRef: order.order_reference,
+      currentOrderDate: order.placed_at
+    })
+  }
+}
+
+
+
 // get Search results with this action, separated by the combined above
 export const getFraudCheckList = (queryParams = {}) => {
-console.log('GET FRAUD CHECK LIST');
+
+  console.log('GET FRAUD CHECK LIST');
+
   const queryUrl = buildQueryUrl(fraudCheckOrders, queryParams)
 
   return (dispatch, getState) => {
@@ -105,11 +121,9 @@ console.log('GET FRAUD CHECK LIST');
           }
         }
       }).then((result) => {
-       console.log(result)
-
         checkCallSuccess(result.type, () => {
           if (result.payload.data.count > 0) {
-           dispatch(getFraudCheckListOrder(result.payload.data.results[0].customer_reference))
+           dispatch(getFraudCheckListOrder(null, result.payload.data.results[0].customer_reference))
           }
         }, () => {dispatch(AuthActions.logOut())});
 
@@ -118,21 +132,26 @@ console.log('GET FRAUD CHECK LIST');
 }
 
 // Get details on the list item currently being hovered over
-export function getFraudCheckListOrder (id, orderRef) {
+export function getFraudCheckListOrder (orderRef, custId, order) {
 
   /* @NOTE Fetch User and Order Details
    * Call getCustomer & getOrders from the customers reducer which just returns the data then
    * put it into this reducer
    */
   console.log('CHECKLIST ORDER')
+
   return (dispatch, getState) => {
     dispatch({
       type: 'FRAUD_ORDER',
-      payload: axios.all([getCustomer(id), getOrders(id)])
+      payload: axios.all([getCustomer(custId), getOrders(custId)])
     }).then((result) => {
-      console.log(result)
       // check result. We don't need a success callback, but log out if it fails
-      checkCallSuccess(result.action.type, () => {}, () => {dispatch(AuthActions.logOut())});
+      checkCallSuccess(result.action.type, () => {
+        if (order){
+          dispatch(updateOrderRef(order)) // Pass the relevant order from the list so we can update the app state with knoweldge of which we're currently viewing on the right hand side
+        }
+
+      }, () => {dispatch(AuthActions.logOut())});
     })
   }
 
@@ -159,7 +178,6 @@ export function postOrderNote (noteObj) {
 
 export function updateOrderStatus (noteObj, orderRef, actionType, fraudStatus) {
   console.log('FRAUD CHECK OVERVIEW - UPDATE ORDER STATUS')
-  console.log(actionType)
   let status = '';
 
   switch(actionType) {

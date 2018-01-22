@@ -48,8 +48,7 @@
     overflow: hidden;
     width: 100%; }
     .sticky-actions .stickyActions-form .stickyActions-form-title {
-      margin-bottom: 2em;
-      text-transform: capitalize; }
+      margin-bottom: 2em; }
   .sticky-actions.sticky-actions-open {
     border-top: 1px solid #e8e9e9; }
     .sticky-actions.sticky-actions-open .sticky-actions-overlay {

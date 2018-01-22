@@ -5,6 +5,31 @@ import Moment from 'react-moment';
 
 import './../../scss/components/stickyActions.css';
 
+// State objects that will be used below
+const approveState = {
+      status: 'open',
+      action: 'approve',
+      title: 'Approve this order'
+    }
+
+const declineState = {
+      status: 'open',
+      action: 'decline',
+      title: 'Decline this order'
+    }
+
+const contactState = {
+      status: 'open',
+      action: 'contact',
+      title: 'Mark as customer contacted'
+    }
+
+const closedState = {
+      status: 'closed',
+      action: '',
+      noteValue: ''
+    }
+
 export default class StickyActions extends Component {
 
   constructor(props) {
@@ -35,42 +60,23 @@ export default class StickyActions extends Component {
   }
 
   handleClickApprove = (orderRef) => {
-    this.setState({
-      status: 'open',
-      action: 'approve',
-      title: 'approved'
-    })
-
+    this.setState(approveState)
     this.handleSubmit(orderRef)
   }
 
   handleClickDecline = (orderRef) => {
-    this.setState({
-      status: 'open',
-      action: 'decline',
-      title: 'declined'
-    })
-
+    this.setState(declineState)
     this.handleSubmit(orderRef)
   }
 
   handleClickContacted = (orderRef) => {
-    this.setState({
-      status: 'open',
-      action: 'contact',
-      title: 'contacted'
-    })
-
+    this.setState(contactState)
     this.handleSubmit(orderRef)
   }
 
   handleToggleForm = () => {
     this.textArea.blur();
-    this.setState({
-      status: 'closed',
-      action: '',
-      noteValue: ''
-    })
+    this.setState(closedState)
   }
 
   handleNoteChange = (event) => {
@@ -94,11 +100,7 @@ export default class StickyActions extends Component {
     }
 
     this.props.updateOrderCallback(noteObj, orderRef, this.state.action)
-    this.setState({
-      status: 'closed',
-      action: '',
-      noteValue: ''
-    })
+    this.setState(closedState)
 
   }
 
@@ -112,25 +114,13 @@ export default class StickyActions extends Component {
   handleKeyboardOpen = (keyName, e, handle) => {
     switch(keyName) {
         case 'shift+a':
-          this.setState({
-            status: 'open',
-            action: 'approve',
-            title: 'contacted'
-          });
+          this.setState(approveState);
           break;
         case 'shift+d':
-          this.setState({
-            status: 'open',
-            action: 'decline',
-            title: 'declined'
-          });
+          this.setState(declineState);
           break;
         case 'shift+c':
-          this.setState({
-            status: 'open',
-            action: 'contact',
-            title: 'contacted'
-          });
+          this.setState(contactState);
           break;
       default:
         return;
@@ -162,7 +152,7 @@ export default class StickyActions extends Component {
             <div className="stickyActions-orderRef heading2">{this.props.orderRef}</div>
             <div className="stickyActions-meta">
               <Moment
-                date={'2017-12-01T12:34:38.934712'}
+                date={this.props.currentOrderDate}
                 format="ddd Do MMM YYYY" />
             </div>
           </div>

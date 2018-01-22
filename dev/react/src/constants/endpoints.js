@@ -6,3 +6,4 @@ export const postOrderNoteEndpoint = baseURL + '/order-notes';
 export const orderStatusUpdateEndpoint = baseURL + '/order-status-updates';
 export const customersEndpoint = baseURL + '/customers';
 export const homeTrialEndpoint = baseURL + '/hometrial-orders';
+export const homeTrialPatchEndpoint = baseURL + '/hometrials'; // this isn't right

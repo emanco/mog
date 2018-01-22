@@ -169,18 +169,12 @@ export function getParams (statusValue, filterValue) {
 export function updateStatus (statusValue) {
 
   return (dispatch, getState) => {
-
-    const params = getParams(
-      statusValue,
-      getState().homeTrialOverviewReducer.homeTrialFilter
-    )
-
     dispatch({
       type: 'HT_LIST_STATUS_CHANGE',
       homeTrialStatus: statusValue
-    }).then(() => {
-      dispatch(getHomeTrialList(params))
     })
+
+    dispatch(getHomeTrialList())
 
   }
 
@@ -243,10 +237,22 @@ export function getHomeTrialListPaginated (params) {
 
 // get Search results with this action, separated by the combined above
 export const getHomeTrialList = (queryParams = {}) => {
-  console.log('GET FRAUD CHECK LIST');
-  const queryUrl = buildQueryUrl(homeTrialEndpoint, queryParams)
 
   return (dispatch, getState) => {
+    let params = getParams(
+        getState().homeTrialOverviewReducer.homeTrialStatus,
+        getState().homeTrialOverviewReducer.homeTrialFilter
+      )
+
+    params = {
+      ...params,
+      ...queryParams
+    }
+
+    console.log(params)
+    const queryUrl = buildQueryUrl(homeTrialEndpoint, params)
+
+
      return dispatch({
         types: [LOADING_LIST, LOADED_LIST, FAILED_LIST],
         payload: {
@@ -352,9 +358,7 @@ export function updateHTOrderStatus (noteObj, homeTrialStatus) {
       if (noteObj.content.length > 1) {
         dispatch(postOrderNote(noteObj));
       }
-//      dispatch(getHomeTrialList({
-//        status: hom
-//      }))
+      dispatch(getHomeTrialList())
     })
   }
 }

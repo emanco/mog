@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { customersEndpoint } from '../../constants/endpoints'
+import buildQueryUrl from '../../helpers/buildQueryUrl'
 
 export default function summaryReducer(state = {}, action = '') {
     switch (action.type)
@@ -39,47 +40,40 @@ const loader = axios.create({
 });
 
 const getCustomer = (id) => {
-    return axios({
-      method: 'GET',
-      url: customersEndpoint + '/' + id,
-      headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')}
-    });
+  return axios({
+    method: 'GET',
+    url: customersEndpoint + '/' + id,
+    headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')}
+  });
 };
 
-const getOrders = (id) => {
-    //return loader.get('customers/'+id+'/customer-summary/', );
-    // user heroku for the time being until swagger is okay to go
-     return axios({
-      method: 'GET',
-      url: customersEndpoint + '/' + id + '/order-summary',
-      headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')}
-    });
-};
+const getOrders = (id, limitValue = 5) => {
+  const params = {
+    limit: limitValue
+  }
 
-const getSingleCustomerOrders = (id) => {
-    return axios({
-      method: 'GET',
-      url: customersEndpoint + '/' + id + '/orders',
-      headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')}
-    });
-}
+  const queryUrl = buildQueryUrl(customersEndpoint + '/' + id + '/order-summary', params)
+
+  return axios({
+    method: 'GET',
+    url: queryUrl,
+    headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')}
+  });
+};
 
 const getPrescriptions = (id) => {
-    return axios.get('https://mog-api.herokuapp.com/prescriptions/')
+  return axios.get('https://mog-api.herokuapp.com/prescriptions/')
 }
 
 const getData = (id) => {
   return (dispatch, getState) => {
-
-    console.log(getState().authReducer.authToken)
-
-      return dispatch({
-        type: 'FETCH_DATA',
-        payload: axios.all([getCustomer(id), getOrders(id), getPrescriptions(id)])
-      })
+    return dispatch({
+      type: 'FETCH_DATA',
+      payload: axios.all([getCustomer(id), getOrders(id), getPrescriptions(id)])
+    })
   }
 };
 
 
 
-export { getData, getCustomer, getOrders, getSingleCustomerOrders };
+export { getData, getCustomer, getOrders };

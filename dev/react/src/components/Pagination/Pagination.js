@@ -21,6 +21,7 @@ export default class Pagination extends Component {
           pageCount={this.props.pageCount}
           marginPagesDisplayed={this.props.marginPagesDisplayed}
           onPageChange={this.handlePageChange}
+          forcePage={this.props.currentPage}
       />
     )
   }

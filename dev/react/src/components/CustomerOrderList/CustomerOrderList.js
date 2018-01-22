@@ -9,6 +9,11 @@ export default class CustomerOrderList extends Component {
    * Props: pass data
    */
 
+  constructor(props){
+    super(props)
+    this.handleViewMore = this.handleViewMore.bind(this)
+  }
+
   componentDidMount() {
       //console.log('mounted');
       $(document).on('click', '[data-pnp-toggle-class]', function () {
@@ -18,8 +23,13 @@ export default class CustomerOrderList extends Component {
       });
     }
 
+  handleViewMore = () => {
+    console.log('Handle View More')
+    this.props.viewMoreCallback(this.props.customerid)
+  }
+
   render() {
-    console.log(this.props.data)
+
     return(
       <section className="component component-customer-orders row">
         <h2 className="heading2 heading">
@@ -32,7 +42,7 @@ export default class CustomerOrderList extends Component {
             return <CustomerOrder key={i} id={i} customerid={this.props.customerid} data={order}/>
         })}
 
-        <button className="btn">View More</button>
+      {this.props.data.results.length >= 5 && <button className="btn" onClick={this.handleViewMore}>View More</button>}
       </section>
     )
   }

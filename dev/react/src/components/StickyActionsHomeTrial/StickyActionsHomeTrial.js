@@ -4,14 +4,14 @@ import Hotkeys from 'react-hot-keys'
 import Moment from 'react-moment'
 
 import {FormDatePicker, SelectBox} from '../../components/'
-import homeTrialStatusValues from '../../constants/homeTrialStatusValues'
+import homeTrialStatusChangeValues from '../../constants/homeTrialStatusChangeValues'
 import './../../scss/components/stickyActions.css'
 import './../../scss/components/stickyActionsHomeTrial.css'
 
 const updateDatesState = {
       status: 'open',
       action: 'updateDate',
-      title: 'Update Date',
+      title: 'Update date',
       changeStatus: false,
       updateDate: true
     }
@@ -19,7 +19,7 @@ const updateDatesState = {
 const statusChangeState = {
       status: 'open',
       action: 'statusChange',
-      title: 'Change Status',
+      title: 'Change status',
       changeStatus: true,
       updateDate: false
     }
@@ -55,13 +55,24 @@ export default class StickyActionsHomeTrial extends Component {
       returnDate: this.props.currentReturnDate,
       chargeDate: this.props.currentChargeDate
     }
+
   }
 
   componentDidUpdate() {
+    console.log(this.props.currentReturnDate)
     if (this.state.status === "open") {
       setTimeout(() => {
         this.textArea.focus();
       }, 200) // This needs to match the animation time set in CSS otherwise the view will jump
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.orderRef !== nextProps.orderRef) {
+      this.setState({
+        returnDate: nextProps.currentReturnDate,
+        chargeDate: nextProps.currentChargeDate
+      })
     }
   }
 
@@ -95,12 +106,13 @@ export default class StickyActionsHomeTrial extends Component {
   }
 
   handleSubmit = (orderRef) => {
-    //return // @TODO - Temp while I work
-
     // taking advtange of the react lifecycle here. Even though
     // we set status to be open, it isn't until the cycle is
     // complete so this will be false and it won't attempt to
     // post on the first click. There may be a better way
+
+    // @TODO - Bug - handleSubmit is occuring when you click on any
+    // button once open.
     if (this.state.status !== 'open') {
       return
     }
@@ -125,7 +137,7 @@ export default class StickyActionsHomeTrial extends Component {
         const status = {
           status: this.state.newStatus
         }
-        this.props.updateStatus(noteObj, status)
+        this.props.updateOrderCallback(noteObj, this.state.newStatus)
       }
 
     this.setState(closedState)
@@ -134,7 +146,7 @@ export default class StickyActionsHomeTrial extends Component {
 
   handleShortcutSubmit = (keyName, e, handle) => {
     // Handles all actions and submits the action
-    if (keyName === 'shift+return'){
+    if (keyName === 'shift+return') {
       this.handleSubmit(this.props.orderRef)
     }
   }
@@ -202,7 +214,7 @@ export default class StickyActionsHomeTrial extends Component {
           {this.state.changeStatus &&
             <div className="homeTrial-changeStatus-dropdown">
               <SelectBox
-                options={homeTrialStatusValues}
+                options={homeTrialStatusChangeValues}
                 handleChange={this.handleFilterChange}
                 placeholder='Change Status'
               />

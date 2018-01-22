@@ -25,3 +25,9 @@
   height: 48px;
   margin-left: 1em;
   clear: both; }
+
+.sticky-actions.sticky-actions-updateDate .btn-updateStatus {
+  visibility: hidden; }
+
+.sticky-actions-statusChange .btn-updateDate {
+  display: none; }

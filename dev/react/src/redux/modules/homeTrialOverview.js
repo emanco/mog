@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { homeTrialEndpoint, homeTrialPatchEndpoint, postOrderNoteEndpoint, orderStatusUpdateEndpoint } from '../../constants/endpoints'
+import { homeTrialEndpoint, homeTrialPatchEndpoint, postOrderNoteEndpoint, orderStatusUpdateEndpoint, customersEndpoint } from '../../constants/endpoints'
 import homeTrialStatusValues from '../../constants/homeTrialStatusValues'
 import homeTrialFilterValues from '../../constants/homeTrialFilterValues'
 import buildQueryUrl from '../../helpers/buildQueryUrl'
@@ -98,10 +98,8 @@ export default function homeTrialOverviewReducer(state = initialState, action = 
         case 'HT_MORE_CUSTOMER_ORDERS' :
           return {
             ...state,
-            payload : {
-              results: action.customerOrders
-            }
-          }
+            orderPayload: action.updatedOrders
+        }
         default:
           return state;
     }
@@ -161,7 +159,6 @@ export function getParams (statusValue, filterValue) {
 
   return params;
 }
-
 
 export function updateStatus (statusValue) {
 
@@ -262,31 +259,24 @@ export const getHomeTrialList = (queryParams = {}) => {
   }
 }
 
-export function loadMoreCustomerOrders () {
-  // @TODO - Dispatch an action that only refreshes the orders list
-  // and appends it to the state
-  // get length of results from state and append 5 to it, use that as the value to load
-  // this will always be correct and avoids having to pass a value up the parental chain.
-
-  // @TODO - DRY - This is going to be used elsewhere i.e. the fraudCheckOverview
-  // NEED CUSTOMER ID
-  // QUERY CUSTOMER ORDER SUMMARY ENDPOINT AND REPLACE ORDERS WITH THE RESULTS
+export function loadMoreCustomerOrders (custId) {
 
   return (dispatch, getState) => {
-    const currentOrderTotal = getState().homeTrialOverviewReducer.orderPayload[1].results.length;
-    console.log(currentOrderTotal + 5)
+    const currentOrderTotal = getState().homeTrialOverviewReducer.orderPayload[1].data.results.length;
 
-    dispatch({
-      type: 'HT_MORE_CUSTOMER_ORDERS',
-      payload: {
-        request: {
-          url: postOrderNoteEndpoint,
-          headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')},
-          method: 'GET'
-        }
-      }
+    //getOrders from customers module
+    getOrders(custId, currentOrderTotal+5).then((result) => {
+
+      const orderPayload = getState().homeTrialOverviewReducer.orderPayload;
+      orderPayload[1] = result;
+      // Due to data structure, which we could possibly go back and revise, we'll just replace the existing
+      // order data with the new response which should include the correct number of results
+      dispatch({
+        type: 'HT_MORE_CUSTOMER_ORDERS',
+        updatedOrders: orderPayload
+      })
+
     })
-
   }
 
 }

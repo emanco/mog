@@ -86,7 +86,7 @@ export default class homeTrialOverview extends Component {
   }
 
   handleViewMoreCustomerOrders = () => {
-    this.props.loadMoreCustomerOrders()
+    this.props.loadMoreCustomerOrders(this.props.data.results[0].customer_reference)
   }
 
   dataIsAvailable = () => {

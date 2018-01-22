@@ -51,13 +51,11 @@ $approveColor : $color-green;
   }
 }
 
-
-
 .sticky-actions.sticky-actions-updateDate {
-    .btn-updateStatus {
-      visibility: hidden;
-    }
+  .btn-updateStatus {
+    visibility: hidden;
   }
+}
 
 .sticky-actions-statusChange {
   .btn-updateDate {

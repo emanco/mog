@@ -29,6 +29,7 @@ import searchReducer from './redux/modules/search'
 import userReducer from './redux/modules/searchUser'
 import fraudCheckOverviewReducer from './redux/modules/fraudCheckOverview'
 import homeTrialOverviewReducer from './redux/modules/homeTrialOverview'
+import createCustomerReducer from './redux/modules/createCustomer'
 
 // styles
 import "./scss/base/0_fonts.css"
@@ -51,6 +52,7 @@ const client = axios.create({ //all axios can be used, shown in axios documentat
 let store = createStore(
   combineReducers({
     authReducer,
+    createCustomerReducer,
     summaryReducer,
     searchReducer,
     userReducer,

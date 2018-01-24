@@ -45,6 +45,12 @@ class StickyBar extends Component {
                     <StickyDropdown values={homeTrialStatusValues} filterListCallback={this.filterListCallback }/>
                 </div>
             )
+        } else if ($path.includes('create-customer')) {
+          return (
+                <div className="sticky-bar nav-height">
+                    <span className="h3">Create Customer</span>
+                </div>
+            )
         } else {
             return (
                 <div className="sticky-bar nav-height">

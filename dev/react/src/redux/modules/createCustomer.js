@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { customersEndpoint, addressLookupEndpoint, addressAPIKey } from '../../constants/endpoints'
+import { customersEndpoint, addressLookupEndpoint, createCustomerEndpoint, addressAPIKey } from '../../constants/endpoints'
 import buildQueryUrl from '../../helpers/buildQueryUrl'
 import addressLookup from '../../mock-data/address-lookup'
 
@@ -21,7 +21,6 @@ export default function createCustomerReducer(state = initialState, action = '')
       }
     case 'FETCH_ADDRESS_FULFILLED' :
       const addresses = modifyAddressData(action.payload.data.addresses)
-      console.log(addresses)
       return {
         ...state,
         loading: false,
@@ -36,6 +35,24 @@ export default function createCustomerReducer(state = initialState, action = '')
         payload: {
             message: action.payload.message
         }
+      }
+    case 'CREATE_CUSTOMER_PENDING' :
+      return {
+        ...state,
+        loading: true,
+        success: false
+      }
+    case 'CREATE_CUSTOMER_FULFILLED' :
+      return {
+        ...state,
+        loading: false,
+        success: true
+      }
+    case 'CREATE_CUSTOMER_REJECTED' :
+      return {
+        ...state,
+        loading: false,
+        success: false
       }
     default:
         return state;
@@ -52,9 +69,25 @@ const lookupAddress = (postcode) => {
   }
 };
 
+const createUser = (formData) => {
+  return (dispatch) => {
+    dispatch({
+      type: 'CREATE_CUSTOMER',
+      payload: {
+        request: {
+          url: createCustomerEndpoint,
+          headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')},
+          data: {
+
+          }
+        }
+      }
+    })
+  }
+}
+
 // modifyAddressData - this is called in the reducer before the nextState object is returned
 const modifyAddressData = (addresses) => {
-  console.log(addresses)
   const newAddresses = addresses.map((val, key) => {
     const addressArray = val.split(',');
     return {

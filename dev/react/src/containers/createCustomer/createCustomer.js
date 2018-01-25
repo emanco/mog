@@ -58,13 +58,12 @@ export default class createCustomer extends Component {
 
   toggleLookupAddress = () => {
     this.setState({
-      lookupAddress: false,
-      showAddressFields: true
+      lookupAddress: false
     })
   }
 
   render() {
-    console.log(this.props.addressLookupAddresses)
+
     return(
       <div>
         <StickyBar path={this.props.location.pathname}/>

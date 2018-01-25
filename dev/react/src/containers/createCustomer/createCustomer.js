@@ -32,7 +32,8 @@ export default class createCustomer extends Component {
   }
 
   setApi = (api) => {
-    // sets a reference to the formAPI that can be accessed by the rest of the component
+    // sets a reference to the formAPI that can be accessed by the rest of the component. This
+    // is the susggested method for react-form.
     this.formApi = api;
   }
 

@@ -32,16 +32,16 @@ import homeTrialOverviewReducer from './redux/modules/homeTrialOverview'
 import createCustomerReducer from './redux/modules/createCustomer'
 
 // styles
-import "./scss/base/0_fonts.css"
-import "./scss/base/1_vars.css"
-import "./scss/base/2_mixins.css"
-import "./scss/base/3_typography.css"
-import "./scss/base/4_global.css"
-import "./scss/base/5_helper.css"
-import "./scss/base/bootstrap_overrides.css"
-import "./scss/base/components.css"
-import "./scss/base/forms.css"
-import "./scss/base/general.css"
+import './scss/base/0_fonts.css'
+import './scss/base/1_vars.css'
+import './scss/base/2_mixins.css'
+import './scss/base/3_typography.css'
+import './scss/base/4_global.css'
+import './scss/base/5_helper.css'
+import './scss/base/bootstrap_overrides.css'
+import './scss/base/components.css'
+import './scss/base/forms.css'
+import './scss/base/general.css'
 
 // Axios Client setup. This could be moved elsewhere, but will work for now
 const client = axios.create({ //all axios can be used, shown in axios documentation
@@ -64,22 +64,17 @@ let store = createStore(
 );
 
 const authCheck = () => {
-
   const storedJWT = window.localStorage.getItem('jwtToken')
-
   if (!storedJWT && window.location.pathname !== '/login') {
     window.location = '/login'
   }
-
 }
 
 ReactDOM.render(
     <Provider store={store}>
-
               <Router render={(props) =>
                 <ReduxAsyncConnect {...props}/>
               } history={browserHistory}>
-
                 <Route component={App} onEnter={authCheck}>
                   <Route path="/" component={Summarypage} />
                   {/*Customers*/}

@@ -35,14 +35,12 @@ export default class fraudCheckOverview extends Component {
 
   componentDidMount() {
     this.props.getFraudCheckList({status: 'FRAUD CHECK NOT CHECKED'});
-    console.log(this.props.data)
   }
 
   handleFraudStatus = (value) => {
-    this.props.upateFilter(value)
-    this.props.getFraudCheckList({
-      status: value,
-      limit: 20
+    this.props.upateStatus(value)
+    this.setState({
+      paginationPage: 0
     })
   }
 
@@ -52,17 +50,17 @@ export default class fraudCheckOverview extends Component {
     }
   }
 
+  // Call the updateFilter action and pass filterName
   handleFilterChange = (filterName) => {
-    // Call Action to go update the view.
-    this.props.getFraudCheckList({
-      [filterName] : true,
-      status : this.props.fraudStatus
+    this.props.updateFilter(filterName)
+    this.setState({
+      paginationPage: 0
     })
   }
 
   handlePaginationChange = (page) => {
 
-    this.props.getFraudCheckList({
+    this.props.getFraudCheckListPaginated({
       offset: page * 20,
       limit: 20
     })
@@ -81,8 +79,6 @@ export default class fraudCheckOverview extends Component {
   }
 
   render() {
-    console.log(this.props.currentOrderDate)
-    //const overlay = this.state.overlay
     if (!this.props.data.results || !this.props.orderData) {
       return (
         <div>
@@ -114,7 +110,9 @@ export default class fraudCheckOverview extends Component {
               <OrderList
                 data={this.props.data}
                 hoverCallback={this.handleFraudCheckListClick}
-                handlePaginationChange={this.handlePaginationChange}/>
+                handlePaginationChange={this.handlePaginationChange}
+                paginationPage={this.state.paginationPage}
+              />
             </div>
             <div className={"right-panel -light-inset cust-scroll fraudCheckOverview-order " + orderLoadingClass}>
             {this.props.data.results[0] &&
@@ -128,7 +126,12 @@ export default class fraudCheckOverview extends Component {
                 data={this.props.orderData[1].data}
                 customerid={this.props.data.results[0].customer_reference} />
               </div>
-              <StickyActions currentOrderDate={this.props.currentOrderDate} loadingStatus={this.props.orderLoading} orderRef={this.props.currentlyViewedOrder} updateOrderCallback={this.handleUpdateOrder} declineCallback={this.handleDeclineOrder} />
+              <StickyActions
+                currentOrderDate={this.props.currentOrderDate}
+                loadingStatus={this.props.orderLoading}
+                orderRef={this.props.currentlyViewedOrder}
+                updateOrderCallback={this.handleUpdateOrder}
+                declineCallback={this.handleDeclineOrder} />
               </div>
               }
             </div>

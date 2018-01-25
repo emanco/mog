@@ -1,7 +1,7 @@
 const homeTrialStatusValues = [
   {
     'label': 'Home Trials Chargeable',
-    'value': 'pending',
+    'value': 'pending_review',
     'class': 'pending'
   },
   {

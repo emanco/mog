@@ -58,8 +58,8 @@ export default class fraudCheckOverview extends Component {
     })
   }
 
+  // When pagination is clicked, get a paginated list of orders
   handlePaginationChange = (page) => {
-
     this.props.getFraudCheckListPaginated({
       offset: page * 20,
       limit: 20
@@ -87,6 +87,7 @@ export default class fraudCheckOverview extends Component {
           <div>LOADING...</div>
         </div>)
     } else {
+      // check status of the reducer and set class values to show on screen when loading
       const orderLoadingClass = this.props.orderLoading ? '-loading' : '';
       const listLoadingClass = this.props.listLoading ? '-loading' : '';
 

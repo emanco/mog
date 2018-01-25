@@ -41,7 +41,7 @@ class CustomerOrder extends Component {
                           <div key={i}>
 
                               <header className="shipment">
-                                  {shipment.shipment_reference} | {shipment.carrier_reference}
+                                  {shipment.shipment_reference}{ shipment.carrier_reference && <span> | {shipment.carrier_reference}</span>}
                               </header>
 
                               <div className="col-xs-12">

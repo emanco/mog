@@ -18,7 +18,8 @@ const initialState = {
     orderLoading: false,
     orderSuccess: false,
     payload: {},
-    fraudStatus: fraudStatusValues[0].value
+    fraudStatus: fraudStatusValues[0].value,
+    fraudFilter: ''
 }
 
 export default function fraudCheckOverviewReducer(state = initialState, action = '') {
@@ -172,11 +173,17 @@ export const getFraudCheckList = (queryParams = {}) => {
   }
 }
 
+/*
+ *
+ *
+ */
+
 export const getFraudCheckListPaginated = (params) => {
   return (dispatch,getState) => {
 
     const filter = getState().fraudCheckOverviewReducer.fraudFilter;
     const status = getState().fraudCheckOverviewReducer.fraudStatus;
+
     const paginatedParams = {
       offset: params.offset,
       limit: params.limit
@@ -185,6 +192,7 @@ export const getFraudCheckListPaginated = (params) => {
     if (filter) {
       paginatedParams[filter] = true
     }
+
     if (status) {
       paginatedParams.status = status
     }
@@ -221,7 +229,6 @@ export function getFraudCheckListOrder (orderRef, custId, order) {
 // @TODO - Move somewhere else as this can be used elsewhere. It's not tied to
 // fraudCheckOverview
 export function postOrderNote (noteObj) {
-
   return (dispatch, getState) => {
     dispatch({
       type: POST_ORDER_NOTE,
@@ -238,11 +245,10 @@ export function postOrderNote (noteObj) {
 }
 
 // Update the status of the order when the user modifies it in the browser.
-//
 export function updateOrderStatus (noteObj, orderRef, actionType, fraudStatus) {
 
   /**
-   * noteObj - object that contains the note details being posted
+   * noteObj - object that contains the required values
    * orderRef - the order reference the note applies too
    * actionType - the action returned by the reducer
    * fraudStatus - passed
@@ -273,18 +279,21 @@ export function updateOrderStatus (noteObj, orderRef, actionType, fraudStatus) {
           headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')},
           method: 'POST',
           data: {
-            "order_reference": orderRef,
-            "status_code": status
+            order_reference: orderRef,
+            status_code: status
           }
         }
       }
     }).then(() => {
+      // check we have content for the note
       if (noteObj.content.length > 1) {
         dispatch(postOrderNote(noteObj));
       }
+
       dispatch(getFraudCheckList({
         status: fraudStatus
       }))
+
     })
   }
 }

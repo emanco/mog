@@ -16,93 +16,93 @@ const UPDATE_ORDER = 'myOp/homeTrialOverviewList/UPDATE_ORDER'
 const POST_ORDER_NOTE = 'myOp/orderNotes/POST_NOTE'
 
 const initialState = {
-    loading: true,
-    success: false,
-    orderLoading: false,
-    orderSuccess: false,
-    payload: {},
-    homeTrialStatus: homeTrialStatusValues[0].value
+  loading: true,
+  success: false,
+  orderLoading: false,
+  orderSuccess: false,
+  payload: {},
+  homeTrialStatus: homeTrialStatusValues[0].value
 }
 
 export default function homeTrialOverviewReducer(state = initialState, action = '') {
-    switch (action.type)
-    {
-        case LOADING_LIST :
-            return {
-                ...state,
-                loading: true,
-                success: false
-            };
-        case LOADED_LIST :
-            let ref = null;
-            let htId = null
-            if (action.payload.data.results[0]) {
-              ref = action.payload.data.results[0].order_reference;
-              htId = action.payload.data.results[0].hometrial.id;
-            }
-            return {
-                ...state,
-                loading: false,
-                success: true,
-                payload: action.payload.data,
-                currentOrderRef: ref,
-                currentOrderHtId: htId
-            };
-        case FAILED_LIST :
-            return {
-                ...state,
-                loading: false,
-                success: false
-            };
-        case 'HT_ORDER_PENDING' :
+  switch (action.type)
+  {
+      case LOADING_LIST :
           return {
-            ...state,
-            orderLoading: true,
-            orderSuccess: false
+              ...state,
+              loading: true,
+              success: false
+          };
+      case LOADED_LIST :
+          let ref = null;
+          let htId = null
+          if (action.payload.data.results[0]) {
+            ref = action.payload.data.results[0].order_reference;
+            htId = action.payload.data.results[0].hometrial.id;
           }
-        case 'HT_ORDER_FAILED' :
           return {
-            ...state,
-            orderLoading: false,
-            orderSuccess: false
-          }
-        case 'HT_ORDER_FULFILLED' :
+              ...state,
+              loading: false,
+              success: true,
+              payload: action.payload.data,
+              currentOrderRef: ref,
+              currentOrderHtId: htId
+          };
+      case FAILED_LIST :
           return {
-            ...state,
-            orderLoading: false,
-            orderSuccess: true,
-            orderPayload: action.payload
-          }
-        case 'HT_LIST_STATUS_CHANGE' :
-        console.log(action)
-          return {
-            ...state,
-            homeTrialStatus: action.homeTrialStatus
-          }
-        case 'HT_FILTER_CHANGE' :
-        console.log(action)
-          return {
-            ...state,
-            homeTrialFilter: action.homeTrialFilter
-          }
-        case 'CURRENT_ORDER_REFERENCE' :
-          console.log(action)
-          return {
-            ...state,
-            currentOrderRef: action.currentOrderRef,
-            currentOrderDate: action.currentOrderDate,
-            currentOrderReturnDate: action.currentOrderReturnDate,
-            currentOrderChargeDate: action.currentOrderChargeDate,
-            currentOrderHtId: action.currentOrderHtId
-          }
-        case 'HT_MORE_CUSTOMER_ORDERS' :
-          return {
-            ...state,
-            orderPayload: action.updatedOrders
+              ...state,
+              loading: false,
+              success: false
+          };
+      case 'HT_ORDER_PENDING' :
+        return {
+          ...state,
+          orderLoading: true,
+          orderSuccess: false
         }
-        default:
-          return state;
-    }
+      case 'HT_ORDER_FAILED' :
+        return {
+          ...state,
+          orderLoading: false,
+          orderSuccess: false
+        }
+      case 'HT_ORDER_FULFILLED' :
+        return {
+          ...state,
+          orderLoading: false,
+          orderSuccess: true,
+          orderPayload: action.payload
+        }
+      case 'HT_LIST_STATUS_CHANGE' :
+      console.log(action)
+        return {
+          ...state,
+          homeTrialStatus: action.homeTrialStatus
+        }
+      case 'HT_FILTER_CHANGE' :
+      console.log(action)
+        return {
+          ...state,
+          homeTrialFilter: action.homeTrialFilter
+        }
+      case 'CURRENT_ORDER_REFERENCE' :
+        console.log(action)
+        return {
+          ...state,
+          currentOrderRef: action.currentOrderRef,
+          currentOrderDate: action.currentOrderDate,
+          currentOrderReturnDate: action.currentOrderReturnDate,
+          currentOrderChargeDate: action.currentOrderChargeDate,
+          currentOrderHtId: action.currentOrderHtId
+        }
+      case 'HT_MORE_CUSTOMER_ORDERS' :
+        return {
+          ...state,
+          orderPayload: action.updatedOrders
+      }
+      default:
+        return state;
+  }
 }
 
 export function handleUpdateDates (noteObj, datesObj) {
@@ -185,7 +185,9 @@ export function updateFilter (filterValue) {
 
   return (dispatch, getState) => {
     const statusValue = getState().homeTrialOverviewReducer.homeTrialStatus
-    let params = {}
+    let params = {
+      chargeable_reasons: filterValue
+    }
 
     dispatch({
       type: 'HT_FILTER_CHANGE',
@@ -201,8 +203,6 @@ export function updateFilter (filterValue) {
         status: 'HT CUSTOMER CONTACTED'
       }
     }
-
-    params.chargeable_reasons = filterValue
 
     dispatch(getHomeTrialList(params))
   }

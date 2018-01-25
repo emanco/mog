@@ -12,11 +12,6 @@ export default class SearchResults extends Component {
         this.handleHover = this.handleHover.bind(this);
     }
 
-    componentDidMount() {
-       // console.log('component did mount: '+this.props.data[0].hits.hit[0].fields.customer_id);
-      // this.props.change(this.props.data[0].hits.hit[0].fields.customer_id);  //emit the first userid to outside
-    }
-
     handleHover = (event) => {
         console.log('hovering'+ event.target.id);
         let $targetid = parseInt(event.target.id,10)+1;

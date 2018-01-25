@@ -9,7 +9,7 @@ import './../../scss/components/stickyActions.css'
 import './../../scss/components/stickyActionsHomeTrial.css'
 
 const updateDatesState = {
-      status: 'open',
+      isOpen: true,
       action: 'updateDate',
       title: 'Update date',
       changeStatus: false,
@@ -17,7 +17,7 @@ const updateDatesState = {
     }
 
 const statusChangeState = {
-      status: 'open',
+      isOpen: true,
       action: 'statusChange',
       title: 'Change status',
       changeStatus: true,
@@ -25,7 +25,7 @@ const statusChangeState = {
     }
 
 const closedState = {
-      status: 'closed',
+      isOpen: false,
       action: '',
       noteValue: ''
     }
@@ -47,7 +47,7 @@ export default class StickyActionsHomeTrial extends Component {
     this.handleUpdateChargeDate = this.handleUpdateChargeDate.bind(this)
 
     this.state = {
-      status: 'closed',
+      isOpen: false,
       action: '',
       title: '',
       noteValue: '',
@@ -59,8 +59,7 @@ export default class StickyActionsHomeTrial extends Component {
   }
 
   componentDidUpdate() {
-    console.log(this.props.currentReturnDate)
-    if (this.state.status === "open") {
+    if (this.state.isOpen) {
       setTimeout(() => {
         this.textArea.focus();
       }, 200) // This needs to match the animation time set in CSS otherwise the view will jump
@@ -113,7 +112,7 @@ export default class StickyActionsHomeTrial extends Component {
 
     // @TODO - Bug - handleSubmit is occuring when you click on any
     // button once open.
-    if (this.state.status !== 'open') {
+    if (!this.state.isOpen) {
       return
     }
 
@@ -178,7 +177,7 @@ export default class StickyActionsHomeTrial extends Component {
   }
 
   render() {
-    const stateClass = this.state.status
+    const stateClass = this.state.isOpen
     const actionClass = this.state.action
 
     return(

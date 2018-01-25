@@ -7,25 +7,25 @@ import './../../scss/components/stickyActions.css';
 
 // State objects that will be used below
 const approveState = {
-      status: 'open',
+      isOpen: true,
       action: 'approve',
       title: 'Approve this order'
     }
 
 const declineState = {
-      status: 'open',
+      isOpen: true,
       action: 'decline',
       title: 'Decline this order'
     }
 
 const contactState = {
-      status: 'open',
+      isOpen: true,
       action: 'contact',
       title: 'Mark as customer contacted'
     }
 
 const closedState = {
-      status: 'closed',
+      isOpen: false,
       action: '',
       noteValue: ''
     }
@@ -44,7 +44,7 @@ export default class StickyActions extends Component {
     this.handleKeyboardOpen = this.handleKeyboardOpen.bind(this);
 
     this.state = {
-      status: 'closed',
+      isOpen: false,
       action: '',
       title: '',
       noteValue: ''
@@ -52,7 +52,7 @@ export default class StickyActions extends Component {
   }
 
   componentDidUpdate() {
-    if (this.state.status === "open") {
+    if (this.state.isOpen) {
       setTimeout(() => {
         this.textArea.focus();
       }, 200) // This needs to match the animation time set in CSS otherwise the view will jump
@@ -90,7 +90,7 @@ export default class StickyActions extends Component {
     // we set status to be open, it isn't until the cycle is
     // complete so this will be false and it won't attempt to
     // post ont he first click. There may be a better way
-    if (this.state.status !== 'open') {
+    if (!this.state.isOpen) {
       return;
     }
 
@@ -128,7 +128,7 @@ export default class StickyActions extends Component {
   }
 
   render() {
-    const stateClass = this.state.status
+    const stateClass = this.state.isOpen
     const actionClass = this.state.action
 
     return(

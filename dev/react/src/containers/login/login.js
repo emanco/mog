@@ -29,7 +29,6 @@ class Login extends Component {
   }
 
   handleRedirect = () => {
-    console.log(this.props.authSuccess)
     if (this.props.authSuccess) {
       browserHistory.push('/');
     }

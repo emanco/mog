@@ -49,14 +49,14 @@
     width: 100%; }
     .sticky-actions .stickyActions-form .stickyActions-form-title {
       margin-bottom: 2em; }
-  .sticky-actions.sticky-actions-open {
+  .sticky-actions.sticky-actions-true {
     border-top: 1px solid #e8e9e9; }
-    .sticky-actions.sticky-actions-open .sticky-actions-overlay {
+    .sticky-actions.sticky-actions-true .sticky-actions-overlay {
       display: block; }
-    .sticky-actions.sticky-actions-open .stickyActions-form {
+    .sticky-actions.sticky-actions-true .stickyActions-form {
       top: -206px;
       height: auto; }
-    .sticky-actions.sticky-actions-open .btn-cancel {
+    .sticky-actions.sticky-actions-true .btn-cancel {
       display: inline-block; }
   .sticky-actions .stickyActions-details {
     float: left; }

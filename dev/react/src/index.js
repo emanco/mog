@@ -72,23 +72,23 @@ const authCheck = () => {
 
 ReactDOM.render(
     <Provider store={store}>
-              <Router render={(props) =>
-                <ReduxAsyncConnect {...props}/>
-              } history={browserHistory}>
-                <Route component={App} onEnter={authCheck}>
-                  <Route path="/" component={Summarypage} />
-                  {/*Customers*/}
-                  <Route path="/customers" component={Summarypage} />
-                  <Route path="/customers/:customerid" component={Summarypage} />
-                  {/*Search*/}
-                  <Route path="/search" component={Searchpage} />
-                  <Route path="/search/:searchid" component={Searchpage} />
-                  <Route path='/fraud-check' component={fraudCheckOverview} />
-                  <Route path='/hometrial-orders' component={homeTrialOverview} />
-                  <Route path='/login' component={Login} />
-                  <Route path='/create-customer' component={CreateCustomer} />
-                </Route>
-              </Router>
+      <Router render={(props) =>
+        <ReduxAsyncConnect {...props}/>
+      } history={browserHistory}>
+        <Route component={App} onEnter={authCheck}>
+          <Route path="/" component={Summarypage} />
+          {/*Customers*/}
+          <Route path="/customers" component={Summarypage} />
+          <Route path="/customers/:customerid" component={Summarypage} />
+          {/*Search*/}
+          <Route path="/search" component={Searchpage} />
+          <Route path="/search/:searchid" component={Searchpage} />
+          <Route path='/fraud-check' component={fraudCheckOverview} />
+          <Route path='/hometrial-orders' component={homeTrialOverview} />
+          <Route path='/login' component={Login} />
+          <Route path='/create-customer' component={CreateCustomer} />
+        </Route>
+      </Router>
     </Provider>,
     document.getElementById('root')
 );

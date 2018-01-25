@@ -50,7 +50,7 @@ class CustomerOrder extends Component {
                                   return(
                                       <div key={i} className="row component card component-card-job">
                                           <div className="col-xs-4 col-sm-2">
-                                              <img src={job.product_image_url} className="img" alt=""/>
+                                          {/*<img src={job.product_image_url} className="img" alt=""/> */}
                                           </div>
 
                                           <div className="col-xs-8 col-sm-5 text-container">

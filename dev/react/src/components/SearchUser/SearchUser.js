@@ -20,20 +20,15 @@ class SearchUser extends Component {
     }
 
     componentDidMount() {
-        this.props.onRef(this);
-
-        TweenMax.from('.customer-info',0.5,{autoAlpha:0} );
+      this.props.onRef(this);
+      TweenMax.from('.customer-info',0.5,{autoAlpha:0} );
     }
     componentWillUnmount() {
-        this.props.onRef(undefined);
+      this.props.onRef(undefined);
     }
 
-
-    // this function is being called by the parent component and triggered by another child component!
     onChange(id) {
-        //console.log('data is: '+this.props.payload_user)
-
-        getUserData(id);
+      getUserData(id);
     }
 
 

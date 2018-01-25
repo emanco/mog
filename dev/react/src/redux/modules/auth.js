@@ -59,32 +59,7 @@ export default function authReducer(state = initialState, action = '') {
     }
 }
 
-// get Search results with this action, separated by the combined above
-export function authorise () {
-  //return axios.get('https://mog-api.herokuapp.com/search/');
-  console.log('AUTHORISE')
-  return (dispatch, getState) => {
-    return dispatch({
-      types: ['AUTH_PENDING', 'AUTH_FULFILLED','AUTH_REJECTED'],
-      payload: {
-        request: {
-          method: 'post',
-          url: authTokenEndpoint,
-          data: {
-            grant_type: 'password',
-            username: 'plugandplay',
-            password: 'november55',
-            client_id: '1d1iLrbz7pmuObdMZ4mwcoAB4GuWHPorvfmpQ7Pq',
-            client_secret: '714dE2J2opmlevocDfz4XjIWzpih0uoWHYM8TNSYV7LYILZczbrvQcjRSSMvp0GtZ6BJRJQCDip44lqFuBZr0U4zk6vOrM1iJeOL1ohSxNDuKQHdKHMifFCMaT7E2xH0'
-          }
-        }
-      }
-    })
-  }
-};
-
 export function login (user, pass) {
-  //return axios.get('https://mog-api.herokuapp.com/search/');
   console.log('AUTHORISE')
   return (dispatch, getState) => {
     return dispatch({
@@ -123,8 +98,6 @@ export function login (user, pass) {
 export function isAuthorised() {
   const token = window.localStorage.getItem('jwtToken');
   let loggedInStatus = token ? true : false;
-
-  console.log(loggedInStatus)
 
   return (dispatch) => {
     dispatch({

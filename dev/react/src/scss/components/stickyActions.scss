@@ -57,7 +57,7 @@ $approveColor : $color-green;
   }
 
 
-  &.sticky-actions-open {
+  &.sticky-actions-true {
     border-top: 1px solid map-get($colours, 'line');
 
     .sticky-actions-overlay {

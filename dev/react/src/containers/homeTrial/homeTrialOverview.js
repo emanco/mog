@@ -32,7 +32,7 @@ export default class homeTrialOverview extends Component {
     this.handleUpdateOrder = this.handleUpdateOrder.bind(this)
     this.handleStatusChange = this.handleStatusChange.bind(this)
     this.handleFraudCheckListClick = this.handleFraudCheckListClick.bind(this)
-    this.dataIsAvailable = this.dataIsAvailable.bind(this)
+    this.isDataAvailable = this.isDataAvailable.bind(this)
     this.handleViewMoreCustomerOrders = this.handleViewMoreCustomerOrders.bind(this)
     this.state = {
       paginationPage: 0
@@ -89,7 +89,7 @@ export default class homeTrialOverview extends Component {
     this.props.loadMoreCustomerOrders(this.props.data.results[0].customer_reference)
   }
 
-  dataIsAvailable = () => {
+  isDataAvailable = () => {
     if (this.props.data.results) {
       if (this.props.data.results.length > 0 && this.props.orderData) {
         if (this.props.orderData[0]) {
@@ -103,7 +103,7 @@ export default class homeTrialOverview extends Component {
 
   render() {
 
-    const render = this.dataIsAvailable();
+    const render = this.isDataAvailable();
 
     if (!this.props.data.results || !this.props.orderData) {
       return (

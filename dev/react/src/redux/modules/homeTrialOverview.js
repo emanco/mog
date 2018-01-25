@@ -208,6 +208,8 @@ export function updateFilter (filterValue) {
   }
 }
 
+// Usually called when we click between orders and the right hand side order details needs to change
+// the data stored here is used for things like StickyActions
 export function updateOrderRef (order) {
   return (dispatch) => {
     dispatch({

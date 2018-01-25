@@ -4,7 +4,7 @@ It's fairly simple to get the app up and running on your local development envir
 
 ### `npm install`
 
-This will check the packages.json file and pull down any dependencies listed
+This will check the package.json file and pull down any dependencies listed
 
 Once that's completed run the following command:
 

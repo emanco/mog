@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { asyncConnect } from 'redux-connect';
 import * as AuthActions from '../../redux/modules/auth'
 import {Header, Footer} from '../../components'
 
-
-@asyncConnect([{
-  promise: ({store: {dispatch}}) => {
-    Promise.resolve(
-      // dispatch(AuthActions.authorise())
-    );
-  }
-}])
 @connect(
   (state, ownProps) => ({
     payload: state.summaryReducer.payload,
@@ -57,7 +48,6 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(this.props)
     const pageClass = this.setPageClass()
     return(
       <div className={pageClass}>

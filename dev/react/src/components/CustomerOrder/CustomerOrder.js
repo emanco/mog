@@ -13,7 +13,6 @@ import '../../scss/components/orders.css';
 class CustomerOrder extends Component {
 
     render() {
-        console.log(this.props.data)
         let $currency = currency(this.props.data.currency);
         let $class = this.props.id === 0 ? '-in':'';
         return (

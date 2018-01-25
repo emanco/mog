@@ -5,7 +5,6 @@ import getUserInitials from '../../helpers/userInitials'
 class CustomerInfo extends Component {
 
     render() {
-      console.log(this.props.data)
         if (!this.props.customerid) {
             return (
                 <div>

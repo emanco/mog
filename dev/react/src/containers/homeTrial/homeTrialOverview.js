@@ -82,7 +82,7 @@ export default class homeTrialOverview extends Component {
   }
 
   handleUpdateDates = (note, dates) => {
-    this.props.handleUpdateDates(note,dates)
+    this.props.handleUpdateDates(note, dates)
   }
 
   handleViewMoreCustomerOrders = () => {

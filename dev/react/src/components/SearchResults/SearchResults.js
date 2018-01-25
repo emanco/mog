@@ -19,9 +19,6 @@ export default class SearchResults extends Component {
         console.log('targetid '+$targetid);
 
         this.props.change(event.target.id);  //emit the first userid to outside
-
-
-        //this.props.dispatch(getUser(this.props.searchid, $targetid));
     };
 
     render() {

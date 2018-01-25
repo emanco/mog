@@ -13,11 +13,7 @@ export default class SearchResults extends Component {
     }
 
     handleHover = (event) => {
-        console.log('hovering'+ event.target.id);
         let $targetid = parseInt(event.target.id,10)+1;
-
-        console.log('targetid '+$targetid);
-
         this.props.change(event.target.id);  //emit the first userid to outside
     };
 
@@ -48,24 +44,24 @@ export default class SearchResults extends Component {
               <section className="component component-results">
                 <div>
                 {this.props.data.hits.hit.map(function(result, i) {
-                        return (
-                        <div className="row component card" key={i} >
-                                <div className="col-sm-12" id={i}>
-                                    <a href={"../customers/"+result.fields.customer_id}>
-                                        <p className="heading2">
-                                            {result.fields.customer_first_name} {result.fields.customer_last_name}
-                                        </p>
-                                        <p className="sub-text">
-                                            {result.fields.customer_id} | {result.fields.customer_billing_postcode}
-                                        </p>
-                                    </a>
+                      return (
+                      <div className="row component card" key={i} >
+                          <div className="col-sm-12" id={i}>
+                              <a href={"../customers/"+result.fields.customer_id}>
+                                  <p className="heading2">
+                                      {result.fields.customer_first_name} {result.fields.customer_last_name}
+                                  </p>
+                                  <p className="sub-text">
+                                      {result.fields.customer_id} | {result.fields.customer_billing_postcode}
+                                  </p>
+                              </a>
 
-                                    <p className="col-sm2 text-right" onMouseOver={$this.handleHover} >
-                                        <i className="ion-more actions" id={result.fields.customer_id}/>
-                                    </p>
-                                </div>
-                            </div>
-                        )
+                              <p className="col-sm2 text-right" onMouseOver={$this.handleHover} >
+                                  <i className="ion-more actions" id={result.fields.customer_id}/>
+                              </p>
+                          </div>
+                      </div>
+                      )
                     })}
                 </div>
               </section>

@@ -65,7 +65,9 @@ export default class HomeTrialListItem extends Component {
       <div className="row component orderListItemContain">
         <div className={'homeTrialListItem-'+ statusClass + ' col-xs-12 orderListItem'} onClick={this.handleItemOnClick}>
           <div className="orderListItem-details">
-            <h2 className="heading2"><Link to={'/customers/'+this.props.data.customer_reference}>{this.props.data.order_reference}</Link></h2>
+            <h2 className="heading2">
+              <Link to={'/customers/'+this.props.data.customer_reference}>{this.props.data.order_reference}</Link>
+            </h2>
             Client: {this.props.data.client_id} | Order Date: <Moment date={this.props.data.placed_at} format="ddd Do MMM YYYY" />
           </div>
           {this.props.data.hometrial &&
@@ -78,8 +80,6 @@ export default class HomeTrialListItem extends Component {
             <div className="homeTrialList-status">
               {this.props.data.status}
             </div>
-
-
         </div>
       </div>
     )

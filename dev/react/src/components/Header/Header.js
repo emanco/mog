@@ -34,9 +34,6 @@ class Header extends Component {
 
     handleChange = (e) => {
         e.preventDefault();
-        //this.props.dispatch(change(e.target.value));  // causes empty load page!
-        //this.props.history.push('/search/'+e.target.value);
-        console.log('changed input: '+e.target.value);
     };
 
     render() {
@@ -51,9 +48,6 @@ class Header extends Component {
                 <header className="nav-container nav-height">
                     <i className="ion-ios-search" />
                     <TagsComponent />
-                    {/*<form onSubmit={this.onSubmit}>*/}
-                        {/*<input ref="search" type="text" className="form-control search" placeholder="" onChange={this.onChange}/>*/}
-                    {/*</form>*/}
                     <div className="burger-container">
                         <button className="burger" id="nav-burger" type="button">
                             <span className="sr-only">Toggle navigation</span>

@@ -43,7 +43,7 @@ class Searchpage extends Component {
         </div>
 
         <div className="right-panel">
-          <SearchUser onRef={ref => (this.user = ref)} id={$id} data={this.props.userData}/>
+          {/*<SearchUser onRef={ref => (this.user = ref)} id={$id} data={this.props.userData}/>*/}
         </div>
     </div>
     );

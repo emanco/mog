@@ -29,7 +29,7 @@ export default class Pagination extends Component {
 
 Pagination.propTypes = {
   containerClassName: PropTypes.string,
-  subContainerClassNam: PropTypes.string,
+  subContainerClassName: PropTypes.string,
   activeClassName: PropTypes.string,
   pageRangeDisplayed: PropTypes.number, // zero indexed so 4 will display 1 to 5
   pageCount: PropTypes.number, // total number of pages available

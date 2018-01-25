@@ -35,7 +35,7 @@ export default class fraudCheckOverview extends Component {
 
   componentDidMount() {
     // @TODO - Make this value dynamic. Status and filtering is a little messy because of the way you need to query the API but ideally this value would be held somewhere else.
-    this.props.getFraudCheckList({status: 'FRAUD CHECK NOT CHECKED'});
+    this.props.getFraudCheckList({status: 'FRAUD CHECK MAYBE'});
   }
 
   handleFraudStatus = (value) => {

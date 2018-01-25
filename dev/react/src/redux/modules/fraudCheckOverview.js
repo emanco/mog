@@ -173,11 +173,6 @@ export const getFraudCheckList = (queryParams = {}) => {
   }
 }
 
-/*
- *
- *
- */
-
 export const getFraudCheckListPaginated = (params) => {
   return (dispatch,getState) => {
 

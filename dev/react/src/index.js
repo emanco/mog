@@ -13,7 +13,7 @@ import { Router, Route, browserHistory } from 'react-router'
 import { applyMiddleware, createStore, combineReducers } from 'redux'
 import { ReduxAsyncConnect, asyncConnect, reducer as reduxAsyncConnect } from 'redux-connect'
 
-//pages
+//containers
 import App from './containers/App/App'
 import Summarypage from "./containers/customers/page"
 import Searchpage from "./containers/search/page"

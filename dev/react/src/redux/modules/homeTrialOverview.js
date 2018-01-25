@@ -121,8 +121,6 @@ export function handleUpdateDates (noteObj, datesObj) {
 
   }
 
-  // @TODO - Once complete, go full refresh so we're using the latest data from the server
-
 }
 
 export function updateDates (datesObj) {
@@ -139,6 +137,7 @@ export function updateDates (datesObj) {
         }
       }
     }).then(() => {
+      // getParams builds the param strings specifically for homeTrials as values aren't always
       const params = getParams(
         getState().homeTrialOverviewReducer.homeTrialStatus,
         getState().homeTrialOverviewReducer.homeTrialFilter
@@ -157,7 +156,9 @@ export function getParams (statusValue, filterValue) {
     params.chargeable_reasons = filterValue
   }
 
-  if (statusValue === 'pending') {
+  // the param we attach the the Query URL differ based on the value
+  // so we need to check
+  if (statusValue === 'pending_review') {
     params.pending_review = true
   } else if (statusValue === 'contacted') {
     params.status = 'HT CUSTOMER CONTACTED'
@@ -249,25 +250,23 @@ export const getHomeTrialList = (queryParams = {}) => {
       ...queryParams
     }
 
-    console.log(params)
     const queryUrl = buildQueryUrl(homeTrialEndpoint, params)
 
-
-     return dispatch({
-        types: [LOADING_LIST, LOADED_LIST, FAILED_LIST],
-        payload: {
-          request: {
-            url: queryUrl,
-            headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')}
-          }
+   return dispatch({
+      types: [LOADING_LIST, LOADED_LIST, FAILED_LIST],
+      payload: {
+        request: {
+          url: queryUrl,
+          headers: {Authorization: 'Bearer ' + window.localStorage.getItem('jwtToken')}
         }
-      }).then((result) => {
-        checkCallSuccess(result.type, () => {
-          if (result.payload.data.count > 0) {
-           dispatch(getHomeTrialListOrder(null, result.payload.data.results[0].customer_reference))
-          }
-        }, () => {dispatch(AuthActions.logOut())});
-      })
+      }
+    }).then((result) => {
+      checkCallSuccess(result.type, () => {
+        if (result.payload.data.count > 0) {
+         dispatch(getHomeTrialListOrder(null, result.payload.data.results[0].customer_reference))
+        }
+      }, () => {dispatch(AuthActions.logOut())});
+    })
   }
 }
 

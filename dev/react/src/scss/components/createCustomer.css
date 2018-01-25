@@ -283,3 +283,21 @@ p {
 
 .create-customer .form-element {
   margin-bottom: 2.5em; }
+
+.create-customer .row .create-customer-initials,
+.create-customer .row .create-customer-form {
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 10%; }
+
+.create-customer .create-customer-initials {
+  text-align: center; }
+
+.create-customer .create-customer-right {
+  border-right: 1px solid #e8e9e9; }
+
+.create-customer .create-customer-form {
+  width: 90%; }
+
+.create-customer .address-finder .postcode-lookup {
+  margin-bottom: 1em; }

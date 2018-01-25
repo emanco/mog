@@ -33,7 +33,6 @@ export default class OrderList extends Component {
   }
 
   render() {
-    console.log(this.props.paginationPage)
     const pageCount = this.calculatePagination(this.props.data.next);
     const ListItem = this.childComponents[this.props.listType || 'FraudCheckList']
     return(

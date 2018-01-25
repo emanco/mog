@@ -37,8 +37,6 @@ export default class homeTrialOverview extends Component {
     this.state = {
       paginationPage: 0
     }
-
-    console.log(this.props.currentOrderDate)
   }
 
   componentDidMount() {

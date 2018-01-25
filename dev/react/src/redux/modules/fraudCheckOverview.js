@@ -67,10 +67,15 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
             orderSuccess: true,
             orderPayload: action.payload
           }
-        case 'FRAUD_LIST_FILTER' :
+        case 'FRAUD_LIST_STATUS_CHANGE' :
           return {
             ...state,
             fraudStatus: action.fraudStatus
+          }
+        case 'FRAUD_LIST_FILTER_CHANGE' :
+          return {
+            ...state,
+            fraudFilter: action.fraudFilter
           }
         case 'CURRENT_ORDER_REFERENCE' :
           return {
@@ -83,12 +88,45 @@ export default function fraudCheckOverviewReducer(state = initialState, action =
     }
 }
 
-export function upateFilter (filterValue) {
-  return (dispatch) => {
+export function upateStatus (statusValue) {
+  return (dispatch, getState) => {
+    const filterValue = getState().fraudCheckOverviewReducer.fraudFilter;
+
     dispatch({
-      type: 'FRAUD_LIST_FILTER',
-      fraudStatus: filterValue
+      type: 'FRAUD_LIST_STATUS_CHANGE',
+      fraudStatus: statusValue
     })
+
+    const params = {
+      status: statusValue
+    }
+
+    if (filterValue) {
+      params[filterValue] = true
+    }
+
+    dispatch(getFraudCheckList(params))
+  }
+}
+
+export function updateFilter (filterValue) {
+  console.log(filterValue)
+
+  return (dispatch, getState) => {
+
+    const statusValue = getState().fraudCheckOverviewReducer.fraudStatus
+
+    let params = {
+      status: statusValue,
+      [filterValue]: true
+    }
+
+    dispatch({
+      type: 'FRAUD_LIST_FILTER_CHANGE',
+      fraudFilter: filterValue
+    })
+
+    dispatch(getFraudCheckList(params))
   }
 }
 
@@ -104,11 +142,8 @@ export function updateOrderRef (order) {
 
 
 
-// get Search results with this action, separated by the combined above
+// call the fraud check API if successful, fetch customer and order details associated with the first result
 export const getFraudCheckList = (queryParams = {}) => {
-
-  console.log('GET FRAUD CHECK LIST');
-
   const queryUrl = buildQueryUrl(fraudCheckOrders, queryParams)
 
   return (dispatch, getState) => {
@@ -122,12 +157,39 @@ export const getFraudCheckList = (queryParams = {}) => {
         }
       }).then((result) => {
         checkCallSuccess(result.type, () => {
+          // If the check passes, the call was successful which means the API is up and we're authorised. Now check there is at least one result
           if (result.payload.data.count > 0) {
-           dispatch(getFraudCheckListOrder(null, result.payload.data.results[0].customer_reference))
+            // fetch data on the first order
+            dispatch(getFraudCheckListOrder(null, result.payload.data.results[0].customer_reference))
           }
-        }, () => {dispatch(AuthActions.logOut())});
+        }, () => {
+          // API call failed. Log out the user and redirect them to the login page
+          // this doesn't allow for the API being down at present.
+          dispatch(AuthActions.logOut())
+        });
 
       })
+  }
+}
+
+export const getFraudCheckListPaginated = (params) => {
+  return (dispatch,getState) => {
+
+    const filter = getState().fraudCheckOverviewReducer.fraudFilter;
+    const status = getState().fraudCheckOverviewReducer.fraudStatus;
+    const paginatedParams = {
+      offset: params.offset,
+      limit: params.limit
+    };
+
+    if (filter) {
+      paginatedParams[filter] = true
+    }
+    if (status) {
+      paginatedParams.status = status
+    }
+
+    dispatch(getFraudCheckList(paginatedParams))
   }
 }
 
@@ -135,29 +197,29 @@ export const getFraudCheckList = (queryParams = {}) => {
 export function getFraudCheckListOrder (orderRef, custId, order) {
 
   /* @NOTE Fetch User and Order Details
-   * Call getCustomer & getOrders from the customers reducer which just returns the data then
-   * put it into this reducer
+   * Call getCustomer & getOrders from the customers module which just returns the data without * modifying the application state, then put it into this reducers state
    */
-  console.log('CHECKLIST ORDER')
 
   return (dispatch, getState) => {
     dispatch({
       type: 'FRAUD_ORDER',
       payload: axios.all([getCustomer(custId), getOrders(custId)])
     }).then((result) => {
+
       // check result. We don't need a success callback, but log out if it fails
       checkCallSuccess(result.action.type, () => {
         if (order){
-          dispatch(updateOrderRef(order)) // Pass the relevant order from the list so we can update the app state with knoweldge of which we're currently viewing on the right hand side
+          // if we have been passed an order, dispatch an action to update Order reference
+          dispatch(updateOrderRef(order))
         }
-
       }, () => {dispatch(AuthActions.logOut())});
     })
   }
 
 }
 
-// @TODO - Move somewhere else as this can be used elsewhere
+// @TODO - Move somewhere else as this can be used elsewhere. It's not tied to
+// fraudCheckOverview
 export function postOrderNote (noteObj) {
 
   return (dispatch, getState) => {
@@ -175,9 +237,16 @@ export function postOrderNote (noteObj) {
   }
 }
 
-
+// Update the status of the order when the user modifies it in the browser.
+//
 export function updateOrderStatus (noteObj, orderRef, actionType, fraudStatus) {
-  console.log('FRAUD CHECK OVERVIEW - UPDATE ORDER STATUS')
+
+  /**
+   * noteObj - object that contains the note details being posted
+   * orderRef - the order reference the note applies too
+   * actionType - the action returned by the reducer
+   * fraudStatus - passed
+   */
   let status = '';
 
   switch(actionType) {

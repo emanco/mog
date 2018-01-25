@@ -1,0 +1,5 @@
+const addressLookup = {
+  "latitude":51.4029314,"longitude":-0.67153869999999993,
+  "addresses": ["67 Victoria Road, , , , , Ascot, Berkshire","69 Victoria Road, , , , , Ascot, Berkshire","71 Victoria Road, , , , , Ascot, Berkshire","73 Victoria Road, , , , , Ascot, Berkshire","75 Victoria Road, , , , , Ascot, Berkshire","75a Victoria Road, , , , , Ascot, Berkshire","77 Victoria Road, , , , , Ascot, Berkshire","77a Victoria Road, , , , , Ascot, Berkshire","79 Victoria Road, , , , , Ascot, Berkshire","81 Victoria Road, , , , , Ascot, Berkshire","83 Victoria Road, , , , , Ascot, Berkshire","85 Victoria Road, , , , , Ascot, Berkshire","87 Victoria Road, , , , , Ascot, Berkshire","89 Victoria Road, , , , , Ascot, Berkshire","91 Victoria Road, , , , , Ascot, Berkshire","93 Victoria Road, , , , , Ascot, Berkshire","95 Victoria Road, , , , , Ascot, Berkshire","97 Victoria Road, , , , , Ascot, Berkshire"]}
+
+export default addressLookup;

@@ -13,7 +13,7 @@ import '../../scss/components/orders.css';
 class CustomerOrder extends Component {
 
     render() {
-        console.log(this.props.data.currency)
+        console.log(this.props.data)
         let $currency = currency(this.props.data.currency);
         let $class = this.props.id === 0 ? '-in':'';
         return (
@@ -24,13 +24,13 @@ class CustomerOrder extends Component {
                   <div className="col-sm-7">
                       <p className="order-id heading2">{this.props.data.external_id}</p>
                       <p className="sub-text">
-                          <Moment date={this.props.data.created} format="ddd Do MMM YYYY" /> | {this.props.data.reference}
+                          <Moment date={this.props.data.created} format="ddd Do MMM YYYY" /> | {this.props.data.order_reference}
                       </p>
                   </div>
 
                   <div className="col-sm-5 text-right">
                       <OrderStatus status={this.props.data.status} />
-                      <span className="price">{$currency}{this.props.data.price}</span>
+                      <span className="price">{$currency}{this.props.data.retail_total}</span>
                   </div>
               </div>
 
@@ -41,7 +41,7 @@ class CustomerOrder extends Component {
                           <div key={i}>
 
                               <header className="shipment">
-                                  {shipment.mbf_reference} | {shipment.carrier_reference}
+                                  {shipment.shipment_reference} | {shipment.carrier_reference}
                               </header>
 
                               <div className="col-xs-12">
@@ -54,13 +54,13 @@ class CustomerOrder extends Component {
                                           </div>
 
                                           <div className="col-xs-8 col-sm-5 text-container">
-                                              <p className="job-name heading2">{job.product_brand}, {job.product_colour}</p>
-                                              <p className="sub-text">{shipment.mbf_reference}/{job.id}</p>
+                                              <p className="job-name heading2">{job.description}, {job.product_colour}</p>
+                                              <p className="sub-text">{shipment.shipment_reference}/{job.job_reference}</p>
                                           </div>
 
                                           <div className="col-sm-5 text-right">
                                               {/*<OrderStatus status={job.status} /> */}
-                                              <span className="price">{$currency}{job.price}</span>
+                                              <span className="price">{$currency}{job.retail_price}</span>
                                           </div>
 
                                       </div>
